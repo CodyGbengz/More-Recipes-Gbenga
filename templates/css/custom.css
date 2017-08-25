@@ -8,3 +8,7 @@
 body{
   background-image: url('../images/bg1.jpg')
 }
+
+#profileBanner{
+  height: 100px;
+}
