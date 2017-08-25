@@ -15,14 +15,31 @@
         <header id="header">
           <div class="navbar-fixed">
               <ul id="dropdown1" class="dropdown-content">
-                  <li><a href="#!">My Profile</a></li>
+                  <li><a href="#!">Profile</a></li>
                   <li class="divider"></li>
                   <li><a href="#!">Sign Out</a></li>
                 </ul>
-            <nav class="">
+            <nav class="yellow">
               <div class="nav-wrapper">
+                  
                 <a href="#" class="brand-logo center">More-Recipe</a>
                 <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                <ul class="hide-on-med-and-down left">               
+                    <li>    
+                       <div class="center row">
+                          <div class="col s12 " >
+                            <div class="row" id="topbarsearch">
+                              <div class="input-field col s6 s12 white-text">
+                                <i class="white-text material-icons prefix">search</i>
+                                <input type="text"class="white-text" >
+                                <i class="material-icons closed">close</i>
+                                </div>
+                              </div>
+                            </div>
+                          </div>          
+                      </li>
+                </ul>   
+                
                 <ul id="navvy" class="right hide-on-med-and-down">
                   <li><a href=""><i class="material-icons">add</i></a></li>
                   <li><a href=""><i class="material-icons">favorite</i></a></li>
@@ -30,6 +47,28 @@
                   <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons">account_circle</i></a></li>
                 </ul>
                 <ul class="side-nav" id="mobile-demo">
+                    <li>
+                        <form>
+                            <div class="input-field">
+                              <input id="search" type="search" required>
+                              <label class="label-icon" for="search"><i class="material-icons">search</i>
+                              </label>
+                              <i class="material-icons closed">close</i>
+                            </div>
+                        </form>
+                    </li>
+                    <li>    
+                        <div class="center row">
+                           <div class="col s12 " >
+                             <div class="row" id="topbarsearch">
+                               <div class="input-field col s6 s12 red-text">
+                                 <i class="red-text material-icons prefix">search</i>
+                                 <input type="text"class="red-text" >
+                                 </div>
+                               </div>
+                             </div>
+                           </div>          
+                       </li>
                     <li><a href="">Create recipe<i class="material-icons">add</i></a></li>
                     <li><a href="">Favourites<i class="material-icons">favorite</i></a></li>
                     <li><a href="">My Profile<i class="material-icons">account_circle</i></a></li>
@@ -40,6 +79,78 @@
             </nav>
           </div>
         </header>
+        <section class="container">
+            <div class="row">
+                <div class="col s12 m6">
+                  <div class="card">
+                    <div class="card-image">
+                      <img src="./images/bg2.jpg">
+                      <span class="card-title">Recipe Title</span>
+                      <a class="btn-floating halfway-fab waves-effect waves-light yellow"><i class="material-icons">favorite</i></a>
+                    </div>
+                    <div class="card-content">
+                      <p>A short description of the recipe with information about the recipe in 140 characters or less.</p>
+                    </div>
+                    <div class="card-action">
+                      
+                      <a class=""><i class="material-icons">thumb_up</i>50</a>
+                      <a class=""><i class="material-icons">thumb_down</i>5</a>
+                      <a class=""><i class="material-icons">visibility</i>4</a>
+                      <div class="chip">
+                              <a href=""><i class="material-icons">person</i>Jane Doe</a>
+                        </div>
+                      
+                  </div>
+                </div>
+              </div>
+
+              <div class="col s12 m6">
+                  <div class="card">
+                    <div class="card-image">
+                      <img src="./images/bg2.jpg">
+                      <span class="card-title">Recipe Title</span>
+                      <a class="btn-floating halfway-fab waves-effect waves-light yellow"><i class="material-icons">favorite</i></a>
+                    </div>
+                    <div class="card-content">
+                      <p>A short description of the recipe with information about the recipe in 140 characters or less.</p>
+                    </div>
+                    <div class="card-action">
+                      
+                      <a class=""><i class="material-icons">thumb_up</i>50</a>
+                      <a class=""><i class="material-icons">thumb_down</i>5</a>
+                      <a class=""><i class="material-icons">visibility</i>4</a>
+                      <div class="chip">
+                              <a href=""><i class="material-icons">person</i>Jane Doe</a>
+                        </div>
+                      
+                  </div>
+                </div>
+              </div>
+              
+              <div class="col s12 m6">
+                  <div class="card">
+                    <div class="card-image">
+                      <img src="./images/bg2.jpg">
+                      <span class="card-title">Recipe Title</span>
+                      <a class="btn-floating halfway-fab waves-effect waves-light yellow"><i class="material-icons">favorite</i></a>
+                    </div>
+                    <div class="card-content">
+                      <p>A short description of the recipe with information about the recipe in 140 characters or less.</p>
+                    </div>
+                    <div class="card-action">
+                      
+                      <a class=""><i class="material-icons">thumb_up</i>50</a>
+                      <a class=""><i class="material-icons">thumb_down</i>5</a>
+                      <a class=""><i class="material-icons">visibility</i>4</a>
+                      <div class="chip">
+                              <a href=""><i class="material-icons">person</i>Jane Doe</a>
+                        </div>
+                      
+                  </div>
+                </div>
+              </div>
+            
+        </section>
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="js/materialize.js"></script>
