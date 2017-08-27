@@ -4,6 +4,7 @@
       <!--Import Google Icon Font-->
       <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
       <!--Import materialize.css-->
+      <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
       <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
       <link type="text/css" rel="stylesheet" href="css/custom.css"/>
 
@@ -11,14 +12,13 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
 
-    <body id="loginBody">
-        <div class="container">
-            <div class="row">
-                <div class=" card-panelcol s12 m8 l8">
+    <body class="bodily">
+        <main id="top" class="row">
+                <div class="col s11 m8  offset-s1 ">
                     <h2 class="">Welcome to More-Recipes</h2>
                     <p class=""> Join our community of food enthusiasts and discover a world of amazing recipes that bring excitment to your kitchen and tickle your taste buds.</p>
-                    <a class="waves-effect waves-light btn modal-trigger yellow" href="#signup">Sign Up and start cooking</a>
-                    <a class="waves-effect waves-light btn modal-trigger yellow" href="#login">Login</a>
+                    <a class="waves-effect waves-light btn modal-trigger white yellow-text" href="#signup">Sign Up and start cooking</a>
+                    <a class="waves-effect waves-light btn modal-trigger white yellow-text" href="#login">Login</a>
 
                     <div id="signup" class="modal">
                         <div class="modal-content">
@@ -41,7 +41,7 @@
                                         </div>
                                         <div class="input-field col s12 ">
                                             <input id="repassword" type="password" class="validate">
-                                            <label for="repassword">Password Again</label>
+                                            <label for="repassword">Confirm Password</label>
                                         </div>
                                     </div>
                                 </form>
@@ -73,13 +73,35 @@
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <a href=""class="">Forgot Password?</a>
                             <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
                             <a class="modal-action modal-close waves-effect waves-light yellow btn">Login</a>
                         </div>
                     </div>
                 </div>
+            </main>
+        <!--
+        <section class="container">
+            <div class="row">
+                <div class="col s12 m12">
+                 <h4 class="center-align">With More-recipes you can:</h4>
+                </div>
             </div>
-        </div>
+        </section>
+    -->
+    <footer class="page-footer white">
+            <div class="container">
+              <div class="row">
+                <div class="col m12 s12 black-text">
+                    © 2017 Copyright Text
+                    <a class="black-text text-lighten-4 right" href="#!"><i class="fa fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+           
+          </footer>
+  
+            
       <!--Import jQuery before materialize.js-->
       <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
       <script type="text/javascript" src="js/materialize.js"></script>
