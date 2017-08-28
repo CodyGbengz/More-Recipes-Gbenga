@@ -12,7 +12,8 @@
       }
     );
     
-  });
+ });
+ 
  
 
 window.onscroll = function() {scrollFunction()};
