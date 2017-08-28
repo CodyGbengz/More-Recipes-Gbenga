@@ -1,0 +1,19 @@
+{
+  "name": "more-recipes",
+  "version": "1.0.0",
+  "description": "A webapp for managing recipes",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WillyWunderdog/More-Recipes.git"
+  },
+  "author": "Gbenga Ode",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/WillyWunderdog/More-Recipes/issues"
+  },
+  "homepage": "https://github.com/WillyWunderdog/More-Recipes#readme"
+}
