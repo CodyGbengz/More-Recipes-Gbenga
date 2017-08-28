@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
+    <link type="text/css" rel="stylesheet" href="css/custom.css">
+
+    <!--Let browser know website is optimized for mobile-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  </head>
+
+  <body class="bodily">
+      <header id="header">
+        <div class="navbar-fixed">
+            <ul id="dropdown1" class="dropdown-content">
+                <li><a href="#!"class="yellow-text">Profile</a></li>
+                <li class="divider"></li>
+                <li><a href="#!"class="yellow-text">Sign Out</a></li>
+              </ul>
+          <nav class="white">
+            <div class="nav-wrapper">
+                
+              <a href="#" class="brand-logo center yellow-text">More-Recipe</a>
+              <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons yellow-text">menu</i></a>
+              <ul class="hide-on-med-and-down left">               
+                  <li>    
+                     <div class="center row">
+                        <div class="col s12 " >
+                          <div class="row" id="topbarsearch">
+                            <form>
+                            <div class="input-field col s6 s12 yellow-text">
+                                <i class="yellow-text material-icons prefix">search</i>
+                              <input id="search" type="search">
+                              <i class="material-icons closed">close</i>
+                              
+                              </div>
+                            </form>
+                            </div>
+                          </div>
+                        </div>          
+                    </li>
+              </ul>  
+            
+              <ul id="navvy" class="right hide-on-med-and-down">
+                <li><a href=""class="tooltipped" data-position="bottom" data-delay="100" data-tooltip="Add recipe"><i class="material-icons yellow-text">add</i></a></li>
+                <li><a href=""class="tooltipped"data-position="bottom" data-delay="100" data-tooltip="Favorites"><i class="material-icons yellow-text">favorite</i></a></li>
+                <li><a href=""class="tooltipped"data-position="bottom" data-delay="100" data-tooltip="My Recipes"><i class="material-icons yellow-text">book</i></a></li>
+                <li><a class="dropdown-button" href="#!" data-activates="dropdown1"><i class="material-icons yellow-text">account_circle</i></a></li>
+              </ul>
+              <ul class="side-nav" id="mobile-demo">
+                  <li>    
+                      <div class="center row">
+                         <div class="col s12 " >
+                           <div class="row" id="topbarsearch">
+                             <div class="input-field col s6 s12 red-text">
+                               <i class="yellow-text material-icons prefix">search</i>
+                               <input type="text"class="red-text" >
+                               </div>
+                             </div>
+                           </div>
+                         </div>          
+                     </li>
+                  <li><a href="">Create recipe<i class="material-icons">add</i></a></li>
+                  <li><a href="">Favourites<i class="material-icons">favorite</i></a></li>
+                  <li><a href="">My Profile<i class="material-icons">account_circle</i></a></li>
+                  <li><a href="">My Recipes<i class="material-icons">book</i></a></li>
+                  <li><a href="">Sign out<i class="material-icons">exit_to_app</i></a></li>
+                </ul>
+            </div>
+          </nav>
+        </div>
+      </header>
+
+      <main class="container">
+          
+            <div class="row">
+                    <div class="col s12 m12">
+                            <h4 class="header">Recipe Details</h4>
+                            
+                            <div class="col s12 hide-on-large-only">
+                              <div class="card">
+                                <div class="card-image">
+                                  <img src="./images/bg2.jpg">
+                                  <span class="card-title">Recipe Title</span>
+                                  <a class="btn-floating halfway-fab waves-effect waves-light yellow"><i class="material-icons">favorite</i></a>
+                                </div>
+                                <div class="card-content">
+                                  <p>A short description of the recipe with information about the recipe in 140 characters or less.</p>
+                                </div>
+                                <div class="card-action">
+                                  
+                                  <a class=""><i class="material-icons">thumb_up</i>50</a>
+                                  <a class=""><i class="material-icons">thumb_down</i>5</a>
+                                  <a class=""><i class="material-icons">visibility</i>4</a>
+                                  <div class="chip">
+                                          <a href=""><i class="material-icons">person</i>Jane Doe</a>
+                                    </div>
+                                  
+                              </div>
+                            </div>
+                          </div>
+                        
+                            <div class="card horizontal hide-on-med-and-down">
+                              <div class="card-image">
+                                <img src="./images/bg2.jpg">
+                              </div>
+                              <div class="card-stacked">
+                                <div class="card-content">
+                                    <div class="row">
+                                        <div class="col s6 m6">
+                                    <h4>Recipe Title</h4>
+                                        </div>
+                                        <div class="col s3 m3 offset-m3 offset-s3">
+                                            <a class="btn-floating top-fab waves-effect waves-light yellow tooltipped"data-position="bottom" data-delay="100" data-tooltip="Add to Favorites"><i class="material-icons">favorite</i></a>
+                                        </div>
+                                    </div>
+                                    <p>A short description of the recipe with information about the recipe in 140 characters or less.</p>
+                                </div>
+                                <div class="card-action">
+                                        <a class="waves-effect waves-light btn-flat"><i class="material-icons left">thumb_up</i>50</a>
+                                        <a class="waves-effect waves-light btn-flat"><i class="material-icons left">thumb_down</i>5</a>
+                                        <a class="waves-effect waves-light btn-flat"><i class="material-icons left">visibility</i>4</a>
+                                        <div class="chip">
+                                                <a href=""><i class="material-icons">person</i>Jane Doe</a>
+                                        </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 m12">
+                    <div class="card darken-1">
+                       <div class="card-content">
+                          <span class="card-title">Ingredients</span>
+                          <hr></hr>
+                          <ul>
+                              <li> 1 cup of sugar</li>
+                              <li> 2 cups of flour</li>
+                          </ul>
+                        </div>
+                        <div class="card-action">
+                          <a href="#"><i class="material-icons">access_time</i>30 minutes</a>
+                          <a href="#"><i class="material-icons">local_dining</i>3 people</a>
+                        </div>
+                      </div>
+                </div>
+            </div>
+
+            <div class="row">
+                  <div class="col s12 m12">
+                        <div class="card darken-1">
+                            <div class="card-content">
+                              <span class="card-title">Directions</span>
+                              <hr></hr>
+                              <ol>
+                                  <li>Preheat oven for 15 minutes</li>
+                                  <li>Mix sugar and flour thoroughly</li>
+                              </ol>
+                            </div>
+                            <div class="card-action">
+                              <a href="#"><i class="material-icons">access_time</i>30 minutes</a>
+                              <a href="#"><i class="material-icons">local_dining</i>3 people</a>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col s12 m12">
+                    <h4 class="">Reviews</h4>
+                    <div class="row">
+                      <div class="col s12 m12">
+                          <ul class="collapsible" data-collapsible="accordion">
+                              <li>
+                                <div class="collapsible-header"><i class="material-icons">add</i>Post a Review</div>
+                                <div class="collapsible-body">
+                                    <div class="row">
+                                        <form class="col s12 white">
+                                          <div class="row">
+                                              <div class="input-field col s12 m12">
+                                                  <textarea id="textarea1" class="materialize-textarea"></textarea>
+                                                   <label for="textarea1">Review</label>
+                                               </div>
+                                          </div>
+                                          <div class="row">
+                                              <div class="col s6 m6 offset-m4 offset-s4">
+                                              <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+                                              <a class="modal-action modal-close waves-effect waves-light yellow btn">Save</a>
+                                              </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                  </div>
+                              </li>
+                            </ul>
+                      </div>
+                    </div>
+                </div>
+            </div>
+                    <div class="row">
+                            <div class="col s12 m4">
+                                    <div class="card darken-1">
+                                      <div class="card-content">
+                                        <p>I really had fun trying out this recipe. Great taste and very easy to prepare. Nice one</p>
+                                      </div>
+                                      <div class="card-action">
+                                        <div class="chip">
+                                          <img src="./images/avi.jpg" alt="Contact Person">
+                                              Jane Doe
+                                        </div>
+                                        </div>
+                                    </div>
+                            </div>
+
+                            <div class="col s12 m4">
+                              <div class="card darken-1">
+                                <div class="card-content">
+                                  <p>I had a lot of fun in the kitchen cooking, and my family enjoyed it. I'm definitely saving this recipe.</p>
+                                </div>
+                                <div class="card-action">
+                                  <div class="chip">
+                                    <img src="./images/avi.jpg" alt="Contact Person">
+                                        Jane Doe
+                                  </div>
+                                  </div>
+                              </div>
+                      </div>
+                            
+                        </div>
+            <a href="#navvy" id="backToTop" onclick="topFunction()" class="btn-floating waves-effect waves-light yellow tooltipped" data-position="top" data-delay="50" data-tooltip="back to top"><i class="material-icons">arrow_upward</i></a>
+          </main>
+          <footer class="page-footer white">
+            <div class="container">
+              <div class="row">
+                <div class="col m12 s12 black-text">
+                    © 2017 Copyright Gbenga Ode for Andela
+                    <a class="black-text text-lighten-4 right" href="#!">Project Repo <i class="fa fa-github"></i></a>
+                </div>
+              </div>
+            </div>
+           
+          </footer>
+
+      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+      <script type="text/javascript" src="js/materialize.js"></script>
+      <script type="text/javascript" src="js/custom.js"></script>
+    </body>
+  </html>
