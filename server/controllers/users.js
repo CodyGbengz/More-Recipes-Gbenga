@@ -36,9 +36,9 @@ export default {
           username: user.username,
           email: user.email,
           message: 'Sign in successful'
-        })
-          .catch(error => res.status(400).send({
-            message: error.message }));
-      });
+        });
+      })
+      .catch(error => res.status(400).send({
+        message: error.message }));
   }
 };
