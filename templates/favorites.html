@@ -30,7 +30,7 @@
             <i class="material-icons">close</i>
           </div>
           <ul id="navvy" class="right hide-on-med-and-down">
-            <li><a href="create recipe.html" class="tooltipped" data-position="bottom" data-delay="100" data-tooltip="Add recipe"><i class="material-icons yellow-text">add</i></a></li>
+            <li><a href="#create" class="modal-trigger tooltipped" data-position="bottom" data-delay="100" data-tooltip="Add recipe"><i class="material-icons yellow-text">add</i></a></li>
             <li><a href="favorites.html" class="tooltipped" data-position="bottom" data-delay="100" data-tooltip="Favorites"><i class="material-icons yellow-text">favorite</i></a></li>
             <li><a href="manage recipes.html" class="tooltipped" data-position="bottom" data-delay="100" data-tooltip="My Recipes"><i class="material-icons yellow-text">book</i></a></li>
             <li><a class="dropdown-button" href="#!" data-activates="dropdown1" data-beloworigin="true"><i class="material-icons yellow-text">account_circle</i></a></li>
@@ -93,11 +93,57 @@
         </div>
       </div>
     </div>
+</footer>
 
-  </footer>
+<div id="create" class="modal">
+    <div class="modal-content">
+      <h4>Create Recipe</h4>
+      <div class="row">
+        <form class="col s12">
+          <div class="row modal-form-row">
+            <div class="input-field col s12 ">
+              <input id="recipeTitle" name="recipeTitle" type="email" required="" aria-required="true">
+              <label for="recipeTitle">Recipe Title</label>
+            </div>
+            <div class="input-field col s12 ">
+              <textarea id="recipeDescription" class="materialize-textarea" name="recipeDescription" type="password" required="" aria-required="true"></textarea>
+              <label for="recipeDescription">Recipe Description</label>
+            </div>
+            <div class="input-field col s6 m6">
+              <input id="first_name" type="text" required="" aria-required="true">
+              <label for="first_name">Estimated Time</label>
+            </div>
+            <div class="input-field col s6 m6">
+              <input id="first_name" type="text" required="" aria-required="true">
+              <label for="first_name">Serves</label>
+            </div>
+            <div class="input-field col s12 m12">
+              <h6><em><b>Upload Image</b></em></h5>
+                <input class="waves-effect waves-light yellow btn" type="file">
+            </div>
+            <div class="file-field input-field col s12 m12">
+              <h6><em><b>Ingredients</b></em></h6>
+              <small><em>Enter your Ingredients one at a time and hit enter</em></small>
+              <input id="first_name" placeholder="e.g 1 tsp dry pepper" type="text" required="" aria-required="true">
+            </div>
+            <div class="input-field col s12 m12">
+              <h6><em><b>Directions</b></em></h5>
+                <small><em>Enter your directions one step at a time and hit enter</em></small>
+                <textarea class="materialize-textarea"id="first_name" placeholder="e.g Place all ingredients in a blender" type="text" required="" aria-required="true"></textarea>
+            </div>
+            <div class="input-field col s12">
+              <button class="modal-action modal-close waves-effect waves-yellow btn-flat right">Cancel</button>
+              <button class="btn waves-effect waves-light right yellow" type="submit" name="action">Save</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/materialize.js"></script>
   <script type="text/javascript" src="js/custom.js"></script>
 </body>
+
 </html>
