@@ -2,7 +2,7 @@ import models from '../models';
 
 export default {
   create(req, res) {
-    return models.Users
+    return models.User
       .create({
         username: req.body.username,
         email: req.body.email,

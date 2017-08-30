@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 import session from 'express-session';
 import routes from './routes/routes';
 
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 8081;
 const app = express();
 
 app.use(bodyParser.json());
