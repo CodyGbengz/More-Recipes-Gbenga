@@ -53,34 +53,47 @@
 
   <main class="container">
     <div class="row">
-      <div class="col s12 m12">
-        <h4 class="header">My Favorite Recipes</h4>
+      <h5> Create a New Recipe</h5>
+      <form class="col s12 white">
         <div class="row">
-          <div class="row">
-            <div class="col s12 m4">
-              <div class="card">
-                <div class="card-image">
-                  <img src="./images/bg2.jpg">
-                  <span class="card-title">Recipe Title</span>
-                  <a class="btn-floating halfway-fab waves-effect waves-light yellow tooltipped" data-position="bottom" data-delay="100" data-tooltip="Delete"><i class="material-icons">clear</i></a>
-                </div>
-                <div class="card-content">
-                  <p>A short description of the recipe with information about the recipe in 140 characters or less.</p>
-                </div>
-                <div class="card-action">
-                  <div class="chip">
-                    <img src="./images/avi.jpg" alt="Contact Person"> Jane Doe
-                  </div>
-                  </br>
-                  <a class=""><i class="material-icons">thumb_up</i>50</a>
-                  <a class=""><i class="material-icons">thumb_down</i>5</a>
-                  <a class=""><i class="material-icons">visibility</i>4</a>
-                </div>
-              </div>
-            </div>
+          <div class="input-field col s12 m12">
+            <input id="first_name" type="text" class="validate">
+            <label for="first_name">Recipe Title</label>
+          </div>
+          <div class="input-field col s12 m12">
+            <textarea id="textarea1" class="materialize-textarea"></textarea>
+            <label for="textarea1">Description</label>
+          </div>
+          <div class="input-field col s6 m6">
+            <input id="first_name" type="text" class="validate">
+            <label for="first_name">Estimated Time</label>
+          </div>
+          <div class="input-field col s6 m6">
+            <input id="first_name" type="text" class="validate">
+            <label for="first_name">Serves</label>
+          </div>
+          <div class="input-field col s12 m12">
+            <h6><em><b>Upload Image</b></em></h5>
+              <input class="waves-effect waves-light yellow btn" type="file">
+          </div>
+          <div class="file-field input-field col s12 m12">
+            <h6><em><b>Ingredients</b></em></h6>
+            <small><em>Enter your Ingredients one at a time and hit enter</em></small>
+            <input id="first_name" placeholder="e.g 1 tsp dry pepper" type="text" class="validate">
+          </div>
+          <div class="input-field col s12 m12">
+            <h6><em><b>Directions</b></em></h5>
+              <small><em>Enter your directions one step at a time and hit enter</em></small>
+              <input id="first_name" placeholder="e.g Place all ingredients in a blender" type="text" class="validate">
           </div>
         </div>
-      </div>
+        <div class="row">
+          <div class="col s6 m6 offset-m4 offset-s4">
+            <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+            <a class="modal-action modal-close waves-effect waves-light yellow btn">Save</a>
+          </div>
+        </div>
+      </form>
     </div>
   </main>
 
@@ -89,15 +102,18 @@
       <div class="row">
         <div class="col m12 s12 black-text">
           © 2017 Copyright Gbenga Ode for Andela
-          <a class="black-text text-lighten-4 right" href="#!">Project Repo <i class="fa fa-github"></i></a>
+          <a class="black-text text-lighten-4 right" href="https://github.com/WillyWunderdog/More-Recipes/tree/template">Project Repo <i class="fa fa-github"></i></a>
         </div>
       </div>
     </div>
 
   </footer>
-
+  <a href="#navvy" id="backToTop" onclick="topFunction()" class="btn-floating waves-effect waves-light yellow tooltipped" data-position="top"
+    data-delay="50" data-tooltip="back to top"><i class="material-icons">arrow_upward</i></a>
+  <!--Import jQuery before materialize.js-->
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
   <script type="text/javascript" src="js/materialize.js"></script>
   <script type="text/javascript" src="js/custom.js"></script>
 </body>
+
 </html>

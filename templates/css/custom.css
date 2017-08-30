@@ -6,7 +6,7 @@
   margin-bottom: 0px;
 }
 .bodily{
-  background-image: url('../images/bg1.jpg')
+  background-color: #ffff66
 }
 
 #profileBanner{
@@ -31,4 +31,8 @@ main {
   position: fixed; /* Fixed/sticky position */
   bottom: 80px; /* Place the button at the bottom of the page */
   right: 30px;
+}
+
+ label {
+    width: 100%;
 }
