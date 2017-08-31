@@ -4,6 +4,19 @@ import models from '../models';
 
 export default {
   create(req, res) {
+    if (!/\w{8}/.test(req.body.username)) {
+      return res.status(402).send({
+        message: 'Enter a username with atleast 8 characters'
+      });
+    } else if (!/^[\w\.-_\+]+@[\w-]+(\.\w{2,4})+$/.test(req.body.email)) {
+      return res.status(402).send({
+        message: 'Please enter a valid email'
+      });
+    } else if (!/^\w{8,12}$/.test(req.body.password)) {
+      return res.status(402).send({
+        message: 'Please Enter a password with atleast 8 characters'
+      });
+    }
     return models.Users
       .create({
         username: req.body.username,
@@ -21,6 +34,15 @@ export default {
   },
 
   signin(req, res) {
+    if (!/^[\w\.-_\+]+@[\w-]+(\.\w{2,4})+$/.test(req.body.email)) {
+      return res.status(402).send({
+        message: 'Please enter a valid email'
+      });
+    } else if (!/^\w{8,12}$/.test(req.body.password)) {
+      return res.status(402).send({
+        message: 'Please Enter a password with atleast 8 characters'
+      });
+    }
     return models.Users
       .findOne({ where:
         { email: req.body.email,
