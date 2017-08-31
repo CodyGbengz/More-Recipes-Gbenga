@@ -74,7 +74,7 @@
                 <a href="#edit" class="waves-effect waves-light btn yellow modal-trigger">Edit</a>
               </div>
               <div class="col s6 m6">
-                <a class="waves-effect waves-light btn yellow ">Delete</a>
+                <a href="#delete"class="waves-effect waves-light btn black modal-trigger">Delete</a>
               </div>
             </div>
           </div>
@@ -95,121 +95,110 @@
   </footer>
 
   <div id="create" class="modal">
-      <div class="modal-content">
-        <h4>Create Recipe</h4>
-        <div class="row">
-          <form class="col s12">
-            <div class="row modal-form-row">
-              <div class="input-field col s12 ">
-                <input id="recipeTitle" name="recipeTitle" type="email" required="" aria-required="true">
-                <label for="recipeTitle">Recipe Title</label>
-              </div>
-              <div class="input-field col s12 ">
-                <textarea id="recipeDescription" class="materialize-textarea" name="recipeDescription" type="password" required="" aria-required="true"></textarea>
-                <label for="recipeDescription">Recipe Description</label>
-              </div>
-              <div class="input-field col s6 m6">
-                <input id="first_name" type="text" required="" aria-required="true">
-                <label for="first_name">Estimated Time</label>
-              </div>
-              <div class="input-field col s6 m6">
-                <input id="first_name" type="text" required="" aria-required="true">
-                <label for="first_name">Serves</label>
-              </div>
-              <div class="input-field col s12 m12">
-                <h6><em><b>Upload Image</b></em></h5>
-                  <input class="waves-effect waves-light yellow btn" type="file">
-              </div>
-              <div class="file-field input-field col s12 m12">
-                <h6><em><b>Ingredients</b></em></h6>
-                <small><em>Enter your Ingredients one at a time and hit enter</em></small>
-                <input id="first_name" placeholder="e.g 1 tsp dry pepper" type="text" required="" aria-required="true">
-              </div>
-              <div class="input-field col s12 m12">
-                <h6><em><b>Directions</b></em></h5>
-                  <small><em>Enter your directions one step at a time and hit enter</em></small>
-                  <textarea class="materialize-textarea"id="first_name" placeholder="e.g Place all ingredients in a blender" type="text" required="" aria-required="true"></textarea>
-              </div>
-              <div class="input-field col s12">
-                <button class="modal-action modal-close waves-effect waves-yellow btn-flat right">Cancel</button>
-                <button class="btn waves-effect waves-light right yellow" type="submit" name="action">Save</button>
-              </div>
+    <div class="modal-content">
+      <h4>Create Recipe</h4>
+      <div class="row">
+        <form class="col s12">
+          <div class="row modal-form-row">
+            <div class="input-field col s12 ">
+              <input id="recipeTitle" name="recipeTitle" type="email" required="" aria-required="true">
+              <label for="recipeTitle">Recipe Title</label>
             </div>
-          </form>
-        </div>
+            <div class="input-field col s12 ">
+              <textarea id="recipeDescription" class="materialize-textarea" name="recipeDescription" type="password" required="" aria-required="true"></textarea>
+              <label for="recipeDescription">Recipe Description</label>
+            </div>
+            <div class="input-field col s6 m6">
+              <input id="first_name" type="text" required="" aria-required="true">
+              <label for="first_name">Estimated Time</label>
+            </div>
+            <div class="input-field col s6 m6">
+              <input id="first_name" type="text" required="" aria-required="true">
+              <label for="first_name">Serves</label>
+            </div>
+            <div class="input-field col s12 m12">
+              <h6><em><b>Upload Image</b></em></h5>
+                <input class="waves-effect waves-light yellow btn" type="file">
+            </div>
+            <div class="file-field input-field col s12 m12">
+              <h6><em><b>Ingredients</b></em></h6>
+              <small><em>Enter your Ingredients one at a time and hit enter</em></small>
+              <input id="first_name" placeholder="e.g 1 tsp dry pepper" type="text" required="" aria-required="true">
+            </div>
+            <div class="input-field col s12 m12">
+              <h6><em><b>Directions</b></em></h5>
+                <small><em>Enter your directions one step at a time and hit enter</em></small>
+                <textarea class="materialize-textarea" id="first_name" placeholder="e.g Place all ingredients in a blender" type="text" required=""
+                  aria-required="true"></textarea>
+            </div>
+            <div class="input-field col s12">
+              <button class="modal-action modal-close waves-effect waves-yellow btn-flat right">Cancel</button>
+              <button class="btn waves-effect waves-light right yellow" type="submit" name="action">Save</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
+  </div>
 
-    <div id="edit" class="modal">
-        <div class="modal-content">
-          <h4>Edit Recipe</h4>
-          <div class="row">
-            <form class="col s12">
-              <div class="row modal-form-row">
-                <div class="input-field col s12 ">
-                  <input value="Recipe title"id="recipeTitle" name="recipeTitle" type="email" required="" aria-required="true">
-                  <label for="recipeTitle">Recipe Title</label>
-                </div>
-                <div class="input-field col s12 ">
-                  <textarea value="A short description of the recipe"id="recipeDescription" class="materialize-textarea" name="recipeDescription" type="password" required="" aria-required="true"></textarea>
-                  <label for="recipeDescription">Recipe Description</label>
-                </div>
-                <div class="input-field col s6 m6">
-                  <input id="first_name" type="text" required="" aria-required="true">
-                  <label for="first_name">Estimated Time</label>
-                </div>
-                <div class="input-field col s6 m6">
-                  <input id="first_name" type="text" required="" aria-required="true">
-                  <label for="first_name">Serves</label>
-                </div>
-                <div class="input-field col s12 m12">
-                  <h6><em><b>Upload Image</b></em></h5>
-                    <input class="waves-effect waves-light yellow btn" type="file">
-                </div>
-                <div class="file-field input-field col s12 m12">
-                  <h6><em><b>Ingredients</b></em></h6>
-                  <small><em>Enter your Ingredients one at a time and hit enter</em></small>
-                  <input id="first_name" placeholder="e.g 1 tsp dry pepper" type="text" required="" aria-required="true">
-                </div>
-                <div class="input-field col s12 m12">
-                  <h6><em><b>Directions</b></em></h5>
-                    <small><em>Enter your directions one step at a time and hit enter</em></small>
-                    <textarea class="materialize-textarea" id="first_name" placeholder="e.g Place all ingredients in a blender" type="text" required="" aria-required="true"></textarea>
-                </div>
-                <div class="input-field col s12">
-                  <button class="modal-action modal-close waves-effect waves-yellow btn-flat right">Cancel</button>
-                  <button class="btn waves-effect waves-light right yellow" type="submit" name="action">Save</button>
-                </div>
-              </div>
-            </form>
+  <div id="edit" class="modal">
+    <div class="modal-content">
+      <h4>Edit Recipe</h4>
+      <div class="row">
+        <form class="col s12">
+          <div class="row modal-form-row">
+            <div class="input-field col s12 ">
+              <input value="Recipe title" id="recipeTitle" name="recipeTitle" type="email" required="" aria-required="true">
+              <label for="recipeTitle">Recipe Title</label>
+            </div>
+            <div class="input-field col s12 ">
+              <textarea value="A short description of the recipe" id="recipeDescription" class="materialize-textarea" name="recipeDescription"
+                type="password" required="" aria-required="true"></textarea>
+              <label for="recipeDescription">Recipe Description</label>
+            </div>
+            <div class="input-field col s6 m6">
+              <input id="first_name" type="text" required="" aria-required="true">
+              <label for="first_name">Estimated Time</label>
+            </div>
+            <div class="input-field col s6 m6">
+              <input id="first_name" type="text" required="" aria-required="true">
+              <label for="first_name">Serves</label>
+            </div>
+            <div class="input-field col s12 m12">
+              <h6><em><b>Upload Image</b></em></h5>
+                <input class="waves-effect waves-light yellow btn" type="file">
+            </div>
+            <div class="file-field input-field col s12 m12">
+              <h6><em><b>Ingredients</b></em></h6>
+              <small><em>Enter your Ingredients one at a time and hit enter</em></small>
+              <input id="first_name" placeholder="e.g 1 tsp dry pepper" type="text" required="" aria-required="true">
+            </div>
+            <div class="input-field col s12 m12">
+              <h6><em><b>Directions</b></em></h5>
+                <small><em>Enter your directions one step at a time and hit enter</em></small>
+                <textarea class="materialize-textarea" id="first_name" placeholder="e.g Place all ingredients in a blender" type="text" required=""
+                  aria-required="true"></textarea>
+            </div>
+            <div class="input-field col s12">
+              <button class="modal-action modal-close waves-effect waves-yellow btn-flat right">Cancel</button>
+              <button class="btn waves-effect waves-light right yellow" type="submit" name="action">Save</button>
+            </div>
           </div>
-        </div>
+        </form>
       </div>
+    </div>
+  </div>
 
-  <div id="login" class="modal">
-		<div class="modal-content">
-			<h4>Login</h4>
-			<div class="row">
-				<form class="col s12">
-					<div class="row modal-form-row">
-						<div class="input-field col s12 ">
-							<input id="logemail" name="logemail" type="email" required="" aria-required="true">
-							<label for="logemail">Email Address</label>
-						</div>
-						<div class="input-field col s12 ">
-							<input id="logpassword" name="logpassword" type="password" required="" aria-required="true">
-							<label for="logpassword">Password</label>
-						</div>
-						<div class="input-field col s12">
-							<a href="" class="black-text">Forgot Password?</a>
-							<button class="modal-action modal-close waves-effect waves-yellow btn-flat right">Cancel</button>
-							<button class="btn waves-effect waves-light right yellow" type="submit" name="action">Log in</button>
-						</div>
-					</div>
-				</form>
-			</div>
-		</div>
-	</div>
+  <div id="delete" class="modal">
+      <div class="modal-content">
+        <h4>Delete recipe</h4>
+        <p>Are you sure you want to permanently delete this recipe?</p>
+      </div>
+      <div class="modal-footer">
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat white-text black">yes</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">no</a>
+      </div>
+    </div>
 
 
   <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
