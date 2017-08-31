@@ -11,6 +11,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: 'secret', resave: false, saveUninitialized: true }));
 app.use(routes);
 
-app.listen(port, () => {
-  console.log('live');
-});
+app.listen(port)
+
+export default app;
