@@ -19,6 +19,10 @@ router.use((req, res, next) => {
   }
 });
 
+// route for add recipe
+router.post('/api/recipes', controllers.Recipe.add);
+
+
 // route for logged in user sign out
 router.post('/signout', (req, res) => {
   req.session.destroy();
@@ -26,6 +30,8 @@ router.post('/signout', (req, res) => {
     message: 'User signed out Successfully'
   });
 });
+
+
 
 // error handlers
 router.use((err, req, res) => {
