@@ -29,4 +29,28 @@ export default {
       }));
   },
 
-};
+  update(req, res) {
+    return models.Recipes
+      .findById(req.params.recipeId)
+      .then((recipe) => {
+        if (!recipe) {
+          return res.status(404).send({
+            message: 'Recipe not found',
+          });
+        }
+        return recipe
+          .update({
+            title: req.body.title || recipe.title,
+            description: req.body.description || recipe.description,
+            ingredients: req.body.ingredients || recipe.ingredients,
+            directions: req.body.directions || recipe.direction
+          })
+          .then(() => res.status(200).send(recipe))
+          .catchh(error => res.status(400).send({
+            message: error.message
+          }))
+          .catch(error => res.status(400).send({
+            message: error.message
+          }));
+      });
+  } };

@@ -25,6 +25,9 @@ router.post('/api/recipes', controllers.Recipe.add);
 // route for get recipes
 router.get('/api/recipes', controllers.Recipe.fetch);
 
+// route for update recipe
+router.put('/api/recipes/:recipeId', controllers.Recipe.update);
+
 
 // route for logged in user sign out
 router.post('/signout', (req, res) => {
