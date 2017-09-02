@@ -53,4 +53,5 @@ export default {
             message: error.message
           }));
       });
-  } };
+  }
+};
