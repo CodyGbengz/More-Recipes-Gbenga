@@ -28,6 +28,9 @@ router.get('/api/recipes', controllers.Recipe.fetch);
 // route for update recipe
 router.put('/api/recipes/:recipeId', controllers.Recipe.update);
 
+// route for delete recipe
+router.delete('/api/recipes/:recipeId', controllers.Recipe.destroy);
+
 
 // route for logged in user sign out
 router.post('/signout', (req, res) => {
@@ -39,10 +42,5 @@ router.post('/signout', (req, res) => {
 
 
 // error handlers
-router.use((err, req, res) => {
-  res.send({
-    messsage: err.message
-  });
-});
 
 export default router;

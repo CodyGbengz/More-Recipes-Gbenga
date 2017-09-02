@@ -48,10 +48,34 @@ export default {
           .then(() => res.status(200).send(recipe))
           .catchh(error => res.status(400).send({
             message: error.message
+          }));
+      })
+      .catch(error => res.status(400).send({
+        message: error.message
+      }));
+  },
+
+  destroy(req, res) {
+    return models.Recipes
+      .findById(req.params.recipeId)
+      .then((recipe) => {
+        if (!recipe) {
+          return res.status(400).send({
+            message: 'Recipe not found'
+          });
+        }
+        return recipe
+          .destroy()
+          .then(() => res.status(204).send({
+            message: 'Recipe deleted successfully'
           }))
           .catch(error => res.status(400).send({
             message: error.message
           }));
-      });
+      })
+      .catch(error => res.status(400)
+        .send({
+          message: error.message
+        }));
   }
 };
