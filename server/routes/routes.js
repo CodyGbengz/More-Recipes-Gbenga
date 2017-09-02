@@ -22,6 +22,9 @@ router.use((req, res, next) => {
 // route for add recipe
 router.post('/api/recipes', controllers.Recipe.add);
 
+// route for get recipes
+router.get('/api/recipes', controllers.Recipe.fetch);
+
 
 // route for logged in user sign out
 router.post('/signout', (req, res) => {
@@ -30,7 +33,6 @@ router.post('/signout', (req, res) => {
     message: 'User signed out Successfully'
   });
 });
-
 
 
 // error handlers
