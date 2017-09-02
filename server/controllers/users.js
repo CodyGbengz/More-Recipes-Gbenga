@@ -34,7 +34,7 @@ export default {
   },
 
   signin(req, res) {
-    if (!/^[\w\.-_\+]+@[\w-]+(\.\w{2,4})+$/.test(req.body.email)) {
+    if (!/[\w\.-_\+]+@[\w-]+(\.\w{2,4})+$/.test(req.body.email)) {
       return res.status(402).send({
         message: 'Please enter a valid email'
       });
