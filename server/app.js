@@ -12,8 +12,12 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: 'secret', resave: false, saveUninitialized: true }));
 app.use(routes);
 
+<<<<<<< HEAD
 app.listen(port, () => {
   winston.info('We up!');
 });
+=======
+app.listen(port);
+>>>>>>> ch-travis-#150703645
 
 export default app;
