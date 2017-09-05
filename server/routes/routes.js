@@ -40,6 +40,8 @@ router.post('/api/users/:userId/recipes', controllers.Favorite.add);
 // route for getting favorites
 router.get('/api/users/:userId/recipes', controllers.Favorite.fetch);
 
+// route for getting recipes by upvotes
+
 
 // route for logged in user sign out
 router.post('/signout', (req, res) => {
