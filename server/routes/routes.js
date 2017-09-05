@@ -32,7 +32,13 @@ router.put('/api/recipes/:recipeId', controllers.Recipe.update);
 router.delete('/api/recipes/:recipeId', controllers.Recipe.destroy);
 
 // route for posting a review
-router.post('/api/recipes/:recipeId/reviews', controllers.Review.add)
+router.post('/api/recipes/:recipeId/reviews', controllers.Review.add);
+
+// route for adding to favorites
+router.post('api/users/:recipeId/recipes', controllers.Favorite.add);
+
+// route for getting favorites
+router.get('api/users/:recipeId/recipes', controllers.Favorite.fetch);
 
 
 // route for logged in user sign out
