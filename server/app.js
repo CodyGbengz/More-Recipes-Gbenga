@@ -12,8 +12,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(session({ secret: 'secret', resave: false, saveUninitialized: true }));
 app.use(routes);
 
-app.listen(port, () => {
-  winston.info('We up!');
-});
+app.listen(port, () => winston.info('We up!'));
 
 export default app;

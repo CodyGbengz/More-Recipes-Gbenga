@@ -29,6 +29,12 @@ export default (sequelize, DataTypes) => {
       validate: {
         notEmpty: true
       }
+    },
+    upvotes: {
+      type: DataTypes.INTEGER
+    },
+    downvotes: {
+      type: DataTypes.INTEGER
     }
   });
 
