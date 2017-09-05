@@ -35,10 +35,10 @@ router.delete('/api/recipes/:recipeId', controllers.Recipe.destroy);
 router.post('/api/recipes/:recipeId/reviews', controllers.Review.add);
 
 // route for adding to favorites
-router.post('api/users/:recipeId/recipes', controllers.Favorite.add);
+router.post('/api/users/:userId/recipes', controllers.Favorite.add);
 
 // route for getting favorites
-router.get('api/users/:recipeId/recipes', controllers.Favorite.fetch);
+router.get('/api/users/:userId/recipes', controllers.Favorite.fetch);
 
 
 // route for logged in user sign out

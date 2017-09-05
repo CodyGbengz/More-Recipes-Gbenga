@@ -2,21 +2,21 @@ import models from '../models';
 
 export default {
   add(req, res) {
-    return models.Recipe
-      .findById(req.params.recipeId)
+    return models.Recipes
+      .findById(req.body.recipeId)
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).send({
             message: 'Recipe does not exists'
           });
         }
-        models.Favorite
+        models.favourites
           .create({
-            userId: req.body.userId,
-            recipeId: req.params.recipeId
+            userId: req.params.userId,
+            recipeId: req.body.recipeId
           });
         return res.status(201).send({
-          message: 'Recipe add to favourites successfully'
+          message: 'Recipe added to favourites successfully'
         });
       })
       .catch(error => res.status(400).send({
@@ -24,10 +24,10 @@ export default {
       }));
   },
   fetch(req, res) {
-    return models.Favorite
+    return models.favourites
       .findAll({ where: { userId: req.params.userId } })
-      .then((favorite) => {
-        res.status(200).send(favorite);
+      .then((favourites) => {
+        res.status(200).send(favourites);
       })
       .catch(error => res.status(400).send({
         message: error.message
