@@ -31,6 +31,9 @@ router.put('/api/recipes/:recipeId', controllers.Recipe.update);
 // route for delete recipe
 router.delete('/api/recipes/:recipeId', controllers.Recipe.destroy);
 
+// route for posting a review
+router.post('/api/recipes/:recipeId/reviews', controllers.Review.add)
+
 
 // route for logged in user sign out
 router.post('/signout', (req, res) => {
