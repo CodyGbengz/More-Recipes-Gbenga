@@ -1,7 +1,6 @@
 
-
 export default (sequelize, DataTypes) => {
-  const Recipes = sequelize.define('Recipes', {
+  const Recipe = sequelize.define('Recipe', {
     title: {
       allowNull: false,
       type: DataTypes.STRING,
@@ -31,15 +30,28 @@ export default (sequelize, DataTypes) => {
       }
     },
     upvotes: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 0
     },
     downvotes: {
-      type: DataTypes.INTEGER
+      type: DataTypes.INTEGER,
+      defaultValue: 0
+    },
+    userId: {
+      type: DataTypes.INTEGER,
+      allowNull: false
     }
   });
 
-  Recipes.associate = (models) => {
+  Recipe.associate = (models) => {
     // define associations here
+    Recipe.hasMany(models.Review, {
+      foreignKey: 'recipeId',
+      as: 'reviews'
+    });
+    Recipe.hasMany(models.Favourite, {
+      foreignKey: 'recipeId'
+    });
   };
-  return Recipes;
+  return Recipe;
 };

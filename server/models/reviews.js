@@ -1,11 +1,11 @@
 
 export default (sequelize, DataTypes) => {
-  const Reviews = sequelize.define('Reviews', {
-    from_user: {
-      type: DataTypes.STRING,
+  const Review = sequelize.define('Review', {
+    userId: {
+      type: DataTypes.INTEGER,
       allowNull: false
     },
-    to_recipe: {
+    recipeId: {
       type: DataTypes.INTEGER,
       allowNull: false
     },
@@ -18,9 +18,16 @@ export default (sequelize, DataTypes) => {
     }
   });
 
-  Reviews.associate = (models) => {
+  Review.associate = (models) => {
     // associations can be defined here
+    Review.belongsTo(models.User, {
+      foreignKey: 'userId'
+    });
+    Review.belongsTo(models.Recipe, {
+      foreignKey: 'recipeId',
+      onDelete: 'CASCADE'
+    });
   };
 
-  return Reviews;
+  return Review;
 };

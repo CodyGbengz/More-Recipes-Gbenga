@@ -2,7 +2,7 @@ import models from '../models';
 
 export default {
   add(req, res) {
-    return models.Recipes
+    return models.Recipe
       .findById(req.body.recipeId)
       .then((recipe) => {
         if (!recipe) {
@@ -10,7 +10,7 @@ export default {
             message: 'Recipe does not exists'
           });
         }
-        models.favourites
+        models.Favourite
           .create({
             userId: req.params.userId,
             recipeId: req.body.recipeId
@@ -24,10 +24,10 @@ export default {
       }));
   },
   fetch(req, res) {
-    return models.favourites
+    return models.Favourite
       .findAll({ where: { userId: req.params.userId } })
-      .then((favourites) => {
-        res.status(200).send(favourites);
+      .then((favourite) => {
+        res.status(200).send(favourite);
       })
       .catch(error => res.status(400).send({
         message: error.message

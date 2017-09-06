@@ -6,10 +6,9 @@ import models from '../server/models';
 
 
 process.env.NODE_ENV = 'test';
-
 chai.use(chaiHttp);
 
-models.Users.destroy({
+models.User.destroy({
   where: {},
   cascade: true,
   truncate: true
@@ -28,7 +27,7 @@ describe('test app', () => {
         })
         .end((err, res) => {
           res.status.should.be.eql(201);
-          res.body.email.should.eql('test@user.com');
+          res.body.data.email.should.eql('test@user.com');
           done();
         });
     });

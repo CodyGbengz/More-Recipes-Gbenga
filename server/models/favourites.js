@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const Favourites = sequelize.define('favourites', {
+  const Favourite = sequelize.define('Favourite', {
     userId: {
       type: DataTypes.INTEGER,
       allowNull: false
@@ -9,5 +9,15 @@ export default (sequelize, DataTypes) => {
       allowNull: false
     }
   });
-  return Favourites;
+  Favourite.associate = (models) => {
+    Favourite.belongsTo(models.User, {
+      foreignKey: 'userId',
+      onDelete: 'CASCADE'
+    });
+    Favourite.belongsTo(models.Recipe, {
+      foreignKey: 'recipeId',
+      onDelete: 'CASCADE'
+    });
+  };
+  return Favourite;
 };

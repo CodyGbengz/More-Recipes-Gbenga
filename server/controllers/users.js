@@ -17,16 +17,19 @@ export default {
         message: 'Please Enter a password with atleast 8 characters'
       });
     }
-    return models.Users
+    return models.User
       .create({
         username: req.body.username,
         email: req.body.email,
         password: md5(req.body.password)
       })
-      .then(user => res.status(201).send({
-        username: user.username,
-        email: user.email,
-        message: 'sign up successful'
+      .then(user => res.status(201).json({
+        status: 'success',
+        message: 'sign up successful',
+        data: {
+          username: user.username,
+          email: user.email,
+        }
       }))
       .catch(error => res.status(400).send({
         error: error.message
@@ -43,7 +46,7 @@ export default {
         message: 'Please Enter a password with atleast 8 characters'
       });
     }
-    return models.Users
+    return models.User
       .findOne({ where:
         { email: req.body.email,
           password: md5(req.body.password) } })

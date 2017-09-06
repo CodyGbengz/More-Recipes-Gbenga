@@ -1,5 +1,5 @@
 export default (sequelize, DataTypes) => {
-  const Users = sequelize.define('Users', {
+  const User = sequelize.define('User', {
     username: {
       allowNull: false,
       type: DataTypes.STRING,
@@ -27,8 +27,17 @@ export default (sequelize, DataTypes) => {
     }
   });
 
-  Users.associate = (models) => {
+  User.associate = (models) => {
     // associations can be defined here
+    User.hasMany(models.Review, {
+      foreignKey: 'userId',
+      as: 'reviews'
+    });
+    User.hasMany(models.Favourite, {
+      foreignKey: 'userId',
+      as: 'favourites'
+    });
   };
-  return Users;
+  
+  return User;
 };

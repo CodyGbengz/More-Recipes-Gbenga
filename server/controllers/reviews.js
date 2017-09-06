@@ -2,10 +2,10 @@ import models from '../models';
 
 export default {
   add(req, res) {
-    return models.Reviews
+    return models.Review
       .create({
-        from_user: req.body.from_user,
-        to_recipe: req.body.to_recipe,
+        userId: req.body.userId,
+        recipe: req.body.recipeId,
         content: req.body.content
 
       })
