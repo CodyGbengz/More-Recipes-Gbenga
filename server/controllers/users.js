@@ -58,9 +58,13 @@ export default {
           });
         }
         req.session.user = user;
-        res.status(202).send({
-          username: user.username,
-          email: user.email,
+        res.status(202).json({
+          status: 'success!',
+          data: {
+            id: user.id,
+            username: user.username,
+            email: user.email
+          },
           message: 'Sign in successful'
         });
       })
