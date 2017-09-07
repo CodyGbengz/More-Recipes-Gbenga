@@ -1,8 +1,9 @@
 language: node_js
 node_js: 
 -stable
-install: 
-  - npm install
+branches:
+  only:
+    - develop
 script:
   -npm test
 services: 
@@ -10,4 +11,7 @@ services:
 cache: 
   - npm install
 before_script:
-  - psql -c 'create database travis_ci_test;' -U postgres
+  - npm install
+  - psql -c 'create database more-recipes-development' -U postgres
+after_script:
+  - psql -c 'drop database more-recipes-development' -U postgres
