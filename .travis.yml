@@ -1,13 +1,13 @@
 language: node_js
 node_js: 
--stable
+- stable
 branches:
   only:
     - develop
 script:
-  -npm test
+  - npm test
 services: 
-  -postgresql
+  - postgresql
 cache: 
   - npm install
 before_script:
