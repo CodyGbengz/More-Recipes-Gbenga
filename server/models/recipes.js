@@ -31,10 +31,12 @@ export default (sequelize, DataTypes) => {
     },
     upvotes: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       defaultValue: 0
     },
     downvotes: {
       type: DataTypes.INTEGER,
+      allowNull: false,
       defaultValue: 0
     },
     userId: {
@@ -45,6 +47,9 @@ export default (sequelize, DataTypes) => {
 
   Recipe.associate = (models) => {
     // define associations here
+    Recipe.belongsTo(models.User, {
+      foreignKey: 'userId'
+    });
     Recipe.hasMany(models.Review, {
       foreignKey: 'recipeId',
       as: 'reviews'
@@ -53,5 +58,6 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'recipeId'
     });
   };
+
   return Recipe;
 };

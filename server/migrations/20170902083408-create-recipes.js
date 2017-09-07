@@ -22,10 +22,14 @@ module.exports = {
         type: Sequelize.STRING
       },
       upvotes: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
       },
       downvotes: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
       },
       createdAt: {
         allowNull: false,
@@ -43,7 +47,6 @@ module.exports = {
           key: 'id',
           as: 'userId'
         }
-
       }
     });
   },

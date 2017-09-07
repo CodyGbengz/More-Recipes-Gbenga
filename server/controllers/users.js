@@ -4,15 +4,15 @@ import models from '../models';
 
 export default {
   create(req, res) {
-    if (!/\w{8}/.test(req.body.username)) {
+    if (!/\w{8}/.test(req.body.username) || !req.body.username) {
       return res.status(402).send({
         message: 'Enter a username with atleast 8 characters'
       });
-    } else if (!/^[\w\.-_\+]+@[\w-]+(\.\w{2,4})+$/.test(req.body.email)) {
+    } else if (!/[\w\.-_\+]+@[\w-]+(\.\w{2,4})+$/.test(req.body.email) || !req.body.email) {
       return res.status(402).send({
         message: 'Please enter a valid email'
       });
-    } else if (!/^\w{8,12}$/.test(req.body.password)) {
+    } else if (!/\w{8,12}$/.test(req.body.password) || !req.body.password) {
       return res.status(402).send({
         message: 'Please Enter a password with atleast 8 characters'
       });
@@ -37,11 +37,11 @@ export default {
   },
 
   signin(req, res) {
-    if (!/[\w\.-_\+]+@[\w-]+(\.\w{2,4})+$/.test(req.body.email)) {
+    if (!/[\w\.-_\+]+@[\w-]+(\.\w{2,4})+$/.test(req.body.email) || !req.body.email) {
       return res.status(402).send({
         message: 'Please enter a valid email'
       });
-    } else if (!/^\w{8,12}$/.test(req.body.password)) {
+    } else if (!/\w{8,12}$/.test(req.body.password) || !req.body.password) {
       return res.status(402).send({
         message: 'Please Enter a password with atleast 8 characters'
       });

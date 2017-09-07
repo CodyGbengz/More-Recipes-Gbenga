@@ -38,6 +38,6 @@ export default (sequelize, DataTypes) => {
       as: 'favourites'
     });
   };
-  
+
   return User;
 };

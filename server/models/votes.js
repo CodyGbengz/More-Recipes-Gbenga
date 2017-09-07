@@ -10,7 +10,8 @@ export default (sequelize, DataTypes) => {
       allowNull: false
     },
     option: {
-      type: DataTypes.BOOLEAN
+      type: DataTypes.BOOLEAN,
+      allowNull: false
     }
   });
 

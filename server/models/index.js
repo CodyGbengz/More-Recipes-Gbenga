@@ -1,9 +1,9 @@
 import fs from 'fs';
 import path from 'path';
 import Sequelize from 'sequelize';
-import env from 'dotenv';
+import dotenv from 'dotenv';
 
-env.config();
+dotenv.config();
 
 
 const envData = process.env.NODE_ENV || 'production';

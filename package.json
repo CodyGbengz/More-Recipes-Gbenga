@@ -28,7 +28,7 @@
     "express-session": "^1.15.5",
     "md5": "^2.2.1",
     "nodemon": "^1.11.0",
-    "pg": "^7.3.0",
+    "pg": "^6.4.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.8.0",
     "winston": "^2.3.1"

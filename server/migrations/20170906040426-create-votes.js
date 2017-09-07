@@ -20,21 +20,16 @@ module.exports = {
       userId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: 'Users',
-          key: 'id',
-          as: 'userId'
-        }
       },
       recipeId: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        references: {
-          model: 'Recipes',
-          key: 'id',
-          as: 'recipeId'
-        }
+      },
+      option: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false
       }
+
     });
   },
   down(queryInterface) {
