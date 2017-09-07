@@ -10,23 +10,28 @@ export default {
         ingredients: req.body.ingredients,
         directions: req.body.directions
       })
-      .then(recipe => res.status(201).send({
-        id: recipe.id,
-        title: recipe.title,
-        description: recipe.description,
+      .then(recipe => res.status(201).json({
+        status: 'success',
+        data: {
+          id: recipe.id,
+          title: recipe.title,
+          description: recipe.description,
+        },
         message: 'recipe created successfully'
       }))
-      .catch(error => res.status(400).send({
-        error: error.message
-      }));
+      .catch(error => res.status(400).json({ error: error.message }));
   },
 
   fetch(req, res, next) {
     if (req.query.sort) return next();
     return models.Recipe
       .all()
-      .then(recipe => res.status(200).send(recipe))
-      .catch(error => res.status(400).send({
+      .then(recipe => res.status(200).json({
+        status: 'success',
+        data: { recipe } 
+      }))
+      .catch(error => res.status(400).json({
+        status: 'fail',
         message: error.message
       }));
   },
@@ -36,7 +41,8 @@ export default {
       .findById(req.params.recipeId)
       .then((recipe) => {
         if (!recipe) {
-          return res.status(404).send({
+          return res.status(404).json({
+            status: 'fail',
             message: 'Recipe not found',
           });
         }
@@ -45,14 +51,16 @@ export default {
             title: req.body.title || recipe.title,
             description: req.body.description || recipe.description,
             ingredients: req.body.ingredients || recipe.ingredients,
-            directions: req.body.directions || recipe.direction
+            directions: req.body.directions || recipe.directions
           })
-          .then(() => res.status(200).send(recipe))
-          .catchh(error => res.status(400).send({
+          .then(() => res.status(200).json({ 
+            status: 'success',
+            recipe }))
+          .catch(error => res.status(400).json({
             message: error.message
           }));
       })
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(400).json({
         message: error.message
       }));
   },
@@ -62,23 +70,20 @@ export default {
       .findById(req.params.recipeId)
       .then((recipe) => {
         if (!recipe) {
-          return res.status(400).send({
+          return res.status(404).json({
+            status: 'fail',
             message: 'Recipe not found'
           });
         }
         return recipe
           .destroy()
-          .then(() => res.status(204).send({
+          .then(() => res.status(200).json({
+            status: 'success',
             message: 'Recipe deleted successfully'
           }))
-          .catch(error => res.status(400).send({
-            message: error.message
-          }));
+          .catch(error => res.status(400).json({ message: error.message }));
       })
-      .catch(error => res.status(400)
-        .send({
-          message: error.message
-        }));
+      .catch(error => res.status(400).json({ message: error.message }));
   },
   fetchTopRecipes(req, res) {
     const sort = req.query.sort;
@@ -90,8 +95,6 @@ export default {
         limit: 5
       })
       .then(recipes => res.status(200).json(recipes))
-      .catch(error => res.status(400).json({
-        message: error.message
-      }));
+      .catch(error => res.status(400).json({ message: error.message }));
   }
 };
