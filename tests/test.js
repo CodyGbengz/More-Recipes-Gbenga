@@ -28,6 +28,46 @@ describe('test app', () => {
         .end((err, res) => {
           res.status.should.be.eql(201);
           res.body.data.email.should.eql('test@user.com');
+          res.body.data.username.should.eql('iamanewuser');
+          done();
+        });
+    });
+    it('returns error message when called without an email address', (done) => {
+      chai.request(app)
+        .post('/api/users/signup')
+        .type('form')
+        .send({
+          username: 'iamanewuser',
+          password: 'testpassword',
+        })
+        .end((err, res) => {
+          res.body.message.should.eql('Please enter a valid email');
+          done();
+        });
+    });
+    it('returns error message when called without a password', (done) => {
+      chai.request(app)
+        .post('/api/users/signup')
+        .type('form')
+        .send({
+          username: 'iamanewuser',
+          email: 'test@user.com'
+        })
+        .end((err, res) => {
+          res.body.message.should.eql('Please Enter a password with atleast 8 characters');
+          done();
+        });
+    });
+    it('returns error message when called without a username', (done) => {
+      chai.request(app)
+        .post('/api/users/signup')
+        .type('form')
+        .send({
+          email: 'test@user.com',
+          password: 'testpassword'
+        })
+        .end((err, res) => {
+          res.body.message.should.eql('Enter a username with atleast 8 characters');
           done();
         });
     });

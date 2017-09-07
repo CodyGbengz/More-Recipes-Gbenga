@@ -1,4 +1,5 @@
 import express from 'express';
+import winston from 'winston';
 import controllers from '../controllers/index';
 
 const router = express.Router();
@@ -11,6 +12,7 @@ router.post('/api/users/signin', controllers.User.signin);
 // authentication middleware
 router.use((req, res, next) => {
   if (req.session.user) {
+    winston.log(req.session.user);
     next();
   } else {
     res.send({
