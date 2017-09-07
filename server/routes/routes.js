@@ -19,6 +19,34 @@ router.use((req, res, next) => {
   }
 });
 
+// route for add recipe
+router.post('/api/recipes', controllers.Recipe.add);
+
+// route for get recipes
+router.get('/api/recipes', controllers.Recipe.fetch, controllers.Recipe.fetchTopRecipes);
+
+// route for update recipe
+router.put('/api/recipes/:recipeId', controllers.Recipe.update);
+
+// route for delete recipe
+router.delete('/api/recipes/:recipeId', controllers.Recipe.destroy);
+
+// route for posting a review
+router.post('/api/recipes/:recipeId/reviews', controllers.Review.add);
+
+// route for adding to favorites
+router.post('/api/users/:userId/recipes', controllers.Favorite.add);
+
+// route for getting favorites
+router.get('/api/users/:userId/recipes', controllers.Favorite.fetch);
+
+// route for upvoting
+router.put('/api/recipes/:recipeId/upvote', controllers.Vote.upvote);
+
+// route for downvoting
+router.put('/api/recipes/:recipeId/downvote', controllers.Vote.downvote);
+
+
 // route for logged in user sign out
 router.post('/signout', (req, res) => {
   req.session.destroy();
@@ -27,11 +55,7 @@ router.post('/signout', (req, res) => {
   });
 });
 
+
 // error handlers
-router.use((err, req, res) => {
-  res.send({
-    messsage: err.message
-  });
-});
 
 export default router;

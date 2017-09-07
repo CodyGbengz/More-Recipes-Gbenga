@@ -1,2 +1,13 @@
 language: node_js
-node_js: stable
+node_js: 
+-stable
+install: 
+  - npm install
+script:
+  -npm test
+services: 
+  -postgresql
+cache: 
+  - npm install
+before_script:
+  - psql -c 'create database travis_ci_test;' -U postgres
