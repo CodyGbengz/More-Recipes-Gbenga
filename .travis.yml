@@ -17,6 +17,7 @@ env:
 - NODE_ENV=test
 
 before_script:
+  - npm install sequelize -g
   - npm install nyc -g
   - npm install mocha -g
   - createdb More-Recipes-tests --username=postgres

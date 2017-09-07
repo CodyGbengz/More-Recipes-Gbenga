@@ -1,6 +1,6 @@
 const config = {
   development: {
-    username: '',
+    username: 'postgres',
     password: '212213',
     database: 'more-recipes-development',
     host: '127.0.0.1',
