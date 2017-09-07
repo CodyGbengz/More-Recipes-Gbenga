@@ -27,6 +27,7 @@ export default {
         status: 'success',
         message: 'sign up successful',
         data: {
+          id: user.id,
           username: user.username,
           email: user.email,
         }
