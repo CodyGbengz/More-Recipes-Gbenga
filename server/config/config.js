@@ -9,7 +9,7 @@ const config = {
   test: {
     username: 'postgres',
     password: '212213',
-    database: 'more-recipes-development',
+    database: 'more-recipes-tests',
     host: '127.0.0.1',
     dialect: 'postgres',
     logging: false
