@@ -12,6 +12,6 @@ cache:
   - npm install
 before_script:
   - npm install
-  - psql -c 'create database more-recipes-development' -U postgres
+  - psql -c 'create database more-recipes-tests' -U postgres
 after_script:
-  - psql -c 'drop database more-recipes-development' -U postgres
+  - psql -c 'drop database more-recipes-tests' -U postgres
