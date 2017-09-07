@@ -1,0 +1,17 @@
+language: node_js
+node_js: 
+-stable
+branches:
+  only:
+    - develop
+script:
+  -npm test
+services: 
+  -postgresql
+cache: 
+  - npm install
+before_script:
+  - npm install
+  - psql -c 'create database more-recipes-development' -U postgres
+after_script:
+  - psql -c 'drop database more-recipes-development' -U postgres

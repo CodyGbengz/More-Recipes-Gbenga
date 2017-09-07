@@ -1,102 +1,105 @@
 <!DOCTYPE html>
-  <html>
-    <head>
-      <!--Import Google Icon Font-->
-      <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-      <!--Import materialize.css-->
-      <link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-      <link type="text/css" rel="stylesheet" href="css/materialize.css"  media="screen,projection"/>
-      <link type="text/css" rel="stylesheet" href="css/custom.css"/>
+<html>
 
-      <!--Let browser know website is optimized for mobile-->
-      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    </head>
+<head>
+	<!--Import Google Icon Font-->
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	<!--Import materialize.css-->
+	<link type="text/css" rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link type="text/css" rel="stylesheet" href="css/materialize.css" media="screen,projection" />
+	<link type="text/css" rel="stylesheet" href="css/custom.css" />
 
-    <body class="bodily">
-        <main id="top" class="row">
-                <div class="col s11 m8  offset-s1 ">
-                    <h2 class="">Welcome to More-Recipes</h2>
-                    <p class=""> Join our community of food enthusiasts and discover a world of amazing recipes that bring excitment to your kitchen and tickle your taste buds.</p>
-                    <a class="waves-effect waves-light btn modal-trigger white yellow-text" href="#signup">Sign Up and start cooking</a>
-                    <a class="waves-effect waves-light btn modal-trigger white yellow-text" href="#login">Login</a>
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+</head>
 
-                    <div id="signup" class="modal">
-                        <div class="modal-content">
-                            <h4>Sign up</h4>
+<body class="bodily">
+	<main id="top" class="row">
+		<div class="col s11 m8  offset-s1 ">
+			<h2 class="">Welcome to More-Recipes</h2>
+			<p class=""> Join our community of food enthusiasts and discover a world of amazing recipes that bring excitment to your kitchen and
+				tickle your taste buds.</p>
+			<a class="waves-effect waves-light btn modal-trigger white yellow-text" href="#signup">Sign Up and start cooking</a>
+			<a class="waves-effect waves-light btn modal-trigger white yellow-text" href="#login">Login</a>
+		</div>
 
-                            <div class="row">
-                                <form class="col s12 ">
-                                    <div class="row modal-form-row">
-                                        <div class="input-field col s12">
-                                            <input id="username" type="text" class="validate">
-                                            <label for="username">Username</label>
-                                        </div>
-                                        <div class="input-field col s12 ">
-                                            <input id="email" type="email" class="validate">
-                                            <label for="email">Email Address</label>
-                                        </div>
-                                        <div class="input-field col s12 ">
-                                            <input id="password" type="password" class="validate">
-                                            <label for="password">Password</label>
-                                        </div>
-                                        <div class="input-field col s12 ">
-                                            <input id="repassword" type="password" class="validate">
-                                            <label for="repassword">Confirm Password</label>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-                            <a class="modal-action modal-close waves-effect waves-light yellow btn">Create</a>
-                        </div>
-                    </div>
 
-                    <div id="login" class="modal">
-                        <div class="modal-content">
-                            <h4>Login</h4>
+	</main>
 
-                            <div class="row">
-                                <form class="col s12">
-                                    <div class="row modal-form-row">
-                                        <div class="input-field col s12 ">
-                                            <input id="email" type="email" class="validate">
-                                            <label for="email">Email Address</label>
-                                        </div>
-                                        <div class="input-field col s12 ">
-                                            <input id="password" type="password" class="validate">
-                                            <label for="password">Password</label>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <a href=""class="">Forgot Password?</a>
-                            <a class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-                            <a class="modal-action modal-close waves-effect waves-light yellow btn">Login</a>
-                        </div>
-                    </div>
-                </div>
-            </main>
-       
-    <footer class="page-footer white">
-        <div class="container">
-          <div class="row">
-            <div class="col m12 s12 black-text">
-                © 2017 Copyright Gbenga Ode for Andela
-                <a class="black-text text-lighten-4 right" href="#!">Project Repo <i class="fa fa-github"></i></a>
-            </div>
-          </div>
-        </div>
-       
-      </footer>
-  
-            
-      <!--Import jQuery before materialize.js-->
-      <script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-      <script type="text/javascript" src="js/materialize.js"></script>
-      <script type="text/javascript" src="js/custom.js"></script>
-    </body>
-  </html>
+	<footer class="page-footer white">
+		<div class="container">
+			<div class="row">
+				<div class="col m12 s12 black-text">
+					© 2017 Copyright Gbenga Ode for Andela
+					<a class="black-text text-lighten-4 right" href="https://github.com/WillyWunderdog/More-Recipes/tree/template">Project Repo <i class="fa fa-github"></i></a>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<div id="signup" class="modal">
+		<div class="modal-content">
+			<h4>Sign up</h4>
+			<div class="row">
+				<form class="col s12 former" novalidate="novalidate">
+					<div class="row modal-form-row">
+						<div class="input-field col s12">
+							<input id="username" name="username" type="text" required="please enter a username" aria-required="true">
+							<label for="username">Username</label>
+						</div>
+						<div class="input-field col s12 ">
+							<input id="email" name="email" type="email" required="please enter a valid email address" aria-required="true">
+							<label for="email">Email Address</label>
+						</div>
+						<div class="input-field col s12 ">
+							<input id="password" name="password" type="password" required="please enter a password" aria-required="true">
+							<label for="password">Password</label>
+						</div>
+						<div class="input-field col s12 ">
+							<input id="repassword" name="repassword" type="password" required="please re-enter password" aria-required="true">
+							<label for="repassword">Confirm Password</label>
+						</div>
+						<div class="input-field col s12">
+							<button class="modal-action modal-close waves-effect waves-green btn-flat right">Cancel</button>
+							<button class="btn waves-effect waves-light yellow right" type="submit" name="action">Sign Up</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div id="login" class="modal">
+		<div class="modal-content">
+			<h4>Login</h4>
+			<div class="row">
+				<form class="col s12">
+					<div class="row modal-form-row">
+						<div class="input-field col s12 ">
+							<input id="logemail" name="logemail" type="email" required="" aria-required="true">
+							<label for="logemail">Email Address</label>
+						</div>
+						<div class="input-field col s12 ">
+							<input id="logpassword" name="logpassword" type="password" required="" aria-required="true">
+							<label for="logpassword">Password</label>
+						</div>
+						<div class="input-field col s12">
+							<a href="" class="black-text">Forgot Password?</a>
+							<button class="modal-action modal-close waves-effect waves-yellow btn-flat right">Cancel</button>
+							<button class="btn waves-effect waves-light right yellow" type="submit" name="action">Log in</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<!--Import jQuery before materialize.js-->
+	<script type="text/javascript" src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.17.0/jquery.validate.js"></script>
+	<script type="text/javascript" src="js/materialize.js"></script>
+	<script type="text/javascript" src="js/custom.js"></script>
+</body>
+
+</html>
