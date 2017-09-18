@@ -38,7 +38,7 @@ export default {
           });
         }
         req.session.user = user;
-        res.status(202).json({
+        res.status(200).json({
           status: 'success',
           data: {
             id: user.id,

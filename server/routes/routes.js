@@ -1,14 +1,16 @@
 import express from 'express';
+import winston from 'winston';
 import controllers from '../controllers/index';
-import validateSignUp from '../helpers/validateSignUp';
-import validateSignIn from '../helpers/validateSignIn';
+import validateUser from '../middlewares/userValidations';
+
+winston.log(validateUser);
 
 const router = express.Router();
 
 // route for user sign up
-router.post('/api/users/signup', validateSignUp, controllers.User.create);
+router.post('/api/users/signup', validateUser.validateFields, validateUser.validateEmail, controllers.User.create);
 // route for user sign in
-router.post('/api/users/signin', validateSignIn, controllers.User.signin);
+router.post('/api/users/signin', controllers.User.signin);
 
 // authentication middleware
 router.use((req, res, next) => {
