@@ -5,7 +5,7 @@ export default {
     return models.Review
       .create({
         userId: req.body.userId,
-        recipe: req.body.recipeId,
+        recipeId: req.body.recipeId,
         content: req.body.content
 
       })

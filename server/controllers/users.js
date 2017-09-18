@@ -50,5 +50,22 @@ export default {
       })
       .catch(error => res.status(400).json({
         message: error.message }));
-  }
+  },
+  fetch(req, res) {
+    return models.User
+      .all({
+        include: [{
+          model: models.Favourite,
+          as: 'favourites'
+        }]
+      })
+      .then(recipe => res.status(200).json({
+        status: 'success',
+        data: { recipe }
+      }))
+      .catch(error => res.status(400).json({
+        status: 'fail',
+        message: error.message
+      }));
+  },
 };

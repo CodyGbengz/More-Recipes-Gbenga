@@ -20,6 +20,8 @@ router.use((req, res, next) => {
     });
   }
 });
+// route for get users
+router.get('/api/users', controllers.User.fetch);
 
 // route for add recipe
 router.post('/api/recipes', controllers.Recipe.add);

@@ -25,10 +25,16 @@ export default {
   fetch(req, res, next) {
     if (req.query.sort) return next();
     return models.Recipe
-      .all()
+      .all({
+        include: [{
+          model: models.Review,
+          as: 'reviews',
+          attributes: ['userId', 'content']
+        }]
+      })
       .then(recipe => res.status(200).json({
         status: 'success',
-        data: { recipe } 
+        data: { recipe }
       }))
       .catch(error => res.status(400).json({
         status: 'fail',
