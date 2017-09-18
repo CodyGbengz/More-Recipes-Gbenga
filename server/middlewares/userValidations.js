@@ -27,12 +27,29 @@ const validateUser = {
     models.User.findOne({ where: { email: req.body.email } })
       .then((user) => {
         if (!user) next();
-        return res.status(409).json({
-          status: 'Fail',
-          message: 'Email address already exists'
-        });
+        else {
+          return res.status(409).json({
+            status: 'Fail',
+            message: 'Email address already exists'
+          });
+        }
       })
-      .catch(error => res.status(400).res.json({
+      .catch(error => res.status(400).json({
+        message: error.message
+      }));
+  },
+  validateUsername(req, res, next) {
+    models.User.findOne({ where: { username: req.body.username } })
+      .then((user) => {
+        if (!user) next();
+        else {
+          return res.status(409).json({
+            status: 'Fail',
+            message: 'Username already taken'
+          });
+        }
+      })
+      .catch(error => res.status(400).json({
         message: error.message
       }));
   }

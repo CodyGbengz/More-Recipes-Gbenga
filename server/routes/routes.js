@@ -8,7 +8,7 @@ winston.log(validateUser);
 const router = express.Router();
 
 // route for user sign up
-router.post('/api/users/signup', validateUser.validateFields, validateUser.validateEmail, controllers.User.create);
+router.post('/api/users/signup', validateUser.validateFields, validateUser.validateEmail, validateUser.validateUsername, controllers.User.create);
 // route for user sign in
 router.post('/api/users/signin', controllers.User.signin);
 
