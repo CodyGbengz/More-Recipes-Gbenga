@@ -17,39 +17,46 @@
   <header id="header">
     <div class="navbar-fixed">
       <ul id="dropdown1" class="dropdown-content">
-        <li><a href="profile.html" class="yellow-text">Profile</a></li>
+        <li>
+          <a href="profile.html" class="red-text">Profile</a>
+        </li>
         <li class="divider"></li>
-        <li><a href="index.html" class="yellow-text">Sign Out</a></li>
+        <li><a href="index.html" class="red-text">Sign Out</a></li>
       </ul>
       <nav class="white">
         <div class="nav-wrapper">
-          <a href="home.html" class="brand-logo center yellow-text">More-Recipe</a>
-          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons yellow-text">menu</i></a>
-          <div class="left hide-on-med-and-down search-wrapper input-field">
-            <input id="search" type="search" placeholder="Search">
-            <i class="material-icons">close</i>
-          </div>
-          <ul id="navvy" class="right hide-on-med-and-down">
-            <li><a href="#create" class="tooltipped modal-trigger" data-position="bottom" data-delay="100" data-tooltip="Add recipe"><i class="material-icons yellow-text">add</i></a></li>
-            <li><a href="favorites.html" class="tooltipped" data-position="bottom" data-delay="100" data-tooltip="Favorites"><i class="material-icons yellow-text">favorite</i></a></li>
-            <li><a href="manage recipes.html" class="tooltipped" data-position="bottom" data-delay="100" data-tooltip="My Recipes"><i class="material-icons yellow-text">book</i></a></li>
-            <li><a class="dropdown-button" href="#!" data-activates="dropdown1" data-beloworigin="true"><i class="material-icons yellow-text">account_circle</i></a></li>
-          </ul>
-          <ul class="side-nav" id="mobile-demo">
-            <li>
-              <input id="search" type="search" placeholder="Search" />
+          <a href="home.html" class="brand-logo center red-text">More-Recipes</a>
+          <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons red-text">menu</i></a>
+          <form class="left hide-on-med-and-down">
+            <div class="input-field">
+              <input id="search" type="search">
+              <label class="label-icon search-icon" for="search"><i class="material-icons red-text ">search</i></label>
               <i class="material-icons">close</i>
-            </li>
-            <li><a href="">Create recipe<i class="material-icons">add</i></a></li>
-            <li><a href="">Favourites<i class="material-icons">favorite</i></a></li>
-            <li><a href="">My Profile<i class="material-icons">account_circle</i></a></li>
-            <li><a href="">My Recipes<i class="material-icons">book</i></a></li>
-            <li><a href="">Sign out<i class="material-icons">exit_to_app</i></a></li>
+            </div>
+          </form>
+
+          <ul id="navvy" class="right hide-on-med-and-down">
+            <li><a href="#create" class="tooltipped modal-trigger" data-position="bottom" data-delay="100" data-tooltip="Add recipe"><i class="material-icons red-text">add</i></a></li>
+            <li><a href="favorites.html" class="tooltipped" data-position="bottom" data-delay="100" data-tooltip="Favorites"><i class="material-icons red-text">favorite</i></a></li>
+            <li><a href="manage recipes.html" class="tooltipped" data-position="bottom" data-delay="100" data-tooltip="My Recipes"><i class="material-icons red-text">book</i></a></li>
+            <li><a class="dropdown-button" href="#!" data-activates="dropdown1" data-beloworigin="true"><i class="material-icons red-text">account_circle</i></a></li>
           </ul>
         </div>
       </nav>
     </div>
   </header>
+
+  <ul class="side-nav" id="mobile-demo" style="transform: translateX(-100%);">
+    <li>
+      <input id="search" type="search" placeholder="Search" />
+      <i class="material-icons">close</i>
+    </li>
+    <li><a href="">Create recipe<i class="material-icons">add</i></a></li>
+    <li><a href="">Favourites<i class="material-icons">favorite</i></a></li>
+    <li><a href="">My Profile<i class="material-icons">account_circle</i></a></li>
+    <li><a href="">My Recipes<i class="material-icons">book</i></a></li>
+    <li><a href="">Sign out<i class="material-icons">exit_to_app</i></a></li>
+  </ul>
 
   <main class="container">
     <div class="row">
@@ -57,8 +64,10 @@
         <div class="card">
           <div class="card-image">
             <img src="./images/bg2.jpg">
-            <span class="card-title"><a href="recipe details.html"class="black-text">Recipe Title</a></span>
-            <a class="btn-floating halfway-fab waves-effect waves-light yellow"><i class="material-icons">favorite</i></a>
+            <span class="card-title">
+              <b><a href="recipe details.html"class="white-text">Recipe Title</a></b>
+            </span>
+            <a class="btn-floating halfway-fab waves-effect waves-light white "><i class="material-icons red-text">favorite</i></a>
           </div>
           <div class="card-content">
             <p>A short description of the recipe with information about the recipe in 140 characters or less.</p>
