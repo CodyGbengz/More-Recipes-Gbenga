@@ -1,6 +1,4 @@
-import winston from 'winston';
 import models from '../models';
-
 
 export default {
   upvote(req, res) {
@@ -15,7 +13,6 @@ export default {
           return models.Recipe
             .findOne({ where: { id: req.params.recipeId } })
             .then((recipe) => {
-              console.log(recipe);
               recipe.increment('upvotes').then(() => {
                 recipe.reload()
                   .then(() => res.status(200).json({
