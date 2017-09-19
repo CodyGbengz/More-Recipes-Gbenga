@@ -73,7 +73,7 @@ describe('test API routes', () => {
           done();
         });
     });
-    it('returns 400 error for duplicate email ', (done) => {
+    it('returns 409 error for duplicate email ', (done) => {
       chai.request(app)
         .post('/api/users/signup')
         .type('form')
@@ -99,7 +99,7 @@ describe('test API routes', () => {
         })
         .end((err, res) => {
           res.status.should.be.eql(200);
-          res.body.message.should.be.eql('Sign in successful')
+          res.body.message.should.be.eql('Sign in successful');
           done();
         });
     });
