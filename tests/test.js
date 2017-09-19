@@ -83,7 +83,7 @@ describe('test API routes', () => {
           password: 'testpassword'
         })
         .end((err, res) => {
-          res.status.should.be.eql(400);
+          res.status.should.be.eql(409);
           done();
         });
     });
@@ -98,13 +98,12 @@ describe('test API routes', () => {
           email: 'test@user.com'
         })
         .end((err, res) => {
-          res.status.should.be.eql(202);
-          res.body.data.email.should.eql('test@user.com');
-          res.body.data.username.should.eql('iamanewuser');
+          res.status.should.be.eql(200);
+          res.body.message.should.be.eql('Sign in successful')
           done();
         });
     });
-    it('returns error message called without a password', (done) => {
+    it('returns error message when called without a password', (done) => {
       chai.request(app)
         .post('/api/users/signin')
         .type('form')
@@ -112,7 +111,7 @@ describe('test API routes', () => {
           email: 'test@user.com'
         })
         .end((err, res) => {
-          res.body.message.should.eql('Please Enter a password with atleast 8 characters');
+          res.body.message.should.eql('Password field cannot be empty');
           done();
         });
     });
