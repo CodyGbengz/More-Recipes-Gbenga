@@ -20,4 +20,4 @@ before_script:
   - npm install sequelize -g
   - npm install nyc -g
   - npm install mocha -g
-  - psql -c 'create database More-Recipes-tests;' -U postgres
+  - psql -c 'create database tests;' -U postgres
