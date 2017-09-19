@@ -4,7 +4,7 @@ export default {
   add(req, res) {
     return models.Recipe
       .create({
-        userId: req.body.userId,
+        userId: req.decoded.user.id,
         title: req.body.title,
         description: req.body.description,
         ingredients: req.body.ingredients,
