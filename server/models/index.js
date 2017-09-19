@@ -1,19 +1,19 @@
 import fs from 'fs';
 import path from 'path';
 import Sequelize from 'sequelize';
-import dotenv from 'dotenv';
+import configure from '../config/config';
 
-dotenv.config();
 
 const basename = path.basename(module.filename);
+const env = process.env.NODE_ENV || 'development';
+const config = configure[env];
 const db = {};
+
 let sequelize;
-if (process.env.NODE_ENV === 'production') {
-  sequelize = new Sequelize(process.env.DATABASE_URL);
-} else if (process.env === 'test') {
-  sequelize = new Sequelize(process.env.DB_NAME_TEST, process.env.DB_USERNAME, process.env.DB_PASSWORD, { dialect: process.env.DB_DIALECT, host: process.env.DB_HOST });
+if (config.use_env_variable) {
+  sequelize = new Sequelize(process.env[config.use_env_variable]);
 } else {
-  sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USERNAME, process.env.DB_PASSWORD, { dialect: process.env.DB_DIALECT, host: process.env.DB_HOST });
+  sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
 fs
