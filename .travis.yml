@@ -21,7 +21,3 @@ before_script:
   - npm install nyc -g
   - npm install mocha -g
   - createdb More-Recipes-tests --username=postgres
-  - sequelize db:migrate
-
-services:
- - postgresql
