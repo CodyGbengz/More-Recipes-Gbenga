@@ -1,4 +1,5 @@
 import md5 from 'md5';
+import jwt from 'jsonwebtoken';
 import models from '../models';
 
 
@@ -37,24 +38,18 @@ export default {
             message: 'Invalid Username or Password'
           });
         }
-        req.session.user = user;
-<<<<<<< HEAD
-        res.status(202).json({
-          status: 'success!',
-=======
+        const token = jwt.sign({ user }, process.env.secret, {
+          expiresIn: 86400
+        });
         res.status(200).json({
           status: 'success',
->>>>>>> ch-refactor-#150886787
-          data: {
-            id: user.id,
-            username: user.username,
-            email: user.email
-          },
+          Token: token,
           message: 'Sign in successful'
         });
       })
       .catch(error => res.status(400).json({
-        message: error.message }));
+        message: error.message
+      }));
   },
   fetch(req, res) {
     return models.User
