@@ -1,6 +1,6 @@
 const config = {
   development: {
-    username: '',
+    username: 'postgres',
     password: '212213',
     database: 'more-recipes-development',
     host: '127.0.0.1',
@@ -15,11 +15,7 @@ const config = {
     logging: false
   },
   production: {
-    username: 'postgres',
-    password: '212213',
-    database: 'more-recipes-development',
-    host: '127.0.0.1',
-    dialect: 'postgres'
+    use_env_variable: 'DATABASE_URL'
   }
 };
 module.exports = config;

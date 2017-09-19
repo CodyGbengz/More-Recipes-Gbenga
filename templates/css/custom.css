@@ -6,7 +6,10 @@
   margin-bottom: 0px;
 }
 .bodily{
-  background-color: #ffff66
+  background-color: white;
+}
+.body-index{
+  background-image: url('../images/bg3.jpeg')
 }
 
 #profileBanner{
@@ -35,4 +38,7 @@ main {
 
  label {
     width: 100%;
+}
+.search-icon{
+  padding: 0px 0px 5px 0px;
 }

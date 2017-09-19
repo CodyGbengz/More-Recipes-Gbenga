@@ -11,11 +11,13 @@ chai.use(chaiHttp);
 models.User.destroy({
   where: {},
   cascade: true,
-  truncate: true
+  truncate: true,
+  restartIdentity: true
+
 });
 
-describe('test app', () => {
-  describe('create user: ', () => {
+describe('test API routes', () => {
+  describe('User sign up route', () => {
     it('POST /api/users/signup creates a new user', (done) => {
       chai.request(app)
         .post('/api/users/signup')
@@ -71,6 +73,48 @@ describe('test app', () => {
           done();
         });
     });
+    it('returns 400 error for duplicate email ', (done) => {
+      chai.request(app)
+        .post('/api/users/signup')
+        .type('form')
+        .send({
+          username: 'newusername',
+          email: 'test@user.com',
+          password: 'testpassword'
+        })
+        .end((err, res) => {
+          res.status.should.be.eql(400);
+          done();
+        });
+    });
+  });
+  describe('User sign in route', () => {
+    it('POST /api/users/signin signs in a registered user', (done) => {
+      chai.request(app)
+        .post('/api/users/signin')
+        .type('form')
+        .send({
+          password: 'testpassword',
+          email: 'test@user.com'
+        })
+        .end((err, res) => {
+          res.status.should.be.eql(202);
+          res.body.data.email.should.eql('test@user.com');
+          res.body.data.username.should.eql('iamanewuser');
+          done();
+        });
+    });
+    it('returns error message called without a password', (done) => {
+      chai.request(app)
+        .post('/api/users/signin')
+        .type('form')
+        .send({
+          email: 'test@user.com'
+        })
+        .end((err, res) => {
+          res.body.message.should.eql('Please Enter a password with atleast 8 characters');
+          done();
+        });
+    });
   });
 });
-

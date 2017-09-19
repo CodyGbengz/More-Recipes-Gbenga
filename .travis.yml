@@ -1,17 +1,27 @@
 language: node_js
 node_js: 
-- stable
+- "6.9.2"
 branches:
   only:
     - develop
+install:
+- npm install
 script:
   - npm test
 services: 
   - postgresql
 cache: 
-  - npm install
+  directories:
+  - "node_modules"
+env:
+- NODE_ENV=test
+
 before_script:
-  - npm install
-  - psql -c 'create database more-recipes-tests' -U postgres
-after_script:
-  - psql -c 'drop database more-recipes-tests' -U postgres
+  - npm install sequelize -g
+  - npm install nyc -g
+  - npm install mocha -g
+  - createdb More-Recipes-tests --username=postgres
+  - sequelize db:migrate
+
+services:
+ - postgresql
