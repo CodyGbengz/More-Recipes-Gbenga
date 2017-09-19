@@ -1,4 +1,7 @@
 import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
+
+dotenv.load();
 
 const auth = (req, res, next) => {
   const token = req.headers['x-access-token'] || req.body.token || req.query.token;
