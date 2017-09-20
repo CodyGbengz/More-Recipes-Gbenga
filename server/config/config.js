@@ -8,7 +8,7 @@ const config = {
   },
   test: {
     username: 'postgres',
-    password: '212213',
+    password: '',
     database: 'travis',
     host: 'localhost',
     dialect: 'postgres',
