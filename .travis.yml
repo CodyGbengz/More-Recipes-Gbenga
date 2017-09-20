@@ -21,3 +21,5 @@ before_script:
   - npm install nyc -g
   - npm install mocha -g
   - psql -c 'CREATE DATABASE travis;' -U postgres
+  - sequelize db:migrate:undo:all
+  - sequelize db:migrate
