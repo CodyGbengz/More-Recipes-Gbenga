@@ -7,19 +7,12 @@ branches:
 install:
 - npm install
 script:
-  - npm test
+  - npm run test
 services: 
   - postgresql
 cache: 
   directories:
   - "node_modules"
-env:
-- NODE_ENV=test
-
 before_script:
-  - npm install sequelize -g
-  - npm install nyc -g
-  - npm install mocha -g
   - psql -c 'CREATE DATABASE travis;' -U postgres
-  - sequelize db:migrate:undo:all
-  - sequelize db:migrate
+
