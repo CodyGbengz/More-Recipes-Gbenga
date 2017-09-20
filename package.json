@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon --exec babel-node server/app.js",
-    "test": "mocha --compilers js:babel-register  --timeout 15000 tests/test"
+    "test": "SET NODE_ENV=test&& mocha --compilers js:babel-register  --timeout 15000 tests/test"
   },
   "repository": {
     "type": "git",
@@ -32,6 +32,7 @@
     "pg": "^6.4.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.8.0",
+    "sequelize-cli": "^3.0.0-3",
     "winston": "^2.3.1"
   },
   "devDependencies": {
