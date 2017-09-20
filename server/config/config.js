@@ -10,7 +10,7 @@ const config = {
     username: 'postgres',
     password: '212213',
     database: 'travis',
-    host: '127.0.0.1',
+    host: 'localhost',
     dialect: 'postgres',
     logging: false
   },
