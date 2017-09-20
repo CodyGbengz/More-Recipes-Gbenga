@@ -7,7 +7,7 @@ branches:
 install:
 - npm install
 script:
-  - npm run test
+  - npm run test_travis
 services: 
   - postgresql
 cache: 
