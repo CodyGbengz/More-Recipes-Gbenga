@@ -8,22 +8,22 @@ __More-Recipes__ provides a platform for users to share the awesome and exciting
 
 ### Project Stack
 This project is built on
-..* Client-Side: React/Redux
-..* Server-Side: NodeJS/Express
-..* Database: Postgresql/Sequelize ORM
+  * Client-Side: React/Redux
+  * Server-Side: NodeJS/Express
+  * Database: Postgresql/Sequelize ORM
 
 ### Installation and Setup
 To setup this project locally you need to have **NodeJs** and **Postgresql** installed.
-..* Clone this repo
-..* Navigate into the project directory
-..* Run ``` npm install``` to install required dependencies
-..* Create database instance for the application
-..* Use ```.env.sample``` to setup environment variables
-..* Run ``` sequelize db:migrate```
-..* Run ``` npm start``` to get started
+  * Clone this repo
+  * Navigate into the project directory
+  * Run ``` npm install``` to install required dependencies
+  * Create database instance for the application
+  * Use ```.env.sample``` to setup environment variables
+  * Run ``` sequelize db:migrate```
+  * Run ``` npm start``` to get started
 
 ### Links
-..* 
-..* 
-..* 
+  * 
+  * 
+  * 
 
