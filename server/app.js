@@ -1,7 +1,6 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import winston from 'winston';
-import session from 'express-session';
 import router from './routes/index';
 
 const port = process.env.PORT || 8081;
@@ -9,8 +8,10 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(session({ secret: 'secret', resave: false, saveUninitialized: true }));
 
+app.get('/', (req, res) => {
+  res.send('its working');
+});
 app.use(router.user);
 app.use(router.recipe);
 app.use(router.review);
