@@ -68,14 +68,12 @@ export default {
   fetch(req, res) {
     return models.User
       .all({
-        include: [{
-          model: models.Favourite,
-          as: 'favourites'
+        include: [{ all: true
         }]
       })
-      .then(recipe => res.status(200).json({
+      .then(user => res.status(200).json({
         status: 'success',
-        data: { recipe }
+        data: user
       }))
       .catch(error => res.status(400).json({
         status: 'fail',

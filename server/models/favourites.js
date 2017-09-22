@@ -7,6 +7,10 @@ export default (sequelize, DataTypes) => {
     recipeId: {
       type: DataTypes.INTEGER,
       allowNull: false
+    },
+    category: {
+      type: DataTypes.STRING,
+      allowNull: true
     }
   });
   Favourite.associate = (models) => {

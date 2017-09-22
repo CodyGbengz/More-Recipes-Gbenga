@@ -34,8 +34,11 @@ module.exports = {
           key: 'id',
           as: 'recipeId'
         }
+      },
+      category: {
+        type: Sequelize.STRING,
+        allowNull: true
       }
-
     });
   },
   down(queryInterface) {

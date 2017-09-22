@@ -39,9 +39,10 @@ export default (sequelize, DataTypes) => {
       allowNull: false,
       defaultValue: 0
     },
-    userId: {
+    views: {
       type: DataTypes.INTEGER,
-      allowNull: false
+      allowNull: false,
+      defaultValue: 0
     }
   });
 
@@ -50,12 +51,12 @@ export default (sequelize, DataTypes) => {
     Recipe.belongsTo(models.User, {
       foreignKey: 'userId'
     });
+    Recipe.hasMany(models.Favourite, {
+      foreignKey: 'recipeId'
+    });
     Recipe.hasMany(models.Review, {
       foreignKey: 'recipeId',
       as: 'reviews'
-    });
-    Recipe.hasMany(models.Favourite, {
-      foreignKey: 'recipeId'
     });
   };
 

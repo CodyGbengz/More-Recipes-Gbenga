@@ -10,16 +10,21 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       title: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       ingredients: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
+
       },
       directions: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false
       },
       upvotes: {
         type: Sequelize.INTEGER,
@@ -27,6 +32,11 @@ module.exports = {
         defaultValue: 0
       },
       downvotes: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0
+      },
+      views: {
         type: Sequelize.INTEGER,
         allowNull: false,
         defaultValue: 0
