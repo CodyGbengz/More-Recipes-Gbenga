@@ -39,5 +39,21 @@ export default {
       .catch(error => res.status(400).send({
         message: error.message
       }));
+  },
+  deleteUserFavourite(req, res) {
+    return models.Favourite
+      .findOne({ where: {
+        userId: req.decoded.user.id,
+        recipeId: req.params.recipeId } })
+      .then((favourite) => {
+        favourite.destroy().then(() => res.status(200).json({
+          status: 'Success',
+          message: 'Recipe deleted from your favourites successfully'
+        }));
+      })
+      .catch(error => res.status(400).json({
+        status: 'Fail',
+        message: error.message
+      }));
   }
 };
