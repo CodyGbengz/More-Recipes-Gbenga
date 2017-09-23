@@ -25,6 +25,42 @@ export default {
       }));
   },
 
+  fetchARecipe(req, res) {
+    return models.Recipe
+      .findOne({
+        where: { id: req.params.recipeId },
+        include: [{
+          model: models.Review,
+          as: 'reviews',
+          attributes: ['userId', 'content'],
+          include: [{
+            model: models.User,
+            attributes: ['username', 'createdAt']
+          }]
+        }]
+      })
+      .then((recipe) => {
+        if (!recipe) {
+          return res.status(200).json({
+            message: 'Recipe does not exist'
+          });
+        }
+        recipe.increment('views').then(() => {
+          recipe.reload()
+            .then(() => {
+              res.status(200).json({
+                status: 'success',
+                data: recipe
+              });
+            });
+        });
+      })
+      .catch(error => res.status(400).json({
+        status: 'fail',
+        message: error.message
+      }));
+  },
+
   fetch(req, res, next) {
     if (req.query.sort) return next();
     return models.Recipe
