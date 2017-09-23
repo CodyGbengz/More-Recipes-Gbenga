@@ -5,7 +5,7 @@ export default {
     return models.Review
       .create({
         userId: req.decoded.user.id,
-        recipeId: req.body.recipeId,
+        recipeId: req.params.recipeId,
         content: req.body.content
       })
       .then(review => res.status(201).send(review))

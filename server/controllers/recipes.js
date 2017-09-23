@@ -39,14 +39,23 @@ export default {
           }]
         }]
       })
-      .then(recipe => res.status(200).json({
-        status: 'success',
-        data: { recipe }
-      }))
-      .catch(error => res.status(400).json({
-        status: 'fail',
-        message: error.message
-      }));
+      .then((recipes) => {
+        if (!recipes.length) {
+          return res.status(200).json({
+            message: 'no recipes found'
+          });
+        }
+        res.status(200).json({
+          status: 'success',
+          data: {
+            recipes
+          }
+        })
+          .catch(error => res.status(400).json({
+            status: 'fail',
+            message: error.message
+          }));
+      });
   },
 
   update(req, res) {
@@ -86,9 +95,12 @@ export default {
 
   destroy(req, res) {
     return models.Recipe
-      .findOne({ where: {
-        userId: req.decoded.user.id,
-        recipeId: req.params.recipeId } })
+      .findOne({
+        where: {
+          userId: req.decoded.user.id,
+          id: req.params.recipeId
+        }
+      })
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).json({
@@ -113,20 +125,25 @@ export default {
 
   searchRecipesByTitle(req, res, next) {
     if (!req.query.title) return next();
-    const title = req.query.title.split(' ');
-    const search = title.map(value => ({
-      title: {
-        $ilike: value
-      }
-    }));
+    const queryTerm = req.query.title;
     return models.Recipe
-      .all({
-        where: { $or: search },
+      .findAll({
+        where: {
+          $or: [
+            { title: {
+              $ilike: `%${queryTerm}%`
+            }
+            },
+            { ingredients: {
+              $ilike: `%${queryTerm}%`
+            }
+            }
+          ] },
         limit: 10,
         attributes: ['title', 'ingredients', 'description', 'directions', 'upvotes', 'downvotes', 'views']
       })
       .then((recipes) => {
-        if (!recipes) {
+        if (!recipes.length) {
           return res.status(200).json({
             message: 'No matches found'
           });
