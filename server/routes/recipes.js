@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('/api/recipes', auth, validateRecipe.validateFields, controllers.Recipe.add);
 
 // route for get recipes
-router.get('/api/recipes', controllers.Recipe.searchRecipesByTitle, controllers.Recipe.fetch, controllers.Recipe.fetchTopRecipes);
+router.get('/api/recipes', controllers.Recipe.searchRecipes, controllers.Recipe.fetch, controllers.Recipe.fetchTopRecipes);
 
 // route for update recipe
 router.put('/api/recipes/:recipeId', auth, validateRecipe.recipeExist, controllers.Recipe.update);

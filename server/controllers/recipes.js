@@ -47,15 +47,13 @@ export default {
         }
         res.status(200).json({
           status: 'success',
-          data: {
-            recipes
-          }
-        })
-          .catch(error => res.status(400).json({
-            status: 'fail',
-            message: error.message
-          }));
-      });
+          data: recipes
+        });
+      })
+      .catch(error => res.status(400).json({
+        status: 'fail',
+        message: error.message
+      }));
   },
 
   update(req, res) {
@@ -129,16 +127,18 @@ export default {
     return models.Recipe
       .findAll({
         where: {
-          $or: [
-            { title: {
+          $or: [{
+            title: {
               $ilike: `%${queryTerm}%`
             }
-            },
-            { ingredients: {
+          },
+          {
+            ingredients: {
               $ilike: `%${queryTerm}%`
             }
-            }
-          ] },
+          }
+          ]
+        },
         limit: 10,
         attributes: ['title', 'ingredients', 'description', 'directions', 'upvotes', 'downvotes', 'views']
       })
