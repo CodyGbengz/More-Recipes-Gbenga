@@ -25,6 +25,29 @@ export default {
       }));
   },
 
+  fetchUserRecipes(req, res) {
+    return models.Recipe
+      .findAll({ where: {
+        userId: req.decoded.user.id
+      }
+      })
+      .then((recipes) => {
+        if (!recipes.length) {
+          return res.status(204).json({
+            message: 'You have not created any recipes yet'
+          });
+        }
+        return res.status(200).json({
+          status: 'success',
+          data: recipes
+        });
+      })
+      .catch(error => res.status(400).json({
+        status: 'Fail',
+        message: error.message
+      }));
+  },
+
   fetchARecipe(req, res) {
     return models.Recipe
       .findOne({
