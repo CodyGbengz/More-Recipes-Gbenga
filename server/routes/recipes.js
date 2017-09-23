@@ -11,6 +11,9 @@ router.post('/api/recipes', auth, validateRecipe.validateFields, controllers.Rec
 // route for get recipes
 router.get('/api/recipes', controllers.Recipe.searchRecipes, controllers.Recipe.fetch, controllers.Recipe.fetchTopRecipes);
 
+// route to get a users recipes
+router.get('/api/recipes/users', auth, controllers.Recipe.fetchUserRecipes);
+
 // route to view recipe details
 router.get('/api/recipes/:recipeId', validateRecipe.recipeExist, controllers.Recipe.fetchARecipe);
 
