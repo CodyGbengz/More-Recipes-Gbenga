@@ -123,9 +123,9 @@ export default {
       }));
   },
 
-  searchRecipesByTitle(req, res, next) {
-    if (!req.query.title) return next();
-    const queryTerm = req.query.title;
+  searchRecipes(req, res, next) {
+    if (!req.query.search) return next();
+    const queryTerm = req.query.search;
     return models.Recipe
       .findAll({
         where: {
