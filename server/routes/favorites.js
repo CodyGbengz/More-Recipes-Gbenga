@@ -9,7 +9,7 @@ const router = express.Router();
 router.post('/api/users/:userId/recipes', auth, controllers.Favorite.add);
 
 // route for getting favorites
-router.get('/api/users/:userId/recipes', auth, controllers.Favorite.fetch);
+router.get('/api/users/recipes', auth, controllers.Favorite.fetchUserFavorites);
 
 
 export default router;

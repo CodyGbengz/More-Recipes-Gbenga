@@ -5,7 +5,7 @@ export default {
     return models.Vote
       .findOrCreate({ where: {
         recipeId: req.params.recipeId,
-        userId: req.body.userId },
+        userId: req.decoded.user.id },
       defaults: { option: true }
       })
       .spread((voter, created) => {
@@ -54,7 +54,7 @@ export default {
   downvote(req, res) {
     return models.Vote
       .findOrCreate({ where: {
-        userId: req.body.userId,
+        userId: req.decoded.user.id,
         recipeId: req.params.recipeId },
       defaults: { option: false }
       })

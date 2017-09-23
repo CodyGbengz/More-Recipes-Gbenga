@@ -19,7 +19,10 @@ export default {
         },
         message: 'recipe created successfully'
       }))
-      .catch(error => res.status(400).json({ error: error.message }));
+      .catch(error => res.status(400).json({
+        status: 'Fail',
+        error: error.message
+      }));
   },
 
   fetch(req, res, next) {
@@ -29,13 +32,24 @@ export default {
         include: [{
           model: models.Review,
           as: 'reviews',
-          attributes: ['userId', 'content']
+          attributes: ['userId', 'content'],
+          include: [{
+            model: models.User,
+            attributes: ['username', 'createdAt']
+          }]
         }]
       })
-      .then(recipe => res.status(200).json({
-        status: 'success',
-        data: { recipe }
-      }))
+      .then((recipes) => {
+        if (!recipes.length) {
+          return res.status(200).json({
+            message: 'no recipes found'
+          });
+        }
+        res.status(200).json({
+          status: 'success',
+          data: recipes
+        });
+      })
       .catch(error => res.status(400).json({
         status: 'fail',
         message: error.message
@@ -44,7 +58,12 @@ export default {
 
   update(req, res) {
     return models.Recipe
-      .findById(req.params.recipeId)
+      .findOne({
+        where: {
+          userId: req.decoded.user.id,
+          recipeId: req.params.recipeId
+        }
+      })
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).json({
@@ -59,9 +78,10 @@ export default {
             ingredients: req.body.ingredients || recipe.ingredients,
             directions: req.body.directions || recipe.directions
           })
-          .then(() => res.status(200).json({ 
+          .then(() => res.status(200).json({
             status: 'success',
-            recipe }))
+            recipe
+          }))
           .catch(error => res.status(400).json({
             message: error.message
           }));
@@ -73,7 +93,12 @@ export default {
 
   destroy(req, res) {
     return models.Recipe
-      .findById(req.params.recipeId)
+      .findOne({
+        where: {
+          userId: req.decoded.user.id,
+          id: req.params.recipeId
+        }
+      })
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).json({
@@ -87,20 +112,64 @@ export default {
             status: 'success',
             message: 'Recipe deleted successfully'
           }))
-          .catch(error => res.status(400).json({ message: error.message }));
+          .catch(error => res.status(400).json({
+            message: error.message
+          }));
       })
-      .catch(error => res.status(400).json({ message: error.message }));
+      .catch(error => res.status(400).json({
+        message: error.message
+      }));
   },
+
+  searchRecipes(req, res, next) {
+    if (!req.query.search) return next();
+    const queryTerm = req.query.search;
+    return models.Recipe
+      .findAll({
+        where: {
+          $or: [{
+            title: {
+              $ilike: `%${queryTerm}%`
+            }
+          },
+          {
+            ingredients: {
+              $ilike: `%${queryTerm}%`
+            }
+          }
+          ]
+        },
+        limit: 10,
+        attributes: ['title', 'ingredients', 'description', 'directions', 'upvotes', 'downvotes', 'views']
+      })
+      .then((recipes) => {
+        if (!recipes.length) {
+          return res.status(200).json({
+            message: 'No matches found'
+          });
+        }
+        res.status(200).json(recipes);
+      })
+      .catch(error => res.status(400).json({
+        status: 'Fail',
+        message: error.message
+      }));
+  },
+
   fetchTopRecipes(req, res) {
     const sort = req.query.sort;
     const order = req.query.order;
     return models.Recipe
       .findAll({
-        attributes: ['title', 'ingredients', 'description', 'directions', 'upvotes', 'downvotes'],
-        order: [[sort, order]],
+        attributes: ['title', 'ingredients', 'description', 'directions', 'upvotes', 'downvotes', 'views'],
+        order: [
+          [sort, order]
+        ],
         limit: 5
       })
       .then(recipes => res.status(200).json(recipes))
-      .catch(error => res.status(400).json({ message: error.message }));
+      .catch(error => res.status(400).json({
+        message: error.message
+      }));
   }
 };

@@ -5,10 +5,18 @@ export default {
     return models.Review
       .create({
         userId: req.decoded.user.id,
-        recipeId: req.body.recipeId,
+        recipeId: req.params.recipeId,
         content: req.body.content
       })
-      .then(review => res.status(201).send(review))
-      .catch(error => res.status(400).send(error));
+      .then(review => res.status(201).json({
+        status: 'Success',
+        message: 'Review posted successfully',
+        data: review
+      }))
+      .catch(error => res.status(400).json({
+        status: 'fail',
+        message: error.message
+      }));
   }
 };
+
