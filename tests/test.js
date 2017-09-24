@@ -4,8 +4,6 @@ import chaiHttp from 'chai-http';
 import app from '../server/app';
 import models from '../server/models';
 
-
-process.env.NODE_ENV = 'test';
 chai.use(chaiHttp);
 
 models.User.destroy({
