@@ -17,7 +17,7 @@ const validateRecipe = {
     if (checkEmpty(description) || !description) {
       return res.status(400).json({
         status: 'Fail',
-        message: 'Please enter a short description '
+        message: 'Please enter a short description'
       });
     }
     if (checkEmpty(ingredients) || !ingredients) {

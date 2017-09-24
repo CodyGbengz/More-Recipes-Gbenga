@@ -17,7 +17,6 @@ export default {
           id: recipe.id,
           title: recipe.title,
           description: recipe.description
-        }
       }))
       .catch(error => res.status(400).json({
         status: 'Fail',
@@ -118,7 +117,7 @@ export default {
       .findOne({
         where: {
           userId: req.decoded.user.id,
-          recipeId: req.params.recipeId
+          id: req.params.recipeId
         }
       })
       .then((recipe) => {
