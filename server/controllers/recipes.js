@@ -17,6 +17,7 @@ export default {
           id: recipe.id,
           title: recipe.title,
           description: recipe.description
+        }
       }))
       .catch(error => res.status(400).json({
         status: 'Fail',

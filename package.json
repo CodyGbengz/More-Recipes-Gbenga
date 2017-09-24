@@ -23,7 +23,7 @@
       "babel-register"
     ],
     "exclude": [
-      "tests/test.js"
+      "tests/"
     ],
     "reporter": [
       "lcov",
