@@ -16,7 +16,7 @@ models.User.destroy({
 });
 
 describe('Sign in user', () => {
-  it('POST /api/users/siup creates a new user', (done) => {
+  it('POST /api/users/signup creates a new user', (done) => {
     chai.request(app)
       .post('/api/users/signup')
       .type('form')

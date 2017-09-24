@@ -12,7 +12,7 @@ export default {
       })
       .then(recipe => res.status(201).json({
         status: 'success',
-        message: 'recipe created successfully',
+        message: 'Recipe created successfully',
         data: {
           id: recipe.id,
           title: recipe.title,
