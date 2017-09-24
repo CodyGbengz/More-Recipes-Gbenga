@@ -1,7 +1,7 @@
 import models from '../models';
 
 export default {
-  add(req, res) {
+  addRecipe(req, res) {
     return models.Recipe
       .create({
         userId: req.decoded.user.id,
@@ -12,12 +12,11 @@ export default {
       })
       .then(recipe => res.status(201).json({
         status: 'success',
+        message: 'recipe created successfully',
         data: {
           id: recipe.id,
           title: recipe.title,
-          description: recipe.description,
-        },
-        message: 'recipe created successfully'
+          description: recipe.description
       }))
       .catch(error => res.status(400).json({
         status: 'Fail',
@@ -28,8 +27,7 @@ export default {
   fetchUserRecipes(req, res) {
     return models.Recipe
       .findAll({ where: {
-        userId: req.decoded.user.id
-      }
+        userId: req.decoded.user.id }
       })
       .then((recipes) => {
         if (!recipes.length) {
@@ -69,13 +67,12 @@ export default {
           });
         }
         recipe.increment('views').then(() => {
-          recipe.reload()
-            .then(() => {
-              res.status(200).json({
-                status: 'success',
-                data: recipe
-              });
+          recipe.reload().then(() => {
+            res.status(200).json({
+              status: 'success',
+              data: recipe
             });
+          });
         });
       })
       .catch(error => res.status(400).json({
@@ -83,8 +80,7 @@ export default {
         message: error.message
       }));
   },
-
-  fetch(req, res, next) {
+  fetchAllRecipes(req, res, next) {
     if (req.query.sort) return next();
     return models.Recipe
       .all({
@@ -96,7 +92,8 @@ export default {
             model: models.User,
             attributes: ['username', 'createdAt']
           }]
-        }]
+        }],
+        limit: 10
       })
       .then((recipes) => {
         if (!recipes.length) {
@@ -115,12 +112,12 @@ export default {
       }));
   },
 
-  update(req, res) {
+  updateARecipe(req, res) {
     return models.Recipe
       .findOne({
         where: {
           userId: req.decoded.user.id,
-          recipeId: req.params.recipeId
+          id: req.params.recipeId
         }
       })
       .then((recipe) => {
@@ -142,15 +139,17 @@ export default {
             recipe
           }))
           .catch(error => res.status(400).json({
+            status: 'fail',
             message: error.message
           }));
       })
       .catch(error => res.status(400).json({
+        status: 'fail',
         message: error.message
       }));
   },
 
-  destroy(req, res) {
+  destroyARecipe(req, res) {
     return models.Recipe
       .findOne({
         where: {
@@ -165,17 +164,17 @@ export default {
             message: 'Recipe not found'
           });
         }
-        return recipe
-          .destroy()
-          .then(() => res.status(200).json({
-            status: 'success',
-            message: 'Recipe deleted successfully'
-          }))
+        return recipe.destroy().then(() => res.status(200).json({
+          status: 'success',
+          message: 'Recipe deleted successfully'
+        }))
           .catch(error => res.status(400).json({
+            status: 'fail',
             message: error.message
           }));
       })
       .catch(error => res.status(400).json({
+        status: 'fail',
         message: error.message
       }));
   },
