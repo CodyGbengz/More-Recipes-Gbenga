@@ -1,7 +1,7 @@
 import models from '../models';
 
 export default {
-  add(req, res) {
+  addUserFavorites(req, res) {
     return models.Recipe
       .findById(req.params.recipeId)
       .then((recipe) => {
@@ -36,7 +36,8 @@ export default {
         }
         res.status(200).json(favourite);
       })
-      .catch(error => res.status(400).send({
+      .catch(error => res.status(400).json({
+        status: 'Fail',
         message: error.message
       }));
   },
