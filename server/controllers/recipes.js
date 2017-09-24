@@ -81,7 +81,6 @@ export default {
         message: error.message
       }));
   },
-
   fetchAllRecipes(req, res, next) {
     if (req.query.sort) return next();
     return models.Recipe

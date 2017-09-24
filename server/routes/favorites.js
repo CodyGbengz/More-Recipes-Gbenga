@@ -9,7 +9,13 @@ const router = express.Router();
 router.post('/api/users/:recipeId/favorites', auth, controllers.Favorite.addUserFavorites);
 
 // route for getting favorites
-router.get('/api/users/recipes', auth, controllers.Favorite.fetchUserFavorites);
+router.get('/api/users/favorites', auth, controllers.Favorite.fetchUserFavorites);
+
+// route for adding favorites to category
+router.put('/api/users/:recipeId/favorites', auth, controllers.Favorite.addToCategory);
+
+// route for deleting a recipe from favorites
+router.delete('/api/users/:recipeId/favorites', auth, controllers.Favorite.deleteUserFavourite);
 
 
 export default router;

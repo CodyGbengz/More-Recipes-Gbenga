@@ -27,7 +27,11 @@ export default {
   },
   fetchUserFavorites(req, res) {
     return models.Favourite
-      .findAll({ where: { userId: req.decoded.user.id } })
+      .findAll({ where: { userId: req.decoded.user.id },
+        include: [{
+          model: models.Recipe
+        }]
+      })
       .then((favourite) => {
         if (!favourite.length) {
           res.status(200).json({
@@ -51,6 +55,25 @@ export default {
           status: 'Success',
           message: 'Recipe deleted from your favourites successfully'
         }));
+      })
+      .catch(error => res.status(400).json({
+        status: 'Fail',
+        message: error.message
+      }));
+  },
+  addToCategory(req, res) {
+    return models.Favourite
+      .findOne({ where: {
+        userId: req.decoded.user.id,
+        recipeId: req.params.recipeId } })
+      .then((recipe) => {
+        recipe.update({ category: req.body.category || recipe.category })
+          .then(() => {
+            res.status(200).json({
+              status: 'Success',
+              message: 'Recipe add to category'
+            });
+          });
       })
       .catch(error => res.status(400).json({
         status: 'Fail',
