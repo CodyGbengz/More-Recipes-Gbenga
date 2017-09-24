@@ -147,6 +147,25 @@ describe('Creates recipes ', () => {
         done();
       });
   });
+  it('rejects entry with missing directio field', (done) => {
+    const testRecipe = {
+      userId: 1,
+      title: 'A testing recipe',
+      description: 'A short description about this recipe',
+      ingredients: 'take a deep breadth, take one to the head',
+    };
+    chai.request(app)
+      .post('/api/recipes')
+      .set('x-access-token', token)
+      .type('form')
+      .send(testRecipe)
+      .end((err, res) => {
+        res.status.should.be.eql(400);
+        res.body.status.should.be.eql('Fail');
+        res.body.message.should.be.eql('Directions field cannot be empty');
+        done();
+      });
+  });
 });
 describe('Updates recipes ', () => {
   it('check non existing recipe', (done) => {
