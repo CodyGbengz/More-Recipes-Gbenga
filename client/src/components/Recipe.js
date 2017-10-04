@@ -5,7 +5,7 @@ export class Recipe extends Component {
     render() {
         const { recipe, i, review } = this.props;
         return (
-            <div className="col s12 l6">
+            <div className="col s12 l4">
               <div className="card">
                 <div className="card-image">
               

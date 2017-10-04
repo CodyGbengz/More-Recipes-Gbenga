@@ -4,7 +4,7 @@ import Recipe from './Recipe';
 export default class RecipeGrid extends Component {
   render() {
     return (
-      <div>
+      <div className='row'>
           <Recipe/>
           <Recipe/>
           <Recipe/>
