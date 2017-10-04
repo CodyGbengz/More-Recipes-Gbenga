@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
+import { render} from 'react-dom';
+
+import Home from './components/Home';
 
 
-class App extends Component {
-  state = { users: []};
-
-  componentDidMount() {
-    fetch('/api/users')
-    .then(res => res.json())
-    .then(users => {
-      console.log(users);
-      users = users.data
-      this.setState({ users });
-    })
-  }
 
   render() {
     return (
