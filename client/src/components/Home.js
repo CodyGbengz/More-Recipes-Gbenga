@@ -37,7 +37,7 @@ const Home = () =>
                                 </div>
                                 <div className="input-field col s12">
                                     <button className="modal-action modal-close waves-effect waves-green btn-flat right">Cancel</button>
-                                    <button className="btn waves-effect waves-light yellow right" type="submit" name="action">Sign Up</button>
+                                    <button className="btn waves-effect waves-light white red-text right" type="submit" name="action">Sign Up</button>
                                 </div>
                             </div>
                         </form>
@@ -62,7 +62,7 @@ const Home = () =>
                                 <div className="input-field col s12">
                                     <a href="" className="black-text">Forgot Password?</a>
                                     <button className="modal-action modal-close waves-effect waves-yellow btn-flat right">Cancel</button>
-                                    <button className="btn waves-effect waves-light right yellow" type="submit" name="action">Log in</button>
+                                    <button className="btn waves-effect waves-light right white red-text" type="submit" name="action">Log in</button>
                                 </div>
                             </div>
                         </form>
