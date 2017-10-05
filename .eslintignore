@@ -1,0 +1,8 @@
+logs
+*.log
+coverage/*
+.env
+.nyc_output/*
+.vscode/*
+templates/*
+node_modules/

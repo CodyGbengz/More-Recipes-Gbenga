@@ -1,0 +1,20 @@
+{
+  "development": {
+    "username": "gbenga",
+    "password": "212213",
+    "database": "more-recipes-development",
+    "host": "127.0.0.1",
+    "dialect": "postgres"
+  },
+  "test": {
+    "username": "gbenga",
+    "password": "212213",
+    "database": "travis",
+    "host": "127.0.0.1",
+    "dialect": "postgres",
+    "logging": false
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL"
+  }
+}

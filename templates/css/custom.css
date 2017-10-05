@@ -1,0 +1,44 @@
+.modal {
+  max-height: 90%;
+}
+
+.modal-form-row {
+  margin-bottom: 0px;
+}
+.bodily{
+  background-color: white;
+}
+.body-index{
+  background-image: url('../images/bg3.jpeg')
+}
+
+#profileBanner{
+  height: 100px;
+  background-color: #ffff66
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+main {
+  flex: 1 0 auto;
+}
+.card{
+  border-radius: 10px !important;
+}
+#backToTop{
+  display: none; /* Hidden by default */
+  position: fixed; /* Fixed/sticky position */
+  bottom: 80px; /* Place the button at the bottom of the page */
+  right: 30px;
+}
+
+ label {
+    width: 100%;
+}
+.search-icon{
+  padding: 0px 0px 5px 0px;
+}

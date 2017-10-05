@@ -1,0 +1,50 @@
+$background_color_1: white;
+$background_color_2: #ffff66;
+
+.modal {
+	max-height: 90%;
+}
+.modal-form-row {
+	margin-bottom: 0px;
+}
+.body-index {
+background-image: url('/images/bg3.jpg');
+}
+#profileBanner {
+	height: 100px;
+	background-color: $background_color_2;
+}
+body {
+	display: flex;
+	min-height: 100vh;
+    flex-direction: column;
+    background-image: url('/images/bg3.jpg');
+    background-size: 100%
+}
+#main {
+	flex: 1 0 auto;
+}
+.card {
+	border-radius: 10px !important;
+}
+#backToTop {
+	display: none;
+	position: fixed;
+	bottom: 80px;
+	right: 30px;
+}
+label {
+	width: 100%;
+}
+.search-icon {
+	padding: 0px 0px 5px 0px;
+}
+.side-nav{
+  transform: translateX(-100%) 
+}
+footer{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0
+}
