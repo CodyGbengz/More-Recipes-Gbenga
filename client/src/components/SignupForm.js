@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { browserHistory } from 'react-router';
 
 class Signup  extends Component {
-    constructor(props){
+    constructor(props) { 
         super(props);
         this.state = {
             username: '',
@@ -48,7 +48,7 @@ class Signup  extends Component {
                         <label htmlFor="repassword">Confirm Password</label>
                     </div>
                     <div className="input-field col s12">
-                        <button className="modal-action modal-close waves-effect waves-green btn-flat right">Cancel</button>
+                        <button className="modal-action modal-close waves-effect waves-green btn white-text red right">Cancel</button>
                         <button className="btn waves-effect waves-light white red-text right" type="submit" name="action">Sign Up</button>
                     </div>
                 </div>

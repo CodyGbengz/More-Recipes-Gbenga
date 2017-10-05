@@ -1,11 +1,13 @@
 import  React from 'react';
 import { connect } from 'react-redux';
 import { userSignupRequest } from '../actions/signupActions';
+import { login } from '../actions/authAction';
 import Signup from './SignupForm';
+import Login from './LoginForm';
 import Footer from './Footer';
 class Home extends React.Component {
     render() {
-        const { userSignupRequest } = this.props;
+        const { userSignupRequest, login } = this.props;
         return (
             <div className='index-body'>
                 <main id="top" className="container">
@@ -23,7 +25,7 @@ class Home extends React.Component {
                     <div className="modal-content">
                         <h4>Sign up</h4>
                         <div className="row">
-                            <Signup userSignupRequest={userSignupRequest}/>
+                            <Signup userSignupRequest={userSignupRequest} />
                         </div>
                     </div>
                 </div>
@@ -32,23 +34,7 @@ class Home extends React.Component {
                     <div className="modal-content">
                         <h4>Login</h4>
                         <div className="row">
-                            <form className="col s12">
-                                <div className="row modal-form-row">
-                                    <div className="input-field col s12 ">
-                                        <input id="logemail" name="logemail" type="email" required="" aria-required="true"/>
-                                        <label htmlFor="logemail">Email Address</label>
-                                    </div>
-                                    <div className="input-field col s12 ">
-                                        <input id="logpassword" name="logpassword" type="password" required="" aria-required="true"/>
-                                        <label htmlFor="logpassword">Password</label>
-                                    </div>
-                                    <div className="input-field col s12">
-                                        <a href="" className="black-text">Forgot Password?</a>
-                                        <button className="modal-action modal-close waves-effect waves-yellow btn-flat right">Cancel</button>
-                                        <button className="btn waves-effect waves-light right white red-text" type="submit" name="action">Log in</button>
-                                    </div>
-                                </div>
-                            </form>
+                            <Login login={login} />
                         </div>
                     </div>
                 </div>
@@ -58,7 +44,8 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-    userSignupRequest: React.PropTypes.func.isRequired
+    userSignupRequest: React.PropTypes.func.isRequired,
+    login: React.PropTypes.func.isRequired.isRequired
 }
 
-export default connect((state) => { return {} }, { userSignupRequest })(Home);
+export default connect((state) => { return {} }, { userSignupRequest, login })(Home);
