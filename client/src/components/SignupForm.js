@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
 
 class Signup  extends Component {
     constructor(props){
@@ -20,7 +21,10 @@ class Signup  extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        this.props.userSignupRequest(this.state);
+        this.props.userSignupRequest(this.state)
+        .then(() => {
+            browserHistory.push('/recipes');
+        });
     }
 
     render() {
