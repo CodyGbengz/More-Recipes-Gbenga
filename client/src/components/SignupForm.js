@@ -21,7 +21,11 @@ class Signup  extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        axios.post('/api/users/signup', { user: this.state});
+        axios.post('/api/users/signup', {
+            username: this.state.username,
+            email: this.state.email,
+            password: this.state.password,
+         });
 
     }
 
