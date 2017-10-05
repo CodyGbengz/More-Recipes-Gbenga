@@ -1,7 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
+import { render } from 'react-dom';
+import { Router, browserHistory } from 'react-router';
 import './index.scss';
-import Main from './components/Main';
-import Home from './components/Home';
+import routes from './routes';
 
-ReactDOM.render(<Home />, document.getElementById('root'));
+render(<Router history={ browserHistory } routes={ routes } />, document.getElementById('root'));
