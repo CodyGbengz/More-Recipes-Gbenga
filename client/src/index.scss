@@ -7,11 +7,8 @@ $background_color_2: #ffff66;
 .modal-form-row {
 	margin-bottom: 0px;
 }
-.bodily {
-	background-color: $background_color_1;
-}
 .body-index {
-background-image: url('/images/bg3.jpeg');
+background-image: url('/images/bg3.jpg');
 }
 #profileBanner {
 	height: 100px;
@@ -20,11 +17,11 @@ background-image: url('/images/bg3.jpeg');
 body {
 	display: flex;
 	min-height: 100vh;
-  flex-direction: column;
-  background-image: url('/images/bg3.jpeg');
-  background-size: 100%
+    flex-direction: column;
+    background-image: url('/images/bg3.jpg');
+    background-size: 100%
 }
-main {
+#main {
 	flex: 1 0 auto;
 }
 .card {
@@ -44,4 +41,10 @@ label {
 }
 .side-nav{
   transform: translateX(-100%) 
+}
+footer{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	left: 0
 }

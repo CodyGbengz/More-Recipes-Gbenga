@@ -5,6 +5,8 @@ import app from '../server/app';
 import models from '../server/models/index';
 
 let token;
+
+
 chai.use(chaiHttp);
 
 models.User.destroy({
@@ -71,6 +73,7 @@ describe('Creates recipes ', () => {
       });
   });
   it('creates a new recipe', (done) => {
+    console.log(token);
     const testRecipe = {
       userId: 1,
       title: 'A testing recipe',

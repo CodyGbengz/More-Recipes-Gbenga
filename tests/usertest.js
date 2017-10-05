@@ -1,10 +1,13 @@
 import chai from 'chai';
 import should from 'should';
+import dotenv from 'dotenv';
 import chaiHttp from 'chai-http';
 import app from '../server/app';
 import models from '../server/models';
 
 chai.use(chaiHttp);
+dotenv.load();
+process.env.NODE_ENV = 'test';
 
 models.User.destroy({
   where: {},

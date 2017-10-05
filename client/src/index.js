@@ -1,9 +1,19 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.scss';
-import Main from './components/Main';
-import Home from './components/Home';
-import registerServiceWorker from './registerServiceWorker';
+import { render } from 'react-dom';
+import { Router, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
+import { createStore, applyMiddleware } from 'redux';
 
-ReactDOM.render(<Main />, document.getElementById('root'));
-registerServiceWorker();
+import './index.scss';
+import routes from './routes';
+
+const store = createStore(
+    (state = {}) => state,
+    applyMiddleware(thunk)
+);
+
+render(
+    <Provider store={store}>
+        <Router history={ browserHistory } routes={ routes } />
+    </Provider>,document.getElementById('root'));
