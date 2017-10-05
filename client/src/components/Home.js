@@ -1,4 +1,5 @@
-import  React from 'react'
+import  React from 'react';
+import Signup from './SignupForm';
 import Footer from './Footer';
 const Home = () => 
         <div className='index-body'>
@@ -17,30 +18,7 @@ const Home = () =>
                 <div className="modal-content">
                     <h4>Sign up</h4>
                     <div className="row">
-                        <form className="col s12 former" noValidate="novalidate">
-                            <div className="row modal-form-row">
-                                <div className="input-field col s12">
-                                    <input id="username" name="username" type="text" required="please enter a username" aria-required="true"/>
-                                    <label htmlFor="username">Username</label>
-                                </div>
-                                <div className="input-field col s12 ">
-                                    <input id="email" name="email" type="email" required="please enter a valid email address" aria-required="true"/>
-                                    <label htmlFor="email">Email Address</label>
-                                </div>
-                                <div className="input-field col s12 ">
-                                    <input id="password" name="password" type="password" required="please enter a password" aria-required="true"/>
-                                    <label htmlFor="password">Password</label>
-                                </div>
-                                <div className="input-field col s12 ">
-                                    <input id="repassword" name="repassword" type="password" required="please re-enter password" aria-required="true"/>
-                                    <label htmlFor="repassword">Confirm Password</label>
-                                </div>
-                                <div className="input-field col s12">
-                                    <button className="modal-action modal-close waves-effect waves-green btn-flat right">Cancel</button>
-                                    <button className="btn waves-effect waves-light white red-text right" type="submit" name="action">Sign Up</button>
-                                </div>
-                            </div>
-                        </form>
+                        <Signup/>
                     </div>
                 </div>
             </div>

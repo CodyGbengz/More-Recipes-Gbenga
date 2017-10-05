@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
 
-export class Recipe extends Component {
+ class Recipe extends Component {
     render() {
         const { recipe, i, review } = this.props;
         return (
