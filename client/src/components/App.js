@@ -1,17 +1,12 @@
 import React, { Component } from 'react';
-import { render} from 'react-dom';
+import Main from '/Main';
+import Home from './Home';
 
-import Home from './components/Home';
-
-
-
+class App extends React.Component {
   render() {
     return (
-      <div className=''>
+      <div className='container'>
         <h1> users</h1>
-        {this.state.users.map(user =>
-         <div key={user.id}>{user.username}</div>
-         )}
       </div>
     );
   }
