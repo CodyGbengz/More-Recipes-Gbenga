@@ -53,8 +53,8 @@ describe('test API routes', () => {
         .post('/api/users/signup')
         .type('form')
         .send({
-          username: 'iamanewuser',
-          email: 'test@user.com'
+          username: 'iamanewuser1',
+          email: 'test1@user.com'
         })
         .end((err, res) => {
           res.body.message.should.eql('Please Enter a password with atleast 8 characters');
@@ -66,7 +66,7 @@ describe('test API routes', () => {
         .post('/api/users/signup')
         .type('form')
         .send({
-          email: 'test@user.com',
+          email: 'test2@user.com',
           password: 'testpassword'
         })
         .end((err, res) => {

@@ -6,17 +6,17 @@ const validateUser = {
       email = req.body.email,
       password = req.body.password;
 
-    if (!/\w{6,12}/.test(username)) {
+    if (!/\w{6,12}/.test(username) || !username) {
       return res.status(400).send({
         message: 'Enter a username with atleast 8 characters'
       });
     }
-    if (!/[\w\.-_\+]+@[\w-]+(\.\w{2,4})+$/.test(email)) {
+    if (!/[\w\.-_\+]+@[\w-]+(\.\w{2,4})+$/.test(email) || !email) {
       return res.status(400).send({
         message: 'Please enter a valid email'
       });
     }
-    if (!/\w{8,12}$/.test(password)) {
+    if (!/\w{8,12}$/.test(password) || !password) {
       return res.status(400).send({
         message: 'Please Enter a password with atleast 8 characters'
       });
