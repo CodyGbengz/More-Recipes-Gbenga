@@ -5,9 +5,11 @@ import Home from './components/Home';
 import Main from './components/Main';
 import RecipeGrid from './components/RecipeGrid'
 
+import requireAuth from './utils/requireAuth';
+
 export default (
     <Route path="/" component={Main}>
         <IndexRoute component={Home} />
-        <Route path="recipes" component={RecipeGrid} />
+        <Route path="recipes" component={requireAuth(RecipeGrid)} />
     </Route>
 )
