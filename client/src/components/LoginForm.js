@@ -30,11 +30,11 @@ class Login extends Component {
             <form onSubmit={ this.onSubmit } className="col s12">
                 <div className="row modal-form-row">
                     <div className="input-field col s12 ">
-                        <input id="logemail" value={ this.state.email } onChange= { this.onChange } name="logemail" type="email"/>
+                        <input id="logemail" value={ this.state.email } onChange= { this.onChange } name="email" type="email"/>
                         <label htmlFor="logemail">Email Address</label>
                     </div>
                     <div className="input-field col s12 ">
-                        <input id="logpassword" value={ this.state.password } onChange= { this.onChange } name="logpassword" type="password" />
+                        <input id="logpassword" value={ this.state.password } onChange= { this.onChange } name="password" type="password" />
                         <label htmlFor="logpassword">Password</label>
                     </div>
                     <div className="input-field col s12">

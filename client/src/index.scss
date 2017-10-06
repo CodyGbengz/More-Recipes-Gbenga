@@ -7,9 +7,6 @@ $background_color_2: #ffff66;
 .modal-form-row {
 	margin-bottom: 0px;
 }
-.body-index {
-background-image: url('/images/bg3.jpg');
-}
 #profileBanner {
 	height: 100px;
 	background-color: $background_color_2;
@@ -21,6 +18,9 @@ body {
     background-image: url('/images/bg3.jpg');
     background-size: 100%
 }
+.body-index {
+	background-image: url('/images/bg3.jpg');
+	}
 #main {
 	flex: 1 0 auto;
 }
@@ -47,4 +47,8 @@ footer{
 	right: 0;
 	bottom: 0;
 	left: 0
+}
+.btn { 
+	margin-right: 5px !important; 
+
 }
