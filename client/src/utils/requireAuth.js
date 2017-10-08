@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { browserHistory } from 'react-router';
 
@@ -18,7 +19,7 @@ export default function(ComposedComponent) {
     }
 
     Authenticate.propTypes = {
-        isAuthenticated: React.PropTypes.bool.isRequired
+        isAuthenticated: PropTypes.bool.isRequired
     }
 
     function mapStateToProps(state) {

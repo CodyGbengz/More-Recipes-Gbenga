@@ -12,7 +12,7 @@ const Header = () =>
           <nav className="white">
             <div className="nav-wrapper">
               <a href="home.html" className="brand-logo center red-text">More-Recipes</a>
-              <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons red-text">menu</i></a>
+              <a href="" data-activates="mobile-demo" className="button-collapse"><i className="material-icons red-text">menu</i></a>
               <form className="left hide-on-med-and-down">
                 <div className="input-field">
                   <input id="search" type="search"/>

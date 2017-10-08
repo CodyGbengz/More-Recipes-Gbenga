@@ -1,4 +1,5 @@
 import  React from 'react';
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
 import { userSignupRequest } from '../actions/signupActions';
 import { login } from '../actions/authAction';
@@ -46,8 +47,8 @@ class Home extends React.Component {
 }
 
 Home.propTypes = {
-    userSignupRequest: React.PropTypes.func.isRequired,
-    login: React.PropTypes.func.isRequired
+    userSignupRequest: PropTypes.func.isRequired,
+    login: PropTypes.func.isRequired
 }
 
 export default connect((state) => { return {} }, { userSignupRequest, login })(Home);

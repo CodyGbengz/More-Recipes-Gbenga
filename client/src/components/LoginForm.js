@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { browserHistory } from 'react-router';
 
 class Login extends Component {
@@ -49,7 +50,7 @@ class Login extends Component {
 }
 
 Login.PropTypes = {
-    login: React.PropTypes.func.isRequired
+    login: PropTypes.func.isRequired
 }
 
 export default Login;
