@@ -46,7 +46,7 @@ class Home extends React.Component {
     }
 }
 
-Home.propTypes = {
+Home.PropTypes = {
     userSignupRequest: PropTypes.func.isRequired,
     login: PropTypes.func.isRequired
 }

@@ -16,7 +16,7 @@ const Header = () =>
               <form className="left hide-on-med-and-down">
                 <div className="input-field">
                   <input id="search" type="search"/>
-                  <label className="label-icon search-icon" for="search"><i className="material-icons red-text ">search</i></label>
+                  <label className="label-icon search-icon" htmlFor="search"><i className="material-icons red-text ">search</i></label>
                   <i className="material-icons">close</i>
                 </div>
               </form>

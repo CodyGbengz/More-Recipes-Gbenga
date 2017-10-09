@@ -12,15 +12,16 @@ export default {
         email: req.body.email,
         password: md5(req.body.password)
       })
-      .then(user => res.status(201).json({
-        status: 'success',
-        message: 'sign up successful',
-        data: {
-          id: user.id,
-          username: user.username,
-          email: user.email,
-        }
-      }))
+      .then((user) => {
+        const token = jwt.sign({ user }, process.env.secret, {
+          expiresIn: 86400
+        });
+        res.status(201).json({
+          status: 'success',
+          message: 'sign up successful',
+          token
+        });
+      })
       .catch(error => res.status(400).json({
         status: 'fail',
         message: error.message
@@ -57,7 +58,7 @@ export default {
         });
         res.status(200).json({
           status: 'success',
-          Token: token,
+          token,
           message: 'Sign in successful'
         });
       })
