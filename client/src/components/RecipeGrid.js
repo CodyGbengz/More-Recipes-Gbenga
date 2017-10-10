@@ -21,7 +21,7 @@ class RecipeGrid extends Component {
               <span className="card-title">
                 <b><a href="recipe details.html"className="white-text">{recipe.title}</a></b>
               </span>
-              <a className="btn-floating halfway-fab waves-effect waves-light white "><i className="material-icons red-text">favorite</i></a>
+              <a className="btn-floating halfway-fab waves-effect waves-light white "><i className="material-icons red-text">favorite_border</i></a>
           </div>
           <div className="card-content">
             <p>{recipe.description}</p>
@@ -35,6 +35,7 @@ class RecipeGrid extends Component {
                 <a href=""><i className="material-icons left">thumb_up</i>{recipe.upvotes}</a>
                 <a className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="downvote"><i className="material-icons left">thumb_down</i>{recipe.downvotes}</a>
                 <a href="recipe details.html" className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100 "data-tooltip="views"><i className="material-icons left">visibility</i>{recipe.views}</a>
+                <a href="recipe details.html" className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100 "data-tooltip="views"><i className="material-icons left">chat</i>{recipe.reviews.length}</a>
               </div>
             </div>
         </div>
@@ -66,7 +67,7 @@ class RecipeGrid extends Component {
 }
 
 function mapStateToProps( state ) {
-  return {recipeList: state.recipeReducer.recipeList};
+  return {recipeList: state.recipes.recipeList};
 }
 
 export default connect(mapStateToProps, { getRecipes })(RecipeGrid);

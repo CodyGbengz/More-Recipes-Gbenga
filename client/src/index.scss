@@ -15,11 +15,11 @@ body {
 	display: flex;
 	min-height: 100vh;
     flex-direction: column;
-    background-image: url('/images/bg3.jpg');
+    //background-image: url('/images/bg3.jpg');
     background-size: 100%
 }
-.body-index {
-	background-image: url('/images/bg3.jpg');
+.main {
+	background-color: white;
 	}
 #main {
 	flex: 1 0 auto;
