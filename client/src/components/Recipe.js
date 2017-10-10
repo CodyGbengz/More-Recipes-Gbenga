@@ -1,9 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 
- class Recipe extends Component {
-    render() {
-        const { recipe, i, review } = this.props;
+ const Recipe = (props) => {
         return (
             <div className="col s12 l4">
               <div className="card">
@@ -11,7 +9,7 @@ import React, { Component } from 'react';
               
                     <img src="./images/bg2.jpg" alt="recipe-img"/>
                     <span className="card-title">
-                      <b><a href="recipe details.html"className="white-text">Recipe Title</a></b>
+                      <b><a href="recipe details.html"className="white-text">{props.title}</a></b>
                     </span>
                     <a className="btn-floating halfway-fab waves-effect waves-light white "><i className="material-icons red-text">favorite</i></a>
                   
@@ -25,7 +23,7 @@ import React, { Component } from 'react';
                       <div className="chip"><img src="./images/avi.jpg" alt="Contact Person"/>Jane Doe</div>
                     </div>
                     <div className="col s12 m12">
-                      <a href=""><i className="material-icons left">thumb_up</i>45</a>
+                      <a href=""><i className="material-icons left">thumb_up</i>{props.upvotes}</a>
                       <a className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="downvote"><i className="material-icons left">thumb_down</i>5</a>
                       <a href="recipe details.html" className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100 "data-tooltip="views"><i className="material-icons left">visibility</i>4</a>
                     </div>
@@ -35,6 +33,5 @@ import React, { Component } from 'react';
           </div>
         )
     }
-}
 
 export default Recipe
