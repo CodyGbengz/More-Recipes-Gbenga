@@ -4,6 +4,7 @@ import Footer from './Footer';
 import CreateRecipeForm from './CreateRecipeForm';
 import { getRecipes } from '../actions/recipeActions';
 import { connect } from 'react-redux';
+import { Link } from 'react-router';
 
 
 class RecipeGrid extends Component {
@@ -12,15 +13,18 @@ class RecipeGrid extends Component {
   }
 
   renderRecipes(recipes) {
+    if (!recipes)return;
     return recipes.map((recipe, i) => {
       return (
         <div className="col s12 m6 l4" key={i}>
         <div className="card">
           <div className="card-image">
+            <Link to={`/recipes/${recipe.id}`}>
               <img src="./images/bg2.jpg" alt="recipe-img"/>
               <span className="card-title">
-                <b><a href="recipe details.html"className="white-text">{recipe.title}</a></b>
+                <b><Link to={`/recipes/${recipe.id}`} className="white-text">{recipe.title}</Link></b>
               </span>
+              </Link>
               <a className="btn-floating halfway-fab waves-effect waves-light white "><i className="material-icons red-text">favorite_border</i></a>
           </div>
           <div className="card-content">
@@ -45,12 +49,11 @@ class RecipeGrid extends Component {
     })
   }
   render() {
-   console.log(this.props.recipeList);
     return (
       <div>
         <Header/>
         <div className='row'>
-          {this.renderRecipes(this.props.recipeList)}
+          {this.renderRecipes(this.props.recipes)}
         </div>
         <Footer/>
         <div id="create" className="modal">
@@ -67,7 +70,7 @@ class RecipeGrid extends Component {
 }
 
 function mapStateToProps( state ) {
-  return {recipeList: state.recipes.recipeList};
+  return {recipes: state.recipes.recipes};
 }
 
 export default connect(mapStateToProps, { getRecipes })(RecipeGrid);

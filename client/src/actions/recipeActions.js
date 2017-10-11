@@ -13,6 +13,13 @@ const getRecipesAction = recipes => (
     }
 );
 
+export const getSingleRecipeAction = recipe => (
+    {
+        type: 'FETCH_SINGLE_RECIPE',
+        recipe
+    }
+);
+
 export function getRecipes() {
     return dispatch => (
         axios.get('/api/recipes')
@@ -23,6 +30,16 @@ export function getRecipes() {
 
     });
 }
+
+export function getSingleRecipe(id) {
+    return dispatch => (
+        axios.get(`/api/recipes/${id}`)
+    )
+    .then((res) => {
+        dispatch(getSingleRecipeAction(res.data.data))
+})
+}
+
 
 
 
