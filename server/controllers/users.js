@@ -1,12 +1,12 @@
 import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 import models from '../models';
-import checkEmpty from '../helpers/checkEmpty';
 
+const User = models.User;
 
 export default {
-  create(req, res) {
-    return models.User
+  createUser(req, res) {
+    return User
       .create({
         username: req.body.username,
         email: req.body.email,
@@ -28,21 +28,8 @@ export default {
       }));
   },
 
-  signin(req, res) {
-    if (checkEmpty(req.body.email) || !req.body.email) {
-      return res.status(400).json({
-        status: 'Fail',
-        message: 'email field cannot be empty'
-      });
-    }
-    if (checkEmpty(req.body.password) || !req.body.password) {
-      return res.status(400).json({
-        status: 'Fail',
-        message: 'Password field cannot be empty'
-      });
-    }
-
-    return models.User
+  loginUser(req, res) {
+    return User
       .findOne({ where:
         { email: req.body.email,
           password: md5(req.body.password) } })
@@ -66,6 +53,7 @@ export default {
         message: error.message
       }));
   },
+  /*
   fetch(req, res) {
     return models.User
       .all({
@@ -80,5 +68,5 @@ export default {
         status: 'fail',
         message: error.message
       }));
-  },
+  }, */
 };

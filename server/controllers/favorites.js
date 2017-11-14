@@ -6,8 +6,8 @@ export default {
       .findById(req.params.recipeId)
       .then((recipe) => {
         if (!recipe) {
-          return res.status(404).json({
-            message: 'Recipe does not exists'
+          return res.status(400).json({
+            message: 'Recipe does not exist'
           });
         }
         models.Favourite
@@ -34,7 +34,7 @@ export default {
       })
       .then((favourite) => {
         if (!favourite.length) {
-          res.status(200).json({
+          res.status(404).json({
             message: 'Your list of favorite recipes is empty'
           });
         }

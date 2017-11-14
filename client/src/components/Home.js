@@ -1,14 +1,17 @@
 import  React from 'react';
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux';
+import setAuthToken from '../utils/setAuthToken';
+import jwtDecode from 'jwt-decode';
 import { userSignupRequest } from '../actions/signupActions';
-import { login } from '../actions/authAction';
+import { signInUser } from '../actions/authAction';
 import Signup from './SignupForm';
 import Login from './LoginForm';
 import Footer from './Footer';
 class Home extends React.Component {
     render() {
-        const { userSignupRequest, login } = this.props;
+        console.log(this.props)
+        const { userSignupRequest, signInUser } = this.props;
         return (
             <div>
                 <div className="body-index">
@@ -36,7 +39,7 @@ class Home extends React.Component {
                         <div className="modal-content">
                             <h4>Login</h4>
                             <div className="row">
-                                <Login login={login} />
+                                <Login signInUser={signInUser} />
                             </div>
                         </div>
                     </div>
@@ -48,7 +51,9 @@ class Home extends React.Component {
 
 Home.PropTypes = {
     userSignupRequest: PropTypes.func.isRequired,
-    login: PropTypes.func.isRequired
+    signInUser: PropTypes.func.isRequired
 }
 
-export default connect((state) => { return {} }, { userSignupRequest, login })(Home);
+
+
+export default connect((state) => { return {} }, { signInUser })(Home);

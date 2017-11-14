@@ -2,6 +2,7 @@ import express from 'express';
 import auth from '../middlewares/auth';
 import controllers from '../controllers/index';
 import validateRecipe from '../middlewares/recipeValidation';
+import validateParams from '../middlewares/validateParams';
 
 const router = express.Router();
 
@@ -15,12 +16,12 @@ router.get('/api/recipes', controllers.Recipe.searchRecipes, controllers.Recipe.
 router.get('/api/recipes/users', auth, controllers.Recipe.fetchUserRecipes);
 
 // route to view recipe details
-router.get('/api/recipes/:recipeId', validateRecipe.recipeExist, controllers.Recipe.fetchARecipe);
+router.get('/api/recipes/:recipeId', validateParams, validateRecipe.recipeExist, controllers.Recipe.fetchARecipe);
 
 // route for update recipe
-router.put('/api/recipes/:recipeId', auth, validateRecipe.recipeExist, controllers.Recipe.updateARecipe);
+router.put('/api/recipes/:recipeId', auth, validateParams, validateRecipe.recipeExist, controllers.Recipe.updateARecipe);
 
 // route for delete recipe
-router.delete('/api/recipes/:recipeId', auth, validateRecipe.recipeExist, controllers.Recipe.destroyARecipe);
+router.delete('/api/recipes/:recipeId', auth, validateParams, validateRecipe.recipeExist, controllers.Recipe.destroyARecipe);
 
 export default router;

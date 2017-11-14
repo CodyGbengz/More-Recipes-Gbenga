@@ -1,21 +1,26 @@
 import RecipeDetails from '../components/RecipeDetails';
-import { getSingleRecipe } from '../actions/recipeActions';
+import { fetchSingleRecipe, fetchSingleRecipeSuccess, fetchSingleRecipeFailure } from '../actions/recipeActions';
 import { connect } from 'react-redux';
 
 
 const mapStateToProps = ( state, ownProps ) => {
-	const { recipe }  = state;
-
 	return { 
-		recipe,
+		recipe: state.recipe,
 		Id: ownProps.id
 	 };
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		getSingleRecipe: (id) => {
-			dispatch(getSingleRecipe(id))
+		fetchSingleRecipe: (id) => {
+			dispatch(fetchSingleRecipe(id)).then((response) => {
+			console.log(response);
+				if(response.payload.response && response.payload.response.status !== 200 ) {
+					dispatch(fetchSingleRecipeFailure(response.payload.response.data));
+				} else {
+					dispatch(fetchSingleRecipeSuccess(response.payload.data.data))
+				}
+			});
 		}
 	}
 }

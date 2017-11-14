@@ -1,17 +1,23 @@
-import { SET_CURRENT_USER } from '../actions/types';
+import { SIGNIN_USER_SUCCESS, SIGNIN_USER, SIGNIN_USER_FAILURE } from '../actions/authAction';
 
-const initialState = {
-    isAuthenticated: false,
-    user: {}
-};
+const INITIAL_STATE = { isAuthenticated: false, user: {}};
 
-export default (state = initialState, action = {}) => {
+export default (state = INITIAL_STATE, action) => {
+    let error;
     switch(action.type) {
-        case SET_CURRENT_USER:
+        case SIGNIN_USER:
             return {
-                isAuthenticated : true,
+                ...state, user: null, isAuthenticated: false, error: null, loading: true
+            };
+        case SIGNIN_USER_SUCCESS:
+            return {
+                isAuthenticated: true,
                 user: action.user
             };
+        case SIGNIN_USER_FAILURE:
+            return {
+                ...state, user: null, isAuthenticated: false, error: error, loading: false
+            }
         default: return state;
     }
 }

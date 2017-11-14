@@ -1,21 +1,21 @@
 import { connect } from 'react-redux';
-import { getRecipes } from '../actions/recipeActions';
+import { fetchRecipes, fetchRecipesFailure, fetchRecipesSuccess } from '../actions/recipeActions';
 import RecipeGrid from '../components/RecipeGrid';
 
 const mapStateToProps = (state) => {
     return {
-        recipes: state.recipeReducer.recipesList
+        recipes: state.recipes
     };
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        getRecipes: () => {
-            dispatch(getRecipes()).then((res) => {
-                console.log(res);
+        fetchRecipes: () => {
+            dispatch(fetchRecipes()).then((response) => {
+                !response.error ? dispatch(fetchRecipesSuccess(response.payload.data.data)) : dispatch(fetchRecipesFailure(response.payload.error));
             });
         }
     }
 }
 
-export default connect(mapStateToProps,mapDispatchToProps )(RecipeGrid);
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeGrid);

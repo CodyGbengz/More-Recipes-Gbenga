@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
-import  Header  from '../components/Header';
-import Footer from '../components/Footer';
+import CreateRecipeForm from '../components/CreateRecipeForm'
 import RecipeDetailsContainer from '../containers/RecipeDetailsContainer';
 
 class RecipeDetailsPage extends Component {
     render() {
         return (
             <div>
-                <Header/>
                 <RecipeDetailsContainer id={this.props.params.id}/>
-                <Footer/>
+                <div id="create" className="modal">
+                    <div className="modal-content">
+                    <h4>Create Recipe</h4>
+                        <div className="row">
+                            <CreateRecipeForm id={this.props.id} />
+                        </div>
+                    </div>
+                </div>
             </div>
 
         );

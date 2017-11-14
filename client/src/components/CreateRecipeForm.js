@@ -24,7 +24,6 @@ class RecipeForm extends Component {
     onSubmit(e) {
     e.preventDefault();
     this.props.createRecipe(this.state);
-    console.log(this.state);
     }
 
     render() {
@@ -39,14 +38,6 @@ class RecipeForm extends Component {
                 <div className="input-field col s12 ">
                     <textarea id="recipeDescription" value={ description } onChange={ this.onChange } className="materialize-textarea" name="description" type="text"></textarea>
                     <label htmlFor="recipeDescription">Recipe Description</label>
-                </div>
-                <div className="input-field col s6 m6">
-                    <input id="time" type="text" name="time"/>
-                    <label htmlFor="time">Estimated Time</label>
-                </div>
-                <div className="input-field col s6 m6">
-                    <input id="serves" type="text"/>
-                    <label htmlFor="serves">Serves</label>
                 </div>
                 <div className="input-field col s12 m12">
                     <h6><em><b>Upload Image</b></em></h6>
@@ -64,7 +55,7 @@ class RecipeForm extends Component {
                 </div>
                 <div className="input-field col s12">
                     <button className="modal-action modal-close waves-effect waves-red red white-text btn-flat right">Cancel</button>
-                    <button className="btn waves-effect waves-light right white red-text" type="submit">Save</button>
+                    <button className="btn waves-effect modal-close waves-light right white red-text" type="submit">Save</button>
                 </div>
                 </div>
           </form>
@@ -77,4 +68,10 @@ RecipeForm.PropTypes = {
     createRecipe: PropTypes.func.isRequired
 } 
 
-export default connect(null, { createRecipe })(RecipeForm);
+const mapStateToProps = (state) => {
+    return {
+        recipesList: state.recipes.recipesList
+    };
+}
+
+export default connect(mapStateToProps, { createRecipe })(RecipeForm);

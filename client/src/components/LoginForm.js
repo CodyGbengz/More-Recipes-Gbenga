@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { browserHistory } from 'react-router';
 
 class Login extends Component {
     constructor(props) {
@@ -20,11 +19,9 @@ class Login extends Component {
 
     onSubmit(e) {
         e.preventDefault();
-        this.props.login(this.state)
-        .then(() => {
-            browserHistory.push('/recipes');
-        });
-    }
+        console.log(this.props);
+        this.props.signInUser(this.state)
+        }
 
     render() {
         return (
@@ -41,7 +38,7 @@ class Login extends Component {
                     <div className="input-field col s12">
                         <a href="" className="black-text">Forgot Password?</a>
                         <button className="modal-action modal-close waves-effect waves-red btn red white-text right">Cancel</button>
-                        <button className="btn waves-effect waves-light right white red-text" type="submit" name="action">Log in</button>
+                        <button data-target="login" className="btn waves-effect  modal-trigger modal-close modal-action waves-light right white red-text" onClick={this.onSubmit} type="submit" name="action">Log in</button>
                     </div>
                 </div>
             </form>
@@ -52,5 +49,7 @@ class Login extends Component {
 Login.PropTypes = {
     login: PropTypes.func.isRequired
 }
+
+
 
 export default Login;

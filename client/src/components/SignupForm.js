@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { browserHistory } from 'react-router';
 
 class Signup  extends Component {
     constructor(props) { 
@@ -24,7 +23,7 @@ class Signup  extends Component {
         e.preventDefault();
         this.props.userSignupRequest(this.state)
         .then(() => {
-            browserHistory.push('/recipes');
+            window.location = '/recipes';
         });
     }
 

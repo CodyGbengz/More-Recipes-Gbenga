@@ -3,27 +3,16 @@ import React from 'react';
 import { render } from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import { createStore, applyMiddleware, compose } from 'redux';
-import rootReducer from './rootReducer';
+import store  from './store';
 import setAuthToken from './utils/setAuthToken';
-import { setCurrentUser } from './actions/authAction';
-
-
+import { signInUserSuccess } from './actions/authAction';
 import './index.scss';
 import routes from './routes';
 
-const store = createStore(
-    rootReducer,
-    compose(
-        applyMiddleware(thunk),
-        window.devToolsExtension ? window.devToolsExtension() : f => f
-    )
-);
 
 if (localStorage.jwtToken) {
     setAuthToken(localStorage.jwtToken);
-    store.dispatch(setCurrentUser(jwtDecode(localStorage.jwtToken)));  
+    store.dispatch(signInUserSuccess(jwtDecode(localStorage.jwtToken)));  
 }
 
 render(
