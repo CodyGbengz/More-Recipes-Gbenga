@@ -13,11 +13,7 @@ export default {
       .then(recipe => res.status(201).json({
         status: 'success',
         message: 'Recipe created successfully',
-        data: {
-          id: recipe.id,
-          title: recipe.title,
-          description: recipe.description
-        }
+        recipe
       }))
       .catch(error => res.status(400).json({
         status: 'Fail',
@@ -59,11 +55,15 @@ export default {
             model: models.User,
             attributes: ['username', 'createdAt']
           }]
+        },
+        {
+          model: models.User,
+          attributes: ['username', 'createdAt']
         }]
       })
       .then((recipe) => {
         if (!recipe) {
-          return res.status(200).json({
+          return res.status(404).json({
             message: 'Recipe does not exist'
           });
         }
@@ -81,6 +81,7 @@ export default {
         message: error.message
       }));
   },
+
   fetchAllRecipes(req, res, next) {
     if (req.query.sort) return next();
     return models.Recipe
@@ -93,8 +94,12 @@ export default {
             model: models.User,
             attributes: ['username', 'createdAt']
           }]
+        },
+        {
+          model: models.User,
+          attributes: ['username']
         }],
-        limit: 10
+        limit: 20
       })
       .then((recipes) => {
         if (!recipes.length) {
@@ -165,10 +170,12 @@ export default {
             message: 'Recipe not found'
           });
         }
-        return recipe.destroy().then(() => res.status(200).json({
-          status: 'success',
-          message: 'Recipe deleted successfully'
-        }))
+        return recipe
+          .destroy()
+          .then(() => res.status(200).json({
+            status: 'success',
+            message: 'Recipe deleted successfully'
+          }))
           .catch(error => res.status(400).json({
             status: 'fail',
             message: error.message

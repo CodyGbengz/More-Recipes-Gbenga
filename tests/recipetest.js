@@ -1,24 +1,13 @@
 import chai from 'chai';
-import should from 'should';
 import chaiHttp from 'chai-http';
 import app from '../server/app';
-import models from '../server/models/index';
 
+const should = chai.should();
 let token;
-
-
 chai.use(chaiHttp);
 
-models.User.destroy({
-  where: {},
-  cascade: true,
-  truncate: true,
-  restartIdentity: true
-
-});
-
-describe('Sign in user', () => {
-  it('POST /api/users/signup creates a new user', (done) => {
+describe('POST /api/users/signup', () => {
+  it('creates a new user', (done) => {
     chai.request(app)
       .post('/api/users/signup')
       .type('form')
@@ -29,11 +18,14 @@ describe('Sign in user', () => {
       })
       .end((err, res) => {
         res.status.should.be.eql(201);
-        res.body.data.email.should.eql('newtest@user.com');
-        res.body.data.username.should.eql('anotheruser');
+        res.body.status.should.eql('success');
+        res.body.message.should.eql('sign up successful');
         done();
       });
   });
+});
+
+describe('POST /api/users/signin', () => {
   it('signs in a registered user', (done) => {
     const testUser = {
       email: 'newtest@user.com',
@@ -44,7 +36,7 @@ describe('Sign in user', () => {
       .type('form')
       .send(testUser)
       .end((err, res) => {
-        token = res.body.Token;
+        token = res.body.token;
         res.status.should.be.eql(200);
         res.body.status.should.be.eql('success');
         res.body.message.should.be.eql('Sign in successful');
@@ -52,6 +44,7 @@ describe('Sign in user', () => {
       });
   });
 });
+
 describe('Creates recipes ', () => {
   it('check authorization recipe', (done) => {
     const testRecipe = {
@@ -73,7 +66,6 @@ describe('Creates recipes ', () => {
       });
   });
   it('creates a new recipe', (done) => {
-    console.log(token);
     const testRecipe = {
       userId: 1,
       title: 'A testing recipe',
@@ -150,7 +142,7 @@ describe('Creates recipes ', () => {
         done();
       });
   });
-  it('rejects entry with missing directio field', (done) => {
+  it('rejects entry with missing directions field', (done) => {
     const testRecipe = {
       userId: 1,
       title: 'A testing recipe',
@@ -170,7 +162,26 @@ describe('Creates recipes ', () => {
       });
   });
 });
-describe('Updates recipes ', () => {
+
+describe('Update recipe ', () => {
+  it('checks that valid params is passed ', (done) => {
+    const testRecipe = {
+      title: 'An updated recipe',
+      description: 'A short description about this recipe',
+      ingredients: '1 cup of ice, 2 shots of vodka',
+      directions: 'take a deep breadth, take one to the head',
+    };
+    chai.request(app)
+      .put('/api/recipes/string')
+      .set('x-access-token', token)
+      .type('form')
+      .send(testRecipe)
+      .end((err, res) => {
+        res.status.should.be.eql(400);
+        res.body.message.should.be.eql('Invalid params');
+        done();
+      });
+  });
   it('check non existing recipe', (done) => {
     const testRecipe = {
       title: 'An updated recipe',
@@ -210,4 +221,118 @@ describe('Updates recipes ', () => {
       });
   });
 });
+describe('Fetch recipes', () => {
+  it('returns a list of all recipes', (done) => {
+    chai.request(app)
+      .get('/api/recipes')
+      .end((err, res) => {
+        res.status.should.be.eql(200);
+        res.body.data.should.be.a('array');
+        done();
+      });
+  });
+});
 
+describe('Fetch a user"s recipes', () => {
+  it('returns no token provided when no token is passed', (done) => {
+    chai.request(app)
+      .get('/api/recipes/users')
+      .end((err, res) => {
+        res.body.message.should.be.eql('No token provided.');
+        done();
+      });
+  });
+  it('returns an empty list for a user without recipes', (done) => {
+    chai.request(app)
+      .get('/api/recipes/users')
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.body.data.length.should.be.eql(1);
+        done();
+      });
+  });
+});
+
+describe('Fetch a single recipe"s details', () => {
+  it('returns recipe does not exist for a non existing recipe', (done) => {
+    const params = 1000;
+    chai.request(app)
+      .get(`/api/recipes/${params}`)
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.status.should.be.eql(404);
+        res.body.message.should.be.eql('Recipe does not exist');
+        done();
+      });
+  });
+  it('returns Invalid params when called with params that is not a number', (done) => {
+    const params = 'string';
+    chai.request(app)
+      .get(`/api/recipes/${params}`)
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.status.should.be.eql(400);
+        res.body.message.should.be.eql('Invalid params');
+        done();
+      });
+  });
+  it('returns Invalid params when called with params that is not a number', (done) => {
+    const params = 'dd';
+    chai.request(app)
+      .get(`/api/recipes/${params}`)
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.status.should.be.eql(400);
+        res.body.message.should.be.eql('Invalid params');
+        done();
+      });
+  });
+  it('returns status 200', (done) => {
+    const params = 1;
+    chai.request(app)
+      .get(`/api/recipes/${params}`)
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.status.should.be.eql(200);
+        res.body.status.should.be.eql('success');
+        done();
+      });
+  });
+  it('returns status 200', (done) => {
+    const params = 1;
+    chai.request(app)
+      .get(`/api/recipes/${params}`)
+      .set('x-access-token', token)
+      .end((err, res) => {
+        res.status.should.be.eql(200);
+        res.body.status.should.be.eql('success');
+        res.body.data.should.be.a('object');
+        res.body.data.should.have.property('title');
+        res.body.data.should.have.property('description');
+        done();
+      });
+  });
+});
+
+describe('Search recipes', () => {
+  it('returns a list of matched recipes', (done) => {
+    const searchTerm = 'An updated recipe';
+    chai.request(app)
+      .get(`/api/recipes?search=${searchTerm}`)
+      .end((err, res) => {
+        res.status.should.be.eql(200);
+        res.body.should.be.a('array');
+        done();
+      });
+  });
+  it('returns no matches found when search term does not match any recipe ', (done) => {
+    const searchTerm = 'xxxxx';
+    chai.request(app)
+      .get(`/api/recipes?search=${searchTerm}`)
+      .end((err, res) => {
+        res.status.should.be.eql(200);
+        res.body.message.should.be.eql('No matches found');
+        done();
+      });
+  });
+});

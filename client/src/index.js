@@ -1,17 +1,19 @@
+import jwtDecode from 'jwt-decode';
 import React from 'react';
 import { render } from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
-import thunk from 'redux-thunk';
-import { createStore, applyMiddleware } from 'redux';
-
+import store  from './store';
+import setAuthToken from './utils/setAuthToken';
+import { signInUserSuccess } from './actions/authAction';
 import './index.scss';
 import routes from './routes';
 
-const store = createStore(
-    (state = {}) => state,
-    applyMiddleware(thunk)
-);
+
+if (localStorage.jwtToken) {
+    setAuthToken(localStorage.jwtToken);
+    store.dispatch(signInUserSuccess(jwtDecode(localStorage.jwtToken)));  
+}
 
 render(
     <Provider store={store}>

@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { browserHistory } from 'react-router';
+import PropTypes from 'prop-types';
 
 class Signup  extends Component {
-    constructor(props){
+    constructor(props) { 
         super(props);
         this.state = {
             username: '',
@@ -23,7 +23,7 @@ class Signup  extends Component {
         e.preventDefault();
         this.props.userSignupRequest(this.state)
         .then(() => {
-            browserHistory.push('/recipes');
+            window.location = '/recipes';
         });
     }
 
@@ -48,7 +48,7 @@ class Signup  extends Component {
                         <label htmlFor="repassword">Confirm Password</label>
                     </div>
                     <div className="input-field col s12">
-                        <button className="modal-action modal-close waves-effect waves-green btn-flat right">Cancel</button>
+                        <button className="modal-action modal-close waves-effect waves-green btn white-text red right">Cancel</button>
                         <button className="btn waves-effect waves-light white red-text right" type="submit" name="action">Sign Up</button>
                     </div>
                 </div>
@@ -58,7 +58,7 @@ class Signup  extends Component {
 }
 
 Signup.PropTypes = {
-    userSignupRequest: React.PropTypes.func.isRequired
+    userSignupRequest: PropTypes.func.isRequired
 }
 
 export default Signup;

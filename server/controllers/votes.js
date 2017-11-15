@@ -20,7 +20,6 @@ export default {
                     message: 'Your vote has been recoded',
                     upvotes: recipe.upvotes,
                     downvotes: recipe.downvotes
-
                   }));
               });
             });

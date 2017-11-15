@@ -7,9 +7,6 @@ $background_color_2: #ffff66;
 .modal-form-row {
 	margin-bottom: 0px;
 }
-.body-index {
-background-image: url('/images/bg3.jpg');
-}
 #profileBanner {
 	height: 100px;
 	background-color: $background_color_2;
@@ -18,9 +15,15 @@ body {
 	display: flex;
 	min-height: 100vh;
     flex-direction: column;
-    background-image: url('/images/bg3.jpg');
+   // background-image: url('/images/bg3.jpg');
     background-size: 100%
 }
+.body-index{
+	background-image: url('/images/bg3.jpg');
+}
+.main {
+	
+	}
 #main {
 	flex: 1 0 auto;
 }
@@ -43,8 +46,14 @@ label {
   transform: translateX(-100%) 
 }
 footer{
-	position: absolute;
+	position: fixed;
 	right: 0;
 	bottom: 0;
-	left: 0
+	left: 0;
+	margin-top: 50px;
+	z-index: 500;
+}
+.btn { 
+	margin-right: 5px !important; 
+
 }

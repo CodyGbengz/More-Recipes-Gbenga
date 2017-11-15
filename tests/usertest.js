@@ -1,13 +1,10 @@
 import chai from 'chai';
-import should from 'should';
-import dotenv from 'dotenv';
 import chaiHttp from 'chai-http';
 import app from '../server/app';
 import models from '../server/models';
 
+const should = chai.should();
 chai.use(chaiHttp);
-dotenv.load();
-process.env.NODE_ENV = 'test';
 
 models.User.destroy({
   where: {},
@@ -30,8 +27,8 @@ describe('test API routes', () => {
         })
         .end((err, res) => {
           res.status.should.be.eql(201);
-          res.body.data.email.should.eql('test@user.com');
-          res.body.data.username.should.eql('iamanewuser');
+          res.body.status.should.eql('success');
+          res.body.message.should.eql('sign up successful');
           done();
         });
     });
@@ -53,11 +50,11 @@ describe('test API routes', () => {
         .post('/api/users/signup')
         .type('form')
         .send({
-          username: 'iamanewuser',
-          email: 'test@user.com'
+          username: 'iamanewuser1',
+          email: 'test1@user.com'
         })
         .end((err, res) => {
-          res.body.message.should.eql('Please Enter a password with atleast 8 characters');
+          res.body.message.should.eql('Please Enter a password with atleast 6 characters');
           done();
         });
     });
@@ -66,11 +63,11 @@ describe('test API routes', () => {
         .post('/api/users/signup')
         .type('form')
         .send({
-          email: 'test@user.com',
+          email: 'test2@user.com',
           password: 'testpassword'
         })
         .end((err, res) => {
-          res.body.message.should.eql('Enter a username with atleast 8 characters');
+          res.body.message.should.eql('Enter a username with atleast 6 characters');
           done();
         });
     });
@@ -98,7 +95,8 @@ describe('test API routes', () => {
           email: 'test@user.com'
         })
         .end((err, res) => {
-          res.body.message.should.eql('Password field cannot be empty');
+          res.status.should.be.eql(400);
+          res.body.message.should.eql('Please Enter a password with atleast 8 characters');
           done();
         });
     });

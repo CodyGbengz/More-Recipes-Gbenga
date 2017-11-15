@@ -3,11 +3,15 @@ import { Route, IndexRoute } from 'react-router';
 
 import Home from './components/Home';
 import Main from './components/Main';
-import RecipeGrid from './components/RecipeGrid'
+import RecipesIndex from './pages/RecipesIndex'
+import RecipeDetailsShow from './pages/RecipeDetailsShow';
+
+import requireAuth from './utils/requireAuth';
 
 export default (
     <Route path="/" component={Main}>
         <IndexRoute component={Home} />
-        <Route path="recipes" component={RecipeGrid} />
+            <Route path="recipes" component={requireAuth(RecipesIndex)} />
+            <Route path="recipes/:id" component={requireAuth(RecipeDetailsShow)}/>
     </Route>
 )
