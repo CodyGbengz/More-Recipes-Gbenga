@@ -11,7 +11,7 @@ const Header = () =>
           </ul>
           <nav className="white">
             <div className="nav-wrapper">
-              <a href="home.html" className="brand-logo center red-text">More-Recipes</a>
+              <a href="/recipes" className="brand-logo center red-text">More-Recipes</a>
               <a href="" data-activates="mobile-demo" className="button-collapse"><i className="material-icons red-text">menu</i></a>
               <form className="left hide-on-med-and-down">
                 <div className="input-field">
@@ -22,7 +22,7 @@ const Header = () =>
               </form>
               <ul id="navvy" className="right hide-on-med-and-down">
                 <li><a data-target="create" className="tooltipped modal-trigger modal-open modal-action" data-position="bottom" data-delay="100" data-tooltip="Add recipe"><i className="material-icons red-text">add</i></a></li>
-                <li><a href="" className="tooltipped" data-position="bottom" data-delay="100" data-tooltip="Favorites"><i className="material-icons red-text">favorite</i></a></li>
+                <li><a href="/favorites" className="tooltipped" data-position="bottom" data-delay="100" data-tooltip="Favorites"><i className="material-icons red-text">favorite</i></a></li>
                 <li><a href="" className="tooltipped" data-position="bottom" data-delay="100" data-tooltip="My Recipes"><i className="material-icons red-text">book</i></a></li>
                 <li><a className="dropdown-button" href="#!" data-activates="dropdown1" data-beloworigin="true"><i className="material-icons red-text">account_circle</i></a></li>
               </ul>

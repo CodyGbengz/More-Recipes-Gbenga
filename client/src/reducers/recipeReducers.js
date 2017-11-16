@@ -54,9 +54,10 @@ export function recipe(state = { recipe: null, error: null, loading: false} , ac
               ...state, recipe: payload, error: null, loading: false 
         };
         case FETCH_SINGLE_RECIPE_FAILURE:
+        console.log(payload);
           error = payload || { message: payload.message };
           return { 
-              ...state, [recipe]: { recipe: null, error: error, loading: false }
+              ...state, recipe: null, error: error.message, loading: false 
         };
         case 'POST_REVIEW':
         const newState = { ...state };

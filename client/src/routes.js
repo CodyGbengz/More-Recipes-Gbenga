@@ -5,6 +5,7 @@ import Home from './components/Home';
 import Main from './components/Main';
 import RecipesIndex from './pages/RecipesIndex'
 import RecipeDetailsShow from './pages/RecipeDetailsShow';
+import Favorites from './pages/Favorites';
 
 import requireAuth from './utils/requireAuth';
 
@@ -13,5 +14,6 @@ export default (
         <IndexRoute component={Home} />
             <Route path="recipes" component={requireAuth(RecipesIndex)} />
             <Route path="recipes/:id" component={requireAuth(RecipeDetailsShow)}/>
+            <Route path="favorites" component={requireAuth(Favorites)} />
     </Route>
 )
