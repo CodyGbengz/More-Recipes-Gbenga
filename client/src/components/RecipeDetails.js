@@ -35,10 +35,11 @@ class RecipeDetails extends Component {
 	
 	render() {
 		const { recipe, loading, error } =  this.props.recipe;
+	
     	if (loading) { 
 			return <div>LOADING!!</div>;
 		} else if(error) {
-			return <div>{error.message}</div>
+			return <div>{error}</div>
 		} else if (!recipe) {
 			return <span/>
 		}

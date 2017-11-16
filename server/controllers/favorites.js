@@ -18,7 +18,8 @@ export default {
           });
         return res.status(201).json({
           status: 'Success',
-          message: 'Recipe added to favourites successfully'
+          message: 'Recipe added to favourites successfully',
+          recipe
         });
       })
       .catch(error => res.status(400).send({
@@ -30,6 +31,10 @@ export default {
       .findAll({ where: { userId: req.decoded.user.id },
         include: [{
           model: models.Recipe
+        },
+        {
+          model: models.User,
+          attributes: ['username']
         }]
       })
       .then((favourite) => {
