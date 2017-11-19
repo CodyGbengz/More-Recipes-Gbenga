@@ -1,7 +1,9 @@
 import {
     FETCH_RECIPES, FETCH_RECIPES_SUCCESS, FETCH_RECIPES_FAILURE,
     FETCH_SINGLE_RECIPE, FETCH_SINGLE_RECIPE_SUCCESS, FETCH_SINGLE_RECIPE_FAILURE,
-    CREATE_RECIPE, CREATE_RECIPE_SUCCESS, CREATE_RECIPE_FAILURE
+    CREATE_RECIPE, CREATE_RECIPE_SUCCESS, CREATE_RECIPE_FAILURE, 
+    UPVOTE_RECIPE, UPVOTE_RECIPE_FAILURE, UPVOTE_RECIPE_SUCCESS
+
 } from '../actions/recipeActions';
 
 export function recipes (state = { recipes: [], error: null, loading: false }, action) {
@@ -33,6 +35,21 @@ export function recipes (state = { recipes: [], error: null, loading: false }, a
         case CREATE_RECIPE_FAILURE:
         error = payload || {message: payload.message};
             return {...state, recipes: {...state.recipes, error:error, loading: false}
+        }
+        case UPVOTE_RECIPE:
+          return {
+              ...state, recipes: [...state.recipes], loading: true
+        }
+        case UPVOTE_RECIPE_SUCCESS:
+            const newState = { ...state };
+            const i = action.payload;
+            console.log(newState.recipes, action.payload)
+            newState.recipes[i].upvotes = state.recipes[i].upvotes + 1;
+            return newState;
+        case UPVOTE_RECIPE_FAILURE:
+        console.log(action);
+        error = action.error 
+            return {...state, recipes: [...state.recipes], error:error, loading: false
         }
         default:
          return state;

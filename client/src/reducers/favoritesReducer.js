@@ -17,7 +17,7 @@ export function favorites (state = { favorites: [], error: null, loading: false 
              ...state, favorites: favorites, error: null, loading: false  
             };
         case FETCH_FAV_RECIPES_FAILURE:
-          error = favorites || { message : favorites.message };
+          error = favorites;
           return {
               ...state, favorites: [], error: error, loading: false 
           }

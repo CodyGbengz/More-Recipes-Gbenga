@@ -21,11 +21,13 @@ export const POST_REVIEW =  'POST_REVIEW';
 
 //
 export const UPVOTE_RECIPE = 'UPVOTE_RECIPE';
+export const UPVOTE_RECIPE_SUCCESS = 'UPVOTE_RECIPE_SUCCESS';
+export const UPVOTE_RECIPE_FAILURE = 'UPVOTE_RECIPE_FAILURE';
 
-export const upvoteARecipe = (id) => {
+export const upvoteRecipe = (recipeId, i) => {
     const request = axios({
         method: 'put',
-        url: `/api/recipes/${id}/upvote`
+        url: `/api/recipes/${recipeId}/upvote`
     });
     return {
         type: UPVOTE_RECIPE,
@@ -33,6 +35,19 @@ export const upvoteARecipe = (id) => {
     };
 }
 
+export const upvoteRecipeSuccess = (request,i) => {
+    return {
+        type: UPVOTE_RECIPE_SUCCESS,
+        payload: i
+    }
+}
+
+export const upvoteRecipeFailure = error => {
+    return {
+        type: UPVOTE_RECIPE_FAILURE,
+        error
+    }
+}
 
 export const fetchRecipes = () => {
     const request = axios({
@@ -99,7 +114,6 @@ export const createRecipe = recipe => {
 }
 
 export const createRecipeSuccess = newRecipe => {
-    console.log(newRecipe);
     const currentState = store.getState()
     const User = currentState.auth.user.user
     newRecipe.reviews = [];
