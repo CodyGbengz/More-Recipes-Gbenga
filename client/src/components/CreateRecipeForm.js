@@ -68,10 +68,5 @@ RecipeForm.PropTypes = {
     createRecipe: PropTypes.func.isRequired
 } 
 
-const mapStateToProps = (state) => {
-    return {
-        recipesList: state.recipes.recipesList
-    };
-}
 
-export default connect(mapStateToProps, { createRecipe })(RecipeForm);
+export default connect(null, { createRecipe })(RecipeForm);

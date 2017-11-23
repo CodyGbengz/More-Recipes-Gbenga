@@ -19,13 +19,45 @@ export const FETCH_SINGLE_RECIPE_FAILURE = 'FETCH_SINGLE_RECIPE_FAILURE';
 // 
 export const POST_REVIEW =  'POST_REVIEW';
 
-//
+// upvote recipe 
 export const UPVOTE_RECIPE = 'UPVOTE_RECIPE';
+export const UPVOTE_RECIPE_SUCCESS = 'UPVOTE_RECIPE_SUCCESS';
+export const UPVOTE_RECIPE_FAILURE = 'UPVOTE_RECIPE_FAILURE';
 
-export const upvoteARecipe = (id) => {
+// downvote recipe
+export const DOWNVOTE_RECIPE = 'DOWNVOTE_RECIPE';
+export const DOWNVOTE_RECIPE_SUCCESS = 'DOWNVOTE_RECIPE_SUCCESS';
+export const DOWNVOTE_RECIPE_FAILURE = 'DOWNVOTE_RECIPE_FAILURE';
+
+export const downvoteRecipe = recipeId => {
     const request = axios({
         method: 'put',
-        url: `/api/recipes/${id}/upvote`
+        url: `/api/recipes/${recipeId}/downvote`
+    });
+    return {
+        type: DOWNVOTE_RECIPE,
+        payload: request
+    };
+}
+
+export const downvoteRecipeSuccess = (votesCount,recipeIndex) => {
+    return {
+        type: DOWNVOTE_RECIPE_SUCCESS,
+        payload: { recipeIndex, votesCount }
+    }
+}
+
+export const downvoteRecipeFailure = error => {
+    return {
+        type: DOWNVOTE_RECIPE_FAILURE,
+        error
+    }
+}
+
+export const upvoteRecipe = recipeId => {
+    const request = axios({
+        method: 'put',
+        url: `/api/recipes/${recipeId}/upvote`
     });
     return {
         type: UPVOTE_RECIPE,
@@ -33,6 +65,19 @@ export const upvoteARecipe = (id) => {
     };
 }
 
+export const upvoteRecipeSuccess = (votes,index) => {
+    return {
+        type: UPVOTE_RECIPE_SUCCESS,
+        payload: { index, votes }
+    }
+}
+
+export const upvoteRecipeFailure = error => {
+    return {
+        type: UPVOTE_RECIPE_FAILURE,
+        error
+    }
+}
 
 export const fetchRecipes = () => {
     const request = axios({
@@ -99,7 +144,6 @@ export const createRecipe = recipe => {
 }
 
 export const createRecipeSuccess = newRecipe => {
-    console.log(newRecipe);
     const currentState = store.getState()
     const User = currentState.auth.user.user
     newRecipe.reviews = [];

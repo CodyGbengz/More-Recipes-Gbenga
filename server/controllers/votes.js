@@ -1,4 +1,6 @@
+import winston from 'winston';
 import models from '../models';
+
 
 export default {
   upvote(req, res) {
@@ -9,6 +11,7 @@ export default {
       defaults: { option: true }
       })
       .spread((voter, created) => {
+        winston.info(voter, created);
         if (created) {
           return models.Recipe
             .findOne({ where: { id: req.params.recipeId } })
@@ -17,13 +20,14 @@ export default {
                 recipe.reload()
                   .then(() => res.status(200).json({
                     status: 'success!',
-                    message: 'Your vote has been recoded',
+                    message: 'Your vote has been recorded',
                     upvotes: recipe.upvotes,
                     downvotes: recipe.downvotes
                   }));
               });
             });
         } else if (!created && voter.option === false) {
+          winston.info(voter, created);
           voter.update({ option: true });
           return models.Recipe
             .findOne({ where: { id: req.params.recipeId } })
@@ -33,7 +37,7 @@ export default {
                   recipe.reload();
                 }).then(() => res.status(200).json({
                   status: 'success',
-                  message: 'Your vote has been record',
+                  message: 'Your vote has been recorded',
                   upvotes: recipe.upvotes,
                   downvotes: recipe.downvotes
                 }));
@@ -58,6 +62,7 @@ export default {
       defaults: { option: false }
       })
       .spread((voter, created) => {
+        winston.info(voter, created);
         if (created) {
           return models.Recipe
             .findOne({ where: { id: req.params.recipeId } })
@@ -72,6 +77,7 @@ export default {
               });
             });
         } else if (!created && voter.option === true) {
+          winston.info(voter, created);
           voter.update({ option: false });
           return models.Recipe
             .findOne({ where: { id: req.params.recipeId } })
@@ -82,8 +88,8 @@ export default {
                 }).then(() => res.status(200).send({
                   status: 'success',
                   message: 'Your vote has been recorded',
-                  upvote: recipe.upvote,
-                  downvote: recipe.downvote
+                  upvotes: recipe.upvotes,
+                  downvotes: recipe.downvotes
                 }));
               });
             });
