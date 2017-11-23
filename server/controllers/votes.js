@@ -63,7 +63,6 @@ export default {
       })
       .spread((voter, created) => {
         winston.info(voter, created);
-        console.log(voter, created);
         if (created) {
           return models.Recipe
             .findOne({ where: { id: req.params.recipeId } })
@@ -89,8 +88,8 @@ export default {
                 }).then(() => res.status(200).send({
                   status: 'success',
                   message: 'Your vote has been recorded',
-                  upvote: recipe.upvote,
-                  downvote: recipe.downvote
+                  upvotes: recipe.upvotes,
+                  downvotes: recipe.downvotes
                 }));
               });
             });

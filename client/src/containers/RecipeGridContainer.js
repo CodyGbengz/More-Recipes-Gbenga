@@ -1,5 +1,7 @@
 import { connect } from 'react-redux';
-import { fetchRecipes, fetchRecipesFailure, fetchRecipesSuccess, upvoteRecipe, upvoteRecipeFailure, upvoteRecipeSuccess } from '../actions/recipeActions';
+import { fetchRecipes, fetchRecipesFailure, fetchRecipesSuccess, 
+    upvoteRecipe, upvoteRecipeFailure, upvoteRecipeSuccess, 
+    downvoteRecipe, downvoteRecipeFailure, downvoteRecipeSuccess } from '../actions/recipeActions';
 import RecipeGrid from '../components/RecipeGrid';
 
 const mapStateToProps = (state) => {
@@ -16,10 +18,14 @@ const mapDispatchToProps = (dispatch) => {
             });
         },
 
-        upvoteRecipe(id, i) {
-            dispatch(upvoteRecipe(id, i)).then((response) => {
-                console.log(response.payload.response);
-                (response.payload.response.data.status === 'success!') ? dispatch(upvoteRecipeSuccess(response.payload.data.message,i)) : dispatch(upvoteRecipeFailure(response.payload.response.data.message));
+        upvoteRecipe(recipeId, index) {
+            dispatch(upvoteRecipe(recipeId)).then((response) => {
+                (!response.error) ? dispatch(upvoteRecipeSuccess(response.payload.data,index)) : dispatch(upvoteRecipeFailure(response.payload.response.data.message));
+            })
+        },
+        downvoteRecipe(recipeId, index) {
+            dispatch(downvoteRecipe(recipeId)).then((response) => {
+                (!response.error) ? dispatch(downvoteRecipeSuccess(response.payload.data,index)) : dispatch(downvoteRecipeFailure(response.payload.response.data.message));
             })
         }
     }

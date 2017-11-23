@@ -5,6 +5,7 @@ class Recipe extends Component {
     super(props);
     this.onHandleClick = this.onHandleClick.bind(this);
     this.onUpvote = this.onUpvote.bind(this);
+    this.onDownvote = this.onDownvote.bind(this);
   }
 
   onHandleClick(e) {
@@ -13,7 +14,11 @@ class Recipe extends Component {
   }
 
   onUpvote(e) {
-    this.props.upvoteRecipe(this.props.recipe.id,this.props.i);
+    this.props.upvoteRecipe(this.props.recipe.id,this.props.index);
+  }
+
+  onDownvote(e) {
+    this.props.downvoteRecipe(this.props.recipe.id,this.props.index);
   }
 
   render() {
@@ -37,7 +42,7 @@ class Recipe extends Component {
             </div>
             <div className="col s12 m12">
               <a onClick={this.onUpvote} className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="upvote"><i className="material-icons left">thumb_up</i>{this.props.recipe.upvotes}</a>
-              <a className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="downvote"><i className="material-icons left">thumb_down</i>{this.props.recipe.downvotes}</a>
+              <a onClick={this.onDownvote} className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="downvote"><i className="material-icons left">thumb_down</i>{this.props.recipe.downvotes}</a>
               <a className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100 " data-tooltip="views"><i className="material-icons left">visibility</i>{this.props.recipe.views}</a>
               <a className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100 " data-tooltip="reviews"><i className="material-icons left">chat</i>{this.props.recipe.reviews.length}</a>
             </div>

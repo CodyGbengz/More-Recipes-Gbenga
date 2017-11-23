@@ -18,16 +18,15 @@ class RecipeGrid extends Component {
       </div>
       )
     }
-    return recipes.map((recipe, i) => {
+    return recipes.map((recipe, index) => {
       return (
-        <Recipe upvoteRecipe={this.props.upvoteRecipe} recipe={recipe} key={i} i={i} />
+        <Recipe downvoteRecipe={ this.props.downvoteRecipe } upvoteRecipe={ this.props.upvoteRecipe } recipe={ recipe}  key={ index } index={ index } />
       );
     });
   }
 
   render() {
     const { recipes, loading, error} = this.props.recipes;
-    console.log(recipes);
     if (loading) {
       return (
       <div>
@@ -37,13 +36,13 @@ class RecipeGrid extends Component {
       )
     }
     if (error) {
-      return <div> {error}</div>
+      return <div> { error }</div>
     }
 
     return (
       <div className=''>
         <div className='row'>
-          {this.renderRecipes(recipes)}
+          { this.renderRecipes(recipes) }
         </div>
       </div>
     )
