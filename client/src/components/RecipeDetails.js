@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Recipe from './Recipe';
 import PostReviewForm from './PostReviewForm';
 
 class RecipeDetails extends Component {
@@ -43,7 +44,7 @@ class RecipeDetails extends Component {
 		} else if (!recipe) {
 			return <span/>
 		}
-		console.log(this.props);
+		
 		return (
 				<div>
 				  <main ref={recipe.id} className="container">
@@ -51,25 +52,7 @@ class RecipeDetails extends Component {
 								<div className="col s12 m12">
 									<h4 className="header">Recipe Details</h4>
 									<div className="col s12 hide-on-large-only">
-										<div className="card">
-											<div className="card-image">
-												<img src="/images/bg2.jpg" alt="recipe owner"/>
-												<span className="card-title black-text"><b>{recipe.title}</b></span>
-												<a className="btn-floating halfway-fab waves-effect waves-light white"><i className="material-icons red-text">favorite_border</i></a>
-											</div>
-											<div className="card-content">
-											<p>{recipe.description}</p>
-											</div>
-											<div className="card-action">
-												<a className="waves-effect grey-text waves-light btn-flat"><i className="material-icons">thumb_up</i>{recipe.upvotes}</a>
-												<a className="waves-effect grey-text waves-light btn-flat"><i className="material-icons">thumb_down</i>{recipe.downvotes}</a>
-												<a className="waves-effect grey-text waves-light btn-flat"><i className="material-icons">visibility</i>{recipe.views}</a>
-												<a className="waves-effect grey-text waves-light btn-flat"><i className="material-icons">chat</i>{recipe.reviews.length}</a>
-												<div className="chip">
-													<a href=""><i className="material-icons">person</i>{recipe.User.username}</a>
-												</div>
-											</div>
-										</div>
+										<Recipe recipe={recipe} />
 									</div>
 									<div className="card horizontal hide-on-med-and-down">
 										<div className="card-image">

@@ -321,7 +321,6 @@ describe('Search recipes', () => {
       .get(`/api/recipes?search=${searchTerm}`)
       .end((err, res) => {
         res.status.should.be.eql(200);
-        res.body.should.be.a('array');
         done();
       });
   });

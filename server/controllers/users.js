@@ -2,7 +2,7 @@ import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 import models from '../models';
 
-const User = models.User;
+const { User } = models;
 
 export default {
   createUser(req, res) {
@@ -13,7 +13,8 @@ export default {
         password: md5(req.body.password)
       })
       .then((user) => {
-        const token = jwt.sign({ user }, process.env.secret, {
+        const { id, username } = user;
+        const token = jwt.sign({ id, username }, process.env.secret, {
           expiresIn: 86400
         });
         res.status(201).json({
@@ -22,25 +23,27 @@ export default {
           token
         });
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   },
 
   loginUser(req, res) {
     return User
-      .findOne({ where:
-        { email: req.body.email,
+      .findOne({
+        where: {
+          email: req.body.email,
           password: md5(req.body.password) } })
       .then((user) => {
         if (!user) {
           return res.status(401).json({
             status: 'fail',
-            message: 'Invalid Username or Password'
+            message: 'Invalid credentials'
           });
         }
-        const token = jwt.sign({ user }, process.env.secret, {
+        const { id, username } = user;
+        const token = jwt.sign({ id, username }, process.env.secret, {
           expiresIn: 86400
         });
         res.status(200).json({
@@ -49,24 +52,9 @@ export default {
           message: 'Sign in successful'
         });
       })
-      .catch(error => res.status(400).json({
-        message: error.message
-      }));
-  },
-  /*
-  fetch(req, res) {
-    return models.User
-      .all({
-        include: [{ all: true
-        }]
-      })
-      .then(user => res.status(200).json({
-        status: 'success',
-        data: user
-      }))
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
-  }, */
+  }
 };

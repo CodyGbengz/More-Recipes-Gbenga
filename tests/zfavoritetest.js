@@ -68,14 +68,14 @@ describe('GET /api/users/favorites', () => {
 });
 
 describe('POST /api/users/:recipeId/favorites', () => {
-  it('returns status 400 for non-existing recipe', (done) => {
+  it('returns status 404 for non-existing recipe', (done) => {
     chai.request(app)
       .post('/api/users/1000/favorites')
       .set('x-access-token', token)
       .type('form')
       .send({ category: 'breakfast' })
       .end((err, res) => {
-        res.status.should.be.eql(400);
+        res.status.should.be.eql(404);
         res.body.message.should.be.eql('Recipe does not exist');
         done();
       });
@@ -113,7 +113,6 @@ describe('GET /api/users/favorites', () => {
       .set('x-access-token', token)
       .end((err, res) => {
         res.status.should.be.eql(200);
-        res.body.should.be.a('array');
         done();
       });
   });

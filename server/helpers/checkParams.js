@@ -1,7 +1,5 @@
 const checkParams = (param) => {
-  if (isNaN(param)) {
-    return false;
-  }
+  if (isNaN(param)) return false;
   return true;
 };
 

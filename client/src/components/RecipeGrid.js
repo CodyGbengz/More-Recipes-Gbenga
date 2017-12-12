@@ -20,7 +20,13 @@ class RecipeGrid extends Component {
     }
     return recipes.map((recipe, index) => {
       return (
-        <Recipe downvoteRecipe={ this.props.downvoteRecipe } upvoteRecipe={ this.props.upvoteRecipe } recipe={ recipe}  key={ index } index={ index } />
+        <Recipe 
+        addFavoriteRecipe = { this.props.addFavoriteRecipe } 
+        downvoteRecipe={ this.props.downvoteRecipe } 
+        upvoteRecipe={ this.props.upvoteRecipe } 
+        recipe={ recipe }  
+        key={ index } 
+        index={ index } />
       );
     });
   }

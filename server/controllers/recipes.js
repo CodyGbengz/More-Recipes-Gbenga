@@ -1,10 +1,12 @@
 import models from '../models';
 
+const { Recipe, Review, User } = models;
+
 export default {
   addRecipe(req, res) {
-    return models.Recipe
+    return Recipe
       .create({
-        userId: req.decoded.user.id,
+        userId: req.decoded.id,
         title: req.body.title,
         description: req.body.description,
         ingredients: req.body.ingredients,
@@ -15,20 +17,21 @@ export default {
         message: 'Recipe created successfully',
         recipe
       }))
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'Fail',
-        error: error.message
+        error: 'An error occured while processing your request'
       }));
   },
 
   fetchUserRecipes(req, res) {
-    return models.Recipe
+    return Recipe
       .findAll({ where: {
-        userId: req.decoded.user.id }
+        userId: req.decoded.id }
       })
       .then((recipes) => {
-        if (!recipes.length) {
-          return res.status(204).json({
+        if (recipes.length <= 0) {
+          return res.status(200).json({
+            status: 'success',
             message: 'You have not created any recipes yet'
           });
         }
@@ -37,27 +40,27 @@ export default {
           data: recipes
         });
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'Fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   },
 
   fetchARecipe(req, res) {
-    return models.Recipe
+    return Recipe
       .findOne({
         where: { id: req.params.recipeId },
         include: [{
-          model: models.Review,
+          model: Review,
           as: 'reviews',
           attributes: ['userId', 'content'],
           include: [{
-            model: models.User,
+            model: User,
             attributes: ['username', 'createdAt']
           }]
         },
         {
-          model: models.User,
+          model: User,
           attributes: ['username', 'createdAt']
         }]
       })
@@ -76,33 +79,33 @@ export default {
           });
         });
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   },
 
   fetchAllRecipes(req, res, next) {
     if (req.query.sort) return next();
-    return models.Recipe
+    return Recipe
       .all({
         include: [{
-          model: models.Review,
+          model: Review,
           as: 'reviews',
           attributes: ['userId', 'content'],
           include: [{
-            model: models.User,
+            model: User,
             attributes: ['username', 'createdAt']
           }]
         },
         {
-          model: models.User,
+          model: User,
           attributes: ['username']
         }],
-        limit: 20
+        limit: 10
       })
       .then((recipes) => {
-        if (!recipes.length) {
+        if (recipes.length <= 0) {
           return res.status(200).json({
             message: 'no recipes found'
           });
@@ -112,17 +115,17 @@ export default {
           data: recipes
         });
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   },
 
   updateARecipe(req, res) {
-    return models.Recipe
+    return Recipe
       .findOne({
         where: {
-          userId: req.decoded.user.id,
+          userId: req.decoded.id,
           id: req.params.recipeId
         }
       })
@@ -144,22 +147,22 @@ export default {
             status: 'success',
             recipe
           }))
-          .catch(error => res.status(400).json({
+          .catch(() => res.status(400).json({
             status: 'fail',
-            message: error.message
+            message: 'An error occured while processing your request'
           }));
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   },
 
   destroyARecipe(req, res) {
-    return models.Recipe
+    return Recipe
       .findOne({
         where: {
-          userId: req.decoded.user.id,
+          userId: req.decoded.id,
           id: req.params.recipeId
         }
       })
@@ -176,21 +179,21 @@ export default {
             status: 'success',
             message: 'Recipe deleted successfully'
           }))
-          .catch(error => res.status(400).json({
+          .catch(() => res.status(400).json({
             status: 'fail',
-            message: error.message
+            message: 'An error occured while processing your request'
           }));
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   },
 
   searchRecipes(req, res, next) {
     if (!req.query.search) return next();
     const queryTerm = req.query.search;
-    return models.Recipe
+    return Recipe
       .findAll({
         where: {
           $or: [{
@@ -209,33 +212,36 @@ export default {
         attributes: ['title', 'ingredients', 'description', 'directions', 'upvotes', 'downvotes', 'views']
       })
       .then((recipes) => {
-        if (!recipes.length) {
+        if (recipes.length <= 0) {
           return res.status(200).json({
+            status: 'fail',
             message: 'No matches found'
           });
         }
-        res.status(200).json(recipes);
+        res.status(200).json({
+          status: 'success',
+          recipes
+        });
       })
-      .catch(error => res.status(400).json({
-        status: 'Fail',
-        message: error.message
+      .catch(() => res.status(400).json({
+        status: 'fail',
+        message: 'An error occured while processing your request'
       }));
   },
 
   fetchTopRecipes(req, res) {
     const sort = req.query.sort;
     const order = req.query.order;
-    return models.Recipe
+    return Recipe
       .findAll({
         attributes: ['title', 'ingredients', 'description', 'directions', 'upvotes', 'downvotes', 'views'],
-        order: [
-          [sort, order]
-        ],
+        order: [[sort, order]],
         limit: 5
       })
       .then(recipes => res.status(200).json(recipes))
-      .catch(error => res.status(400).json({
-        message: error.message
+      .catch(() => res.status(400).json({
+        status: 'fail',
+        message: 'An error occured while processing your request'
       }));
   }
 };

@@ -14,6 +14,10 @@ models.User.destroy({
 
 });
 
+models.Vote.destroy({
+  where: {}
+});
+
 describe('test API routes', () => {
   describe('User sign up route', () => {
     it('POST /api/users/signup creates a new user', (done) => {
@@ -111,7 +115,7 @@ describe('test API routes', () => {
         .end((err, res) => {
           res.status.should.be.eql(401);
           res.body.status.should.be.eql('fail');
-          res.body.message.should.be.eql('Invalid Username or Password');
+          res.body.message.should.be.eql('Invalid credentials');
           done();
         });
     });

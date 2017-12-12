@@ -1,10 +1,12 @@
 import models from '../models';
 
+const { Review } = models;
+
 export default {
   add(req, res) {
-    return models.Review
+    return Review
       .create({
-        userId: req.decoded.user.id,
+        userId: req.decoded.id,
         recipeId: req.params.recipeId,
         content: req.body.content
       })
@@ -13,9 +15,9 @@ export default {
         message: 'Review posted successfully',
         data: review
       }))
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   }
 };

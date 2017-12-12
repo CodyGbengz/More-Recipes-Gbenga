@@ -14,7 +14,6 @@ const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchSingleRecipe: (id) => {
 			dispatch(fetchSingleRecipe(id)).then((response) => {
-			console.log(response);
 				if(response.payload.response && response.payload.response.status !== 200 ) {
 					dispatch(fetchSingleRecipeFailure(response.payload.response.data));
 				} else {

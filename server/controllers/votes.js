@@ -1,19 +1,20 @@
-import winston from 'winston';
+
 import models from '../models';
 
+const { Vote, Recipe } = models;
 
 export default {
   upvote(req, res) {
-    return models.Vote
+    return Vote
       .findOrCreate({ where: {
         recipeId: req.params.recipeId,
-        userId: req.decoded.user.id },
+        userId: req.decoded.id
+      },
       defaults: { option: true }
       })
       .spread((voter, created) => {
-        winston.info(voter, created);
         if (created) {
-          return models.Recipe
+          return Recipe
             .findOne({ where: { id: req.params.recipeId } })
             .then((recipe) => {
               recipe.increment('upvotes').then(() => {
@@ -27,9 +28,8 @@ export default {
               });
             });
         } else if (!created && voter.option === false) {
-          winston.info(voter, created);
           voter.update({ option: true });
-          return models.Recipe
+          return Recipe
             .findOne({ where: { id: req.params.recipeId } })
             .then((recipe) => {
               recipe.increment('upvotes').then(() => {
@@ -49,22 +49,22 @@ export default {
           message: 'User has already upvoted'
         });
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'fail',
-        message: error.message
+        message: 'An error occured while trying to process your request'
       }));
   },
   downvote(req, res) {
-    return models.Vote
+    return Vote
       .findOrCreate({ where: {
-        userId: req.decoded.user.id,
-        recipeId: req.params.recipeId },
+        userId: req.decoded.id,
+        recipeId: req.params.recipeId
+      },
       defaults: { option: false }
       })
       .spread((voter, created) => {
-        winston.info(voter, created);
         if (created) {
-          return models.Recipe
+          return Recipe
             .findOne({ where: { id: req.params.recipeId } })
             .then((recipe) => {
               recipe.increment('downvotes').then(() => {
@@ -77,9 +77,8 @@ export default {
               });
             });
         } else if (!created && voter.option === true) {
-          winston.info(voter, created);
           voter.update({ option: false });
-          return models.Recipe
+          return Recipe
             .findOne({ where: { id: req.params.recipeId } })
             .then((recipe) => {
               recipe.increment('downvotes').then(() => {
@@ -99,8 +98,8 @@ export default {
           message: 'User has already downvoted'
         });
       })
-      .catch(error => res.status(400).json({
-        message: error.message
+      .catch(() => res.status(400).json({
+        message: 'An error occured while trying to process your request'
       }));
   },
 };
