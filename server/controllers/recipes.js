@@ -112,7 +112,7 @@ export default {
         }
         res.status(200).json({
           status: 'success',
-          data: recipes
+          recipes
         });
       })
       .catch(() => res.status(400).json({

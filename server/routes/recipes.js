@@ -10,7 +10,7 @@ const router = express.Router();
 router.post('/api/recipes', auth, validateRecipe.validateFields, controllers.Recipe.addRecipe);
 
 // route for get recipes
-router.get('/api/recipes', controllers.Recipe.searchRecipes, controllers.Recipe.fetchAllRecipes, controllers.Recipe.fetchTopRecipes);
+router.get('/api/recipes', auth, controllers.Recipe.searchRecipes, controllers.Recipe.fetchAllRecipes, controllers.Recipe.fetchTopRecipes);
 
 // route to get a users recipes
 router.get('/api/recipes/users', auth, controllers.Recipe.fetchUserRecipes);
