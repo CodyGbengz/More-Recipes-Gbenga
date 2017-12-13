@@ -115,7 +115,7 @@ describe('test API routes', () => {
         .end((err, res) => {
           res.status.should.be.eql(401);
           res.body.status.should.be.eql('fail');
-          res.body.message.should.be.eql('Invalid credentials');
+          res.body.message.should.be.eql('You have not created an account yet.');
           done();
         });
     });

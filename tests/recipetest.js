@@ -227,7 +227,7 @@ describe('Fetch recipes', () => {
       .get('/api/recipes')
       .end((err, res) => {
         res.status.should.be.eql(200);
-        res.body.data.should.be.a('array');
+        res.body.recipes.should.be.a('array');
         done();
       });
   });

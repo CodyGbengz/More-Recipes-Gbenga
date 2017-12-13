@@ -32,29 +32,28 @@ export default {
   loginUser(req, res) {
     return User
       .findOne({
-        where: {
-          email: req.body.email,
-          password: md5(req.body.password) } })
+        where: { email: req.body.email }
+      })
       .then((user) => {
-        if (!user) {
-          return res.status(401).json({
-            status: 'fail',
-            message: 'Invalid credentials'
+        if (user.password === md5(req.body.password)) {
+          const { id, username } = user;
+          const token = jwt.sign({ id, username }, process.env.secret, {
+            expiresIn: 86400
+          });
+          res.status(200).json({
+            status: 'success',
+            token,
+            message: 'Sign in successful'
           });
         }
-        const { id, username } = user;
-        const token = jwt.sign({ id, username }, process.env.secret, {
-          expiresIn: 86400
-        });
-        res.status(200).json({
-          status: 'success',
-          token,
-          message: 'Sign in successful'
+        return res.status(401).json({
+          status: 'fail',
+          message: 'Invalid login credentials'
         });
       })
-      .catch(() => res.status(400).json({
+      .catch(() => res.status(401).json({
         status: 'fail',
-        message: 'An error occured while processing your request'
+        message: 'You have not created an account yet.'
       }));
   }
 };

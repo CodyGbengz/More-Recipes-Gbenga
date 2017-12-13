@@ -1,13 +1,21 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import winston from 'winston';
+import path from 'path';
 import router from './routes/index';
+
 
 const {
   user, recipe, review, favorite, vote
 } = router;
 const port = process.env.PORT || 8081;
 const app = express();
+
+app.get('/api/docs', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '..', 'build/index.html'));
+});
+
+app.use('/api/docs-assets', express.static(path.resolve(__dirname, '..', 'build')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
