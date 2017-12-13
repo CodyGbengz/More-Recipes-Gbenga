@@ -2,7 +2,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import winston from 'winston';
 import path from 'path';
-import router from './routes/index';
+import router from './routes';
 
 
 const {
@@ -11,6 +11,7 @@ const {
 const port = process.env.PORT || 8081;
 const app = express();
 
+// api documentation
 app.get('/api/docs', (req, res) => {
   res.sendFile(path.resolve(__dirname, '..', 'build/index.html'));
 });

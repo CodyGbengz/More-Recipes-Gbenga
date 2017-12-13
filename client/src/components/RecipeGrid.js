@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Recipe from './Recipe';
+import Recipe from '../containers/RecipeContainer';
 
 class RecipeGrid extends Component {
   componentWillMount() {
@@ -9,8 +9,8 @@ class RecipeGrid extends Component {
   renderRecipes(recipes) {
     if (!recipes) {
       return (
-      <div class="container">
-        <div class="row">
+      <div className="container">
+        <div className="row">
           <div className="col s12 m6 l4 ">
             <h2 className="center-align">No recipes found</h2>
           </div>
@@ -21,9 +21,6 @@ class RecipeGrid extends Component {
     return recipes.map((recipe, index) => {
       return (
         <Recipe 
-        addFavoriteRecipe = { this.props.addFavoriteRecipe } 
-        downvoteRecipe={ this.props.downvoteRecipe } 
-        upvoteRecipe={ this.props.upvoteRecipe } 
         recipe={ recipe }  
         key={ index } 
         index={ index } />

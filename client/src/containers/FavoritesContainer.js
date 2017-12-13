@@ -12,7 +12,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     fetchFavoriteRecipes: () => {
       dispatch(fetchFavoriteRecipes()).then((response) => {
-        !response.error ? dispatch(fetchFavRecipesSuccess(response.payload.data)) : dispatch(fetchFavRecipesFailure(response.payload.response.data.message));
+        !response.error ? dispatch(fetchFavRecipesSuccess(response.payload.data.favourites)) : dispatch(fetchFavRecipesFailure(response.payload.response.data.message));
       });
     }
   }

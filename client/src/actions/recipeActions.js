@@ -29,10 +29,12 @@ export const DOWNVOTE_RECIPE = 'DOWNVOTE_RECIPE';
 export const DOWNVOTE_RECIPE_SUCCESS = 'DOWNVOTE_RECIPE_SUCCESS';
 export const DOWNVOTE_RECIPE_FAILURE = 'DOWNVOTE_RECIPE_FAILURE';
 
+const BASE_URL = '/api/v1/';
+
 export const downvoteRecipe = recipeId => {
   const request = axios({
     method: 'put',
-    url: `/api/recipes/${recipeId}/downvote`
+    url: `${BASE_URL}recipes/${recipeId}/downvote`
   });
   return {
     type: DOWNVOTE_RECIPE,
@@ -57,7 +59,7 @@ export const downvoteRecipeFailure = error => {
 export const upvoteRecipe = recipeId => {
   const request = axios({
     method: 'put',
-    url: `/api/recipes/${recipeId}/upvote`
+    url: `${BASE_URL}recipes/${recipeId}/upvote`
   });
   return {
     type: UPVOTE_RECIPE,
@@ -82,7 +84,7 @@ export const upvoteRecipeFailure = error => {
 export const fetchRecipes = () => {
   const request = axios({
     method: 'get',
-    url: `/api/recipes`
+    url: `${BASE_URL}recipes`
   });
   return {
     type: FETCH_RECIPES,
@@ -107,7 +109,7 @@ export const fetchRecipesFailure = error => {
 export const fetchSingleRecipe = id => {
   const request = axios({
     method: 'get',
-    url: `/api/recipes/${id}`
+    url: `${BASE_URL}recipes/${id}`
   });
   return {
     type: FETCH_SINGLE_RECIPE,
@@ -134,7 +136,7 @@ export const createRecipe = recipe => {
   const request = axios({
     method: 'post',
     data: recipe,
-    url: `/api/recipes`
+    url: `${BASE_URL}recipes`
   });
   return dispatch => {
     return request.then(res => {
@@ -145,7 +147,7 @@ export const createRecipe = recipe => {
 
 export const createRecipeSuccess = newRecipe => {
   const currentState = store.getState()
-  const User = currentState.auth.user.user
+  const User = currentState.auth.user
   newRecipe.reviews = [];
   newRecipe.User = {
     username: User.username
@@ -171,10 +173,10 @@ export const postReview = review => (
 
 export function postReviewAction(id, review) {
   return dispatch => (
-    axios.post(`/api/recipes/${id}/reviews`, { content: review })
+    axios.post(`${BASE_URL}recipes/${id}/reviews`, { content: review })
       .then((res) => {
         const currentState = store.getState();
-        const User = currentState.auth.user.user;
+        const User = currentState.auth.user;
         res.data.data.User = {
           id: User.id,
           username: User.username,

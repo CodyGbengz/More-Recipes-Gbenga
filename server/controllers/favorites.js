@@ -3,6 +3,12 @@ import models from '../models';
 const { Favourite, Recipe, User } = models;
 
 export default {
+  /**
+   * @description adds a recipe to a user's list of favourites
+   * @param {*} req - request object
+   * @param {*} res - response object
+   * @returns {object} response object containing status and message
+   */
   addUserFavorites(req, res) {
     return Favourite
       .findOne({
@@ -35,7 +41,12 @@ export default {
         message: 'An error occured while processing your request'
       }));
   },
-
+  /**
+   * @description gets a user's favourite recipes
+   * @param {*} req - request object
+   * @param {*} res - response object
+   * @returns {object} - response object containing status, message and an array of recipes 
+   */
   fetchUserFavorites(req, res) {
     return Favourite
       .findAll({
@@ -64,11 +75,15 @@ export default {
         message: 'An error occured while processing your request'
       }));
   },
+  /**
+   * @description  Permanently removes a recipe from a user's list of favourites
+   * @param {*} req - request object 
+   * @param {*} res - response object
+   * @returns {object} - response object with status and message
+   */
   deleteUserFavourite(req, res) {
     return Favourite
-      .findOne({ where: {
-        userId: req.decoded.id,
-        recipeId: req.params.recipeId } })
+      .findOne({ where: { recipeId: req.params.recipeId } })
       .then((favourite) => {
         favourite.destroy().then(() => res.status(200).json({
           status: 'Success',
@@ -80,17 +95,21 @@ export default {
         message: 'An error occured while processing your request'
       }));
   },
+  /**
+   * @description adds a favourite recipe to a category
+   * @param {*} req - request object
+   * @param {*} res - response object
+   * @returns {object} - response object with status and message
+   */
   addToCategory(req, res) {
     return Favourite
-      .findOne({ where: {
-        userId: req.decoded.id,
-        recipeId: req.params.recipeId } })
+      .findOne({ where: { recipeId: req.params.recipeId } })
       .then((recipe) => {
         recipe.update({ category: req.body.category || recipe.category })
           .then(() => {
             res.status(200).json({
               status: 'Success',
-              message: 'Recipe add to category'
+              message: 'Recipe added to category'
             });
           });
       })

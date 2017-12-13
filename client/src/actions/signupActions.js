@@ -12,7 +12,8 @@ export function setCurrentUser(user) {
 
 export function userSignupRequest(userData) {
     return dispatch => {
-        return axios.post('/api/users/signup', userData).then(res => {
+        return axios.post('/api/v1/users/signup', userData).then(res => {
+            window.location = '/recipes';
             const token = res.data.token;
             localStorage.setItem('jwtToken', token);
             setAuthToken(jwtDecode(token));

@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 class Recipe extends Component {
   constructor(props) {
     super(props);
-    this.onHandleClick = this.onHandleClick.bind(this);
+    this.HandleClick = this.HandleClick.bind(this);
     this.onUpvote = this.onUpvote.bind(this);
     this.onDownvote = this.onDownvote.bind(this);
     this.handleAddFav = this.handleAddFav.bind(this);
+    console.log(this.props);
   }
 
-  onHandleClick(e) {
+  HandleClick(e) {
     const recipeId = e.target.name;
     window.location = `/recipes/${recipeId}`
   }
@@ -24,7 +26,6 @@ class Recipe extends Component {
   }
 
   handleAddFav(e) {
-    console.log(this.props)
     this.props.addFavoriteRecipe(this.props.recipe.id)
   }
 
@@ -36,15 +37,14 @@ class Recipe extends Component {
           <div className="card-image">
             <img
               name={this.props.recipe.id}
-              onClick={this.onHandleClick}
+              onClick={this.HandleClick}
               src="/images/bg2.jpg"
               alt="props-img" />
-            <span className="card-title">
-              <b>{this.props.recipe.title}</b>
-            </span>
-            <a className="btn-floating halfway-fab waves-effect waves-light white" onClick={this.handleAddFav} ><i className="material-icons red-text">favorite_border</i></a>
+            <a className="btn-floating halfway-fab waves-effect waves-light white" 
+             onClick={this.handleAddFav} ><i className="material-icons red-text">favorite_border</i></a>
           </div>
           <div className="card-content">
+           <Link to="recipes/1"><b>{this.props.recipe.title}</b></Link>
             <p>{this.props.recipe.description}</p>
           </div>
           <div className="card-action">

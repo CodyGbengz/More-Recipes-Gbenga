@@ -12,22 +12,27 @@ export function signInUserSuccess(user) {
         type: SIGNIN_USER_SUCCESS,
         user
     };
-}
+};
 
 export function signInUserFailure(error) {
     return {
         type: SIGNIN_USER_FAILURE,
         payload: error
     };
-}
+};
 export function signInUser(userData) {
     return dispatch => {
-        return axios.post('/api/users/signin', userData).then(res => {
+        return axios.post('/api/v1/users/signin', userData)
+        .then(res => {
             window.location = '/recipes';
             const token = res.data.token;
             localStorage.setItem('jwtToken', token);
             setAuthToken(token);
             dispatch(signInUserSuccess(jwtDecode(token)));
-        });
-    }
-}
+        })
+        .catch(error => {
+            console.log(error.message);
+            dispatch(signInUserFailure(error))
+        })
+    };
+};

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Recipe from './Recipe';
+import Recipe from '../containers/RecipeContainer'
 import PostReviewForm from './PostReviewForm';
 
 class RecipeDetails extends Component {
@@ -10,8 +10,8 @@ class RecipeDetails extends Component {
 	renderReviews(reviews) {
 		if(reviews.length === 0 ) {
 			return (
-				<div class="container">
-					<div class="row">
+				<div className="container">
+					<div className="row">
 						<h4 className="center-align"> No reviews posted yet!</h4>
 					</div>
 				</div>
@@ -36,13 +36,15 @@ class RecipeDetails extends Component {
 	
 	render() {
 		const { recipe, loading, error } =  this.props.recipe;
-	
+		console.log(this.props.recipe);
     	if (loading) { 
 			return <div>LOADING!!</div>;
 		} else if(error) {
 			return <div>{error}</div>
 		} else if (!recipe) {
-			return <span/>
+			return <div>
+				<span>here </span>
+				</div>
 		}
 		
 		return (

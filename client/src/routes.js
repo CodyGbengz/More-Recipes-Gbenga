@@ -10,10 +10,11 @@ import Favorites from './pages/Favorites';
 import requireAuth from './utils/requireAuth';
 
 export default (
+
     <Route path="/" component={Main}>
         <IndexRoute component={Home} />
-            <Route path="recipes" component={requireAuth(RecipesIndex)} />
-            <Route path="recipes/:id" component={requireAuth(RecipeDetailsShow)}/>
-            <Route path="favorites" component={requireAuth(Favorites)} />
+        <Route path="recipes" component={RecipesIndex} />
+        <Route path="recipes/:id" component={RecipeDetailsShow}/>
+        <Route path="favorites" component={requireAuth(Favorites)} />
     </Route>
-)
+);

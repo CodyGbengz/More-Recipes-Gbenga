@@ -10,10 +10,12 @@ export const ADD_FAVORITE_RECIPE = 'ADD_FAVORITE_RECIPE';
 export const ADD_FAVORITE_SUCCESS = 'ADD_FAVORITE_SUCCESS';
 export const ADD_FAVORITE_FAILURE = 'ADD_FAVORITE_FAILURE';
 
+
+
 export const fetchFavoriteRecipes = () => {
   const request = axios({
     method: 'get',
-    url: '/api/users/favorites'
+    url: '/api/v1/users/favorites'
   });
   return {
     type: FETCH_FAVORITE_RECIPES,
@@ -38,10 +40,16 @@ export const fetchFavRecipesFailure = payload => {
 export const addFavoriteRecipe = recipeId => {
   const request = axios({
     method: 'post',
-    url: `/api/users/${recipeId}/favorites`
+    url: `/api/v1/users/${recipeId}/favorites`
   });
-  return dispatch => (request.then(res => dispatch(addFavoriteSuccess(res.data.recipe))));
-}
+  return dispatch => {
+    request.then(res => {
+      console.log(res.data);
+      dispatch(addFavoriteSuccess(res.data.recipe))
+    })
+  }
+};
+
 
 export const addFavoriteSuccess = favorite => {
   return {

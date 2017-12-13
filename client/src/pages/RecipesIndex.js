@@ -1,10 +1,13 @@
 import React, { Component } from 'react';
+import Header from '../components/Header';
 import RecipeGrid from  '../containers/RecipeGridContainer';
-
 class RecipesIndex extends Component {
     render() {
         return (
-            <RecipeGrid />
+            <div>
+                <Header />
+                <RecipeGrid />
+            </div>
         );
     }
 }

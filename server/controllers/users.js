@@ -5,6 +5,12 @@ import models from '../models';
 const { User } = models;
 
 export default {
+  /**
+   * @description Creates a new user in the database
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {object} - Response object containing token, status and message 
+   */
   createUser(req, res) {
     return User
       .create({
@@ -28,7 +34,12 @@ export default {
         message: 'An error occured while processing your request'
       }));
   },
-
+  /**
+ * @description User authentication function
+ * @param {object} req - request object
+ * @param {object} res - response object
+ * @returns {object} Response object containing token, status and message 
+ */
   loginUser(req, res) {
     return User
       .findOne({

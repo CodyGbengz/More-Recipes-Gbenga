@@ -44,8 +44,8 @@ export function recipes(state = { recipes: [], error: null, loading: false }, ac
     case UPVOTE_RECIPE_SUCCESS:
       const newState = { ...state };
       const { index, votes } = action.payload;
-      newState.recipes[index].upvotes = votes.upvotes;
-      newState.recipes[index].downvotes = votes.downvotes;
+      newState.recipes[index].upvotes = votes.recipe.upvotes;
+      newState.recipes[index].downvotes = votes.recipe.downvotes;
       newState.loading = false;
       return newState;
     case UPVOTE_RECIPE_FAILURE:
@@ -61,8 +61,8 @@ export function recipes(state = { recipes: [], error: null, loading: false }, ac
       const newWState = { ...state };
       const { recipeIndex, votesCount } = action.payload;
       newWState.loading = false;
-      newWState.recipes[recipeIndex].downvotes = votesCount.downvotes;
-      newWState.recipes[recipeIndex].upvotes = votesCount.upvotes;
+      newWState.recipes[recipeIndex].downvotes = votesCount.recipe.downvotes;
+      newWState.recipes[recipeIndex].upvotes = votesCount.recipe.upvotes;
       return newWState;
     case DOWNVOTE_RECIPE_FAILURE:
       error = action.error;

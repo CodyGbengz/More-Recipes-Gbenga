@@ -1,13 +1,15 @@
 import { SIGNIN_USER_SUCCESS, SIGNIN_USER, SIGNIN_USER_FAILURE } from '../actions/authAction';
 
-const INITIAL_STATE = { isAuthenticated: false, user: {}};
-
-export default (state = INITIAL_STATE, action) => {
+export default (state = { isAuthenticated: false, user: {}, error: null, loading: false }, action) => {
     let error;
     switch(action.type) {
         case SIGNIN_USER:
             return {
-                ...state, user: null, isAuthenticated: false, error: null, loading: true
+                ...state, 
+                user: null, 
+                isAuthenticated: false, 
+                error: null, 
+                loading: true
             };
         case SIGNIN_USER_SUCCESS:
             return {
@@ -15,8 +17,13 @@ export default (state = INITIAL_STATE, action) => {
                 user: action.user
             };
         case SIGNIN_USER_FAILURE:
+        console.log(action.payload)
             return {
-                ...state, user: null, isAuthenticated: false, error: error, loading: false
+                ...state, 
+                user: null, 
+                isAuthenticated: false, 
+                error: error, 
+                loading: false
             }
         default: return state;
     }

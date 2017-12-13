@@ -3,6 +3,12 @@ import models from '../models';
 const { Review } = models;
 
 export default {
+  /**
+   * @description posts a review on a recipe
+   * @param {*} req - request object
+   * @param {*} res - response object
+   * @returns {object} response object with status, message and review properties
+   */
   add(req, res) {
     return Review
       .create({
