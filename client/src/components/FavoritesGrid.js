@@ -3,7 +3,6 @@ import Header from './Header';
 
 class FavoritesGrid extends Component {
   componentWillMount() {
-      console.log(this.props);
     this.props.fetchFavoriteRecipes();
   }
 

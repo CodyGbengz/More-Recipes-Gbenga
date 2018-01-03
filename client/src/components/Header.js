@@ -24,7 +24,7 @@ const Header = () =>
             <ul id="navvy" className="right hide-on-med-and-down">
               <li><a data-target="create" className="tooltipped modal-trigger modal-open modal-action" data-position="bottom" data-delay="100" data-tooltip="Add recipe"><i className="material-icons red-text">add</i></a></li>
               <li><a href="/favorites" className="tooltipped" data-position="bottom" data-delay="100" data-tooltip="Favorites"><i className="material-icons red-text">favorite</i></a></li>
-              <li><a href="" className="tooltipped" data-position="bottom" data-delay="100" data-tooltip="My Recipes"><i className="material-icons red-text">book</i></a></li>
+              <li><a href="/myrecipes" className="tooltipped" data-position="bottom" data-delay="100" data-tooltip="My Recipes"><i className="material-icons red-text">book</i></a></li>
               <li><a className="dropdown-button" href="#!" data-activates="dropdown1" data-beloworigin="true"><i className="material-icons red-text">account_circle</i></a></li>
             </ul>
           </div>
@@ -37,9 +37,9 @@ const Header = () =>
         <i className="material-icons">close</i>
       </li>
       <li><a data-target="create" className=" modal-trigger modal-open modal-action">Create recipe<i className="material-icons">add</i></a></li>
-      <li><a href="">Favourites<i className="material-icons">favorite</i></a></li>
+      <li><a href="/favorites">Favourites<i className="material-icons">favorite</i></a></li>
       <li><a href="">My Profile<i className="material-icons">account_circle</i></a></li>
-      <li><a href="">My Recipes<i className="material-icons">book</i></a></li>
+      <li><a href="/myrecipes">My Recipes<i className="material-icons">book</i></a></li>
       <li><a href="">Sign out<i className="material-icons">exit_to_app</i></a></li>
     </ul>
   </div>
