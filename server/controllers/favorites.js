@@ -1,88 +1,121 @@
 import models from '../models';
 
+const { Favourite, Recipe, User } = models;
+
 export default {
+  /**
+   * @description adds a recipe to a user's list of favourites
+   * @param {*} req - request object
+   * @param {*} res - response object
+   * @returns {object} response object containing status and message
+   */
   addUserFavorites(req, res) {
-    return models.Recipe
-      .findById(req.params.recipeId)
-      .then((recipe) => {
-        if (!recipe) {
-          return res.status(400).json({
-            message: 'Recipe does not exist'
+    return Favourite
+      .findOne({
+        where: {
+          userId: req.decoded.id,
+          recipeId: req.params.recipeId
+        }
+      }).then((favorite) => {
+        if (favorite) {
+          return res.status(404).json({
+            status: 'Fail',
+            message: 'You have already added this recipe to your favorites'
           });
         }
-        models.Favourite
+        Favourite
           .create({
-            userId: req.decoded.user.id,
+            userId: req.decoded.id,
             recipeId: req.params.recipeId,
             category: req.body.category
-          });
-        return res.status(201).json({
-          status: 'Success',
-          message: 'Recipe added to favourites successfully',
-          recipe
-        });
-      })
-      .catch(error => res.status(400).send({
-        message: error.message
+          }).then(recipe => res.status(201).json({
+            status: 'Success',
+            message: 'Recipe added to favourites successfully',
+            recipe
+          })).catch(() => res.status(400).json({
+            status: 'Fail',
+            message: 'An error occured while processing your request'
+          }));
+      }).catch(() => res.status(400).json({
+        status: 'Fail',
+        message: 'An error occured while processing your request'
       }));
   },
+  /**
+   * @description gets a user's favourite recipes
+   * @param {*} req - request object
+   * @param {*} res - response object
+   * @returns {object} - response object containing status, message and an array of recipes 
+   */
   fetchUserFavorites(req, res) {
-    return models.Favourite
-      .findAll({ where: { userId: req.decoded.user.id },
+    return Favourite
+      .findAll({
+        where: { userId: req.decoded.id },
         include: [{
-          model: models.Recipe
+          model: Recipe
         },
         {
-          model: models.User,
+          model: User,
           attributes: ['username']
         }]
       })
-      .then((favourite) => {
-        if (!favourite.length) {
+      .then((favourites) => {
+        if (favourites.length <= 0) {
           res.status(404).json({
             message: 'Your list of favorite recipes is empty'
           });
         }
-        res.status(200).json(favourite);
+        res.status(200).json({
+          status: 'Success',
+          favourites
+        });
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'Fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   },
+  /**
+   * @description  Permanently removes a recipe from a user's list of favourites
+   * @param {*} req - request object 
+   * @param {*} res - response object
+   * @returns {object} - response object with status and message
+   */
   deleteUserFavourite(req, res) {
-    return models.Favourite
-      .findOne({ where: {
-        userId: req.decoded.user.id,
-        recipeId: req.params.recipeId } })
+    return Favourite
+      .findOne({ where: { recipeId: req.params.recipeId } })
       .then((favourite) => {
         favourite.destroy().then(() => res.status(200).json({
           status: 'Success',
           message: 'Recipe deleted from your favourites successfully'
         }));
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'Fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   },
+  /**
+   * @description adds a favourite recipe to a category
+   * @param {*} req - request object
+   * @param {*} res - response object
+   * @returns {object} - response object with status and message
+   */
   addToCategory(req, res) {
-    return models.Favourite
-      .findOne({ where: {
-        userId: req.decoded.user.id,
-        recipeId: req.params.recipeId } })
+    return Favourite
+      .findOne({ where: { recipeId: req.params.recipeId } })
       .then((recipe) => {
         recipe.update({ category: req.body.category || recipe.category })
           .then(() => {
             res.status(200).json({
               status: 'Success',
-              message: 'Recipe add to category'
+              message: 'Recipe added to category'
             });
           });
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'Fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   }
 };

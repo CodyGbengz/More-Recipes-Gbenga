@@ -14,7 +14,8 @@ const auth = (req, res, next) => {
     if (err) {
       return res.status(500).json({
         status: 'Fail',
-        message: err.message });
+        message: err.message
+      });
     }
     req.decoded = decoded;
     next();

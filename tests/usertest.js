@@ -14,11 +14,15 @@ models.User.destroy({
 
 });
 
+models.Vote.destroy({
+  where: {}
+});
+
 describe('test API routes', () => {
   describe('User sign up route', () => {
-    it('POST /api/users/signup creates a new user', (done) => {
+    it('POST /api/v1/users/signup creates a new user', (done) => {
       chai.request(app)
-        .post('/api/users/signup')
+        .post('/api/v1/users/signup')
         .type('form')
         .send({
           username: 'iamanewuser',
@@ -34,7 +38,7 @@ describe('test API routes', () => {
     });
     it('returns error message when called without an email address', (done) => {
       chai.request(app)
-        .post('/api/users/signup')
+        .post('/api/v1/users/signup')
         .type('form')
         .send({
           username: 'iamanewuser',
@@ -47,7 +51,7 @@ describe('test API routes', () => {
     });
     it('returns error message when called without a password', (done) => {
       chai.request(app)
-        .post('/api/users/signup')
+        .post('/api/v1/users/signup')
         .type('form')
         .send({
           username: 'iamanewuser1',
@@ -60,7 +64,7 @@ describe('test API routes', () => {
     });
     it('returns error message when called without a username', (done) => {
       chai.request(app)
-        .post('/api/users/signup')
+        .post('/api/v1/users/signup')
         .type('form')
         .send({
           email: 'test2@user.com',
@@ -73,7 +77,7 @@ describe('test API routes', () => {
     });
     it('returns 409 error for duplicate email ', (done) => {
       chai.request(app)
-        .post('/api/users/signup')
+        .post('/api/v1/users/signup')
         .type('form')
         .send({
           username: 'newusername',
@@ -89,7 +93,7 @@ describe('test API routes', () => {
   describe('User sign in route', () => {
     it('returns error message when called without a password', (done) => {
       chai.request(app)
-        .post('/api/users/signin')
+        .post('/api/v1/users/signin')
         .type('form')
         .send({
           email: 'test@user.com'
@@ -102,7 +106,7 @@ describe('test API routes', () => {
     });
     it('returns error messagge when called with invalid password or email', (done) => {
       chai.request(app)
-        .post('/api/users/signin')
+        .post('/api/v1/users/signin')
         .type('form')
         .send({
           email: 'test@use.com',
@@ -111,7 +115,7 @@ describe('test API routes', () => {
         .end((err, res) => {
           res.status.should.be.eql(401);
           res.body.status.should.be.eql('fail');
-          res.body.message.should.be.eql('Invalid Username or Password');
+          res.body.message.should.be.eql('You have not created an account yet.');
           done();
         });
     });

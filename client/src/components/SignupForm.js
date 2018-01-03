@@ -21,10 +21,8 @@ class Signup  extends Component {
 
     onSubmit(e) {
         e.preventDefault();
+        console.log(this.props);
         this.props.userSignupRequest(this.state)
-        .then(() => {
-            window.location = '/recipes';
-        });
     }
 
     render() {

@@ -1,10 +1,18 @@
 import models from '../models';
 
+const { Recipe, Review, User } = models;
+
 export default {
+  /**
+   * @description Creates a new recipe
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {object} Response object containing recipe, status and message 
+   */
   addRecipe(req, res) {
-    return models.Recipe
+    return Recipe
       .create({
-        userId: req.decoded.user.id,
+        userId: req.decoded.id,
         title: req.body.title,
         description: req.body.description,
         ingredients: req.body.ingredients,
@@ -15,121 +23,146 @@ export default {
         message: 'Recipe created successfully',
         recipe
       }))
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'Fail',
-        error: error.message
+        message: 'An error occured while processing your request'
       }));
   },
-
+  /**
+   * @description Gets all recipes belonging to a user
+   * @param {object} req - Request object 
+   * @param {object} res - Response object
+   * @returns {object} response object contain status, message and recipes
+   */
   fetchUserRecipes(req, res) {
-    return models.Recipe
+    return Recipe
       .findAll({ where: {
-        userId: req.decoded.user.id }
+        userId: req.decoded.id }
       })
       .then((recipes) => {
-        if (!recipes.length) {
-          return res.status(204).json({
+        if (recipes.length <= 0) {
+          return res.status(200).json({
+            status: 'success',
             message: 'You have not created any recipes yet'
           });
         }
         return res.status(200).json({
           status: 'success',
-          data: recipes
+          message: 'Recipes fetched successfully',
+          recipes
         });
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'Fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   },
-
+  /**
+  * @description Gets a single recipe
+  * @param {object} req - Request object 
+  * @param {object} res - Response object
+  * @returns {object} response object contains status, message and recipe with reviews 
+  */
   fetchARecipe(req, res) {
-    return models.Recipe
+    return Recipe
       .findOne({
         where: { id: req.params.recipeId },
         include: [{
-          model: models.Review,
+          model: Review,
           as: 'reviews',
           attributes: ['userId', 'content'],
           include: [{
-            model: models.User,
+            model: User,
             attributes: ['username', 'createdAt']
           }]
         },
         {
-          model: models.User,
+          model: User,
           attributes: ['username', 'createdAt']
         }]
       })
       .then((recipe) => {
         if (!recipe) {
           return res.status(404).json({
-            message: 'Recipe does not exist'
+            message: 'Recipe does not exist',
+            status: 'success'
           });
         }
         recipe.increment('views').then(() => {
           recipe.reload().then(() => {
             res.status(200).json({
+              message: 'Recipe fetched successfully',
               status: 'success',
-              data: recipe
+              recipe
             });
           });
         });
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   },
-
+  /**
+   * @description Gets all the recipes
+   * @param {*} req - Request object
+   * @param {*} res - Response object
+   * @param {*} next 
+   * @returns {object} containing status, message and an array of recipes
+   */
   fetchAllRecipes(req, res, next) {
     if (req.query.sort) return next();
-    return models.Recipe
+    return Recipe
       .all({
         include: [{
-          model: models.Review,
+          model: Review,
           as: 'reviews',
           attributes: ['userId', 'content'],
           include: [{
-            model: models.User,
+            model: User,
             attributes: ['username', 'createdAt']
           }]
         },
         {
-          model: models.User,
+          model: User,
           attributes: ['username']
         }],
-        limit: 20
+        limit: 10
       })
       .then((recipes) => {
-        if (!recipes.length) {
+        if (recipes.length <= 0) {
           return res.status(200).json({
+            status: 'success',
             message: 'no recipes found'
           });
         }
         res.status(200).json({
+          message: 'Recipes fetched successfully',
           status: 'success',
-          data: recipes
+          recipes
         });
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   },
-
+  /**
+   * @description modifies a single recipe
+   * @param {*} req -  request object
+   * @param {*} res -  response object
+   * @returns {object} - containing status, message and the updated recipe
+   */
   updateARecipe(req, res) {
-    return models.Recipe
+    return Recipe
       .findOne({
-        where: {
-          userId: req.decoded.user.id,
-          id: req.params.recipeId
-        }
+        where: { id: req.params.recipeId }
       })
       .then((recipe) => {
+        // check if recipe exists
         if (!recipe) {
           return res.status(404).json({
-            status: 'fail',
+            status: 'suceess',
             message: 'Recipe not found',
           });
         }
@@ -141,29 +174,33 @@ export default {
             directions: req.body.directions || recipe.directions
           })
           .then(() => res.status(200).json({
+            message: 'Recipe modified successfully',
             status: 'success',
             recipe
           }))
-          .catch(error => res.status(400).json({
+          .catch(() => res.status(400).json({
             status: 'fail',
-            message: error.message
+            message: 'An error occured while processing your request'
           }));
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   },
-
+  /**
+   * @description Deletes a recipe from the database permanently
+   * @param {*} req - request object
+   * @param {*} res - response object
+   * @returns {object} - contain status and message
+   */
   destroyARecipe(req, res) {
-    return models.Recipe
+    return Recipe
       .findOne({
-        where: {
-          userId: req.decoded.user.id,
-          id: req.params.recipeId
-        }
+        where: { id: req.params.recipeId }
       })
       .then((recipe) => {
+        // check that the recipe exists in the database
         if (!recipe) {
           return res.status(404).json({
             status: 'fail',
@@ -176,21 +213,27 @@ export default {
             status: 'success',
             message: 'Recipe deleted successfully'
           }))
-          .catch(error => res.status(400).json({
+          .catch(() => res.status(400).json({
             status: 'fail',
-            message: error.message
+            message: 'An error occured while processing your request'
           }));
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   },
-
+  /**
+   * @description search the database for a recipe matching query string
+   * @param {*} req - request object
+   * @param {*} res - response object
+   * @param {*} next 
+   * @returns {object}  containing status, message and an array of recipes
+   */
   searchRecipes(req, res, next) {
     if (!req.query.search) return next();
     const queryTerm = req.query.search;
-    return models.Recipe
+    return Recipe
       .findAll({
         where: {
           $or: [{
@@ -202,40 +245,52 @@ export default {
             ingredients: {
               $ilike: `%${queryTerm}%`
             }
-          }
-          ]
+          }]
         },
         limit: 10,
         attributes: ['title', 'ingredients', 'description', 'directions', 'upvotes', 'downvotes', 'views']
       })
       .then((recipes) => {
-        if (!recipes.length) {
+        if (recipes.length <= 0) {
           return res.status(200).json({
+            status: 'fail',
             message: 'No matches found'
           });
         }
-        res.status(200).json(recipes);
+        res.status(200).json({
+          message: 'Here are your search results',
+          status: 'success',
+          recipes
+        });
       })
-      .catch(error => res.status(400).json({
-        status: 'Fail',
-        message: error.message
+      .catch(() => res.status(400).json({
+        status: 'fail',
+        message: 'An error occured while processing your request'
       }));
   },
-
+  /**
+   * @description Gets recipes with the most upvotes
+   * @param {*} req - request object
+   * @param {*} res - response object
+   * @returns {object} - containing status,message and recipes in descending order of upvotes
+   */
   fetchTopRecipes(req, res) {
     const sort = req.query.sort;
     const order = req.query.order;
-    return models.Recipe
+    return Recipe
       .findAll({
         attributes: ['title', 'ingredients', 'description', 'directions', 'upvotes', 'downvotes', 'views'],
-        order: [
-          [sort, order]
-        ],
+        order: [[sort, order]],
         limit: 5
       })
-      .then(recipes => res.status(200).json(recipes))
-      .catch(error => res.status(400).json({
-        message: error.message
+      .then(recipes => res.status(200).json({
+        status: 'success',
+        message: 'Recipes fetched successfully',
+        recipes
+      }))
+      .catch(() => res.status(400).json({
+        status: 'fail',
+        message: 'An error occured while processing your request'
       }));
   }
 };

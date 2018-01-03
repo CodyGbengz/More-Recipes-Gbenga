@@ -6,14 +6,14 @@ const should = chai.should();
 let token;
 chai.use(chaiHttp);
 
-describe('POST /api/users/signup', () => {
+describe('POST /api/v1/users/signup', () => {
   it('signs in a registered user', (done) => {
     const testUser = {
       email: 'newtest@user.com',
       password: 'testpassword'
     };
     chai.request(app)
-      .post('/api/users/signin')
+      .post('/api/v1/users/signin')
       .type('form')
       .send(testUser)
       .end((err, res) => {
@@ -26,7 +26,7 @@ describe('POST /api/users/signup', () => {
   });
 });
 
-describe('POST /api/recipes/:recipeId/reviews', () => {
+describe('POST /api/v1/recipes/:recipeId/reviews', () => {
   it('returns status 403 when no token is provided', (done) => {
     const reviewData = {
       userId: 2,
@@ -34,7 +34,7 @@ describe('POST /api/recipes/:recipeId/reviews', () => {
       content: 'A new review'
     };
     chai.request(app)
-      .post('/api/recipes/1/reviews')
+      .post('/api/v1/recipes/1/reviews')
       .type('form')
       .send(reviewData)
       .end((err, res) => {
@@ -50,7 +50,7 @@ describe('POST /api/recipes/:recipeId/reviews', () => {
       content: 'A new review'
     };
     chai.request(app)
-      .post('/api/recipes/1/reviews')
+      .post('/api/v1/recipes/1/reviews')
       .set('x-access-token', token)
       .type('form')
       .send(reviewData)
@@ -68,7 +68,7 @@ describe('POST /api/recipes/:recipeId/reviews', () => {
       recipeId: 1,
     };
     chai.request(app)
-      .post('/api/recipes/1/reviews')
+      .post('/api/v1/recipes/1/reviews')
       .set('x-access-token', token)
       .type('form')
       .send(reviewData)

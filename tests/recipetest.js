@@ -6,10 +6,10 @@ const should = chai.should();
 let token;
 chai.use(chaiHttp);
 
-describe('POST /api/users/signup', () => {
+describe('POST /api/v1/users/signup', () => {
   it('creates a new user', (done) => {
     chai.request(app)
-      .post('/api/users/signup')
+      .post('/api/v1/users/signup')
       .type('form')
       .send({
         username: 'anotheruser',
@@ -25,14 +25,14 @@ describe('POST /api/users/signup', () => {
   });
 });
 
-describe('POST /api/users/signin', () => {
+describe('POST /api/v1/users/signin', () => {
   it('signs in a registered user', (done) => {
     const testUser = {
       email: 'newtest@user.com',
       password: 'testpassword'
     };
     chai.request(app)
-      .post('/api/users/signin')
+      .post('/api/v1/users/signin')
       .type('form')
       .send(testUser)
       .end((err, res) => {
@@ -55,7 +55,7 @@ describe('Creates recipes ', () => {
       directions: 'take a deep breadth, take one to the head',
     };
     chai.request(app)
-      .post('/api/recipes')
+      .post('/api/v1/recipes')
       .type('form')
       .send(testRecipe)
       .end((err, res) => {
@@ -74,7 +74,7 @@ describe('Creates recipes ', () => {
       directions: 'take a deep breadth, take one to the head',
     };
     chai.request(app)
-      .post('/api/recipes')
+      .post('/api/v1/recipes')
       .set('x-access-token', token)
       .type('form')
       .send(testRecipe)
@@ -93,7 +93,7 @@ describe('Creates recipes ', () => {
       directions: 'take a deep breadth, take one to the head',
     };
     chai.request(app)
-      .post('/api/recipes')
+      .post('/api/v1/recipes')
       .set('x-access-token', token)
       .type('form')
       .send(testRecipe)
@@ -112,7 +112,7 @@ describe('Creates recipes ', () => {
       directions: 'take a deep breadth, take one to the head',
     };
     chai.request(app)
-      .post('/api/recipes')
+      .post('/api/v1/recipes')
       .set('x-access-token', token)
       .type('form')
       .send(testRecipe)
@@ -131,7 +131,7 @@ describe('Creates recipes ', () => {
       directions: 'take a deep breadth, take one to the head',
     };
     chai.request(app)
-      .post('/api/recipes')
+      .post('/api/v1/recipes')
       .set('x-access-token', token)
       .type('form')
       .send(testRecipe)
@@ -150,7 +150,7 @@ describe('Creates recipes ', () => {
       ingredients: 'take a deep breadth, take one to the head',
     };
     chai.request(app)
-      .post('/api/recipes')
+      .post('/api/v1/recipes')
       .set('x-access-token', token)
       .type('form')
       .send(testRecipe)
@@ -172,7 +172,7 @@ describe('Update recipe ', () => {
       directions: 'take a deep breadth, take one to the head',
     };
     chai.request(app)
-      .put('/api/recipes/string')
+      .put('/api/v1/recipes/string')
       .set('x-access-token', token)
       .type('form')
       .send(testRecipe)
@@ -190,7 +190,7 @@ describe('Update recipe ', () => {
       directions: 'take a deep breadth, take one to the head',
     };
     chai.request(app)
-      .put('/api/recipes/5')
+      .put('/api/v1/recipes/5')
       .set('x-access-token', token)
       .type('form')
       .send(testRecipe)
@@ -209,7 +209,7 @@ describe('Update recipe ', () => {
       directions: 'take a deep breadth, take one to the head',
     };
     chai.request(app)
-      .put('/api/recipes/1')
+      .put('/api/v1/recipes/1')
       .set('x-access-token', token)
       .type('form')
       .send(testRecipe)
@@ -224,10 +224,10 @@ describe('Update recipe ', () => {
 describe('Fetch recipes', () => {
   it('returns a list of all recipes', (done) => {
     chai.request(app)
-      .get('/api/recipes')
+      .get('/api/v1/recipes')
       .end((err, res) => {
         res.status.should.be.eql(200);
-        res.body.data.should.be.a('array');
+        res.body.recipes.should.be.a('array');
         done();
       });
   });
@@ -236,7 +236,7 @@ describe('Fetch recipes', () => {
 describe('Fetch a user"s recipes', () => {
   it('returns no token provided when no token is passed', (done) => {
     chai.request(app)
-      .get('/api/recipes/users')
+      .get('/api/v1/recipes/users')
       .end((err, res) => {
         res.body.message.should.be.eql('No token provided.');
         done();
@@ -244,10 +244,10 @@ describe('Fetch a user"s recipes', () => {
   });
   it('returns an empty list for a user without recipes', (done) => {
     chai.request(app)
-      .get('/api/recipes/users')
+      .get('/api/v1/recipes/users')
       .set('x-access-token', token)
       .end((err, res) => {
-        res.body.data.length.should.be.eql(1);
+        res.body.recipes.length.should.be.eql(1);
         done();
       });
   });
@@ -257,7 +257,7 @@ describe('Fetch a single recipe"s details', () => {
   it('returns recipe does not exist for a non existing recipe', (done) => {
     const params = 1000;
     chai.request(app)
-      .get(`/api/recipes/${params}`)
+      .get(`/api/v1/recipes/${params}`)
       .set('x-access-token', token)
       .end((err, res) => {
         res.status.should.be.eql(404);
@@ -268,7 +268,7 @@ describe('Fetch a single recipe"s details', () => {
   it('returns Invalid params when called with params that is not a number', (done) => {
     const params = 'string';
     chai.request(app)
-      .get(`/api/recipes/${params}`)
+      .get(`/api/v1/recipes/${params}`)
       .set('x-access-token', token)
       .end((err, res) => {
         res.status.should.be.eql(400);
@@ -279,7 +279,7 @@ describe('Fetch a single recipe"s details', () => {
   it('returns Invalid params when called with params that is not a number', (done) => {
     const params = 'dd';
     chai.request(app)
-      .get(`/api/recipes/${params}`)
+      .get(`/api/v1/recipes/${params}`)
       .set('x-access-token', token)
       .end((err, res) => {
         res.status.should.be.eql(400);
@@ -290,7 +290,7 @@ describe('Fetch a single recipe"s details', () => {
   it('returns status 200', (done) => {
     const params = 1;
     chai.request(app)
-      .get(`/api/recipes/${params}`)
+      .get(`/api/v1/recipes/${params}`)
       .set('x-access-token', token)
       .end((err, res) => {
         res.status.should.be.eql(200);
@@ -301,14 +301,14 @@ describe('Fetch a single recipe"s details', () => {
   it('returns status 200', (done) => {
     const params = 1;
     chai.request(app)
-      .get(`/api/recipes/${params}`)
+      .get(`/api/v1/recipes/${params}`)
       .set('x-access-token', token)
       .end((err, res) => {
         res.status.should.be.eql(200);
         res.body.status.should.be.eql('success');
-        res.body.data.should.be.a('object');
-        res.body.data.should.have.property('title');
-        res.body.data.should.have.property('description');
+        res.body.recipe.should.be.a('object');
+        res.body.recipe.should.have.property('title');
+        res.body.recipe.should.have.property('description');
         done();
       });
   });
@@ -318,17 +318,16 @@ describe('Search recipes', () => {
   it('returns a list of matched recipes', (done) => {
     const searchTerm = 'An updated recipe';
     chai.request(app)
-      .get(`/api/recipes?search=${searchTerm}`)
+      .get(`/api/v1/recipes?search=${searchTerm}`)
       .end((err, res) => {
         res.status.should.be.eql(200);
-        res.body.should.be.a('array');
         done();
       });
   });
   it('returns no matches found when search term does not match any recipe ', (done) => {
     const searchTerm = 'xxxxx';
     chai.request(app)
-      .get(`/api/recipes?search=${searchTerm}`)
+      .get(`/api/v1/recipes?search=${searchTerm}`)
       .end((err, res) => {
         res.status.should.be.eql(200);
         res.body.message.should.be.eql('No matches found');

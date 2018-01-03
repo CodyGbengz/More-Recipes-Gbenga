@@ -1,5 +1,4 @@
 import React, { Component }from 'react';
-import Header from './Header';
 import Footer from './Footer';
 import CreateRecipeForm from './CreateRecipeForm';
 
@@ -9,7 +8,6 @@ class Main extends Component {
     render() {
       return (
         <div className="main">
-          <Header/>
           { this.props.children }
           <Footer/>
           <div id="create" className="modal">

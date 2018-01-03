@@ -3,10 +3,7 @@ import checkEmpty from '../helpers/checkEmpty';
 
 const validateRecipe = {
   validateFields(req, res, next) {
-    const title = req.body.title,
-      description = req.body.description,
-      ingredients = req.body.ingredients,
-      directions = req.body.directions;
+    const { title, description, ingredients, directions } = req.body;
 
     if (checkEmpty(title) || !title) {
       return res.status(400).json({

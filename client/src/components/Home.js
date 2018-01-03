@@ -10,11 +10,10 @@ import Login from './LoginForm';
 import Footer from './Footer';
 class Home extends React.Component {
     render() {
-        console.log(this.props)
         const { userSignupRequest, signInUser } = this.props;
         return (
-            <div>
-                <div className="body-index">
+            <div className="body-index">
+                <div>
                     <main id="top" className="container">
                         <div className="row">
                             <div className="col s11 m8 offset-s1">
@@ -56,4 +55,4 @@ Home.PropTypes = {
 
 
 
-export default connect((state) => { return {} }, { signInUser })(Home);
+export default connect((state) => { return {} }, { userSignupRequest, signInUser })(Home);

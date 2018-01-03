@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Header from './Header';
 
 class FavoritesGrid extends Component {
   componentWillMount() {
@@ -12,14 +13,13 @@ class FavoritesGrid extends Component {
       <div class="container">
         <div class="row">
           <div className="col s12 m6 l4 ">
-            <h2 className="center-align">No recipes found</h2>
+            <h5 className="center-align"><em>No recipes found</em></h5>
           </div>
         </div>
       </div>
       )
     }
     return recipes.map((recipe, i) => {
-      console.log(recipe);
       return (
         <div className="col s12 m6 l4">
         <div className="card">
@@ -57,9 +57,8 @@ class FavoritesGrid extends Component {
     if (loading) {
       return (
       <div>
-        <h1>Recipes</h1>
         <h3>loading...</h3>
-        </div>
+      </div>
       )
     } else if (error) {
       return <div> Error : {error}</div>
@@ -68,7 +67,7 @@ class FavoritesGrid extends Component {
     return (
       <div className='container'>
         <div className='row'>
-        <h3>My Favorite Recipes</h3>
+        <h5>My Favorite Recipes</h5>
           {this.renderRecipes(favorites)}
         </div>
       </div>

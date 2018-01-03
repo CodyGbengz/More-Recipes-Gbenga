@@ -2,9 +2,15 @@ import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 import models from '../models';
 
-const User = models.User;
+const { User } = models;
 
 export default {
+  /**
+   * @description Creates a new user in the database
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {object} - Response object containing token, status and message 
+   */
   createUser(req, res) {
     return User
       .create({
@@ -13,7 +19,8 @@ export default {
         password: md5(req.body.password)
       })
       .then((user) => {
-        const token = jwt.sign({ user }, process.env.secret, {
+        const { id, username } = user;
+        const token = jwt.sign({ id, username }, process.env.secret, {
           expiresIn: 86400
         });
         res.status(201).json({
@@ -22,51 +29,42 @@ export default {
           token
         });
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   },
-
+  /**
+ * @description User authentication function
+ * @param {object} req - request object
+ * @param {object} res - response object
+ * @returns {object} Response object containing token, status and message 
+ */
   loginUser(req, res) {
     return User
-      .findOne({ where:
-        { email: req.body.email,
-          password: md5(req.body.password) } })
+      .findOne({
+        where: { email: req.body.email }
+      })
       .then((user) => {
-        if (!user) {
-          return res.status(401).json({
-            status: 'fail',
-            message: 'Invalid Username or Password'
+        if (user.password === md5(req.body.password)) {
+          const { id, username } = user;
+          const token = jwt.sign({ id, username }, process.env.secret, {
+            expiresIn: 86400
+          });
+          res.status(200).json({
+            status: 'success',
+            token,
+            message: 'Sign in successful'
           });
         }
-        const token = jwt.sign({ user }, process.env.secret, {
-          expiresIn: 86400
-        });
-        res.status(200).json({
-          status: 'success',
-          token,
-          message: 'Sign in successful'
+        return res.status(401).json({
+          status: 'fail',
+          message: 'Invalid login credentials'
         });
       })
-      .catch(error => res.status(400).json({
-        message: error.message
-      }));
-  },
-  /*
-  fetch(req, res) {
-    return models.User
-      .all({
-        include: [{ all: true
-        }]
-      })
-      .then(user => res.status(200).json({
-        status: 'success',
-        data: user
-      }))
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(401).json({
         status: 'fail',
-        message: error.message
+        message: 'You have not created an account yet.'
       }));
-  }, */
+  }
 };

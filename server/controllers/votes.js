@@ -1,19 +1,26 @@
-import winston from 'winston';
+
 import models from '../models';
 
+const { Vote, Recipe } = models;
 
 export default {
-  upvote(req, res) {
-    return models.Vote
+  /**
+   * @description upvotes a recipe
+   * @param {object} req - request object
+   * @param {object} res - response object
+   * @returns {object} returns a response object with properties status, message and recipe
+   */
+  upvoteRecipe(req, res) {
+    return Vote
       .findOrCreate({ where: {
         recipeId: req.params.recipeId,
-        userId: req.decoded.user.id },
+        userId: req.decoded.id
+      },
       defaults: { option: true }
       })
       .spread((voter, created) => {
-        winston.info(voter, created);
         if (created) {
-          return models.Recipe
+          return Recipe
             .findOne({ where: { id: req.params.recipeId } })
             .then((recipe) => {
               recipe.increment('upvotes').then(() => {
@@ -21,27 +28,39 @@ export default {
                   .then(() => res.status(200).json({
                     status: 'success!',
                     message: 'Your vote has been recorded',
-                    upvotes: recipe.upvotes,
-                    downvotes: recipe.downvotes
+                    recipe
                   }));
               });
             });
-        } else if (!created && voter.option === false) {
-          winston.info(voter, created);
+        }
+        if (!created && voter.option === false) {
           voter.update({ option: true });
-          return models.Recipe
+          return Recipe
             .findOne({ where: { id: req.params.recipeId } })
             .then((recipe) => {
               recipe.increment('upvotes').then(() => {
-                recipe.decrement('downvotes').then(() => {
-                  recipe.reload();
-                }).then(() => res.status(200).json({
+                recipe.reload();
+              })
+                .then(() => res.status(200).json({
                   status: 'success',
                   message: 'Your vote has been recorded',
-                  upvotes: recipe.upvotes,
-                  downvotes: recipe.downvotes
+                  recipe
                 }));
-              });
+            });
+        }
+        if (!created && voter.option === true) {
+          voter.update({ option: false });
+          return Recipe
+            .findOne({ where: { id: req.params.recipeId } })
+            .then((recipe) => {
+              recipe.decrement('upvotes').then(() => {
+                recipe.reload();
+              })
+                .then(() => res.status(200).json({
+                  status: 'success',
+                  message: 'Your vote has been recorded',
+                  recipe
+                }));
             });
         }
         return res.status(400).json({
@@ -49,49 +68,68 @@ export default {
           message: 'User has already upvoted'
         });
       })
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'fail',
-        message: error.message
+        message: 'An error occured while trying to process your request'
       }));
   },
-  downvote(req, res) {
-    return models.Vote
+  /**
+   * @description downvotes a recipe 
+   * @param {object} req - request object 
+   * @param {object} res - response object
+   * @returns {object} response object with properties status, message and recipe
+   */
+  downvoteRecipe(req, res) {
+    return Vote
       .findOrCreate({ where: {
-        userId: req.decoded.user.id,
-        recipeId: req.params.recipeId },
+        userId: req.decoded.id,
+        recipeId: req.params.recipeId
+      },
       defaults: { option: false }
       })
       .spread((voter, created) => {
-        winston.info(voter, created);
+        // check if the user has not voted
         if (created) {
-          return models.Recipe
+          return Recipe
             .findOne({ where: { id: req.params.recipeId } })
             .then((recipe) => {
               recipe.increment('downvotes').then(() => {
                 recipe.reload().then(() => res.status(200).send({
                   status: 'success',
                   message: 'Your vote has been recorded',
-                  upvotes: recipe.upvotes,
-                  downvotes: recipe.downvotes
+                  recipe
                 }));
               });
             });
-        } else if (!created && voter.option === true) {
-          winston.info(voter, created);
+        }
+        // check if the user has upvoted already
+        if (!created && voter.option === true) {
           voter.update({ option: false });
-          return models.Recipe
+          return Recipe
             .findOne({ where: { id: req.params.recipeId } })
             .then((recipe) => {
               recipe.increment('downvotes').then(() => {
-                recipe.decrement('upvotes').then(() => {
-                  recipe.reload();
-                }).then(() => res.status(200).send({
+                recipe.reload();
+              }).then(() => res.status(200).send({
+                status: 'success',
+                message: 'Your vote has been recorded',
+                recipe
+              }));
+            });
+        }
+        if (!created && voter.option === false) {
+          voter.update({ option: true });
+          return Recipe
+            .findOne({ where: { id: req.params.recipeId } })
+            .then((recipe) => {
+              recipe.decrement('downvotes').then(() => {
+                recipe.reload();
+              })
+                .then(() => res.status(200).json({
                   status: 'success',
                   message: 'Your vote has been recorded',
-                  upvotes: recipe.upvotes,
-                  downvotes: recipe.downvotes
+                  recipe
                 }));
-              });
             });
         }
         return res.status(400).send({
@@ -99,8 +137,8 @@ export default {
           message: 'User has already downvoted'
         });
       })
-      .catch(error => res.status(400).json({
-        message: error.message
+      .catch(() => res.status(400).json({
+        message: 'An error occured while trying to process your request'
       }));
   },
 };

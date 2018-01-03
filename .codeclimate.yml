@@ -22,6 +22,7 @@ languages:
   JavaScript: true
 exclude_paths:
   - "node_modules/"
-  - "template/*"
+  - "templates/*"
   - "server/routes/"
   - "tests/"
+  

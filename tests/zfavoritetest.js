@@ -6,10 +6,10 @@ const should = chai.should();
 let token;
 chai.use(chaiHttp);
 
-describe('POST /api/users/signup', () => {
+describe('POST /api/v1/users/signup', () => {
   it('creates a new user', (done) => {
     chai.request(app)
-      .post('/api/users/signup')
+      .post('/api/v1/users/signup')
       .type('form')
       .send({
         username: 'anotherusers',
@@ -25,14 +25,14 @@ describe('POST /api/users/signup', () => {
   });
 });
 
-describe('POST /api/users/signin', () => {
+describe('POST /api/v1/users/signin', () => {
   it('signs in a registered user', (done) => {
     const testUser = {
       email: 'newtests@user.com',
       password: 'testpassword'
     };
     chai.request(app)
-      .post('/api/users/signin')
+      .post('/api/v1/users/signin')
       .type('form')
       .send(testUser)
       .end((err, res) => {
@@ -45,10 +45,10 @@ describe('POST /api/users/signin', () => {
   });
 });
 
-describe('GET /api/users/favorites', () => {
+describe('GET /api/v1/users/favorites', () => {
   it('returns 403 when no token is passed', (done) => {
     chai.request(app)
-      .get('/api/users/favorites')
+      .get('/api/v1/users/favorites')
       .end((err, res) => {
         res.status.should.be.eql(403);
         res.body.message.should.be.eql('No token provided.');
@@ -57,7 +57,7 @@ describe('GET /api/users/favorites', () => {
   });
   it('returns 404 when user has not added any favorites', (done) => {
     chai.request(app)
-      .get('/api/users/favorites')
+      .get('/api/v1/users/favorites')
       .set('x-access-token', token)
       .end((err, res) => {
         res.status.should.be.eql(404);
@@ -67,22 +67,22 @@ describe('GET /api/users/favorites', () => {
   });
 });
 
-describe('POST /api/users/:recipeId/favorites', () => {
-  it('returns status 400 for non-existing recipe', (done) => {
+describe('POST /api/v1/users/:recipeId/favorites', () => {
+  it('returns status 404 for non-existing recipe', (done) => {
     chai.request(app)
-      .post('/api/users/1000/favorites')
+      .post('/api/v1/users/1000/favorites')
       .set('x-access-token', token)
       .type('form')
       .send({ category: 'breakfast' })
       .end((err, res) => {
-        res.status.should.be.eql(400);
+        res.status.should.be.eql(404);
         res.body.message.should.be.eql('Recipe does not exist');
         done();
       });
   });
   it('returns status 400 when called with an invalid param', (done) => {
     chai.request(app)
-      .post('/api/users/string/favorites')
+      .post('/api/v1/users/string/favorites')
       .set('x-access-token', token)
       .type('form')
       .send({ category: 'breakfast' })
@@ -94,7 +94,7 @@ describe('POST /api/users/:recipeId/favorites', () => {
   });
   it('adds a recipe to a users favorites', (done) => {
     chai.request(app)
-      .post('/api/users/1/favorites')
+      .post('/api/v1/users/1/favorites')
       .set('x-access-token', token)
       .type('form')
       .send({ category: 'breakfast' })
@@ -106,14 +106,13 @@ describe('POST /api/users/:recipeId/favorites', () => {
   });
 });
 
-describe('GET /api/users/favorites', () => {
+describe('GET /api/v1/users/favorites', () => {
   it('returns 200 when user has favorites', (done) => {
     chai.request(app)
-      .get('/api/users/favorites')
+      .get('/api/v1/users/favorites')
       .set('x-access-token', token)
       .end((err, res) => {
         res.status.should.be.eql(200);
-        res.body.should.be.a('array');
         done();
       });
   });
