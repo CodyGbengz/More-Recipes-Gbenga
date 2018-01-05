@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import Recipe from '../containers/RecipeContainer';
 
 class RecipeGrid extends Component {
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchRecipes();
   }
 
@@ -29,22 +29,25 @@ class RecipeGrid extends Component {
   }
 
   render() {
-    const { recipes, loading, error} = this.props.recipes;
+    console.log(this.props)
+    const recipes = this.props.recipes;
+    /*
     if (loading) {
       return (
       <div>
         <h1>Recipes</h1>
         <h3>loading...</h3>
-        </div>
+      </div>
       )
     }
     if (error) {
       return <div> { error }</div>
     }
-
+*/
     return (
       <div className=''>
         <div className='row'>
+       { console.log(recipes,'here')}
           { this.renderRecipes(recipes) }
         </div>
       </div>

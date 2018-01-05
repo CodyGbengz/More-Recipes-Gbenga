@@ -23,9 +23,9 @@ export default {
         message: 'Recipe created successfully',
         recipe
       }))
-      .catch(() => res.status(400).json({
+      .catch(error => res.status(400).json({
         status: 'Fail',
-        message: 'An error occured while processing your request'
+        message: error.message
       }));
   },
   /**
@@ -36,8 +36,21 @@ export default {
    */
   fetchUserRecipes(req, res) {
     return Recipe
-      .findAll({ where: {
-        userId: req.decoded.id }
+      .findAll({
+        where: { userId: req.decoded.id },
+        include: [{
+          model: Review,
+          as: 'reviews',
+          attributes: ['userId', 'content'],
+          include: [{
+            model: User,
+            attributes: ['username', 'createdAt']
+          }]
+        },
+        {
+          model: User,
+          attributes: ['username']
+        }]
       })
       .then((recipes) => {
         if (recipes.length <= 0) {

@@ -6,7 +6,6 @@ import {
 export default function favorites(state = { favorites: [], error: null, loading: false }, action) {
   let error;
   const { type, favorites } = action;
-  console.log(action);
   switch (type) {
     case FETCH_FAVORITE_RECIPES:
       return {

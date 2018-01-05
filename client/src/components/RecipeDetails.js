@@ -3,9 +3,9 @@ import Recipe from '../containers/RecipeContainer'
 import PostReviewForm from './PostReviewForm';
 
 class RecipeDetails extends Component {
-	componentDidMount() {
+	componentWillMount() {
 		this.props.fetchSingleRecipe(this.props.id);
-	}
+	};
 
 	renderReviews(reviews) {
 		if(reviews.length === 0 ) {
@@ -15,7 +15,8 @@ class RecipeDetails extends Component {
 						<h4 className="center-align"> No reviews posted yet!</h4>
 					</div>
 				</div>
-				)};
+				)
+			};
 		return reviews.map((review, i) => {
 			return (
 				<div key={i} className="col s12 m4">
@@ -35,13 +36,15 @@ class RecipeDetails extends Component {
 	}
 	
 	render() {
-		const { recipe, loading, error } =  this.props.recipe;
+		const { recipe } =  this.props.recipe;
 		console.log(this.props.recipe);
+		/*
     	if (loading) { 
 			return <div>LOADING!!</div>;
 		} else if(error) {
 			return <div>{error}</div>
-		} else if (!recipe) {
+		} else */
+		if (!recipe) {
 			return <div>
 				<span>here </span>
 				</div>

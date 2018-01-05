@@ -7,85 +7,79 @@ import {
 
 } from '../actions/recipeActions';
 
-export function recipes(state = { recipes: [], error: null, loading: false }, action) {
+export function recipes(state = [], action) {
   let error;
   const { type, payload } = action;
   switch (type) {
     case FETCH_RECIPES:
-      return {
-        ...state, recipes: [], error: null, loading: true
-      };
+      return [ ...state ];
     case FETCH_RECIPES_SUCCESS:
-      return {
-        ...state, recipes: payload, error: null, loading: false
-      };
+      return [ 
+        ...state,
+        ...payload 
+      ];
     case FETCH_RECIPES_FAILURE:
-      error = payload || { message: payload.message };
-      return {
-        ...state, recipes: [], error: error, loading: false
-      };
+     // error = payload || { message: payload.message };
+      return state ;
     case CREATE_RECIPE:
-      return {
-        ...state, recipes: { ...state.recipes, loading: true }
-      };
+      return [ ...state ];
     case CREATE_RECIPE_SUCCESS:
-      return {
-        ...state, recipes: state.recipes.concat(payload), error: null, loading: false
-      };
+      return [
+        payload,
+        ...state
+      ];
     case CREATE_RECIPE_FAILURE:
-      error = payload || { message: payload.message };
-      return {
-        ...state, recipes: { ...state.recipes, error: error, loading: false }
-      };
+     // error = payload || { message: payload.message };
+      return [ ...state ];
     case UPVOTE_RECIPE:
-      return {
-        ...state, recipes: [...state.recipes], loading: true
-      };
+      return [...state ];
     case UPVOTE_RECIPE_SUCCESS:
-      const newState = { ...state };
       const { index, votes } = action.payload;
-      newState.recipes[index].upvotes = votes.recipe.upvotes;
-      newState.recipes[index].downvotes = votes.recipe.downvotes;
-      newState.loading = false;
-      return newState;
+      return [
+        ...state.slice(0,index), // before the one we are updating
+        { ...state[index], 
+          upvotes: votes.recipe.upvotes,
+          downvotes: votes.recipe.downvotes 
+        },
+        ...state.slice(index + 1), // after the one we are updating
+      ]
     case UPVOTE_RECIPE_FAILURE:
       error = action.error;
-      return {
-        ...state, recipes: [...state.recipes], error: error, loading: false
-      };
+      return [ ...state ];
     case DOWNVOTE_RECIPE:
-      return {
-        ...state, recipes: [...state.recipes], loading: true
-      };
+      return [ ...state ];
     case DOWNVOTE_RECIPE_SUCCESS:
-      const newWState = { ...state };
       const { recipeIndex, votesCount } = action.payload;
-      newWState.loading = false;
-      newWState.recipes[recipeIndex].downvotes = votesCount.recipe.downvotes;
-      newWState.recipes[recipeIndex].upvotes = votesCount.recipe.upvotes;
-      return newWState;
+      return [
+        ...state.slice(0,recipeIndex), // before the one we are updating
+        { ...state[recipeIndex], 
+          upvotes: votesCount.recipe.upvotes,
+          downvotes: votesCount.recipe.downvotes },
+        ...state.slice(recipeIndex + 1), // after the one we are updating
+      ];
     case DOWNVOTE_RECIPE_FAILURE:
       error = action.error;
-      return {
-        ...state, recipes: [...state.recipes], error: error, loading: false
-      };
+      return [
+        ...state, 
+           error
+      ];
     default:
       return state;
   }
 }
 
 
-export function recipe(state = { recipe: null, error: null, loading: false }, action) {
+export function recipe(state = { }, action) {
   let error;
   const { type, payload } = action;
+  console.log(action);
   switch (type) {
     case FETCH_SINGLE_RECIPE:
-      return {
-        ...state, recipe: {}, error: null, loading: true
-      };
+      return { ...state };
     case FETCH_SINGLE_RECIPE_SUCCESS:
       return {
-        ...state, recipe: payload, error: null, loading: false
+        ...state,
+        ...payload
       };
     case FETCH_SINGLE_RECIPE_FAILURE:
       error = payload || { message: payload.message };
