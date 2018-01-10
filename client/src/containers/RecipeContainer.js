@@ -15,14 +15,7 @@ const mapStateToProps = ( state, ownProps ) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    upvoteRecipe(recipeId, index) {
-      dispatch(upvoteRecipe(recipeId)).then((response) => {
-        (!response.error) ?
-          dispatch(upvoteRecipeSuccess(response.payload.data, index)) :
-          dispatch(upvoteRecipeFailure(response.payload.response.data.message));
-      });
-    },
-
+    
     downvoteRecipe(recipeId, index) {
       dispatch(downvoteRecipe(recipeId)).then((response) => {
         (!response.error) ?

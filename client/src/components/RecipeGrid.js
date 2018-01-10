@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
 import Recipe from '../containers/RecipeContainer';
+import { upvoteRecipe } from '../actions/recipeActions';
 
 class RecipeGrid extends Component {
-  componentWillMount() {
+ /* componentWillMount() {
+    console.log(this.props);
     this.props.fetchRecipes();
+    //this.props.fetchFavoriteRecipes();
   }
-
+*/
   renderRecipes(recipes) {
-    if (!recipes) {
+    if (!recipes || recipes.length <= 0) {
       return (
       <div className="container">
         <div className="row">
           <div className="col s12 m6 l4 ">
-            <h2 className="center-align">No recipes found</h2>
+            <h5 className="center-align"><em>No recipes found</em></h5>
           </div>
         </div>
       </div>
@@ -23,25 +26,29 @@ class RecipeGrid extends Component {
         <Recipe 
         recipe={ recipe }  
         key={ index } 
-        index={ index } />
+        index={ index }
+        upvoteRecipe={ this.props.upvoteRecipe}
+        deleteSingleRecipe={ this.props.deleteSingleRecipe }/>
+        
       );
     });
   }
 
   render() {
-    const { recipes, loading, error} = this.props.recipes;
+    const { recipes }  = this.props;
+    /*
     if (loading) {
       return (
       <div>
         <h1>Recipes</h1>
         <h3>loading...</h3>
-        </div>
+      </div>
       )
     }
     if (error) {
       return <div> { error }</div>
     }
-
+*/
     return (
       <div className=''>
         <div className='row'>

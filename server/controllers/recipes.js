@@ -23,9 +23,9 @@ export default {
         message: 'Recipe created successfully',
         recipe
       }))
-      .catch(() => res.status(400).json({
+      .catch(error => res.status(400).json({
         status: 'Fail',
-        message: 'An error occured while processing your request'
+        message: error.message
       }));
   },
   /**
@@ -36,12 +36,25 @@ export default {
    */
   fetchUserRecipes(req, res) {
     return Recipe
-      .findAll({ where: {
-        userId: req.decoded.id }
+      .findAll({
+        where: { userId: req.decoded.id },
+        include: [{
+          model: Review,
+          as: 'reviews',
+          attributes: ['userId', 'content'],
+          include: [{
+            model: User,
+            attributes: ['username', 'createdAt']
+          }]
+        },
+        {
+          model: User,
+          attributes: ['username']
+        }]
       })
       .then((recipes) => {
         if (recipes.length <= 0) {
-          return res.status(200).json({
+          return res.status(404).json({
             status: 'success',
             message: 'You have not created any recipes yet'
           });
@@ -215,7 +228,7 @@ export default {
           }))
           .catch(() => res.status(400).json({
             status: 'fail',
-            message: 'An error occured while processing your request'
+            message: 'An error hoccured while processing your request'
           }));
       })
       .catch(() => res.status(400).json({
