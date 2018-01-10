@@ -16,6 +16,6 @@ router.post('/api/v1/users/signin',
   validateUser.validateLoginFields,
   controllers.User.loginUser);
 // route for get users
-// router.get('/api/users', controllers.User.fetch);
+// router.get('/api/v1/users', controllers.User.fetch);
 
 export default router;

@@ -7,7 +7,7 @@ class FavoritesGrid extends Component {
   }
 
   renderRecipes(recipes) {
-    if (!recipes) {
+    if (recipes.length <= 0) {
       return (
       <div class="container">
         <div class="row">
@@ -52,8 +52,8 @@ class FavoritesGrid extends Component {
   }
 
   render() {
-    const { favorites, loading, error } = this.props.favorites;
-    if (loading) {
+    const { favorites } = this.props;
+   /* if (loading) {
       return (
       <div>
         <h3>loading...</h3>
@@ -62,6 +62,7 @@ class FavoritesGrid extends Component {
     } else if (error) {
       return <div> Error : {error}</div>
     }
+    */
 
     return (
       <div className='container'>

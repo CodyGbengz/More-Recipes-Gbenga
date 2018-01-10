@@ -15,7 +15,6 @@ export function recipes(state = [], action) {
       return [ ...state ];
     case FETCH_RECIPES_SUCCESS:
       return [ 
-        ...state,
         ...payload 
       ];
     case FETCH_RECIPES_FAILURE:
@@ -38,8 +37,8 @@ export function recipes(state = [], action) {
       return [
         ...state.slice(0,index), // before the one we are updating
         { ...state[index], 
-          upvotes: votes.recipe.upvotes,
-          downvotes: votes.recipe.downvotes 
+          upvotes: votes.upvotes,
+          downvotes: votes.downvotes 
         },
         ...state.slice(index + 1), // after the one we are updating
       ]
@@ -53,8 +52,8 @@ export function recipes(state = [], action) {
       return [
         ...state.slice(0,recipeIndex), // before the one we are updating
         { ...state[recipeIndex], 
-          upvotes: votesCount.recipe.upvotes,
-          downvotes: votesCount.recipe.downvotes },
+          upvotes: votesCount.upvotes,
+          downvotes: votesCount.downvotes },
         ...state.slice(recipeIndex + 1), // after the one we are updating
       ];
     case DOWNVOTE_RECIPE_FAILURE:
@@ -87,9 +86,10 @@ export function recipe(state = { }, action) {
         ...state, recipe: null, error: error.message, loading: false
       };
     case 'POST_REVIEW':
-      const newState = { ...state };
-      newState.recipe.reviews = state.recipe.reviews.concat(payload);
-      return newState;
+      return {
+        ...state,
+        reviews: [payload, ...state.reviews]
+      }
     default:
       return state;
   }

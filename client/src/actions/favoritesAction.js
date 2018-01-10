@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-//Recipes list
+// Recipes list
 export const FETCH_FAVORITE_RECIPES = 'FETCH_FAVORITE_RECIPES';
 export const FETCH_FAV_RECIPES_SUCCESS = 'FETCH_FAV_RECIPES_SUCCESS';
 export const FETCH_FAV_RECIPES_FAILURE = 'FETCH_FAV_RECIPES_FAILURE';
@@ -9,6 +9,11 @@ export const FETCH_FAV_RECIPES_FAILURE = 'FETCH_FAV_RECIPES_FAILURE';
 export const ADD_FAVORITE_RECIPE = 'ADD_FAVORITE_RECIPE';
 export const ADD_FAVORITE_SUCCESS = 'ADD_FAVORITE_SUCCESS';
 export const ADD_FAVORITE_FAILURE = 'ADD_FAVORITE_FAILURE';
+
+// delete from list of favorites
+export const REMOVE_FAVORITE_RECIPE = 'REMOVE_FAVORITE_RECIPE';
+export const REMOVE_FAVORITE_RECIPE_SUCCESS = 'REMOVE_FAVORITE_RECIPE_SUCCESS';
+export const REMOVE_FAVORITE_RECIPE_FAILURE = 'REMOVE_FAVORITE_RECIPE_FAILURE';
 
 
 
@@ -44,17 +49,15 @@ export const addFavoriteRecipe = recipeId => {
   });
   return dispatch => {
     request.then(res => {
-      console.log(res.data);
       dispatch(addFavoriteSuccess(res.data.recipe))
     })
   }
 };
 
-
 export const addFavoriteSuccess = favorite => {
   return {
     type: ADD_FAVORITE_SUCCESS,
-    payload: favorite
+    favorite
   };
 };
 
@@ -63,4 +66,31 @@ export const addFavoriteFailure = error => {
     type: ADD_FAVORITE_FAILURE,
     payload: error
   };
+};
+
+export const removeFavoriteRecipe = ( recipeId, index ) => {
+  console.log(index);
+  const request = axios({
+    method:'delete',
+    url: `/api/v1/users/${recipeId}/favorites`
+  });
+  return dispatch => {
+    request.then(res => {
+      dispatch(removeFavoriteRecipeSuccess(index))
+    })
+  };
+};
+
+export const removeFavoriteRecipeSuccess = index => {
+  return {
+    type: REMOVE_FAVORITE_RECIPE_SUCCESS,
+    index
+  }
+};
+
+export const removeFavoriteRecipeFailure = message => {
+  return {
+    type: REMOVE_FAVORITE_RECIPE_FAILURE,
+    message
+  }
 };

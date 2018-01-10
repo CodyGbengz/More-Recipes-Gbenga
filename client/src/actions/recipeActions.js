@@ -31,14 +31,13 @@ export const DOWNVOTE_RECIPE_FAILURE = 'DOWNVOTE_RECIPE_FAILURE';
 
 const BASE_URL = '/api/v1/';
 
-export const downvoteRecipe = recipeId => {
+export const downvoteRecipe = (recipeId, index) => {
   const request = axios({
     method: 'put',
     url: `${BASE_URL}recipes/${recipeId}/downvote`
   });
-  return {
-    type: DOWNVOTE_RECIPE,
-    payload: request
+  return dispatch => {
+    return request.then(res => dispatch(downvoteRecipeSuccess(res.data.recipe, index)));
   };
 };
 
@@ -56,14 +55,13 @@ export const downvoteRecipeFailure = error => {
   };
 };
 
-export const upvoteRecipe = recipeId => {
+export const upvoteRecipe = (recipeId, index) => {
   const request = axios({
     method: 'put',
     url: `${BASE_URL}recipes/${recipeId}/upvote`
   });
-  return {
-    type: UPVOTE_RECIPE,
-    payload: request
+  return dispatch => {
+    return request.then(res => dispatch(upvoteRecipeSuccess(res.data.recipe, index)));
   };
 };
 

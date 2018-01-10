@@ -10,6 +10,12 @@ export const DELETE_SINGLE_RECIPE = 'DELETE_SINGLE_RECIPE';
 export const DELETE_SINGLE_RECIPE_SUCCESS  = 'DELETE_SINGLE_RECIPE_SUCCESS';
 export const DELETE_SINGLE_RECIPE_FAILURE = 'DELETE_SINGLE_RECIPE_FAILURE';
 
+// create recipe
+ 
+export const CREATE_RECIPE = 'CREATE_RECIPE';
+export const CREATE_RECIPE_SUCCESS = 'CREATE_RECIPE_SUCCESS';
+export const CREATE_RECIPE_FAILURE = 'CREATE_RECIPE_FAILURE'
+
 export const fetchUsersRecipes = () => {
   const request = axios({
     method: 'get',
@@ -35,21 +41,21 @@ export const fetchUsersRecipesFailure = payload => {
   };
 }
 
-export const deleteSingleRecipe = (recipeId) => {
+export const deleteSingleRecipe = (recipeId, index) => {
   const request = axios({
-    method: 'del',
+    method: 'delete',
     url: `/api/v1/recipes/${recipeId}`
   });
-  return {
-    type: DELETE_SINGLE_RECIPE,
-    payload: request
+  return dispatch => {
+    return request.then(res => dispatch(deleteSingleRecipeSuccess(res.data.recipe, index)));
   };
 };
 
-export const deleteSingleRecipeSuccess = recipe => {
+export const deleteSingleRecipeSuccess = (message, index) => {
   return {
     type: DELETE_SINGLE_RECIPE_SUCCESS,
-    payload: recipe
+    message,
+    index
   };
 };
 

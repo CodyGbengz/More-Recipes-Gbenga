@@ -1,11 +1,26 @@
 import React, { Component } from 'react';
+import isEmpty from 'lodash/isEmpty';
 import Recipe from '../containers/RecipeContainer'
 import PostReviewForm from './PostReviewForm';
 
 class RecipeDetails extends Component {
+	constructor() {
+		super();
+		this.state = {
+			recipe: {}
+		}
+	}
 	componentWillMount() {
 		this.props.fetchSingleRecipe(this.props.id);
 	};
+
+	componentWillReceiveProps(nextProps) {
+		if (nextProps.recipe) {
+			this.setState({
+				recipe: nextProps.recipe,
+			})
+		}
+	}
 
 	renderReviews(reviews) {
 		if(reviews.length === 0 ) {
@@ -36,15 +51,15 @@ class RecipeDetails extends Component {
 	}
 	
 	render() {
-		const { recipe } =  this.props.recipe;
-		console.log(this.props.recipe);
+		const { recipe } =  this.state;
+		console.log(recipe.reviews);
 		/*
     	if (loading) { 
 			return <div>LOADING!!</div>;
 		} else if(error) {
 			return <div>{error}</div>
 		} else */
-		if (!recipe) {
+		if (isEmpty(recipe)) {
 			return <div>
 				<span>here </span>
 				</div>

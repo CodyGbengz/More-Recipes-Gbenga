@@ -54,7 +54,7 @@ export default {
       })
       .then((recipes) => {
         if (recipes.length <= 0) {
-          return res.status(200).json({
+          return res.status(404).json({
             status: 'success',
             message: 'You have not created any recipes yet'
           });
@@ -228,7 +228,7 @@ export default {
           }))
           .catch(() => res.status(400).json({
             status: 'fail',
-            message: 'An error occured while processing your request'
+            message: 'An error hoccured while processing your request'
           }));
       })
       .catch(() => res.status(400).json({
