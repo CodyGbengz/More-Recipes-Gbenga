@@ -15,7 +15,7 @@ class FavoriteButtonContainer extends Component {
         };
     };
 
-    componentDidMount = () => {
+    componentDidMount () {
         this.isUserFavorite();
     };
 
@@ -27,7 +27,7 @@ class FavoriteButtonContainer extends Component {
         console.log(this.state.favorites);
     };
     
-    handleFavBtnClick = (event) => {
+    handleFavBtnClick(event) {
         console.log(this.props);
         event.preventDefault();
         this.toggleFavorite();
@@ -39,7 +39,7 @@ class FavoriteButtonContainer extends Component {
         }
     };
 
-    isUserFavorite = () => {
+    isUserFavorite() {
         console.log(this.state.favorites);
         const isFavorite = this.state.favorites.filter(favorite => favorite.recipeId === this.props.recipe.id);
         console.log(isFavorite);
@@ -49,7 +49,7 @@ class FavoriteButtonContainer extends Component {
         return false;
     };
 
-    toggleFavorite =  () => {
+    toggleFavorite () {
         if (this.state.isFavorite) {
             this.setState({ isFavorite: false });
         }

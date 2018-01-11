@@ -9,7 +9,7 @@ class DownvoteButtonContainer extends Component {
         this.handleDownvoteBtnClick = this.handleDownvoteBtnClick.bind(this);
     };
 
-    handleDownvoteBtnClick = (event) => {
+    handleDownvoteBtnClick(event) {
         this.props.downvoteRecipe(this.props.recipe.id, this.props.index);
     };
     
