@@ -121,12 +121,20 @@ export default {
    * @param {*} req - Request object
    * @param {*} res - Response object
    * @param {*} next 
-   * @returns {object} containing status, message and an array of recipes
+   * @returns {object} Response object containing status, message and an array of recipes
    */
   fetchAllRecipes(req, res, next) {
     if (req.query.sort) return next();
+
+    let limit = null;
+    if (parseInt(req.query.limit, 10)) {
+      limit = req.query.limit;
+    }
+    const page = parseInt(req.query.page, 10) || 1;
+    const offset = page !== 1 ? limit * (page - 1) : null;
+
     return Recipe
-      .all({
+      .findAndCountAll({
         include: [{
           model: Review,
           as: 'reviews',
@@ -140,7 +148,9 @@ export default {
           model: User,
           attributes: ['username']
         }],
-        limit: 10
+        offset,
+        limit,
+        order: [['createdAt', 'DESC']]
       })
       .then((recipes) => {
         if (recipes.length <= 0) {
@@ -149,11 +159,16 @@ export default {
             message: 'no recipes found'
           });
         }
-        res.status(200).json({
-          message: 'Recipes fetched successfully',
-          status: 'success',
-          recipes
-        });
+        if (recipes.count > 0) {
+          if (req.query) {
+            return res.status(200).json({
+              message: 'Recipes fetched successfully',
+              status: 'success',
+              count: recipes.count,
+              recipes: recipes.rows
+            });
+          }
+        }
       })
       .catch(() => res.status(400).json({
         status: 'fail',

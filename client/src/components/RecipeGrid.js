@@ -3,12 +3,12 @@ import Recipe from '../containers/RecipeContainer';
 import { upvoteRecipe } from '../actions/recipeActions';
 
 class RecipeGrid extends Component {
- /* componentWillMount() {
+  componentDidMount() {
     console.log(this.props);
-    this.props.fetchRecipes();
+    //this.props.fetchRecipes();
     //this.props.fetchFavoriteRecipes();
   }
-*/
+
   renderRecipes(recipes) {
     if (!recipes || recipes.length <= 0) {
       return (
@@ -27,9 +27,10 @@ class RecipeGrid extends Component {
         recipe={ recipe }  
         key={ index } 
         index={ index }
-        upvoteRecipe={ this.props.upvoteRecipe}
-        deleteSingleRecipe={ this.props.deleteSingleRecipe }/>
-        
+        downvoteRecipe={ this.props.downvoteRecipe }
+        upvoteRecipe={ this.props.upvoteRecipe }
+        deleteSingleRecipe={ this.props.deleteSingleRecipe }
+        editRecipe={ this.props.editRecipe }/>
       );
     });
   }

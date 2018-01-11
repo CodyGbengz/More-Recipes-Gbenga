@@ -1,6 +1,7 @@
 import React, { Component }from 'react';
 import Footer from './Footer';
 import CreateRecipeForm from './CreateRecipeForm';
+import UpdateRecipeForm from './UpdateRecipeForm';
 
 
 
@@ -14,7 +15,7 @@ class Main extends Component {
             <div className="modal-content">
               <h4>Create Recipe</h4>
               <div className="row">
-                <CreateRecipeForm id={this.props.id} />
+                <CreateRecipeForm id={ this.props.id } />
               </div>
             </div>
           </div>
