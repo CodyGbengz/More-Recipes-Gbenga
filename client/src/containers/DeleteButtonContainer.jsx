@@ -9,7 +9,7 @@ class DeleteButtonContainer extends Component {
         this.handleDeleteBtnClick = this.handleDeleteBtnClick.bind(this);
     };
 
-    handleDeleteBtnClick = (event) => {
+    handleDeleteBtnClick(event){
         this.props.deleteSingleRecipe(this.props.recipe.id, this.props.index);
     };
     

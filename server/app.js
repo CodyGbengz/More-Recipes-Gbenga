@@ -2,6 +2,10 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import winston from 'winston';
 import path from 'path';
+import webpack from 'webpack';
+import webpackMiddleware from 'webpack-dev-middleware';
+import webpackHotMiddleware from 'webpack-hot-middleware';
+import webpackConfig from '../webpack.config';
 import router from './routes';
 
 
@@ -18,8 +22,20 @@ app.get('/api/docs', (req, res) => {
 
 app.use('/api/docs-assets', express.static(path.resolve(__dirname, '..', 'build')));
 
+app.use(webpackMiddleware(webpack(webpackConfig), {
+  noInfo: true,
+  publicPath: webpackConfig.output.publicPath
+}));
+app.use(webpackHotMiddleware(webpack(webpackConfig)));
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use(express.static(path.join(__dirname, '/client/public')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, '../client/public/index.html'));
+});
 
 app.use(user);
 app.use(recipe);
