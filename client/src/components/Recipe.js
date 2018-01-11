@@ -4,16 +4,14 @@ import FavoriteButtonContainer from '../containers/FavoriteButtonContainer';
 import UpvoteButtonContainer from '../containers/UpvoteButtonContainer';
 import DownvoteButtonContainer from '../containers/DownvoteButtonContainer';
 import DeleteButtonContainer from '../containers/DeleteButtonContainer';
+import EditButton from './EditButton';
+import UpdateRecipeForm from '../components/CreateRecipeForm';
+
 
 class Recipe extends Component {
-  constructor(props) {
-    super(props);
-   // this.handleUpvote = this.handleUpvote.bind(this);
-    //this.handleDownvote = this.handleDownvote.bind(this);
-    console.log(this.props);
-  };
   render() {
     return (
+      <div>
       <div className="col xs12 s12 m6 l4">
         <div className="card">
           <div className="card-image">
@@ -58,6 +56,13 @@ class Recipe extends Component {
                   index={this.props.index}
                   />
               }
+              {
+                this.props.editRecipe &&
+                <EditButton
+                  recipe={this.props.recipe}
+                  index={this.props.index}
+                  />
+              }
 
                 <a className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100 " data-tooltip="views"><i className="material-icons left">visibility</i>{this.props.recipe.views}</a>
                 <a className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100 " data-tooltip="reviews"><i className="material-icons left">chat</i>{this.props.recipe.reviews.length}</a>
@@ -65,6 +70,15 @@ class Recipe extends Component {
             </div>
           </div>
         </div>
+      </div>
+      <div id="edit" className="modal">
+        <div className="modal-content">
+          <h4>Edit Recipe</h4>
+          <div className="row">
+          <UpdateRecipeForm recipe={this.props.recipe}/>
+          </div>
+        </div>
+      </div>
       </div>
     )
   }

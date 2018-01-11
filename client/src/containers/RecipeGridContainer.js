@@ -29,6 +29,7 @@ class RecipesGridContainer extends Component {
           <RecipeGrid 
             recipes={this.props.recipes}
             upvoteRecipe={this.props.upvoteRecipe}
+            downvoteRecipe={ this.props.downvoteRecipe}
           />
         </div>
       </div>
@@ -62,7 +63,14 @@ const mapDispatchToProps = (dispatch) => {
           dispatch(upvoteRecipeSuccess(response.payload.data, index)) :
           dispatch(upvoteRecipeFailure(response.payload.response.data.message));
       });
-    }
+    },
+    downvoteRecipe(recipeId, index) {
+      dispatch(downvoteRecipe(recipeId)).then((response) => {
+        (!response.error) ?
+          dispatch(downvoteRecipeSuccess(response.payload.data, index)) :
+          dispatch(downvoteRecipeFailure(response.payload.response.data.message));
+      });
+    },
   };
 };
 

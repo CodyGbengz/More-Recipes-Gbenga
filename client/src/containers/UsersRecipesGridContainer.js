@@ -6,25 +6,24 @@ import {
   fetchUsersRecipesSuccess,
   deleteSingleRecipe,
   deleteSingleRecipeSuccess,
-  deleteSingleRecipeFailure
+  deleteSingleRecipeFailure,
+  editRecipe,
+  editRecipeFailure,
+  editRecipeSuccess
  } from '../actions/usersRecipesActions';
 import RecipeGrid from '../components/RecipeGrid';
+import UpdateRecipeForm from '../components/UpdateRecipeForm';
+
 
 class UserRecipesContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.handleUpvote = this.handleUpvote.bind(this);
-  }
   componentWillMount() {
     this.props.fetchRecipes();
+    console.log(this.props)
     //this.props.fetchFavoriteRecipes();
-  }
-
-  handleUpvote(event) {
-    this.props.upvoteRecipe(this.props.recipe.id, this.props.index);
   };
 
   render() {
+    console.log(this.props);
     const { recipes } = this.props;
     return (
      <div className='container'>
@@ -33,8 +32,17 @@ class UserRecipesContainer extends Component {
         <RecipeGrid 
           recipes={ this.props.recipes }
           deleteSingleRecipe={ this.props.deleteSingleRecipe }
+          editRecipe={ this.props.editRecipe }
         />
       </div>
+      <div id="edit" className="modal">
+            <div className="modal-content">
+              <h4>Edit Recipe</h4>
+              <div className="row">
+                <UpdateRecipeForm id={ this.props.id } />
+              </div>
+            </div>
+          </div>
     </div>
     )
 
@@ -62,8 +70,15 @@ const mapDispatchToProps = (dispatch) => {
         dispatch(deleteSingleRecipeSuccess(response.payload.data.message, index)) :
         dispatch(deleteSingleRecipeFailure(response.payload.error))
       }); 
+    },
+    editRecipe(recipe, index) {
+      dispatch(editRecipe(recipe, index)).then((response) => {
+        !response.error ?
+        dispatch(editRecipeSuccess(response.payload.data, index)) :
+        dispatch(editRecipeFailure(response.payload.error))
+      });
     }
-  };
+  }
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(UserRecipesContainer);
