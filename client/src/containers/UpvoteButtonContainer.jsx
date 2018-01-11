@@ -9,7 +9,7 @@ class UpvoteButtonContainer extends Component {
         this.handleUpvoteBtnClick = this.handleUpvoteBtnClick.bind(this);
     };
 
-    handleUpvoteBtnClick = (event) => {
+    handleUpvoteBtnClick (event) {
         this.props.upvoteRecipe(this.props.recipe.id, this.props.index);
     };
     

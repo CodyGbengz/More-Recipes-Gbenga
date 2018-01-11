@@ -6,4 +6,4 @@ coverage/*
 .vscode/*
 templates/*
 node_modules
-client/*
+

@@ -23,9 +23,9 @@ export default {
         message: 'Recipe created successfully',
         recipe
       }))
-      .catch(error => res.status(400).json({
+      .catch(() => res.status(400).json({
         status: 'Fail',
-        message: error.message
+        message: 'An error occured while processing your request'
       }));
   },
   /**
@@ -36,25 +36,12 @@ export default {
    */
   fetchUserRecipes(req, res) {
     return Recipe
-      .findAll({
-        where: { userId: req.decoded.id },
-        include: [{
-          model: Review,
-          as: 'reviews',
-          attributes: ['userId', 'content'],
-          include: [{
-            model: User,
-            attributes: ['username', 'createdAt']
-          }]
-        },
-        {
-          model: User,
-          attributes: ['username']
-        }]
+      .findAll({ where: {
+        userId: req.decoded.id }
       })
       .then((recipes) => {
         if (recipes.length <= 0) {
-          return res.status(404).json({
+          return res.status(200).json({
             status: 'success',
             message: 'You have not created any recipes yet'
           });
@@ -121,20 +108,12 @@ export default {
    * @param {*} req - Request object
    * @param {*} res - Response object
    * @param {*} next 
-   * @returns {object} Response object containing status, message and an array of recipes
+   * @returns {object} containing status, message and an array of recipes
    */
   fetchAllRecipes(req, res, next) {
     if (req.query.sort) return next();
-
-    let limit = null;
-    if (parseInt(req.query.limit, 10)) {
-      limit = req.query.limit;
-    }
-    const page = parseInt(req.query.page, 10) || 1;
-    const offset = page !== 1 ? limit * (page - 1) : null;
-
     return Recipe
-      .findAndCountAll({
+      .all({
         include: [{
           model: Review,
           as: 'reviews',
@@ -148,9 +127,7 @@ export default {
           model: User,
           attributes: ['username']
         }],
-        offset,
-        limit,
-        order: [['createdAt', 'DESC']]
+        limit: 10
       })
       .then((recipes) => {
         if (recipes.length <= 0) {
@@ -159,16 +136,11 @@ export default {
             message: 'no recipes found'
           });
         }
-        if (recipes.count > 0) {
-          if (req.query) {
-            return res.status(200).json({
-              message: 'Recipes fetched successfully',
-              status: 'success',
-              count: recipes.count,
-              recipes: recipes.rows
-            });
-          }
-        }
+        res.status(200).json({
+          message: 'Recipes fetched successfully',
+          status: 'success',
+          recipes
+        });
       })
       .catch(() => res.status(400).json({
         status: 'fail',
@@ -243,7 +215,7 @@ export default {
           }))
           .catch(() => res.status(400).json({
             status: 'fail',
-            message: 'An error hoccured while processing your request'
+            message: 'An error occured while processing your request'
           }));
       })
       .catch(() => res.status(400).json({
