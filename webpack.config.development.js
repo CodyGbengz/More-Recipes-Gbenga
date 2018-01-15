@@ -1,8 +1,8 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const DashboardPlugin = require('webpack-dashboard/plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const DashboardPlugin = require('webpack-dashboard/plugin');
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './client/public/index.html',
