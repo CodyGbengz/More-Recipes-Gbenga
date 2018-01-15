@@ -60,7 +60,7 @@ describe('GET /api/v1/users/favorites', () => {
       .get('/api/v1/users/favorites')
       .set('x-access-token', token)
       .end((err, res) => {
-        res.status.should.be.eql(404);
+        res.status.should.be.eql(200);
         res.body.message.should.be.eql('Your list of favorite recipes is empty');
         done();
       });
