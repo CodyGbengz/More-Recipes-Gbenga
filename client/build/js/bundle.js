@@ -60,7 +60,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "a67301f253e3d2261bb4"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "320faf8348b728b29c83"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -26784,8 +26784,6 @@ var _routes2 = _interopRequireDefault(_routes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 /* eslint-disable no-unused-vars */
-(0, _reactPerfDevtool2.default)();
-
 if (localStorage.jwtToken) {
   (0, _setAuthToken2.default)(localStorage.jwtToken);
   _store2.default.dispatch((0, _authAction.signInUserSuccess)((0, _jwtDecode2.default)(localStorage.jwtToken)));
