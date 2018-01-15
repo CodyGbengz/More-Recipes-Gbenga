@@ -1,6 +1,7 @@
 import path from 'path';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
 import webpack from 'webpack';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+
 
 module.exports = {
   devtool: 'inline-source-map',

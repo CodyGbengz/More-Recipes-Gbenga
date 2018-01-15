@@ -4,12 +4,16 @@
   "description": "A webapp for managing recipes",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --exec babel-node server/app.js",
-    "wp": "webpack-dev-server --hot --history-api-fallback --open --config webpack.config.dev.babel.js ",
-    "watch": "webpack --config webpack.config.js --watch",
+    "start": "babel-node server/app.js",
+    "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node server/app.js",
+    "build:client": "npm run clean:client && webpack -p --config=webpack.config.development.js",
+    "wp": "npm start && webpack-dev-server --hot --history-api-fallback --open --config webpack.config.dev.babel.js --watch",
+    "wb": "webpack-dashboard -- webpack-dev-server --history-api-fallback --inline --progress webpack.config.development.js",
+    "watch": "webpack --config webpack.config.dev.babel.js --watch",
     "test": "NODE_ENV=test && nyc --reporter=html mocha -c --compilers js:babel-register  --timeout 15000 tests/",
     "test_travis": "NODE_ENV=test && nyc _mocha -c --report lcovonly --reporter spec --timeout 15000 tests/",
-    "coverage": "nyc npm test --report lcovonly && cat ./coverage/lcov.info | coveralls"
+    "coverage": "nyc npm test --report lcovonly && cat ./coverage/lcov.info | coveralls",
+    "clean:client": "rimraf client/build"
   },
   "repository": {
     "type": "git",
@@ -45,6 +49,7 @@
     "babel-jest": "20.0.3",
     "babel-loader": "7.1.1",
     "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
     "babel-preset-react-app": "^3.0.2",
     "babel-register": "^6.26.0",
     "babel-runtime": "6.26.0",
@@ -52,6 +57,7 @@
     "case-sensitive-paths-webpack-plugin": "2.1.1",
     "chalk": "1.1.3",
     "clean-webpack-plugin": "^0.1.17",
+    "cross-env": "^5.1.3",
     "css-loader": "0.28.4",
     "dotenv": "4.0.0",
     "eslint": "4.4.1",
@@ -85,6 +91,7 @@
     "react": "^15.6.2",
     "react-dev-utils": "^4.0.1",
     "react-dom": "^15.6.2",
+    "react-perf-devtool": "^3.0.2",
     "react-redux": "^5.0.6",
     "react-router": "^2.5.0",
     "redux": "^3.7.2",
@@ -106,8 +113,11 @@
     "winston": "^2.3.1"
   },
   "devDependencies": {
+    "babel-preset-stage-0": "^6.24.1",
+    "babel-preset-stage-2": "^6.24.1",
     "chai": "^4.1.1",
     "chai-http": "^3.0.0",
+    "copy-webpack-plugin": "^4.3.1",
     "coveralls": "^2.13.1",
     "eslint": "^4.5.0",
     "eslint-config-airbnb-base": "^11.3.2",
@@ -115,7 +125,9 @@
     "extract-text-webpack-plugin": "^3.0.0",
     "mocha": "^3.5.0",
     "nyc": "^11.2.1",
+    "rimraf": "^2.6.2",
     "should": "^12.0.0",
-    "supertest": "^3.0.0"
+    "supertest": "^3.0.0",
+    "webpack-dashboard": "^1.0.2"
   }
 }

@@ -7,6 +7,14 @@
     "mocha": true,
     "browser": true
   },
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true,
+      "jsx": true,
+      "modules": true
+    }
+  },
   "rules": {
     "one-var": 0,
     "one-var-declaration-per-line": 0,
@@ -25,9 +33,9 @@
     }],
     "require-jsdoc": ["error", {
         "require": {
-            "FunctionDeclaration": true,
-            "MethodDefinition": true,
-            "ClassDeclaration": true
+            "FunctionDeclaration": false,
+            "MethodDefinition": false,
+            "ClassDeclaration": false
         }
     }]
   }

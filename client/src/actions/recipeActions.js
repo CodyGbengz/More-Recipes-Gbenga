@@ -1,17 +1,17 @@
 import axios from 'axios';
 import store from '../store';
 
-//Recipes list
+// Recipes list
 export const FETCH_RECIPES = 'FETCH_RECIPES';
 export const FETCH_RECIPES_SUCCESS = 'FETCH_RECIPES_SUCCESS';
 export const FETCH_RECIPES_FAILURE = 'FETCH_RECIPES_FAILURE';
 
-//create a recipe
+// create a recipe
 export const CREATE_RECIPE = 'CREATE_RECIPE';
 export const CREATE_RECIPE_SUCCESS = 'CREATE_RECIPE_SUCCESS';
-export const CREATE_RECIPE_FAILURE = 'CREATE_RECIPE_FAILURE'
+export const CREATE_RECIPE_FAILURE = 'CREATE_RECIPE_FAILURE';
 
-//fetch single recipe
+// fetch single recipe
 export const FETCH_SINGLE_RECIPE = 'FETCH_SINGLE_RECIPE';
 export const FETCH_SINGLE_RECIPE_SUCCESS = 'FETCH_SINGLE_RECIPE_SUCCESS';
 export const FETCH_SINGLE_RECIPE_FAILURE = 'FETCH_SINGLE_RECIPE_FAILURE';
@@ -36,48 +36,36 @@ export const downvoteRecipe = (recipeId, index) => {
     method: 'put',
     url: `${BASE_URL}recipes/${recipeId}/downvote`
   });
-  return dispatch => {
-    return request.then(res => dispatch(downvoteRecipeSuccess(res.data.recipe, index)));
-  };
+  return dispatch => request.then(res => dispatch(downvoteRecipeSuccess(res.data.recipe, index)));
 };
 
-export const downvoteRecipeSuccess = (votesCount, recipeIndex) => {
-  return {
-    type: DOWNVOTE_RECIPE_SUCCESS,
-    payload: { recipeIndex, votesCount }
-  };
-};
+export const downvoteRecipeSuccess = (votesCount, recipeIndex) => ({
+  type: DOWNVOTE_RECIPE_SUCCESS,
+  payload: { recipeIndex, votesCount }
+});
 
-export const downvoteRecipeFailure = error => {
-  return {
-    type: DOWNVOTE_RECIPE_FAILURE,
-    error
-  };
-};
+export const downvoteRecipeFailure = error => ({
+  type: DOWNVOTE_RECIPE_FAILURE,
+  error
+});
 
 export const upvoteRecipe = (recipeId, index) => {
   const request = axios({
     method: 'put',
     url: `${BASE_URL}recipes/${recipeId}/upvote`
   });
-  return dispatch => {
-    return request.then(res => dispatch(upvoteRecipeSuccess(res.data.recipe, index)));
-  };
+  return dispatch => request.then(res => dispatch(upvoteRecipeSuccess(res.data.recipe, index)));
 };
 
-export const upvoteRecipeSuccess = (votes, index) => {
-  return {
-    type: UPVOTE_RECIPE_SUCCESS,
-    payload: { index, votes }
-  };
-};
+export const upvoteRecipeSuccess = (votes, index) => ({
+  type: UPVOTE_RECIPE_SUCCESS,
+  payload: { index, votes }
+});
 
-export const upvoteRecipeFailure = error => {
-  return {
-    type: UPVOTE_RECIPE_FAILURE,
-    error
-  };
-};
+export const upvoteRecipeFailure = error => ({
+  type: UPVOTE_RECIPE_FAILURE,
+  error
+});
 
 export const fetchRecipes = () => {
   const request = axios({
@@ -90,21 +78,17 @@ export const fetchRecipes = () => {
   };
 };
 
-export const fetchRecipesSuccess = recipes => {
-  return {
-    type: FETCH_RECIPES_SUCCESS,
-    payload: recipes
-  };
-};
+export const fetchRecipesSuccess = recipes => ({
+  type: FETCH_RECIPES_SUCCESS,
+  payload: recipes
+});
 
-export const fetchRecipesFailure = error => {
-  return {
-    type: FETCH_RECIPES_FAILURE,
-    payload: error
-  };
-};
+export const fetchRecipesFailure = error => ({
+  type: FETCH_RECIPES_FAILURE,
+  payload: error
+});
 
-export const fetchSingleRecipe = id => {
+export const fetchSingleRecipe = (id) => {
   const request = axios({
     method: 'get',
     url: `${BASE_URL}recipes/${id}`
@@ -115,37 +99,31 @@ export const fetchSingleRecipe = id => {
   };
 };
 
-export const fetchSingleRecipeSuccess = recipe => {
-  return {
-    type: FETCH_SINGLE_RECIPE_SUCCESS,
-    payload: recipe
-  };
-};
+export const fetchSingleRecipeSuccess = recipe => ({
+  type: FETCH_SINGLE_RECIPE_SUCCESS,
+  payload: recipe
+});
 
-export const fetchSingleRecipeFailure = error => {
-  return {
-    type: FETCH_SINGLE_RECIPE_FAILURE,
-    payload: error
-  };
-};
+export const fetchSingleRecipeFailure = error => ({
+  type: FETCH_SINGLE_RECIPE_FAILURE,
+  payload: error
+});
 
 
-export const createRecipe = recipe => {
+export const createRecipe = (recipe) => {
   const request = axios({
     method: 'post',
     data: recipe,
     url: `${BASE_URL}recipes`
   });
-  return dispatch => {
-    return request.then(res => {
-      dispatch(createRecipeSuccess(res.data.recipe))
-    })
-  };
+  return dispatch => request.then((res) => {
+    dispatch(createRecipeSuccess(res.data.recipe));
+  });
 };
 
-export const createRecipeSuccess = newRecipe => {
-  const currentState = store.getState()
-  const User = currentState.auth.user
+export const createRecipeSuccess = (newRecipe) => {
+  const currentState = store.getState();
+  const User = currentState.auth.user;
   newRecipe.reviews = [];
   newRecipe.User = {
     username: User.username
@@ -169,6 +147,12 @@ export const postReview = review => (
     payload: review
   });
 
+/**
+ * 
+ * @param {*} id 
+ * @param {*} review 
+ * @return {object} return value
+ */
 export function postReviewAction(id, review) {
   return dispatch => (
     axios.post(`${BASE_URL}recipes/${id}/reviews`, { content: review })
@@ -182,12 +166,6 @@ export function postReviewAction(id, review) {
         };
         dispatch(postReview(res.data.data));
       })
-  )
+  );
 }
-
-
-
-
-
-
 
