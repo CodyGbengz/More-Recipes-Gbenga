@@ -11,7 +11,7 @@
     "wb": "webpack-dashboard -- webpack-dev-server --history-api-fallback --inline --progress webpack.config.development.js",
     "watch": "webpack --config webpack.config.dev.babel.js --watch",
     "test": "nyc --reporter=html mocha -c --compilers js:babel-register  --timeout 15000 tests/",
-    "test_travis": "NODE_ENV=test && nyc _mocha -c --report lcovonly --reporter spec --timeout 15000 tests/",
+    "test_travis": "nyc _mocha -c --report lcovonly --reporter spec --timeout 15000 tests/",
     "coverage": "nyc npm test --report lcovonly && cat ./coverage/lcov.info | coveralls",
     "clean:client": "rimraf client/build"
   },
