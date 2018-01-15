@@ -1,42 +1,33 @@
 import React, { Component } from 'react';
 import Recipe from '../containers/RecipeContainer';
-import { upvoteRecipe } from '../actions/recipeActions';
 
 class RecipeGrid extends Component {
-  componentDidMount() {
-    console.log(this.props);
-    //this.props.fetchRecipes();
-    //this.props.fetchFavoriteRecipes();
-  }
-
   renderRecipes(recipes) {
     if (!recipes || recipes.length <= 0) {
       return (
-      <div className="container">
-        <div className="row">
-          <div className="col s12 m6 l4 ">
-            <h5 className="center-align"><em>No recipes found</em></h5>
+        <div className="container">
+          <div className="row">
+            <div className="col s12 m6 l4 ">
+              <h5 className="center-align"><em>No recipes found</em></h5>
+            </div>
           </div>
         </div>
-      </div>
-      )
+      );
     }
-    return recipes.map((recipe, index) => {
-      return (
-        <Recipe 
-        recipe={ recipe }  
-        key={ index } 
+    return recipes.map((recipe, index) => (
+      <Recipe
+        recipe={ recipe }
+        key={ index }
         index={ index }
         downvoteRecipe={ this.props.downvoteRecipe }
         upvoteRecipe={ this.props.upvoteRecipe }
         deleteSingleRecipe={ this.props.deleteSingleRecipe }
         editRecipe={ this.props.editRecipe }/>
-      );
-    });
+    ));
   }
 
   render() {
-    const { recipes }  = this.props;
+    const { recipes } = this.props;
     /*
     if (loading) {
       return (
@@ -56,7 +47,7 @@ class RecipeGrid extends Component {
           { this.renderRecipes(recipes) }
         </div>
       </div>
-    )
+    );
   }
 }
 

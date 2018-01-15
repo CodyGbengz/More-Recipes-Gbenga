@@ -30,7 +30,7 @@ class FavoriteButtonContainer extends Component {
     handleFavBtnClick = (event) => {
         console.log(this.props);
         event.preventDefault();
-        this.toggleFavorite();
+       // this.toggleFavorite();
         if (!this.isUserFavorite()) {
             this.props.addFavoriteRecipe(this.props.recipe.id, this.props.index )
         }

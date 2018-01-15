@@ -10,6 +10,7 @@ export default {
    * @returns {object} Response object containing recipe, status and message 
    */
   addRecipe(req, res) {
+    console.log(req.decoded.id);
     return Recipe
       .create({
         userId: req.decoded.id,
@@ -36,8 +37,7 @@ export default {
    */
   fetchUserRecipes(req, res) {
     return Recipe
-      .findAll({
-        where: { userId: req.decoded.id },
+      .all({ where: { userId: req.decoded.id },
         include: [{
           model: Review,
           as: 'reviews',
@@ -50,24 +50,25 @@ export default {
         {
           model: User,
           attributes: ['username']
-        }]
+        }],
+        limit: 10
       })
       .then((recipes) => {
         if (recipes.length <= 0) {
-          return res.status(404).json({
+          return res.status(200).json({
             status: 'success',
             message: 'You have not created any recipes yet'
           });
         }
         return res.status(200).json({
           status: 'success',
-          message: 'Recipes fetched successfully',
+          message: 'Your Recipes fetched successfully',
           recipes
         });
       })
-      .catch(() => res.status(400).json({
+      .catch(error => res.status(400).json({
         status: 'Fail',
-        message: 'An error occured while processing your request'
+        message: error.message
       }));
   },
   /**
@@ -104,7 +105,7 @@ export default {
         recipe.increment('views').then(() => {
           recipe.reload().then(() => {
             res.status(200).json({
-              message: 'Recipe fetched successfully',
+              message: 'single Recipe fetched successfully',
               status: 'success',
               recipe
             });
@@ -121,20 +122,12 @@ export default {
    * @param {*} req - Request object
    * @param {*} res - Response object
    * @param {*} next 
-   * @returns {object} Response object containing status, message and an array of recipes
+   * @returns {object} containing status, message and an array of recipes
    */
   fetchAllRecipes(req, res, next) {
     if (req.query.sort) return next();
-
-    let limit = null;
-    if (parseInt(req.query.limit, 10)) {
-      limit = req.query.limit;
-    }
-    const page = parseInt(req.query.page, 10) || 1;
-    const offset = page !== 1 ? limit * (page - 1) : null;
-
     return Recipe
-      .findAndCountAll({
+      .all({
         include: [{
           model: Review,
           as: 'reviews',
@@ -148,9 +141,7 @@ export default {
           model: User,
           attributes: ['username']
         }],
-        offset,
-        limit,
-        order: [['createdAt', 'DESC']]
+        limit: 10
       })
       .then((recipes) => {
         if (recipes.length <= 0) {
@@ -159,16 +150,11 @@ export default {
             message: 'no recipes found'
           });
         }
-        if (recipes.count > 0) {
-          if (req.query) {
-            return res.status(200).json({
-              message: 'Recipes fetched successfully',
-              status: 'success',
-              count: recipes.count,
-              recipes: recipes.rows
-            });
-          }
-        }
+        res.status(200).json({
+          message: 'all Recipes fetched successfully',
+          status: 'success',
+          recipes
+        });
       })
       .catch(() => res.status(400).json({
         status: 'fail',
@@ -243,7 +229,7 @@ export default {
           }))
           .catch(() => res.status(400).json({
             status: 'fail',
-            message: 'An error hoccured while processing your request'
+            message: 'An error occured while processing your request'
           }));
       })
       .catch(() => res.status(400).json({
@@ -313,7 +299,7 @@ export default {
       })
       .then(recipes => res.status(200).json({
         status: 'success',
-        message: 'Recipes fetched successfully',
+        message: 'top Recipes fetched successfully',
         recipes
       }))
       .catch(() => res.status(400).json({

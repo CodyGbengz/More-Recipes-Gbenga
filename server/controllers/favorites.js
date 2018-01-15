@@ -18,7 +18,7 @@ export default {
         }
       }).then((favorite) => {
         if (favorite) {
-          return res.status(404).json({
+          return res.status(200).json({
             status: 'Fail',
             message: 'You have already added this recipe to your favorites'
           });
@@ -61,7 +61,7 @@ export default {
       })
       .then((favourites) => {
         if (favourites.length <= 0) {
-          res.status(404).json({
+          res.status(200).json({
             message: 'Your list of favorite recipes is empty'
           });
         }

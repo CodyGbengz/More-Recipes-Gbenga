@@ -9,21 +9,20 @@ class FavoritesGrid extends Component {
   renderRecipes(recipes) {
     if (recipes.length <= 0) {
       return (
-      <div class="container">
-        <div class="row">
-          <div className="col s12 m6 l4 ">
-            <h5 className="center-align"><em>No recipes found</em></h5>
+        <div className="container">
+          <div className="row">
+            <div className="col s12 m6 l4 ">
+              <h5 className="center-align"><em>No recipes found</em></h5>
+            </div>
           </div>
         </div>
-      </div>
-      )
+      );
     }
-    return recipes.map((recipe, i) => {
-      return (
-        <div className="col s12 m6 l4">
+    return recipes.map(recipe => (
+      <div key={recipe.Recipe.id} className="col s12 m6 l4">
         <div className="card">
           <div className="card-image">
-            <img name={recipe.Recipe.id} onClick={this.onHandleClick} src="./images/bg2.jpg" alt="props-img" />
+            <img name={recipe.Recipe.id} onClick={this.onHandleClick} src="http://res.cloudinary.com/myresources/image/upload/v1515852046/bg2_pj1yit.jpg" alt="props-img" />
             <span className="card-title">
               <b>{recipe.Recipe.title}</b>
             </span>
@@ -35,25 +34,24 @@ class FavoritesGrid extends Component {
           <div className="card-action">
             <div className="row">
               <div className="col s12 m12">
-                <div className="chip"><img src="./images/avi.jpg" alt="Contact Person" />{recipe.User.username}</div>
+                <div className="chip"><img src="http://res.cloudinary.com/myresources/image/upload/v1515852440/avi_so66tc.jpg" alt="Contact Person" />{recipe.User.username}</div>
               </div>
               <div className="col s12 m12">
                 <a className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="upvote"><i className="material-icons left">thumb_up</i>{recipe.Recipe.upvotes}</a>
                 <a className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="downvote"><i className="material-icons left">thumb_down</i>{recipe.Recipe.downvotes}</a>
                 <a className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100 " data-tooltip="views"><i className="material-icons left">visibility</i>{recipe.Recipe.views}</a>
-                <a className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100 " data-tooltip="reviews"><i className="material-icons left">chat</i>1</a>
+                <a className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100 " data-tooltip="reviews"><i className="material-icons left">chat</i>0</a>
               </div>
             </div>
           </div>
         </div>
       </div>
-      );
-    });
+    ));
   }
 
   render() {
     const { favorites } = this.props;
-   /* if (loading) {
+    /* if (loading) {
       return (
       <div>
         <h3>loading...</h3>
@@ -67,11 +65,11 @@ class FavoritesGrid extends Component {
     return (
       <div className='container'>
         <div className='row'>
-        <h5>My Favorite Recipes</h5>
+          <h5>My Favorite Recipes</h5>
           {this.renderRecipes(favorites)}
         </div>
       </div>
-    )
+    );
   }
 }
 

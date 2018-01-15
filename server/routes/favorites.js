@@ -33,7 +33,7 @@ router.delete('/api/v1/users/:recipeId/favorites',
   auth,
   validateParams,
   validateRecipe.recipeExist,
-  validateOwnership,
+  // validateOwnership,
   controllers.Favorite.deleteUserFavourite);
 
 
