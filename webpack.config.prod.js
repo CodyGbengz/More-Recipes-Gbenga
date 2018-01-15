@@ -129,14 +129,16 @@ module.exports = {
         test: /\.js?$/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015', 'stage-0']
+          presets: ['react', 'es2015', 'stage-0'],
+          plugins: ['react-html-attrs']
         }
       },
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
         query: {
-          presets: ['react', 'es2015', 'stage-0']
+          presets: ['react', 'es2015', 'stage-0'],
+          plugins: ['react-html-attrs']
         }
       },
       {
