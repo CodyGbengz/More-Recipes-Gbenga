@@ -58,6 +58,11 @@ module.exports = {
     ]
   },
   plugins: [
+    new webpack.optimize.UglifyJsPlugin({
+      sourceMap: true,
+      comments: false,
+      minimize: true,
+    }),
     new webpack.HotModuleReplacementPlugin(),
     HtmlWebpackPluginConfig,
     new ExtractTextPlugin({
