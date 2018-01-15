@@ -40,6 +40,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, '/client/public')));
+app.use('/static', express.static(path.resolve(__dirname, '../client/build')));
 
 // API routes
 app.use(user);
@@ -51,7 +52,6 @@ app.use(vote);
 app.get('*', (req, res) => {
   res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
 });
-app.use('/static', express.static(path.resolve(__dirname, '../client/build')));
 
 app.listen(port, () => winston.info('We up!'));
 

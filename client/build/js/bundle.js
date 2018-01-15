@@ -60,7 +60,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "4acbc8436bb7fcec9b08"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "a67301f253e3d2261bb4"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -44401,7 +44401,7 @@ $(document).ready(function () {
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _react = __webpack_require__(1);
@@ -44441,13 +44441,13 @@ var _requireAuth2 = _interopRequireDefault(_requireAuth);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 exports.default = _react2.default.createElement(
-    _reactRouter.Route,
-    { path: '/', component: _Main2.default },
-    _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: 'recipes', component: _RecipesIndex2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: 'recipes/:id', component: _RecipeDetailsShow2.default }),
-    _react2.default.createElement(_reactRouter.Route, { path: 'favorites', component: (0, _requireAuth2.default)(_Favorites2.default) }),
-    _react2.default.createElement(_reactRouter.Route, { path: 'myrecipes', component: (0, _requireAuth2.default)(_UsersRecipesPage2.default) })
+  _reactRouter.Route,
+  { path: '/', component: _Main2.default },
+  _react2.default.createElement(_reactRouter.IndexRoute, { component: _Home2.default }),
+  _react2.default.createElement(_reactRouter.Route, { path: 'recipes', component: (0, _requireAuth2.default)(_RecipesIndex2.default) }),
+  _react2.default.createElement(_reactRouter.Route, { path: 'recipes/:id', component: (0, _requireAuth2.default)(_RecipeDetailsShow2.default) }),
+  _react2.default.createElement(_reactRouter.Route, { path: 'favorites', component: (0, _requireAuth2.default)(_Favorites2.default) }),
+  _react2.default.createElement(_reactRouter.Route, { path: 'myrecipes', component: (0, _requireAuth2.default)(_UsersRecipesPage2.default) })
 );
 
 /***/ }),
@@ -44686,7 +44686,7 @@ var SET_CURRENT_USER = exports.SET_CURRENT_USER = 'SET_CURRENT_USER';
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
@@ -44710,110 +44710,133 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 var Signup = function (_Component) {
-    _inherits(Signup, _Component);
+  _inherits(Signup, _Component);
 
-    function Signup(props) {
-        _classCallCheck(this, Signup);
+  function Signup(props) {
+    _classCallCheck(this, Signup);
 
-        var _this = _possibleConstructorReturn(this, (Signup.__proto__ || Object.getPrototypeOf(Signup)).call(this, props));
+    var _this = _possibleConstructorReturn(this, (Signup.__proto__ || Object.getPrototypeOf(Signup)).call(this, props));
 
-        _this.state = {
-            username: '',
-            email: '',
-            password: '',
-            repassword: ''
-        };
+    _this.state = {
+      username: '',
+      email: '',
+      password: '',
+      repassword: ''
+    };
 
-        _this.onChange = _this.onChange.bind(_this);
-        _this.onSubmit = _this.onSubmit.bind(_this);
-        return _this;
+    _this.onChange = _this.onChange.bind(_this);
+    _this.onSubmit = _this.onSubmit.bind(_this);
+    return _this;
+  }
+
+  _createClass(Signup, [{
+    key: 'onChange',
+    value: function onChange(e) {
+      this.setState(_defineProperty({}, e.target.name, e.target.value));
     }
+  }, {
+    key: 'onSubmit',
+    value: function onSubmit(e) {
+      e.preventDefault();
+      this.props.userSignupRequest(this.state);
+    }
+  }, {
+    key: 'render',
+    value: function render() {
+      return _react2.default.createElement(
+        'form',
+        { onSubmit: this.onSubmit, className: 'col s12 former' },
+        _react2.default.createElement(
+          'div',
+          { className: 'row modal-form-row' },
+          _react2.default.createElement(
+            'div',
+            { className: 'input-field col s12' },
+            _react2.default.createElement('input', {
+              id: 'username', value: this.state.username,
+              onChange: this.onChange,
+              name: 'username', type: 'text'
+            }),
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'username' },
+              'Username'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'input-field col s12 ' },
+            _react2.default.createElement('input', {
+              id: 'email',
+              name: 'email',
+              value: this.state.email,
+              onChange: this.onChange,
+              type: 'email'
+            }),
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'email' },
+              'Email Address'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'input-field col s12 ' },
+            _react2.default.createElement('input', {
+              id: 'password',
+              name: 'password',
+              value: this.state.password,
+              onChange: this.onChange,
+              type: 'password'
+            }),
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'password' },
+              'Password'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'input-field col s12 ' },
+            _react2.default.createElement('input', {
+              id: 'repassword',
+              name: 'repassword',
+              value: this.state.repassword,
+              onChange: this.onChange,
+              type: 'password'
+            }),
+            _react2.default.createElement(
+              'label',
+              { htmlFor: 'repassword' },
+              'Confirm Password'
+            )
+          ),
+          _react2.default.createElement(
+            'div',
+            { className: 'input-field col s12' },
+            _react2.default.createElement(
+              'button',
+              {
+                className: 'modal-action modal-close waves-effect waves-green btn white-text red right' },
+              'Cancel'
+            ),
+            _react2.default.createElement(
+              'button',
+              {
+                className: 'btn waves-effect waves-light white red-text right', type: 'submit', name: 'action' },
+              'Sign Up'
+            )
+          )
+        )
+      );
+    }
+  }]);
 
-    _createClass(Signup, [{
-        key: 'onChange',
-        value: function onChange(e) {
-            this.setState(_defineProperty({}, e.target.name, e.target.value));
-        }
-    }, {
-        key: 'onSubmit',
-        value: function onSubmit(e) {
-            e.preventDefault();
-            console.log(this.props);
-            this.props.userSignupRequest(this.state);
-        }
-    }, {
-        key: 'render',
-        value: function render() {
-            return _react2.default.createElement(
-                'form',
-                { onSubmit: this.onSubmit, className: 'col s12 former' },
-                _react2.default.createElement(
-                    'div',
-                    { className: 'row modal-form-row' },
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'input-field col s12' },
-                        _react2.default.createElement('input', { id: 'username', value: this.state.username, onChange: this.onChange, name: 'username', type: 'text' }),
-                        _react2.default.createElement(
-                            'label',
-                            { htmlFor: 'username' },
-                            'Username'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'input-field col s12 ' },
-                        _react2.default.createElement('input', { id: 'email', name: 'email', value: this.state.email, onChange: this.onChange, type: 'email' }),
-                        _react2.default.createElement(
-                            'label',
-                            { htmlFor: 'email' },
-                            'Email Address'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'input-field col s12 ' },
-                        _react2.default.createElement('input', { id: 'password', name: 'password', value: this.state.password, onChange: this.onChange, type: 'password' }),
-                        _react2.default.createElement(
-                            'label',
-                            { htmlFor: 'password' },
-                            'Password'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'input-field col s12 ' },
-                        _react2.default.createElement('input', { id: 'repassword', name: 'repassword', value: this.state.repassword, onChange: this.onChange, type: 'password' }),
-                        _react2.default.createElement(
-                            'label',
-                            { htmlFor: 'repassword' },
-                            'Confirm Password'
-                        )
-                    ),
-                    _react2.default.createElement(
-                        'div',
-                        { className: 'input-field col s12' },
-                        _react2.default.createElement(
-                            'button',
-                            { className: 'modal-action modal-close waves-effect waves-green btn white-text red right' },
-                            'Cancel'
-                        ),
-                        _react2.default.createElement(
-                            'button',
-                            { className: 'btn waves-effect waves-light white red-text right', type: 'submit', name: 'action' },
-                            'Sign Up'
-                        )
-                    )
-                )
-            );
-        }
-    }]);
-
-    return Signup;
+  return Signup;
 }(_react.Component);
 
 Signup.PropTypes = {
-    userSignupRequest: _propTypes2.default.func.isRequired
+  userSignupRequest: _propTypes2.default.func.isRequired
 };
 
 exports.default = Signup;
@@ -45901,7 +45924,7 @@ exports.default = DeleteButton;
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _react = __webpack_require__(1);
@@ -45915,11 +45938,13 @@ var _propTypes2 = _interopRequireDefault(_propTypes);
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 var EditButton = function EditButton(props) {
-    return _react2.default.createElement(
-        'a',
-        { 'data-target': 'edit', className: 'waves-effect waves-light btn-small modal-open modal-action modal-trigger' },
-        'update'
-    );
+  return _react2.default.createElement(
+    'a',
+    {
+      'data-target': 'edit',
+      className: 'waves-effect waves-light btn-small modal-open modal-action modal-trigger' },
+    'update'
+  );
 };
 
 exports.default = EditButton;
@@ -47529,10 +47554,10 @@ var FavoritesGrid = function (_Component) {
       if (recipes.length <= 0) {
         return _react2.default.createElement(
           'div',
-          { 'class': 'container' },
+          { className: 'container' },
           _react2.default.createElement(
             'div',
-            { 'class': 'row' },
+            { className: 'row' },
             _react2.default.createElement(
               'div',
               { className: 'col s12 m6 l4 ' },
@@ -47645,7 +47670,7 @@ var FavoritesGrid = function (_Component) {
                       { className: 'material-icons left' },
                       'chat'
                     ),
-                    '1'
+                    '0'
                   )
                 )
               )
@@ -47793,12 +47818,7 @@ var UserRecipesContainer = function (_Component) {
   function UserRecipesContainer() {
     _classCallCheck(this, UserRecipesContainer);
 
-    var _this = _possibleConstructorReturn(this, (UserRecipesContainer.__proto__ || Object.getPrototypeOf(UserRecipesContainer)).call(this));
-
-    _this.state = {
-      recipes: []
-    };
-    return _this;
+    return _possibleConstructorReturn(this, (UserRecipesContainer.__proto__ || Object.getPrototypeOf(UserRecipesContainer)).apply(this, arguments));
   }
 
   _createClass(UserRecipesContainer, [{
@@ -47807,20 +47827,10 @@ var UserRecipesContainer = function (_Component) {
       this.props.fetchRecipes();
     }
   }, {
-    key: 'componentWillReceiveProps',
-    value: function componentWillReceiveProps(nextProps) {
-      if (nextProps.recipes) {
-        this.setState({
-          recipes: nextProps.recipes
-        });
-      }
-    }
-  }, {
     key: 'render',
     value: function render() {
-      var recipes = this.state.recipes;
+      var recipes = this.props.recipes;
 
-      console.log('---->', recipes);
       return _react2.default.createElement(
         'div',
         { className: 'container' },
@@ -47837,24 +47847,6 @@ var UserRecipesContainer = function (_Component) {
             deleteSingleRecipe: this.props.deleteSingleRecipe,
             editRecipe: this.props.editRecipe
           })
-        ),
-        _react2.default.createElement(
-          'div',
-          { id: 'edit', className: 'modal' },
-          _react2.default.createElement(
-            'div',
-            { className: 'modal-content' },
-            _react2.default.createElement(
-              'h4',
-              null,
-              'Edit Recipe'
-            ),
-            _react2.default.createElement(
-              'div',
-              { className: 'row' },
-              _react2.default.createElement(_UpdateRecipeForm2.default, { id: this.props.id })
-            )
-          )
         )
       );
     }
@@ -47899,49 +47891,49 @@ exports.default = (0, _reactRedux.connect)(mapStateToProps, mapDispatchToProps)(
 
 
 Object.defineProperty(exports, "__esModule", {
-    value: true
+  value: true
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
 exports.default = function (ComposedComponent) {
-    var Authenticate = function (_React$Component) {
-        _inherits(Authenticate, _React$Component);
+  var Authenticate = function (_React$Component) {
+    _inherits(Authenticate, _React$Component);
 
-        function Authenticate() {
-            _classCallCheck(this, Authenticate);
+    function Authenticate() {
+      _classCallCheck(this, Authenticate);
 
-            return _possibleConstructorReturn(this, (Authenticate.__proto__ || Object.getPrototypeOf(Authenticate)).apply(this, arguments));
-        }
-
-        _createClass(Authenticate, [{
-            key: 'componentWillMount',
-            value: function componentWillMount() {
-                if (!this.props.isAuthenticated) {
-                    _reactRouter.browserHistory.push('/');
-                }
-            }
-        }, {
-            key: 'render',
-            value: function render() {
-                return _react2.default.createElement(ComposedComponent, this.props);
-            }
-        }]);
-
-        return Authenticate;
-    }(_react2.default.Component);
-
-    Authenticate.propTypes = {
-        isAuthenticated: _propTypes2.default.bool.isRequired
-    };
-
-    function mapStateToProps(state) {
-        return {
-            isAuthenticated: state.auth.isAuthenticated
-        };
+      return _possibleConstructorReturn(this, (Authenticate.__proto__ || Object.getPrototypeOf(Authenticate)).apply(this, arguments));
     }
 
-    return (0, _reactRedux.connect)(mapStateToProps)(Authenticate);
+    _createClass(Authenticate, [{
+      key: 'componentWillMount',
+      value: function componentWillMount() {
+        if (!this.props.isAuthenticated) {
+          _reactRouter.browserHistory.push('/');
+        }
+      }
+    }, {
+      key: 'render',
+      value: function render() {
+        return _react2.default.createElement(ComposedComponent, this.props);
+      }
+    }]);
+
+    return Authenticate;
+  }(_react2.default.Component);
+
+  Authenticate.propTypes = {
+    isAuthenticated: _propTypes2.default.bool.isRequired
+  };
+
+  function mapStateToProps(state) {
+    return {
+      isAuthenticated: state.auth.isAuthenticated
+    };
+  }
+
+  return (0, _reactRedux.connect)(mapStateToProps)(Authenticate);
 };
 
 var _react = __webpack_require__(1);
