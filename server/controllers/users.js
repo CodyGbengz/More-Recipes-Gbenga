@@ -2,7 +2,7 @@ import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 import models from '../models';
 
-const { User } = models;
+const { User, Recipe, Favorite } = models;
 
 export default {
   /**
@@ -62,9 +62,26 @@ export default {
           message: 'Invalid login credentials'
         });
       })
-      .catch(() => res.status(401).json({
+      .catch(() => res.status(500).json({
         status: 'fail',
         message: 'You have not created an account yet.'
+      }));
+  },
+  fetchUserDetails(req, res) {
+    return User
+      .findOne({ where: { id: req.decoded.id },
+        include: [{ all: true }]
+      })
+      .then((user) => {
+        res.status(200).json({
+          status: 'success',
+          message: 'User"s details fetched successfully',
+          user
+        });
+      })
+      .catch(error => res.status(500).json({
+        status: 'fail',
+        message: error.message
       }));
   }
 };

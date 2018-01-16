@@ -8,7 +8,7 @@ import { Provider } from 'react-redux';
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
 import { signInUserSuccess } from './actions/authAction';
-import '../public/js/custom';
+import '../build/js/custom';
 import './index.scss';
 
 import routes from './routes';

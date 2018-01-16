@@ -1,8 +1,12 @@
 $background_color_1: white;
-$background_color_2: #ffff66;
+$background_color_2: #E25141;
 
 .modal {
 	max-height: 90%;
+}
+
+h1,h2,h3,h4,h5,h6,.brand-logo{
+	font-family: 'Acme', sans-serif;
 }
 .modal-form-row {
 	margin-bottom: 0px;
@@ -14,7 +18,8 @@ $background_color_2: #ffff66;
 body {
 	display: flex;
 	min-height: 100vh;
-    flex-direction: column;
+	flex-direction: column;
+	font-family: 'Quattrocento Sans', sans-serif;
 		//background-image: url('/images/bg3.jpg');
 		//background-color: #AB382F;
     background-size: 100%

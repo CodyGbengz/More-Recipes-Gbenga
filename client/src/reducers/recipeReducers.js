@@ -28,7 +28,6 @@ export function recipes(state = [], action) {
     case CREATE_RECIPE:
       return [...state];
     case CREATE_RECIPE_SUCCESS:
-      console.log(action.payload);
       return [
         payload,
         ...state
@@ -79,7 +78,6 @@ export function recipes(state = [], action) {
  */
 export function recipe(state = { }, action) {
   let error;
-  console.log(action.payload);
   const { type, payload } = action;
   switch (type) {
     case FETCH_SINGLE_RECIPE:

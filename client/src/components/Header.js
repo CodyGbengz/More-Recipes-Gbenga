@@ -6,7 +6,7 @@ const Header = () =>
     <header id="header">
       <div className="navbar-fixed">
         <ul id="dropdown1" className="dropdown-content">
-          <li><a href="profile.html" className="red-text">Profile</a></li>
+          <li><a href="/profile" className="red-text">Profile</a></li>
           <li className="divider"></li>
           <li><a href="index.html" className="red-text">Sign Out</a></li>
         </ul>
@@ -43,5 +43,5 @@ const Header = () =>
       <li><a href="">Sign out<i className="material-icons">exit_to_app</i></a></li>
     </ul>
   </div>
-  )
+  );
 export default Header;

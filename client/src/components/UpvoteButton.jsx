@@ -10,8 +10,7 @@ const UpvoteButton = props =>
       data-delay="100"
       data-tooltip="upvote">
       <i className="material-icons left">thumb_up</i>
-      {props.recipe.upvotes}
-      {console.log(props)}
+      { props.recipe.upvotes }
     </a>
   );
 

@@ -11,6 +11,7 @@ const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
 });
 
 module.exports = {
+  devtool: 'inline-source-map',
   entry: {
     app: [
       'babel-polyfill',

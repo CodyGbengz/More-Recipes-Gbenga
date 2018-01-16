@@ -39,17 +39,19 @@ export default {
             .findOne({ where: { id: req.params.recipeId } })
             .then((recipe) => {
               recipe.increment('upvotes').then(() => {
-                recipe.reload();
-              })
-                .then(() => res.status(200).json({
-                  status: 'success',
-                  message: 'Your vote has been recorded',
-                  recipe
-                }));
+                recipe.decrement('downvotes').then(() => {
+                  recipe.reload();
+                })
+                  .then(() => res.status(200).json({
+                    status: 'success',
+                    message: 'Your vote has been recorded',
+                    recipe
+                  }));
+              });
             });
         }
         if (!created && voter.option === true) {
-          voter.update({ option: false });
+          voter.destroy();
           return Recipe
             .findOne({ where: { id: req.params.recipeId } })
             .then((recipe) => {
@@ -63,12 +65,8 @@ export default {
                 }));
             });
         }
-        return res.status(400).json({
-          status: 'fail',
-          message: 'User has already upvoted'
-        });
       })
-      .catch(() => res.status(400).json({
+      .catch(() => res.status(500).json({
         status: 'fail',
         message: 'An error occured while trying to process your request'
       }));
@@ -109,16 +107,18 @@ export default {
             .findOne({ where: { id: req.params.recipeId } })
             .then((recipe) => {
               recipe.increment('downvotes').then(() => {
-                recipe.reload();
-              }).then(() => res.status(200).send({
-                status: 'success',
-                message: 'Your vote has been recorded',
-                recipe
-              }));
+                recipe.decrement('upvotes').then(() => {
+                  recipe.reload();
+                }).then(() => res.status(200).send({
+                  status: 'success',
+                  message: 'Your vote has been recorded',
+                  recipe
+                }));
+              });
             });
         }
         if (!created && voter.option === false) {
-          voter.update({ option: true });
+          voter.destroy();
           return Recipe
             .findOne({ where: { id: req.params.recipeId } })
             .then((recipe) => {
@@ -132,10 +132,6 @@ export default {
                 }));
             });
         }
-        return res.status(400).send({
-          status: 'fail',
-          message: 'User has already downvoted'
-        });
       })
       .catch(() => res.status(400).json({
         message: 'An error occured while trying to process your request'
