@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const dotenv = require('dotenv');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 dotenv.config();
 
@@ -67,11 +68,7 @@ module.exports = {
         CLOUDINARY_API_KEYS: JSON.stringify(process.env.CLOUDINARY_API_KEYS),
       }
     }),
-    new webpack.optimize.UglifyJsPlugin({
-      compress: { warnings: false },
-      comments: false,
-      sourceMap: true,
-      minimize: false
+    new UglifyJsPlugin({
     }),
     new webpack.optimize.AggressiveMergingPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),

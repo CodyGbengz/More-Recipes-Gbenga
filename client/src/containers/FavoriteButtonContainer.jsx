@@ -11,7 +11,8 @@ class FavoriteButtonContainer extends Component {
         super(props);
         this.handlFavBtnClick = this.handleFavBtnClick.bind(this);
         this.state = {
-            favorites: this.props.favorites
+            favorites: this.props.favorites,
+            isFavorite: false
         };
     };
 
@@ -20,17 +21,14 @@ class FavoriteButtonContainer extends Component {
     };
 
     componentWillReceiveProps(nextProps) {
-        console.log(nextProps.favorites);
         if (this.props.favorites !== nextProps.favorites) {
             this.setState({ favorites: nextProps.favorites });
         }
-        console.log(this.state.favorites);
     };
     
     handleFavBtnClick = (event) => {
-        console.log(this.props);
         event.preventDefault();
-       // this.toggleFavorite();
+        this.toggleFavorite();
         if (!this.isUserFavorite()) {
             this.props.addFavoriteRecipe(this.props.recipe.id, this.props.index )
         }
@@ -40,7 +38,6 @@ class FavoriteButtonContainer extends Component {
     };
 
     isUserFavorite = () => {
-        console.log(this.state.favorites);
         const isFavorite = this.state.favorites.filter(favorite => favorite.recipeId === this.props.recipe.id);
         console.log(isFavorite);
         if (isFavorite.length > 0) {
@@ -59,7 +56,6 @@ class FavoriteButtonContainer extends Component {
     };
     render() {
         const { recipe } = this.props;
-        console.log(this.props);
         return (
             <FavoritesButton 
                 handleFavBtnClick={ this.handleFavBtnClick }
