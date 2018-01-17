@@ -16,15 +16,16 @@ class FavoriteButtonContainer extends Component {
     };
   }
 
-  componentDidMount() {
-    this.isUserFavorite();
-  }
-
   componentWillReceiveProps(nextProps) {
     if (this.props.favorites !== nextProps.favorites) {
       this.setState({ favorites: nextProps.favorites });
+      this.isUserFavorite();
     }
   }
+
+  // componentDidMount() {
+  //   this.isUserFavorite();
+  // }
 
   handleFavBtnClick(event) {
     event.preventDefault();
@@ -37,8 +38,9 @@ class FavoriteButtonContainer extends Component {
   }
 
   isUserFavorite() {
-    const isFavorite = this.state.favorites.filter(favorite => favorite.recipeId === this.props.recipe.id);
-    console.log(isFavorite);
+    console.log(this.props);
+    const isFavorite = this.state.favorites.filter(favorite => console.log(favorite));
+    console.log(isFavorite, '----->');
     if (isFavorite.length > 0) {
       return true;
     }
