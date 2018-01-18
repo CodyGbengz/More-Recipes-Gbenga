@@ -10,7 +10,6 @@ export default {
    * @returns {object} Response object containing recipe, status and message 
    */
   addRecipe(req, res) {
-    console.log(req.decoded.id);
     return Recipe
       .create({
         userId: req.decoded.id,

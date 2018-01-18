@@ -5,7 +5,7 @@ import path from 'path';
 import webpack from 'webpack';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
-import webpackConfig from '../webpack.config.development';
+import webpackConfig from '../webpack.dev';
 import router from './routes';
 
 
@@ -15,6 +15,10 @@ const {
 const port = process.env.PORT || 8081;
 const app = express();
 
+const DIST_DIR = path.join(__dirname, '../client/public');
+const HTML_FILE = path.join(DIST_DIR, 'index.html');
+
+console.log(process.env.NODE_ENV);
 if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, {
@@ -26,6 +30,12 @@ if (process.env.NODE_ENV === 'development') {
   app.use(webpackHotMiddleware(compiler, {
     reload: true
   }));
+}
+
+// Serves view for production after files has been bundled in production environment
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(DIST_DIR));
+  app.get('*', (req, res) => res.sendFile(HTML_FILE));
 }
 
 
@@ -50,7 +60,7 @@ app.use(favorite);
 app.use(vote);
 
 app.get('*', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '../client/build/index.html'));
+  res.sendFile(path.resolve(__dirname, '../client/public/index.html'));
 });
 
 app.listen(port, () => winston.info('We up!'));

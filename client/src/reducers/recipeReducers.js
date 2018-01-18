@@ -3,7 +3,8 @@ import {
   FETCH_SINGLE_RECIPE, FETCH_SINGLE_RECIPE_SUCCESS, FETCH_SINGLE_RECIPE_FAILURE,
   CREATE_RECIPE, CREATE_RECIPE_SUCCESS, CREATE_RECIPE_FAILURE,
   UPVOTE_RECIPE, UPVOTE_RECIPE_FAILURE, UPVOTE_RECIPE_SUCCESS,
-  DOWNVOTE_RECIPE, DOWNVOTE_RECIPE_FAILURE, DOWNVOTE_RECIPE_SUCCESS
+  DOWNVOTE_RECIPE, DOWNVOTE_RECIPE_FAILURE, DOWNVOTE_RECIPE_SUCCESS,
+  DELETE_SINGLE_RECIPE, DELETE_SINGLE_RECIPE_FAILURE, DELETE_SINGLE_RECIPE_SUCCESS
 
 } from '../actions/recipeActions';
 /**
@@ -28,14 +29,24 @@ export function recipes(state = [], action) {
     case CREATE_RECIPE:
       return [...state];
     case CREATE_RECIPE_SUCCESS:
-      console.log(action.payload);
       return [
         payload,
         ...state
       ];
     case CREATE_RECIPE_FAILURE:
-      // error = payload || { message: payload.message };
+      error = payload || { message: payload.message };
       return [...state];
+    case DELETE_SINGLE_RECIPE:
+      return [...state];
+    case DELETE_SINGLE_RECIPE_SUCCESS:
+      return [
+        ...state.slice(0, action.index),
+        ...state.slice(action.index + 1)
+      ];
+    case DELETE_SINGLE_RECIPE_FAILURE:
+      return [
+        ...state,
+        error ];
     case UPVOTE_RECIPE:
       return [...state];
     case UPVOTE_RECIPE_SUCCESS:
@@ -79,7 +90,6 @@ export function recipes(state = [], action) {
  */
 export function recipe(state = { }, action) {
   let error;
-  console.log(action.payload);
   const { type, payload } = action;
   switch (type) {
     case FETCH_SINGLE_RECIPE:

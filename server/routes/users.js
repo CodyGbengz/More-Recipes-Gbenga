@@ -1,6 +1,7 @@
 import express from 'express';
 import controllers from '../controllers';
 import validateUser from '../middlewares/userValidations';
+import auth from '../middlewares/auth';
 
 const router = express.Router();
 
@@ -16,6 +17,8 @@ router.post('/api/v1/users/signin',
   validateUser.validateLoginFields,
   controllers.User.loginUser);
 // route for get users
-// router.get('/api/v1/users', controllers.User.fetch);
+router.get('/api/v1/user',
+  auth,
+  controllers.User.fetchUserDetails);
 
 export default router;

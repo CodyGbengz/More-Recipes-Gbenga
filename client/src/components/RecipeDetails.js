@@ -40,7 +40,7 @@ class RecipeDetails extends Component {
           </div>
           <div className="card-action">
             <div className="chip">
-              <img src="/images/avi.jpg" alt="Contact Person" />{review.User.username}
+              <img src="https://api.adorable.io/avatars/285/abott@adorable.png" alt="Contact Person" />{review.User.username}
             </div>
           </div>
         </div>
@@ -95,8 +95,10 @@ class RecipeDetails extends Component {
                     <a className="waves-effect grey-text btn-flat"><i className="material-icons left">thumb_down</i>{recipe.downvotes}</a>
                     <a className="waves-effect grey-text waves-light btn-flat"><i className="material-icons left">visibility</i>{recipe.views}</a>
                     <a className="waves-effect grey-text waves-light btn-flat"><i className="material-icons left">chat</i>{recipe.reviews.length}</a>
-                    <div className="chip">
-                      <a href=""><i className="material-icons">person</i>{recipe.User.username}</a>
+                    <div>
+                      <div className="chip">
+                        <img src="https://api.adorable.io/avatars/285/abott@adorable.png" alt="Contact Person" />{recipe.User.username}
+                      </div>
                     </div>
                   </div>
                 </div>

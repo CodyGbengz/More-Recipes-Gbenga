@@ -29,6 +29,12 @@ export const DOWNVOTE_RECIPE = 'DOWNVOTE_RECIPE';
 export const DOWNVOTE_RECIPE_SUCCESS = 'DOWNVOTE_RECIPE_SUCCESS';
 export const DOWNVOTE_RECIPE_FAILURE = 'DOWNVOTE_RECIPE_FAILURE';
 
+// delete a recipe
+export const DELETE_SINGLE_RECIPE = 'DELETE_SINGLE_RECIPE';
+export const DELETE_SINGLE_RECIPE_SUCCESS  = 'DELETE_SINGLE_RECIPE_SUCCESS';
+export const DELETE_SINGLE_RECIPE_FAILURE = 'DELETE_SINGLE_RECIPE_FAILURE';
+
+
 const BASE_URL = '/api/v1/';
 
 export const downvoteRecipe = (recipeId, index) => {

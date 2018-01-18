@@ -18,7 +18,6 @@ import {
 export default function usersRecipes(state = [], action) {
   let error;
   const { type, usersrecipes, payload } = action;
-  console.log(action);
   switch (type) {
     case FETCH_USERS_RECIPES:
       return [...state];

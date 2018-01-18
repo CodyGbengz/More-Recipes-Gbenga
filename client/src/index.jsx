@@ -1,15 +1,17 @@
 /* eslint-disable no-unused-vars */
 import React from 'react';
 import jwtDecode from 'jwt-decode';
-import registerObserver from 'react-perf-devtool';
+import $ from 'jquery';
 import { render } from 'react-dom';
 import { Router, browserHistory } from 'react-router';
 import { Provider } from 'react-redux';
+import 'materialize-css/dist/js/materialize.min';
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
 import { signInUserSuccess } from './actions/authAction';
-import '../public/js/custom';
-import './index.scss';
+// import './js/custom';
+import '../src/scss/materialize.scss';
+
 
 import routes from './routes';
 

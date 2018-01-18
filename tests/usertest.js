@@ -113,7 +113,7 @@ describe('test API routes', () => {
           password: 'testpasswod'
         })
         .end((err, res) => {
-          res.status.should.be.eql(401);
+          res.status.should.be.eql(500);
           res.body.status.should.be.eql('fail');
           res.body.message.should.be.eql('You have not created an account yet.');
           done();

@@ -7,6 +7,7 @@ import RecipesIndex from './pages/RecipesIndex';
 import RecipeDetailsShow from './pages/RecipeDetailsShow';
 import Favorites from './pages/Favorites';
 import UsersRecipesPage from './pages/UsersRecipesPage';
+import UserProfilePage from './pages/UserProfilePage';
 
 import requireAuth from './utils/requireAuth';
 
@@ -18,5 +19,6 @@ export default (
     <Route path="recipes/:id" component={requireAuth(RecipeDetailsShow)}/>
     <Route path="favorites" component={requireAuth(Favorites)} />
     <Route path="myrecipes" component={requireAuth(UsersRecipesPage)} />
+    <Route path="profile" component={requireAuth(UserProfilePage)} />
   </Route>
 );
