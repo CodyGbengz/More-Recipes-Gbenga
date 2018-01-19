@@ -136,15 +136,18 @@ handleImageUpload(file) {
           </div>
           <div className="input-field col s12">
             <button 
-            className="modal-action modal-close waves-effect waves-red red white-text btn-flat right">Cancel</button>
-            <button className="btn waves-effect modal-close waves-light right white red-text" type="submit">Edit</button>
+            className=
+            "modal-action modal-close waves-effect waves-red red white-text btn-flat right">
+            Cancel</button>
+            <button 
+            className="btn waves-effect modal-close waves-light right white red-text" type="submit">
+            Edit</button>
           </div>
         </div>
       </form>
-
     );
   }
-};
+}
 
 RecipeForm.PropTypes = {
   editRecipe: PropTypes.func.isRequired

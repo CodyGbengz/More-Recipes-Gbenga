@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
-import { connect }  from 'react-redux';
+import { connect } from 'react-redux';
 import EditButton from '../components/EditButton';
-import { editRecipe  } from '../actions/usersRecipesActions';
+import { editRecipe } from '../actions/usersRecipesActions';
 
 class EditButtonContainer extends Component {
   constructor(props) {
     super(props);
     this.handleEditBtnClick = this.handleEditBtnClick.bind(this);
-  };
+  }
 
-  handleEditBtnClick(event) {
-    this.props.editRecipe(this.props.recipe.id, this.props.index)
-  };
+  handleEditBtnClick() {
+    this.props.editRecipe(this.props.recipe.id, this.props.index);
+  }
 
   render() {
     return (
@@ -20,14 +20,14 @@ class EditButtonContainer extends Component {
         recipe={ this.props.recipe }
         index={ this.props.index }
         />
-    )
+    );
   }
-};
+}
 
 const mapStateToProps = state => ({
   recipes: state.usersrecipes
 });
 
-export default connect( mapStateToProps, {
+export default connect(mapStateToProps,{
   editRecipe
 })(EditButtonContainer);

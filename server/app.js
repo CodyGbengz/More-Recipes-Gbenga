@@ -41,10 +41,10 @@ if (process.env.NODE_ENV === 'production') {
 
 // api documentation
 app.get('/api/docs', (req, res) => {
-  res.sendFile(path.resolve(__dirname, '..', 'build/index.html'));
+  res.sendFile(path.resolve(__dirname, '..', 'docs/index.html'));
 });
 
-app.use('/api/docs-assets', express.static(path.resolve(__dirname, '..', 'build')));
+app.use('/api/docs-assets', express.static(path.resolve(__dirname, '..', 'docs')));
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
