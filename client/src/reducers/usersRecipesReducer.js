@@ -7,7 +7,10 @@ import {
   DELETE_SINGLE_RECIPE_SUCCESS,
   CREATE_RECIPE_FAILURE,
   CREATE_RECIPE_SUCCESS,
-  CREATE_RECIPE
+  CREATE_RECIPE,
+  EDIT_RECIPE,
+  EDIT_RECIPE_FAILURE,
+  EDIT_RECIPE_SUCCESS
 } from '../actions/usersRecipesActions';
 /**
  * 
@@ -17,7 +20,7 @@ import {
  */
 export default function usersRecipes(state = [], action) {
   let error;
-  const { type, usersrecipes, payload } = action;
+  const { type, usersrecipes, payload, newRecipe, index } = action;
   switch (type) {
     case FETCH_USERS_RECIPES:
       return [...state];
@@ -48,6 +51,19 @@ export default function usersRecipes(state = [], action) {
         ...state
       ];
     case CREATE_RECIPE_FAILURE:
+      // error = payload || { message: payload.message };
+      return [...state];
+    case EDIT_RECIPE:
+      return [...state];
+    case EDIT_RECIPE_SUCCESS:
+    const updatedItems = state.map(item => {
+      if(item.id === newRecipe.id) {
+        return { ...item, ...newRecipe }
+      }
+      return item
+    })
+      return updatedItems
+    case EDIT_RECIPE_FAILURE:
       // error = payload || { message: payload.message };
       return [...state];
     default:

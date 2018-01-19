@@ -18,7 +18,7 @@ const app = express();
 const DIST_DIR = path.join(__dirname, '../client/public');
 const HTML_FILE = path.join(DIST_DIR, 'index.html');
 
-console.log(process.env.NODE_ENV);
+
 if (process.env.NODE_ENV === 'development') {
   const compiler = webpack(webpackConfig);
   app.use(webpackDevMiddleware(compiler, {

@@ -15,13 +15,13 @@ import {
  */
 export function recipes(state = [], action) {
   let error;
-  const { type, payload } = action;
+  const { type, payload, recipes } = action;
   switch (type) {
     case FETCH_RECIPES:
       return [...state];
     case FETCH_RECIPES_SUCCESS:
       return [
-        ...payload
+        ...recipes
       ];
     case FETCH_RECIPES_FAILURE:
       // error = payload || { message: payload.message };

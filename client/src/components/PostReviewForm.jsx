@@ -37,7 +37,7 @@ class ReviewForm extends Component {
                         <div className="row">
                             <div className="col s6 m6 offset-m4 offset-s4">
                                 <a className="modal-action modal-close waves-effect waves-red red white-text btn">Cancel</a>
-                                <a onClick={ this.onClick } className="modal-action modal-close waves-effect waves-light white red-text btn">Save</a>
+                                <a onClick={ this.onClick } className="modal-action modal-close waves-effect waves-light white red-text btn">Post</a>
                             </div>
                     </div>
                 </form>

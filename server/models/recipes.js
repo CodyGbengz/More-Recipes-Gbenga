@@ -46,7 +46,7 @@ export default (sequelize, DataTypes) => {
     },
     image_url: {
       type: DataTypes.STRING,
-      defaultValue: 'img-source'
+      allowNull: true
     }
   });
 

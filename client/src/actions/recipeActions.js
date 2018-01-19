@@ -73,10 +73,10 @@ export const upvoteRecipeFailure = error => ({
   error
 });
 
-export const fetchRecipes = () => {
+export const fetchRecipes = (offset) => {
   const request = axios({
     method: 'get',
-    url: `${BASE_URL}recipes`
+    url: `${BASE_URL}recipes?offset=${offset}`
   });
   return {
     type: FETCH_RECIPES,
@@ -84,9 +84,10 @@ export const fetchRecipes = () => {
   };
 };
 
-export const fetchRecipesSuccess = recipes => ({
+export const fetchRecipesSuccess = (recipes, pages) => ({
   type: FETCH_RECIPES_SUCCESS,
-  payload: recipes
+  recipes,
+  pages
 });
 
 export const fetchRecipesFailure = error => ({

@@ -90,9 +90,9 @@ export default {
           message: 'Recipe deleted from your favourites successfully'
         }));
       })
-      .catch(() => res.status(400).json({
+      .catch(error => res.status(400).json({
         status: 'Fail',
-        message: 'An error occured while processing your request'
+        message: error.message
       }));
   },
   /**

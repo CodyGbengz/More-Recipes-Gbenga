@@ -4,6 +4,7 @@ import { recipes, recipe } from './reducers/recipeReducers';
 import favorites from './reducers/favoritesReducer';
 import usersrecipes from './reducers/usersRecipesReducer';
 import userDetailsReducer from './reducers/userDetailsReducer';
+import { getPages }  from './reducers/paginationReducer'
 
 export default combineReducers({
   auth,
@@ -11,5 +12,6 @@ export default combineReducers({
   recipe,
   favorites,
   usersrecipes,
-  userDetailsReducer
+  userDetailsReducer,
+  getPages
 });

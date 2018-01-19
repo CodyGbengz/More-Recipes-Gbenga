@@ -11,7 +11,6 @@ const DownvoteButton = props =>
         data-tooltip="downvote">
         <i className="material-icons left">thumb_down</i>
         {props.recipe.downvotes}
-        {console.log(props)}
         </a>
     );
 

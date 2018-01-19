@@ -5,7 +5,7 @@ import UpvoteButtonContainer from '../containers/UpvoteButtonContainer';
 import DownvoteButtonContainer from '../containers/DownvoteButtonContainer';
 import DeleteButtonContainer from '../containers/DeleteButtonContainer';
 import EditButton from './EditButton';
-import UpdateRecipeForm from '../components/CreateRecipeForm';
+import UpdateRecipeForm from '../components/UpdateRecipeForm';
 
 
 class Recipe extends Component {
@@ -18,7 +18,7 @@ class Recipe extends Component {
               <Link to={`recipes/${this.props.recipe.id}`}>
                 <img
                   name={this.props.recipe.id}
-                  src="http://res.cloudinary.com/myresources/image/upload/v1515852046/bg2_pj1yit.jpg"
+                  src={this.props.recipe.image_url}
                   alt="recipe image"/>
               </Link>
               <FavoriteButtonContainer
@@ -32,7 +32,11 @@ class Recipe extends Component {
             <div className="card-action">
               <div className="row">
                 <div className="col s12 m12">
-                  <div className="chip"><img src="http://res.cloudinary.com/myresources/image/upload/v1515852440/avi_so66tc.jpg" alt="Contact Person" />{this.props.recipe.User.username}</div>
+                  <div className="chip">
+                  <img src="http://res.cloudinary.com/myresources/image/upload/v1515852440/avi_so66tc.jpg" 
+                  alt="Contact Person" />
+                  {this.props.recipe.User.username}
+                  </div>
                 </div>
                 <div className="col xs12 s12 m12">
                   {
@@ -64,8 +68,21 @@ class Recipe extends Component {
                 />
                   }
 
-                  <a className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100 " data-tooltip="views"><i className="material-icons left">visibility</i>{this.props.recipe.views}</a>
-                  <a className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100 " data-tooltip="reviews"><i className="material-icons left">chat</i>{this.props.recipe.reviews.length}</a>
+                  <a 
+                  className="waves-effect waves-light tooltipped" 
+                  data-position="bottom" 
+                  data-delay="100 " 
+                  data-tooltip="views">
+                  <i className="material-icons left">visibility</i>
+                  {this.props.recipe.views}</a>
+                  <a 
+                  className="waves-effect waves-light tooltipped" 
+                  data-position="bottom" 
+                  data-delay="100 " 
+                  data-tooltip="reviews">
+                  <i className="material-icons left">chat</i>
+                  {this.props.recipe.reviews.length}
+                  </a>
                 </div>
               </div>
             </div>
@@ -75,7 +92,10 @@ class Recipe extends Component {
           <div className="modal-content">
             <h4>Edit Recipe</h4>
             <div className="row">
-              <UpdateRecipeForm recipe={this.props.recipe}/>
+              <UpdateRecipeForm 
+              recipe={this.props.recipe}
+              index={this.props.index}
+              />
             </div>
           </div>
         </div>

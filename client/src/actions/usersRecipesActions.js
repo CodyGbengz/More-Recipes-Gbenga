@@ -72,7 +72,7 @@ export const deleteSingleRecipeFailure = error => {
   };
 };
 
-export const editRecipe = (recipe, recipeId) => {
+export const editRecipe = (recipe, recipeId, index) => {
   const request = axios({
     method: 'put',
     data: recipe,
@@ -80,12 +80,12 @@ export const editRecipe = (recipe, recipeId) => {
   });
   return dispatch => {
     return request.then(res => {
-      dispatch(editRecipeSuccess(res.data.recipe))
+      dispatch(editRecipeSuccess(res.data.recipe, index))
     })
   };
 };
 
-export const editRecipeSuccess = newRecipe => {
+export const editRecipeSuccess = (newRecipe, index) => {
   const currentState = store.getState()
   const User = currentState.auth.user
   newRecipe.reviews = [];
@@ -94,7 +94,8 @@ export const editRecipeSuccess = newRecipe => {
   };
   return {
     type: EDIT_RECIPE_SUCCESS,
-    payload: newRecipe
+    newRecipe,
+    index
   };
 };
 

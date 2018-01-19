@@ -16,7 +16,8 @@ export default {
         title: req.body.title,
         description: req.body.description,
         ingredients: req.body.ingredients,
-        directions: req.body.directions
+        directions: req.body.directions,
+        image_url: req.body.image_url || 'http://res.cloudinary.com/myresources/image/upload/v1515852046/bg2_pj1yit.jpg'
       })
       .then(recipe => res.status(201).json({
         status: 'success',
@@ -125,8 +126,9 @@ export default {
    */
   fetchAllRecipes(req, res, next) {
     if (req.query.sort) return next();
+    const { limit, offset } = req.body;
     return Recipe
-      .all({
+      .findAndCountAll({
         include: [{
           model: Review,
           as: 'reviews',
@@ -140,24 +142,27 @@ export default {
           model: User,
           attributes: ['username']
         }],
-        limit: 10
+        limit: limit || 5,
+        offset: offset || 0
       })
       .then((recipes) => {
-        if (recipes.length <= 0) {
+        if (recipes.rows.length <= 0) {
           return res.status(200).json({
             status: 'success',
             message: 'no recipes found'
           });
         }
+        const pageNumber = parseInt(recipes.count, 10) / parseInt(limit || 5, 10);
         res.status(200).json({
           message: 'all Recipes fetched successfully',
           status: 'success',
-          recipes
+          recipes,
+          pages: Math.ceil(pageNumber)
         });
       })
-      .catch(() => res.status(400).json({
+      .catch(error => res.status(400).json({
         status: 'fail',
-        message: 'An error occured while processing your request'
+        message: error.message
       }));
   },
   /**

@@ -50,7 +50,6 @@ class RecipeDetails extends Component {
 
   render() {
     const { recipe } = this.state;
-    console.log(recipe.reviews);
     /*
     	if (loading) { 
 			return <div>LOADING!!</div>;
@@ -74,7 +73,7 @@ class RecipeDetails extends Component {
               </div>
               <div className="card horizontal hide-on-med-and-down">
                 <div className="card-image">
-                  <img src="http://res.cloudinary.com/myresources/image/upload/v1515852046/bg2_pj1yit.jpg" alt="recipe owner" />
+                  <img src={recipe.image_url} alt="recipe owner" />
                 </div>
                 <div className="card-stacked">
                   <div className="card-content">
@@ -128,13 +127,13 @@ class RecipeDetails extends Component {
                   <div className="card-content">
                     <span className="card-title">Directions</span>
                     <hr></hr>
-                    <ol>
+                    <ul>
                       {
                         recipe.directions.split(/\r?\n/).map((direction, i) => (
                           <li key={i}>{direction}</li>
                         ))
                       }
-                    </ol>
+                    </ul>
                   </div>
                 </div>
               </div>

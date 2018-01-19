@@ -12,18 +12,40 @@ import {
 import RecipeGrid from '../components/RecipeGrid';
 
 class RecipesGridContainer extends Component {
-  componentWillMount() {
-    this.props.fetchRecipes();
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentPage: 1
+    }
+    this.onPaginateClick = this.onPaginateClick.bind(this);
+  }
+  componentDidMount() {
+    const offset = 5 * (this.state.currentPage - 1)
+    this.props.fetchRecipes(offset);
     this.props.fetchFavoriteRecipes();
   }
+
+  onPaginateClick(page) {
+    this.setState({ currentPaginatePage: page }, () => {
+      this.getRecipes();
+    })
+  }
+
+  getRecipes() {
+    const offset = 5 * (this.state.currentPage - 1);
+    this.props.fetchRecipes(offset);
+  }
   render() {
-    const { recipes } = this.props;
+    const { recipes, pages } = this.props;
     return (
       <div className='container'>
         <div className='row'>
           <h5>Most Voted Recipes</h5>
           <RecipeGrid
             recipes={ recipes }
+            pages={ pages }
+            onPaginateClick={this.onPaginateClick}
+            currentPage={ this.state.currentPage}
             upvoteRecipe={ this.props.upvoteRecipe}
             downvoteRecipe={ this.props.downvoteRecipe}
           />
@@ -34,14 +56,15 @@ class RecipesGridContainer extends Component {
 }
 
 const mapStateToProps = state => ({
-  recipes: state.recipes
+  recipes: state.recipes,
+  pages: state.getPages
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchRecipes() {
     dispatch(fetchRecipes()).then((response) => {
       !response.error ?
-        dispatch(fetchRecipesSuccess(response.payload.data.recipes)) :
+        dispatch(fetchRecipesSuccess(response.payload.data.recipes.rows,response.payload.data.pages)) :
         dispatch(fetchRecipesFailure(response.payload.error));
     });
   },

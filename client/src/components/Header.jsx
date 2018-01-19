@@ -20,8 +20,11 @@ class Header extends Component {
       );
     });
   }
+
+  removeTooltip() {
+    $('.tooltipped').tooltip('remove');
+  }
   render() {
-    console.log(this);
     return (
       <div>
         <header id="header">
@@ -44,7 +47,11 @@ class Header extends Component {
                 </form>
                 <ul id="navvy" className="right hide-on-med-and-down">
                   <li><a data-target="create" className="tooltipped modal-trigger modal-open modal-action" data-position="bottom" data-delay="100" data-tooltip="Add recipe"><i className="material-icons red-text">add</i></a></li>
-                  <li><Link to="/favorites" className="tooltipped" data-position="bottom" data-delay="100" data-tooltip="Favorites"><i className="material-icons red-text">favorite</i></Link></li>
+                  <li><Link to="/favorites"
+                  onClick={this.removeTooltip()} 
+                  className="tooltipped" 
+                  data-position="bottom" 
+                  data-delay="100" data-tooltip="Favorites"><i className="material-icons red-text">favorite</i></Link></li>
                   <li><Link to="/myrecipes" className="tooltipped" data-position="bottom" data-delay="100" data-tooltip="My Recipes"><i className="material-icons red-text">book</i></Link></li>
                   <li><a className="dropdown-button" href="#!" data-activates="dropdown1" data-beloworigin="true"><i className="material-icons red-text">account_circle</i></a></li>
                 </ul>

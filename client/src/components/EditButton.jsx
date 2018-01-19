@@ -4,8 +4,13 @@ import PropTypes from 'prop-types';
 const EditButton = props =>
   (
     <a
+      onClick={props.handleEditBtnClick}
+      data-position="bottom"
+      data-delay="100"
+      data-tooltip="edit"
       data-target="edit"
-      className="waves-effect waves-light btn-small modal-open modal-action modal-trigger">update
+      className="waves-effect waves-light modal-open modal-action modal-trigger">
+      <i className="material-icons">mode_edit</i>
     </a>
   );
 
