@@ -8,11 +8,11 @@
     "start:dev": "cross-env NODE_ENV=development nodemon --exec babel-node server/app.js",
     "build": "NODE_ENV=production webpack --config webpack.prod.js --progress",
     "heroku-postbuild": "sequelize db:migrate && npm run build",
-    "watch": "webpack --config webpack.config.dev.babel.js --watch",
+    "watch": "webpack --config webpack.dev.js --watch",
     "test": "nyc --reporter=html mocha -c --compilers js:babel-register  --timeout 15000 tests/",
     "test_travis": "NODE_ENV=test && nyc _mocha -c --report lcovonly --reporter spec --timeout 15000 tests/",
     "coverage": "nyc npm test --report lcovonly && cat ./coverage/lcov.info | coveralls",
-    "clean:client": "rimraf client/build"
+    "clean:client": "rimraf client/public"
   },
   "repository": {
     "type": "git",
@@ -81,6 +81,7 @@
     "lodash": "^4.17.4",
     "materialize-css": "^0.100.2",
     "md5": "^2.2.1",
+    "moment": "^2.20.1",
     "node-sass": "^4.5.3",
     "nodemailer": "^4.1.0",
     "nodemon": "^1.11.0",

@@ -26,7 +26,7 @@ class Recipe extends Component {
                 recipe={ this.props.recipe } />
             </div>
             <div className="card-content">
-              <Link to="recipes/1"><b>{this.props.recipe.title}</b></Link>
+              <Link to={`recipes/${this.props.recipe.id}`}><b>{this.props.recipe.title}</b></Link>
               <p>{this.props.recipe.description}</p>
             </div>
             <div className="card-action">
@@ -93,8 +93,8 @@ class Recipe extends Component {
             <h4>Edit Recipe</h4>
             <div className="row">
               <UpdateRecipeForm 
-              recipe={this.props.recipe}
-              index={this.props.index}
+              recipe={ this.props.recipe }
+              index={ this.props.index }
               />
             </div>
           </div>

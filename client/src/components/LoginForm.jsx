@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import isEmpty from 'lodash/isEmpty';
 
 class Login extends Component {
   constructor(props) {
@@ -21,16 +22,24 @@ class Login extends Component {
     this.props.signInUser(this.state);
   }
 
+  onBlur (event) {
+    if(isEmpty(event.target.value)) {
+        Materialize.toast(`${event.target.name} Field cannot be empty`, 2000);
+    }
+  }
+
+  
+
   render() {
     return (
       <form onSubmit={ this.onSubmit } className="col s12">
         <div className="row modal-form-row">
           <div className="input-field col s12 ">
-            <input id="logemail" value={ this.state.email } onChange= { this.onChange } name="email" type="email"/>
+            <input id="logemail" value={ this.state.email } onBlur={ this.onBlur } onChange= { this.onChange } name="email" type="email"/>
             <label htmlFor="logemail">Email Address</label>
           </div>
           <div className="input-field col s12 ">
-            <input id="logpassword" value={ this.state.password } onChange= { this.onChange } name="password" type="password" />
+            <input id="logpassword" value={ this.state.password } onBlur={ this.onBlur } onChange= { this.onChange } name="password" type="password" />
             <label htmlFor="logpassword">Password</label>
           </div>
           <div className="input-field col s12">

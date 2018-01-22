@@ -5,7 +5,6 @@ import $ from 'jquery';
 class Header extends Component {
   componentDidMount() {
     $(document).ready(() => {
-      console.log(this);
       // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
       $('.modal').modal();
       $('.button-collapse').sideNav();
@@ -24,6 +23,7 @@ class Header extends Component {
   removeTooltip() {
     $('.tooltipped').tooltip('remove');
   }
+  
   render() {
     return (
       <div>
@@ -64,7 +64,7 @@ class Header extends Component {
             <input id="search" type="search" placeholder="Search" />
             <i className="material-icons">close</i>
           </li>
-          <li><a data-target="create" className=" modal-trigger modal-open modal-action">Create recipe<i className="material-icons">add</i></a></li>
+          <li><a data-target="create" className=" modal-trigger">Create recipe<i className="material-icons">add</i></a></li>
           <li><Link to="/favorites">Favourites<i className="material-icons">favorite</i></Link></li>
           <li><Link to="/profile">My Profile<i className="material-icons">account_circle</i></Link></li>
           <li><Link to="/myrecipes">My Recipes<i className="material-icons">book</i></Link></li>

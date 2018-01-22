@@ -49,6 +49,7 @@ export const addFavoriteRecipe = recipeId => {
   });
   return dispatch => {
     request.then(res => {
+      console.log(res.data.recipe)
       dispatch(addFavoriteSuccess(res.data.recipe))
     })
   }
@@ -69,22 +70,23 @@ export const addFavoriteFailure = error => {
 };
 
 export const removeFavoriteRecipe = ( recipeId, index ) => {
-  console.log(index);
+  console.log(recipeId);
   const request = axios({
     method:'delete',
     url: `/api/v1/users/${recipeId}/favorites`
   });
   return dispatch => {
     request.then(res => {
-      dispatch(removeFavoriteRecipeSuccess(index))
+      dispatch(removeFavoriteRecipeSuccess(index, recipeId))
     })
   };
 };
 
-export const removeFavoriteRecipeSuccess = index => {
+export const removeFavoriteRecipeSuccess = (index, recipeId) => {
   return {
     type: REMOVE_FAVORITE_RECIPE_SUCCESS,
-    index
+    index,
+    recipeId
   }
 };
 

@@ -10,6 +10,7 @@ class EditButtonContainer extends Component {
   }
 
   handleEditBtnClick() {
+    console.log(this.props.recipe.id);
     this.props.editRecipe(this.props.recipe.id, this.props.index);
   }
 

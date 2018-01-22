@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Dropzone from 'react-dropzone';
 import request from 'superagent';
 import { connect } from 'react-redux';
+import isEmpty from 'lodash/isEmpty';
 import { createRecipe } from '../actions/recipeActions';
 
 const CLOUDINARY_UPLOAD_PRESET = 'lexglsms';
@@ -26,6 +27,12 @@ class RecipeForm extends Component {
 
     onChange(event) {
         this.setState({ [event.target.name]: event.target.value });
+    }
+
+    onBlur (event) {
+        if(isEmpty(event.target.value)) {
+            Materialize.toast(`${event.target.name} Field cannot be empty`, 2000);
+        }    
     }
 
     onSubmit(e) {
@@ -79,11 +86,26 @@ class RecipeForm extends Component {
             <form className="col s12" onSubmit={ this.onSubmit }>
                 <div className="row modal-form-row">
                 <div className="input-field col s12 ">
-                    <input id="recipeTitle" value={ title } onChange={ this.onChange } name="title" type="text"/>
+                    <input
+                    id="recipeTitle" 
+                    value={ title } 
+                    onBlur={ this.onBlur } 
+                    onChange={ this.onChange } 
+                    name="title"
+                    type="text"
+                    />
                     <label htmlFor="recipeTitle">Recipe Title</label>
                 </div>
                 <div className="input-field col s12 ">
-                    <textarea id="recipeDescription" value={ description } onChange={ this.onChange } className="materialize-textarea" name="description" type="text"></textarea>
+                    <input
+                    id="recipeDescription"
+                    value={ description }
+                    onBlur={ this.onBlur }
+                    onChange={ this.onChange } 
+                    className="materialize-textarea"
+                    name="description" 
+                    type="text" 
+                    />
                     <label htmlFor="recipeDescription">Recipe Description</label>
                 </div>
                 <div className="input-field col s12 m12">
@@ -105,12 +127,12 @@ class RecipeForm extends Component {
                 <div className="file-field input-field col s12 m12">
                     <h6><em><b>Ingredients</b></em></h6>
                     <small><em>Enter your Ingredients one at a time and hit enter</em></small>
-                    <textarea id="ingredients" name="ingredients" value= { ingredients } onChange= { this.onChange } className="materialize-textarea" placeholder="e.g 1 tsp dry pepper" type="text"></textarea>
+                    <textarea id="ingredients" onBlur={ this.onBlur } name="ingredients" value= { ingredients } onChange= { this.onChange } className="materialize-textarea" placeholder="e.g 1 tsp dry pepper" type="text"></textarea>
                 </div>
                 <div className="input-field col s12 m12">
                     <h6><em><b>Directions</b></em></h6>
                     <small><em>Enter your directions one step at a time and hit enter</em></small>
-                    <textarea className="materialize-textarea" name="directions" value={ directions } onChange={ this.onChange } id="directions" placeholder="e.g Place all ingredients in a blender" type="text"></textarea>
+                    <textarea className="materialize-textarea" onBlur={ this.onBlur } name="directions" value={ directions } onChange={ this.onChange } id="directions" placeholder="e.g Place all ingredients in a blender" type="text"></textarea>
                 </div>
                 <div className="input-field col s12">
                     <button className="modal-action modal-close waves-effect waves-red red white-text btn-flat right">Cancel</button>

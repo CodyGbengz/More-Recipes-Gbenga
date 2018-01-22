@@ -8,7 +8,7 @@ class RecipeGrid extends Component {
       return (
         <div className="container">
           <div className="row">
-            <div className="col s12 m6 l4 ">
+            <div className="col s12 m6 l4">
               <h5 className="center-align"><em>No recipes found</em></h5>
             </div>
           </div>
@@ -32,9 +32,9 @@ class RecipeGrid extends Component {
       <div className='col s12 m12 l4 center-align offset-l4'>
         <Paginate
           id='paginate'
-          handlePaginateClick={this.props.onPaginationClick}
-          pageNumber={pages}
-          currentPage={this.props.currentPage}
+          onPaginateClick={ this.props.onPaginationClick }
+          pageNumber={ pages }
+          currentPage={ this.props.currentPage }
         />
       </div>
     );

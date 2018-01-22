@@ -15,9 +15,11 @@ class RecipesGridContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentPage: 1
+      currentPage: 1,
+      pages: 1
     }
     this.onPaginateClick = this.onPaginateClick.bind(this);
+    this.getRecipes = this.getRecipes.bind(this);
   }
   componentDidMount() {
     const offset = 5 * (this.state.currentPage - 1)
@@ -25,13 +27,16 @@ class RecipesGridContainer extends Component {
     this.props.fetchFavoriteRecipes();
   }
 
-  onPaginateClick(page) {
-    this.setState({ currentPaginatePage: page }, () => {
+  onPaginateClick(data) {
+    const { selected } = data;
+    this.setState({ currentPage: selected + 1 }, () => {
+      console.log('called')
       this.getRecipes();
     })
   }
 
   getRecipes() {
+    console.log('called');
     const offset = 5 * (this.state.currentPage - 1);
     this.props.fetchRecipes(offset);
   }
@@ -61,8 +66,8 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  fetchRecipes() {
-    dispatch(fetchRecipes()).then((response) => {
+  fetchRecipes(offset) {
+    dispatch(fetchRecipes(offset)).then((response) => {
       !response.error ?
         dispatch(fetchRecipesSuccess(response.payload.data.recipes.rows,response.payload.data.pages)) :
         dispatch(fetchRecipesFailure(response.payload.error));

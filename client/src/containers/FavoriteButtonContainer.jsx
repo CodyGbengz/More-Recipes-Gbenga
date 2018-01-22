@@ -9,7 +9,6 @@ import FavoritesButton from '../components/FavoriteButton';
 class FavoriteButtonContainer extends Component {
   constructor(props) {
     super(props);
-    // this.toggleFavorite = this.toggleFavorite.bind(this)
     this.state = {
       favorites: this.props.favorites,
     };
@@ -25,8 +24,6 @@ class FavoriteButtonContainer extends Component {
     }
   }
 
-
-
   handleFavBtnClick = (event) => {
     event.preventDefault();
     if (!this.isUserFavorite()) {
@@ -36,8 +33,8 @@ class FavoriteButtonContainer extends Component {
     }
   }
 
-  isUserFavorite = () => {
-    const isFavorite = this.state.favorites.filter(favorite => favorite.recipeId === this.props.recipe.id);
+  isUserFavorite = () => { 
+    const isFavorite = this.state.favorites.filter(favorite => (favorite.recipeId === this.props.recipe.id));
     if (isFavorite.length > 0) {
       return true;
     }
@@ -49,7 +46,7 @@ class FavoriteButtonContainer extends Component {
     return (
       <FavoritesButton
       isUserFavorite={ this.isUserFavorite }
-        handleFavBtnClick={ this.handleFavBtnClick }
+      handleFavBtnClick={ this.handleFavBtnClick }
       />
     );
   }

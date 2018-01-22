@@ -15,6 +15,6 @@
     "logging": false
   },
   "production": {
-    "use_env_variable": "DATABASE_URL"
+    "use_env_variable": "postgres://pgkibgwmanjzbm:fa406ff85392efcb2afe2e9d0321be0a7874c17c26ffa9703a458dac5b0153d9@ec2-184-73-167-43.compute-1.amazonaws.com:5432/d3kbf0mr4h27re"
   }
 }

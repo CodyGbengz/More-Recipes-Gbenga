@@ -50,7 +50,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.use(express.static(path.join(__dirname, '/client/public')));
-app.use('/static', express.static(path.resolve(__dirname, '../client/build')));
+app.use('/static', express.static(path.resolve(__dirname, '../client/public')));
 
 // API routes
 app.use(user);

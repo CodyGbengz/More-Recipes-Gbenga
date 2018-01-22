@@ -6,6 +6,5 @@ coverage/*
 .vscode/*
 templates/*
 node_modules
-client/src/js
 client/src/scss
 

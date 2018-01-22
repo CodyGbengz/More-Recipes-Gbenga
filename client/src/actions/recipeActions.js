@@ -73,7 +73,7 @@ export const upvoteRecipeFailure = error => ({
   error
 });
 
-export const fetchRecipes = (offset) => {
+export const fetchRecipes = offset => {
   const request = axios({
     method: 'get',
     url: `${BASE_URL}recipes?offset=${offset}`
@@ -121,7 +121,7 @@ export const createRecipe = (recipe) => {
   const request = axios({
     method: 'post',
     data: recipe,
-    url: `${BASE_URL}recipes`
+    url: `${BASE_URL}recipe`
   });
   return dispatch => request.then((res) => {
     dispatch(createRecipeSuccess(res.data.recipe));

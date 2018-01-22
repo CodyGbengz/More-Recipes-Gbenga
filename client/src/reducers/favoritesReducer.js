@@ -12,12 +12,11 @@ import {
 
 export default function favorites(state = [], action) {
   let error;
-  const { type, favorites } = action;
+  const { type, favorites, recipeId } = action;
   switch (type) {
     case FETCH_FAVORITE_RECIPES:
       return [...state];
     case FETCH_FAV_RECIPES_SUCCESS:
-      console.log(favorites);
       return [
         ...favorites
       ];
@@ -39,8 +38,7 @@ export default function favorites(state = [], action) {
       return [...state];
     case REMOVE_FAVORITE_RECIPE_SUCCESS:
       return [
-        ...state.slice(0, action.index),
-        ...state.slice(action.index + 1)
+        ...state.filter(favorite => favorite.recipeId !== recipeId)
       ];
     default:
       return state;

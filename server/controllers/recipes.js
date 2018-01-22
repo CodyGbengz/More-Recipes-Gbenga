@@ -126,7 +126,8 @@ export default {
    */
   fetchAllRecipes(req, res, next) {
     if (req.query.sort) return next();
-    const { limit, offset } = req.body;
+    console.log(req.query);
+    const { limit, offset } = req.query;
     return Recipe
       .findAndCountAll({
         include: [{

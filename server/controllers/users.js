@@ -1,6 +1,6 @@
-import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 import models from '../models';
+import md5 from 'md5';
 
 const { User, Recipe, Favorite } = models;
 
@@ -83,5 +83,39 @@ export default {
         status: 'fail',
         message: error.message
       }));
+  },
+  editUserDetails(req, res) {
+    return User
+    .findOne({
+      where: { id : req.decoded.id }
+    })
+    .then((user) => {
+      if (!user) {
+        return res.status(200).json({
+          status: 'success',
+          message: 'User not Found'
+        });
+      }
+      return user
+      .update({
+        firstname: req.body.firstname || user.firstname,
+        surname: req.body.surname || user.surname,
+        birthdate: req.body.birthdate || user.birthdate,
+        image_url: req.body.image_url || user.image_url
+      })
+      .then(() => res.status(200).json({
+        message: 'Profile updated successfully',
+        status: 'success',
+        user
+      }))
+      .catch(error => res.status(500).json({
+        status: 'fail',
+        message: error.message
+      }));
+    })
+    .catch( error => res.status(500).json({
+      status: 'fail',
+      message: error.message
+    }));
   }
 };

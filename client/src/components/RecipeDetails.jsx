@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import moment from 'moment';
 import isEmpty from 'lodash/isEmpty';
 import Recipe from '../containers/RecipeContainer';
 import PostReviewForm from './PostReviewForm';
@@ -10,7 +11,7 @@ class RecipeDetails extends Component {
       recipe: {}
     };
   }
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchSingleRecipe(this.props.id);
   }
 
@@ -41,6 +42,9 @@ class RecipeDetails extends Component {
           <div className="card-action">
             <div className="chip">
               <img src="https://api.adorable.io/avatars/285/abott@adorable.png" alt="Contact Person" />{review.User.username}
+            </div>
+            <div className="col s6 m6 l6 right">
+              <p>{moment().from(review.createdAt)}</p>
             </div>
           </div>
         </div>

@@ -20,5 +20,9 @@ router.post('/api/v1/users/signin',
 router.get('/api/v1/user',
   auth,
   controllers.User.fetchUserDetails);
+// route to edit user's profile
+router.put('/api/v1/user',
+  auth,
+  controllers.User.editUserDetails);
 
 export default router;

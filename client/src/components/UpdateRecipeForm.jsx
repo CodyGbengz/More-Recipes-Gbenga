@@ -4,6 +4,7 @@ import Dropzone from 'react-dropzone';
 import request from 'superagent';
 import { connect } from 'react-redux';
 import { editRecipe } from '../actions/usersRecipesActions';
+import EditButtonContainer from '../containers/EditButtonContainer'
 
 const CLOUDINARY_UPLOAD_PRESET = 'lexglsms';
 const CLOUDINARY_UPLOAD_URL = ' https://api.cloudinary.com/v1_1/myresources/image/upload';
@@ -56,7 +57,6 @@ handleImageUpload(file) {
   let upload = request.post(CLOUDINARY_UPLOAD_URL)
                       .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
                       .field('file', file);
-
   upload.end((err, response) => {
     if (err) {
     }
