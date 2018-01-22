@@ -12,7 +12,7 @@ const db = {};
 
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env.DATABASE_URL, {
+  sequelize = new Sequelize('postgres://pgkibgwmanjzbm:fa406ff85392efcb2afe2e9d0321be0a7874c17c26ffa9703a458dac5b0153d9@ec2-184-73-167-43.compute-1.amazonaws.com:5432/d3kbf0mr4h27re', {
     dialect: 'postgres',
     protocol: 'postgres',
     dialectOptions: {
