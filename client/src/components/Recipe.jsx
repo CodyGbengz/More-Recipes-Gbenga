@@ -9,6 +9,43 @@ import UpdateRecipeForm from '../components/UpdateRecipeForm';
 
 
 class Recipe extends Component {
+  constructor(props){
+    super(props)
+
+    this.state={
+      recipeIndex: 0,
+      recipe: {},
+      editClicked:false,
+      recipes:[]
+    }
+  }
+  componentWillMount(){
+    $(document).ready(function(){
+      // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+      $('.modal').modal();
+    });
+
+  }
+
+  componentDidMount(){
+    $(document).ready(function(){
+      // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
+      $('.modal').modal();
+
+    });
+  
+  }
+
+
+  handleEdit = (props) => {
+    const { index, recipe, recipes }= this.props
+    this.setState({
+      recipeIndex: index,
+      recipe,
+      recipes,
+    })
+    $('#'+this.props.index).modal('open');
+  }
   render() {
     return (
       <div>
@@ -63,6 +100,7 @@ class Recipe extends Component {
                   {
                     this.props.editRecipe &&
                 <EditButton
+                  handleEdit={this.handleEdit}
                   recipe={this.props.recipe}
                   index={this.props.index}
                 />
@@ -88,13 +126,14 @@ class Recipe extends Component {
             </div>
           </div>
         </div>
-        <div id="edit" className="modal">
+       <div id={this.props.index} className="modal">
           <div className="modal-content">
             <h4>Edit Recipe</h4>
             <div className="row">
               <UpdateRecipeForm 
-              recipe={ this.props.recipe }
-              index={ this.props.index }
+              recipes={this.state.recipes}
+              recipe={ this.state.recipe }
+              index={ this.state.recipeIndex }
               />
             </div>
           </div>

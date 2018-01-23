@@ -41,7 +41,8 @@ class RecipeGrid extends Component {
   };
 
   render() {
-    const { recipes, pages } = this.props;
+    const { pages, recipes } = this.props;
+
     /*
     if (loading) {
       return (

@@ -13,17 +13,33 @@ class RecipeForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      title: this.props.recipe.title,
+      title: '',
       description: '',
       ingredients: '',
       directions: '',
       image_url: '',
-      uploadedFile: []
+      uploadedFile: [],
+      recipe: {}
     };
 
     this.onChange = this.onChange.bind(this);
     this.onSubmit = this.onSubmit.bind(this);
   }
+
+  componentWillReceiveProps(nextProps){
+    console.log(this.props.recipes);
+
+    if (nextProps.recipe.title !== this.props.recipe.title){   
+      const {title, description, directions, ingredients} = nextProps.recipe
+      this.setState({
+        title,
+        description,
+        ingredients,
+        directions,
+      })
+    }
+  }
+
 
   onChange(event) {
     this.setState({ [event.target.name]: event.target.value });
@@ -70,7 +86,7 @@ handleImageUpload(file) {
 }
 
   render() {
-    const { title, description, ingredients, directions } = this.state;
+     const { title, description, ingredients, directions } = this.state;
     return (
       <form className="col s12" onSubmit={this.onSubmit}>
         <div className="row modal-form-row">
@@ -79,6 +95,7 @@ handleImageUpload(file) {
             value={title} 
             onChange={this.onChange} 
             name="title" 
+            placeholder="Title"
             type="text" />
             <label htmlFor="recipeTitle">Recipe Title</label>
           </div>
@@ -136,12 +153,13 @@ handleImageUpload(file) {
           </div>
           <div className="input-field col s12">
             <button 
+            className="btn waves-effect modal-close waves-light right white red-text" type="submit">
+            Edit</button>
+            <button 
+            type="button"
             className=
             "modal-action modal-close waves-effect waves-red red white-text btn-flat right">
             Cancel</button>
-            <button 
-            className="btn waves-effect modal-close waves-light right white red-text" type="submit">
-            Edit</button>
           </div>
         </div>
       </form>

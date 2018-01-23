@@ -3,12 +3,14 @@
 const webpack = require('webpack');
 const path = require('path');
 const dotenv = require('dotenv');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 dotenv.config();
 module.exports = {
   entry: [path.join(__dirname, '/client/src/index.jsx')],
   output: {
-    path: path.join(__dirname, '/client/public'),
+    path: path.join(__dirname, '/public'),
     filename: 'bundle.js',
     publicPath: '/',
   },
@@ -19,6 +21,10 @@ module.exports = {
       jQuery: 'jquery',
       'window.$': 'jquery',
       'window.jQuery': 'jquery',
+    }),
+    new CleanWebpackPlugin(['public']),
+    new HtmlWebpackPlugin({
+      template: './client/src/index.html'
     }),
     // DefinePlugin allows to create global constants which can be configured at compile time
     new webpack.DefinePlugin({
