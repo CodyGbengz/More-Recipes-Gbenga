@@ -11,7 +11,6 @@ import UpdateRecipeForm from '../components/UpdateRecipeForm';
 class Recipe extends Component {
   constructor(props){
     super(props)
-
     this.state={
       recipeIndex: 0,
       recipe: {},
@@ -19,12 +18,12 @@ class Recipe extends Component {
       recipes:[]
     }
   }
+
   componentWillMount(){
     $(document).ready(function(){
       // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
       $('.modal').modal();
     });
-
   }
 
   componentDidMount(){
@@ -33,9 +32,7 @@ class Recipe extends Component {
       $('.modal').modal();
 
     });
-  
   }
-
 
   handleEdit = (props) => {
     const { index, recipe, recipes }= this.props
@@ -50,7 +47,7 @@ class Recipe extends Component {
     return (
       <div>
         <div className="col xs12 s12 m6 l4">
-          <div className="card">
+          <div className="card medium">
             <div className="card-image">
               <Link to={`recipes/${this.props.recipe.id}`}>
                 <img
@@ -58,19 +55,23 @@ class Recipe extends Component {
                   src={this.props.recipe.image_url}
                   alt="recipe image"/>
               </Link>
-              <FavoriteButtonContainer
-                index={this.props.index}
-                recipe={ this.props.recipe } />
             </div>
             <div className="card-content">
-              <Link to={`recipes/${this.props.recipe.id}`}><b>{this.props.recipe.title}</b></Link>
-              <p>{this.props.recipe.description}</p>
-            </div>
-            <div className="card-action">
               <div className="row">
+                <div className="col m10 s10 l10">
+                  <Link to={`recipes/${this.props.recipe.id}`}>
+                  <b>{this.props.recipe.title}</b></Link>
+                  <p>{this.props.recipe.description}</p>
+                </div>
+                <div className="col m2 s2 l2">
+                  <FavoriteButtonContainer
+                  index={this.props.index}
+                  recipe={ this.props.recipe } 
+                  />
+                </div>
                 <div className="col s12 m12">
                   <div className="chip">
-                  <img src="http://res.cloudinary.com/myresources/image/upload/v1515852440/avi_so66tc.jpg" 
+                  <img src={ this.props.recipe.User.image_url} 
                   alt="Contact Person" />
                   {this.props.recipe.User.username}
                   </div>

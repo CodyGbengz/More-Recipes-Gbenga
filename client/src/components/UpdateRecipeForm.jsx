@@ -27,8 +27,6 @@ class RecipeForm extends Component {
   }
 
   componentWillReceiveProps(nextProps){
-    console.log(this.props.recipes);
-
     if (nextProps.recipe.title !== this.props.recipe.title){   
       const {title, description, directions, ingredients} = nextProps.recipe
       this.setState({
@@ -122,12 +120,10 @@ handleImageUpload(file) {
             {this.state.image_url === '' ? null :
               <div>
                 <p>{this.state.uploadedFile.name}</p>
-                <img className="responsive-img" src={this.state.image_url} />
+                <img 
+                className="responsive-img" 
+                src={this.state.image_url} />
               </div>}
-          </div>
-          <div className="input-field col s12 m12">
-            <h6><em><b>Upload Image</b></em></h6>
-            <input className="waves-effect waves-light red-text white btn" type="file" />
           </div>
           <div className="file-field input-field col s12 m12">
             <h6><em><b>Ingredients</b></em></h6>
@@ -153,7 +149,8 @@ handleImageUpload(file) {
           </div>
           <div className="input-field col s12">
             <button 
-            className="btn waves-effect modal-close waves-light right white red-text" type="submit">
+            className="btn waves-effect modal-close waves-light right white red-text" 
+            type="submit">
             Edit</button>
             <button 
             type="button"

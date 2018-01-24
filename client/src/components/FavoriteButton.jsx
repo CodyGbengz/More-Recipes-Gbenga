@@ -5,7 +5,7 @@ const FavoritesButton = props =>
     (
     <div>
       <a
-        className="btn-floating halfway-fab waves-effect waves-light white"
+        className="btn-floating fab waves-effect waves-light white"
         onClick={props.handleFavBtnClick} >
         <i className="material-icons red-text">
           {(props.isUserFavorite()) ? 'favorite' : 'favorite_border'}

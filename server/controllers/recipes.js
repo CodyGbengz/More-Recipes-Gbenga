@@ -7,7 +7,7 @@ export default {
    * @description Creates a new recipe
    * @param {object} req - request object
    * @param {object} res - response object
-   * @returns {object} Response object containing recipe, status and message 
+   * @returns {object} Response object containing recipe, status and message
    */
   addRecipe(req, res) {
     return Recipe
@@ -31,7 +31,7 @@ export default {
   },
   /**
    * @description Gets all recipes belonging to a user
-   * @param {object} req - Request object 
+   * @param {object} req - Request object
    * @param {object} res - Response object
    * @returns {object} response object contain status, message and recipes
    */
@@ -49,7 +49,7 @@ export default {
         },
         {
           model: User,
-          attributes: ['username']
+          attributes: ['username', 'image_url']
         }],
         limit: 10
       })
@@ -73,9 +73,9 @@ export default {
   },
   /**
   * @description Gets a single recipe
-  * @param {object} req - Request object 
+  * @param {object} req - Request object
   * @param {object} res - Response object
-  * @returns {object} response object contains status, message and recipe with reviews 
+  * @returns {object} response object contains status, message and recipe with reviews
   */
   fetchARecipe(req, res) {
     return Recipe
@@ -121,12 +121,11 @@ export default {
    * @description Gets all the recipes
    * @param {*} req - Request object
    * @param {*} res - Response object
-   * @param {*} next 
+   * @param {*} next
    * @returns {object} containing status, message and an array of recipes
    */
   fetchAllRecipes(req, res, next) {
     if (req.query.sort) return next();
-    console.log(req.query);
     const { limit, offset } = req.query;
     return Recipe
       .findAndCountAll({
@@ -141,7 +140,7 @@ export default {
         },
         {
           model: User,
-          attributes: ['username']
+          attributes: ['username', 'image_url']
         }],
         limit: limit || 5,
         offset: offset || 0
@@ -246,7 +245,7 @@ export default {
    * @description search the database for a recipe matching query string
    * @param {*} req - request object
    * @param {*} res - response object
-   * @param {*} next 
+   * @param {*} next
    * @returns {object}  containing status, message and an array of recipes
    */
   searchRecipes(req, res, next) {

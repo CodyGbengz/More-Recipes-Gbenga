@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BarLoader } from 'react-spinners';
 import Paginate from './Pagination';
 import Recipe from '../containers/RecipeContainer';
 
@@ -9,7 +10,7 @@ class RecipeGrid extends Component {
         <div className="container">
           <div className="row">
             <div className="col s12 m6 l4">
-              <h5 className="center-align"><em>No recipes found</em></h5>
+              <h5 className="center-align"><em>No recipes created yet!</em></h5>
             </div>
           </div>
         </div>
@@ -25,39 +26,43 @@ class RecipeGrid extends Component {
         deleteSingleRecipe={ this.props.deleteSingleRecipe }
         editRecipe={ this.props.editRecipe }/>
     ));
-  };
+  }
 
   renderPaginationGrid(pages) {
     return (
       <div className='col s12 m12 l4 center-align offset-l4'>
         <Paginate
           id='paginate'
-          onPaginateClick={ this.props.onPaginationClick }
+          onPageChange={ this.props.onPaginateClick }
           pageNumber={ pages }
-          currentPage={ this.props.currentPage }
         />
       </div>
     );
-  };
+  }
 
   render() {
-    const { pages, recipes } = this.props;
-
-    /*
-    if (loading) {
-      return (
-      <div>
-        <h1>Recipes</h1>
-        <h3>loading...</h3>
-      </div>
-      )
-    }
-    if (error) {
-      return <div> { error }</div>
-    }
-*/
+    const { pages, recipes, loading } = this.props;
+    // if (loading) {
+    //   return (
+    //     <div className='sweet-loading'>
+    //     <BarLoader
+    //       color={'#123abc'}
+    //       loading={loading}
+    //     />
+    //   </div>
+    //   )
+    // }
+    // if (error) {
+    //   return <div> { error }</div>
+    // }
     return (
       <div className=''>
+      {/* { loading &&
+      <div className='sweet-loading'>
+           <BarLoader
+             color={'#ff0000'}
+      />
+       </div>} */}
         <div className='row'>
           {this.renderRecipes(recipes)}
         </div>

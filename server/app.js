@@ -8,7 +8,6 @@ import webpackHotMiddleware from 'webpack-hot-middleware';
 import webpackConfig from '../webpack.dev';
 import router from './routes';
 
-
 const {
   user, recipe, review, favorite, vote
 } = router;
@@ -17,10 +16,6 @@ const app = express();
 
 const DIST_DIR = path.join(__dirname, '../public');
 const HTML_FILE = path.join(DIST_DIR, 'index.html');
-
-
-
-
 
 // api documentation
 app.get('/api/docs', (req, res) => {

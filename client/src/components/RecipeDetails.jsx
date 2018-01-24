@@ -28,23 +28,26 @@ class RecipeDetails extends Component {
       return (
         <div className="container">
           <div className="row">
-            <h4 className="center-align"> No reviews posted yet!</h4>
+            <h4 className="center-align"> 
+            No reviews posted yet!</h4>
           </div>
         </div>
       );
     }
-    return reviews.map((review, i) => (
-      <div key={i} className="col s12 m4">
+    return reviews.map((review, index) => (
+      <div key={index} className="col s12 m4">
         <div className="card darken-1">
           <div className="card-content">
             <p>{review.content}</p>
           </div>
           <div className="card-action">
             <div className="chip">
-              <img src="https://api.adorable.io/avatars/285/abott@adorable.png" alt="Contact Person" />{review.User.username}
+              <img 
+              src="https://api.adorable.io/avatars/285/abott@adorable.png" 
+              alt="Contact Person" />{review.User.username}
             </div>
             <div className="col s6 m6 l6 right">
-              <p>{moment().from(review.createdAt)}</p>
+              <p>{moment(review.createdAt).fromNow()}</p>
             </div>
           </div>
         </div>
@@ -86,7 +89,10 @@ class RecipeDetails extends Component {
                         <h4>{recipe.title}</h4>
                       </div>
                       <div className="col s3 m3 offset-m3 offset-s3">
-                        <a className="btn-floating top-fab waves-effect waves-light white tooltipped" data-position="bottom" data-delay="100" data-tooltip="Add to Favorites"><i className="material-icons red-text">favorite_border</i></a>
+                        <a className="btn-floating top-fab waves-effect waves-light white tooltipped" 
+                        data-position="bottom" data-delay="100" data-tooltip="Add to Favorites">
+                        <i className="material-icons red-text">favorite_border</i>
+                        </a>
                       </div>
                     </div>
                     <p>{recipe.description}</p>
@@ -95,12 +101,17 @@ class RecipeDetails extends Component {
                     <a className="waves-effect grey-text btn-flat">
                       <i className="material-icons left">thumb_up</i>{recipe.upvotes}
                     </a>
-                    <a className="waves-effect grey-text btn-flat"><i className="material-icons left">thumb_down</i>{recipe.downvotes}</a>
-                    <a className="waves-effect grey-text waves-light btn-flat"><i className="material-icons left">visibility</i>{recipe.views}</a>
-                    <a className="waves-effect grey-text waves-light btn-flat"><i className="material-icons left">chat</i>{recipe.reviews.length}</a>
+                    <a className="waves-effect grey-text btn-flat">
+                    <i className="material-icons left">thumb_down</i>{recipe.downvotes}</a>
+                    <a className="waves-effect grey-text waves-light btn-flat">
+                    <i className="material-icons left">visibility</i>{recipe.views}</a>
+                    <a className="waves-effect grey-text waves-light btn-flat">
+                    <i className="material-icons left">chat</i>{recipe.reviews.length}</a>
                     <div>
                       <div className="chip">
-                        <img src="https://api.adorable.io/avatars/285/abott@adorable.png" alt="Contact Person" />{recipe.User.username}
+                        <img 
+                        src="https://api.adorable.io/avatars/285/abott@adorable.png" 
+                        alt="Contact Person" />{recipe.User.username}
                       </div>
                     </div>
                   </div>
@@ -156,7 +167,14 @@ class RecipeDetails extends Component {
             <div className="row">
               {this.renderReviews(recipe.reviews)}
             </div>
-            <a href="#navvy" id="backToTop" className="btn-floating waves-effect waves-light yellow tooltipped" data-position="top" data-delay="50" data-tooltip="back to top"><i className="material-icons">arrow_upward</i></a>
+            <a 
+            href="#navvy" 
+            id="backToTop" 
+            className="btn-floating waves-effect waves-light yellow tooltipped" 
+            data-position="top" 
+            data-delay="50" 
+            data-tooltip="back to top">
+            <i className="material-icons">arrow_upward</i></a>
           </div>
         </main>
       </div>

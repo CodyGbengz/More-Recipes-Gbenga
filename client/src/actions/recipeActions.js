@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { beginAjaxCall, ajaxCallError } from './ajaxStatusActions';
 import store from '../store';
 
 // Recipes list
@@ -16,10 +17,10 @@ export const FETCH_SINGLE_RECIPE = 'FETCH_SINGLE_RECIPE';
 export const FETCH_SINGLE_RECIPE_SUCCESS = 'FETCH_SINGLE_RECIPE_SUCCESS';
 export const FETCH_SINGLE_RECIPE_FAILURE = 'FETCH_SINGLE_RECIPE_FAILURE';
 
-// 
+//
 export const POST_REVIEW = 'POST_REVIEW';
 
-// upvote recipe 
+// upvote recipe
 export const UPVOTE_RECIPE = 'UPVOTE_RECIPE';
 export const UPVOTE_RECIPE_SUCCESS = 'UPVOTE_RECIPE_SUCCESS';
 export const UPVOTE_RECIPE_FAILURE = 'UPVOTE_RECIPE_FAILURE';
@@ -31,7 +32,7 @@ export const DOWNVOTE_RECIPE_FAILURE = 'DOWNVOTE_RECIPE_FAILURE';
 
 // delete a recipe
 export const DELETE_SINGLE_RECIPE = 'DELETE_SINGLE_RECIPE';
-export const DELETE_SINGLE_RECIPE_SUCCESS  = 'DELETE_SINGLE_RECIPE_SUCCESS';
+export const DELETE_SINGLE_RECIPE_SUCCESS = 'DELETE_SINGLE_RECIPE_SUCCESS';
 export const DELETE_SINGLE_RECIPE_FAILURE = 'DELETE_SINGLE_RECIPE_FAILURE';
 
 
@@ -73,7 +74,7 @@ export const upvoteRecipeFailure = error => ({
   error
 });
 
-export const fetchRecipes = offset => {
+export const fetchRecipes = (offset) => {
   const request = axios({
     method: 'get',
     url: `${BASE_URL}recipes?offset=${offset}`
@@ -123,8 +124,13 @@ export const createRecipe = (recipe) => {
     data: recipe,
     url: `${BASE_URL}recipe`
   });
-  return dispatch => request.then((res) => {
+  return dispatch =>
+  dispatch(beginAjaxCall());
+  request.then((res) => {
     dispatch(createRecipeSuccess(res.data.recipe));
+  }).catch((error) => {
+    dispatch(ajaxCallError());
+    throw (error);
   });
 };
 
@@ -155,9 +161,9 @@ export const postReview = review => (
   });
 
 /**
- * 
- * @param {*} id 
- * @param {*} review 
+ *
+ * @param {*} id
+ * @param {*} review
  * @return {object} return value
  */
 export function postReviewAction(id, review) {

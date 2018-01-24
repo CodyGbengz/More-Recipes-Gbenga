@@ -9,14 +9,15 @@ export default {
    * @description Creates a new user in the database
    * @param {object} req - request object
    * @param {object} res - response object
-   * @returns {object} - Response object containing token, status and message 
+   * @returns {object} - Response object containing token, status and message
    */
   createUser(req, res) {
     return User
       .create({
         username: req.body.username,
         email: req.body.email,
-        password: md5(req.body.password)
+        password: md5(req.body.password),
+        image_url: req.body.image_url || 'http://res.cloudinary.com/myresources/image/upload/v1516794077/user_hm9yov.png'
       })
       .then((user) => {
         const { id, username } = user;
@@ -38,7 +39,7 @@ export default {
  * @description User authentication function
  * @param {object} req - request object
  * @param {object} res - response object
- * @returns {object} Response object containing token, status and message 
+ * @returns {object} Response object containing token, status and message
  */
   loginUser(req, res) {
     return User
@@ -87,7 +88,7 @@ export default {
   editUserDetails(req, res) {
     return User
     .findOne({
-      where: { id : req.decoded.id }
+      where: { id: req.decoded.id }
     })
     .then((user) => {
       if (!user) {
@@ -113,7 +114,7 @@ export default {
         message: error.message
       }));
     })
-    .catch( error => res.status(500).json({
+    .catch(error => res.status(500).json({
       status: 'fail',
       message: error.message
     }));

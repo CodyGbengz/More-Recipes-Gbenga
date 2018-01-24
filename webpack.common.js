@@ -22,7 +22,7 @@ module.exports = {
       'window.$': 'jquery',
       'window.jQuery': 'jquery',
     }),
-    new CleanWebpackPlugin(['public']),
+    // new CleanWebpackPlugin(['public']),
     new HtmlWebpackPlugin({
       template: './client/src/index.html'
     }),

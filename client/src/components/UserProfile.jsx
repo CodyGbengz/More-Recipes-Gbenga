@@ -8,23 +8,28 @@ const UserProfile = props => (
         <div className="card-image">
           <img id="profileBanner" />
           <a className="btn-floating halfway-fab waves-effect waves-light left red">
-            <img src={props.userDetails.image_url}  className="circle responsive-img" />
+            <img 
+            src={props.userDetails.image_url}
+            className="circle responsive-img" />
           </a>
         </div>
         <div className="card-content">
           <h4>{props.userDetails.username}</h4>
           <a className="waves-effect waves-light btn-flat">
-            <i className="material-icons left">favorite</i>{ props.userDetails.favourites.length || 0}
+            <i className="material-icons left">favorite</i>
+            { props.userDetails.favourites.length || 0}
           </a>
           <a className="waves-effect waves-light btn-flat">
-            <i className="material-icons left">book</i>{ props.userDetails.recipes.length || 0}
+            <i className="material-icons left">book</i>
+            { props.userDetails.recipes.length || 0}
           </a>
           <a
             href="#editprofile"
             className="btn-floating btn-medium red right tooltipped modal-trigger"
             data-position="bottom"
             data-delay="100"
-            data-tooltip="Edit profile"><i className="material-icons right">mode_edit</i>
+            data-tooltip="Edit profile">
+            <i className="material-icons right">mode_edit</i>
           </a>
         </div>
         <div className="card-action">

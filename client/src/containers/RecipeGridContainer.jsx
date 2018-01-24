@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchRecipes,
-  fetchRecipesFailure,
-  fetchRecipesSuccess,
+import { 
+  beginAjaxCall, 
+  ajaxCallError } from '../actions/ajaxStatusActions'
+import { fetchRecipes, fetchRecipesFailure, fetchRecipesSuccess,
   upvoteRecipe, upvoteRecipeFailure, upvoteRecipeSuccess,
-  downvoteRecipe, downvoteRecipeFailure, downvoteRecipeSuccess } from '../actions/recipeActions';
+  downvoteRecipe, downvoteRecipeFailure, downvoteRecipeSuccess
+ } from '../actions/recipeActions';
 import {
   fetchFavoriteRecipes,
   fetchFavRecipesFailure,
@@ -27,21 +29,19 @@ class RecipesGridContainer extends Component {
     this.props.fetchFavoriteRecipes();
   }
 
-  onPaginateClick(data) {
+  onPaginateClick = (data) => {
     const { selected } = data;
     this.setState({ currentPage: selected + 1 }, () => {
-      console.log('called')
       this.getRecipes();
     })
   }
 
   getRecipes() {
-    console.log('called');
     const offset = 5 * (this.state.currentPage - 1);
     this.props.fetchRecipes(offset);
   }
   render() {
-    const { recipes, pages } = this.props;
+    const { recipes, pages, loading } = this.props;
     return (
       <div className='container'>
         <div className='row'>
@@ -49,6 +49,7 @@ class RecipesGridContainer extends Component {
           <RecipeGrid
             recipes={ recipes }
             pages={ pages }
+            loading={ loading }
             onPaginateClick={this.onPaginateClick}
             currentPage={ this.state.currentPage}
             upvoteRecipe={ this.props.upvoteRecipe}
@@ -62,12 +63,14 @@ class RecipesGridContainer extends Component {
 
 const mapStateToProps = state => ({
   recipes: state.recipes,
-  pages: state.getPages
+  pages: state.getPages,
+  loading: state.ajaxStatusReducer
 });
 
 const mapDispatchToProps = dispatch => ({
   fetchRecipes(offset) {
     dispatch(fetchRecipes(offset)).then((response) => {
+      dispatch(beginAjaxCall())
       !response.error ?
         dispatch(fetchRecipesSuccess(response.payload.data.recipes.rows,response.payload.data.pages)) :
         dispatch(fetchRecipesFailure(response.payload.error));
@@ -75,7 +78,10 @@ const mapDispatchToProps = dispatch => ({
   },
   fetchFavoriteRecipes: () => {
     dispatch(fetchFavoriteRecipes()).then((response) => {
-      !response.error ? dispatch(fetchFavRecipesSuccess(response.payload.data.favourites)) : dispatch(fetchFavRecipesFailure(response.payload.response.data.message));
+      dispatch(beginAjaxCall())
+      !response.error ? 
+      dispatch(fetchFavRecipesSuccess(response.payload.data.favourites)) : 
+      dispatch(fetchFavRecipesFailure(response.payload.response.data.message));
     });
   },
   upvoteRecipe(recipeId, index) {

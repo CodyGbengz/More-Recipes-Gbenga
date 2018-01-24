@@ -13,39 +13,59 @@ class Login extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  onChange(e) {
-    this.setState({ [e.target.name]: e.target.value });
+  onChange(event) {
+    this.setState({ [event.target.name]: event.target.value });
   }
 
-  onSubmit(e) {
-    e.preventDefault();
+  onSubmit(event) {
+    event.preventDefault();
     this.props.signInUser(this.state);
   }
 
-  onBlur (event) {
-    if(isEmpty(event.target.value)) {
-        Materialize.toast(`${event.target.name} Field cannot be empty`, 2000);
+  onBlur(event) {
+    if (isEmpty(event.target.value)) {
+      Materialize.toast(`${event.target.name} Field cannot be empty`, 2000);
     }
   }
 
-  
 
   render() {
     return (
       <form onSubmit={ this.onSubmit } className="col s12">
         <div className="row modal-form-row">
           <div className="input-field col s12 ">
-            <input id="logemail" value={ this.state.email } onBlur={ this.onBlur } onChange= { this.onChange } name="email" type="email"/>
+            <input
+            id="logemail"
+            value={ this.state.email }
+            onBlur={ this.onBlur }
+            onChange= { this.onChange }
+            name="email"
+            type="email"
+            />
             <label htmlFor="logemail">Email Address</label>
           </div>
           <div className="input-field col s12 ">
-            <input id="logpassword" value={ this.state.password } onBlur={ this.onBlur } onChange= { this.onChange } name="password" type="password" />
+            <input
+            id="logpassword"
+            value={ this.state.password }
+            onBlur={ this.onBlur }
+            onChange= { this.onChange }
+            name="password"
+            type="password"
+            />
             <label htmlFor="logpassword">Password</label>
           </div>
           <div className="input-field col s12">
             <a href="" className="black-text">Forgot Password?</a>
-            <button className="modal-action modal-close waves-effect waves-red btn red white-text right">Cancel</button>
-            <button data-target="login" className="btn waves-effect  modal-trigger modal-close modal-action waves-light right white red-text" onClick={this.onSubmit} type="submit" name="action">Log in</button>
+            <button
+            className="modal-action modal-close waves-effect waves-red btn red white-text right">
+            Cancel</button>
+            <button
+            data-target="login"
+            className="btn waves-effect modal-close modal-action waves-light right white red-text"
+            type="submit"
+            name="action">
+            Log in</button>
           </div>
         </div>
       </form>

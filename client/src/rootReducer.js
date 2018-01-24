@@ -5,6 +5,7 @@ import favorites from './reducers/favoritesReducer';
 import usersrecipes from './reducers/usersRecipesReducer';
 import userDetailsReducer from './reducers/userDetailsReducer';
 import { getPages }  from './reducers/paginationReducer'
+import ajaxStatusReducer from './reducers/ajaxStatusReducer'
 
 export default combineReducers({
   auth,
@@ -13,5 +14,6 @@ export default combineReducers({
   favorites,
   usersrecipes,
   userDetailsReducer,
-  getPages
+  getPages,
+  ajaxStatusReducer
 });

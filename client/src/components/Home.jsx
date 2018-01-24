@@ -2,8 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import $ from 'jquery';
-import jwtDecode from 'jwt-decode';
-import setAuthToken from '../utils/setAuthToken';
 import { userSignupRequest } from '../actions/signupActions';
 import { signInUser } from '../actions/authAction';
 import Signup from './SignupForm';
@@ -13,7 +11,6 @@ import Footer from './Footer';
 class Home extends React.Component {
   componentDidMount() {
     $(document).ready(() => {
-      // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
       $('.modal').modal();
       $('.button-collapse').sideNav();
       $('.tooltipped').tooltip({ delay: 500 });
@@ -30,15 +27,26 @@ class Home extends React.Component {
   render() {
     const { userSignupRequest, signInUser } = this.props;
     return (
-      <div className="body-index">
+      <div className="body-index homepage">
         <div>
           <main id="top" className="container">
-            <div className="row">
-              <div className="col s11 m8 offset-s1">
-                <h2 className="white-text">Welcome to <span className="red-text">More-Recipes</span></h2>
-                <p className="white-text"> Join our community of food enthusiasts and discover a world of amazing recipes that bring excitment to your kitchen and tickle your taste buds.</p>
-                <a className="waves-effect waves-light btn modal-trigger white red-text" href="#signup">Sign Up and start cooking</a>
-                <a className="waves-effect waves-light btn modal-trigger white red-text" href="#login">Login</a>
+            <div className="row home-text-wrapper">
+              <div className="col s11 m8 offset-s1 offset-m2">
+                <h2 className="white-text">Welcome to
+                <span className="red-text">More-Recipes</span></h2>
+                <p className="white-text">
+                Join our community of food enthusiasts and discover a world of amazing recipes that bring excitment to your kitchen and tickle your taste buds.
+                </p>
+                <a
+                className="waves-effect waves-light btn modal-trigger white red-text"
+                href="#signup">
+                Sign Up and start cooking
+                </a>
+                <a
+                className="waves-effect waves-light btn modal-trigger white red-text"
+                href="#login">
+                Login
+                </a>
               </div>
             </div>
           </main>
