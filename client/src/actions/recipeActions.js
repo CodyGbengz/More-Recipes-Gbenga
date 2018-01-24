@@ -117,23 +117,6 @@ export const fetchSingleRecipeFailure = error => ({
   payload: error
 });
 
-
-export const createRecipe = (recipe) => {
-  const request = axios({
-    method: 'post',
-    data: recipe,
-    url: `${BASE_URL}recipe`
-  });
-  return dispatch =>
-  dispatch(beginAjaxCall());
-  request.then((res) => {
-    dispatch(createRecipeSuccess(res.data.recipe));
-  }).catch((error) => {
-    dispatch(ajaxCallError());
-    throw (error);
-  });
-};
-
 export const createRecipeSuccess = (newRecipe) => {
   const currentState = store.getState();
   const User = currentState.auth.user;
@@ -145,6 +128,21 @@ export const createRecipeSuccess = (newRecipe) => {
     type: CREATE_RECIPE_SUCCESS,
     payload: newRecipe
   };
+};
+
+export const createRecipe = (recipe) => {
+  const request = axios({
+    method: 'post',
+    data: recipe,
+    url: `${BASE_URL}recipe`
+  });
+  return dispatch =>
+  request.then((res) => {
+    Materialize.toast(res.data.message, 3000);
+    dispatch(createRecipeSuccess(res.data.recipe));
+  }).catch((error) => {
+    throw (error);
+  });
 };
 
 export const createRecipeFailure = error => (
@@ -177,6 +175,7 @@ export function postReviewAction(id, review) {
           username: User.username,
           createdAt: new Date()
         };
+        Materialize.toast(res.data.message, 3000);
         dispatch(postReview(res.data.data));
       })
   );
