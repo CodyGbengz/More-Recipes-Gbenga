@@ -33,7 +33,7 @@ class Home extends React.Component {
             <div className="row home-text-wrapper">
               <div className="col s11 m8 offset-s1 offset-m2">
                 <h2 className="white-text">Welcome to
-                <span className="red-text">More-Recipes</span></h2>
+                <span className="red-text"> More-Recipes</span></h2>
                 <p className="white-text">
                 Join our community of food enthusiasts and discover a world of amazing recipes that bring excitment to your kitchen and tickle your taste buds.
                 </p>
