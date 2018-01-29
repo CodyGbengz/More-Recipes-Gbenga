@@ -7,7 +7,7 @@ export default {
    * @description Creates a new recipe
    * @param {object} req - request object
    * @param {object} res - response object
-   * @returns {object} Response object containing recipe, status and message 
+   * @returns {object} Response object containing recipe, status and message
    */
   addRecipe(req, res) {
     return Recipe
@@ -16,7 +16,8 @@ export default {
         title: req.body.title,
         description: req.body.description,
         ingredients: req.body.ingredients,
-        directions: req.body.directions
+        directions: req.body.directions,
+        image_url: req.body.image_url || 'http://res.cloudinary.com/myresources/image/upload/v1515852046/bg2_pj1yit.jpg'
       })
       .then(recipe => res.status(201).json({
         status: 'success',
@@ -30,13 +31,14 @@ export default {
   },
   /**
    * @description Gets all recipes belonging to a user
-   * @param {object} req - Request object 
+   * @param {object} req - Request object
    * @param {object} res - Response object
    * @returns {object} response object contain status, message and recipes
    */
   fetchUserRecipes(req, res) {
+    const { limit, offset } = req.query;
     return Recipe
-      .all({ where: { userId: req.decoded.id },
+      .findAndCountAll({ where: { userId: req.decoded.id },
         include: [{
           model: Review,
           as: 'reviews',
@@ -48,21 +50,25 @@ export default {
         },
         {
           model: User,
-          attributes: ['username']
+          attributes: ['username', 'image_url']
         }],
-        limit: 10
+        limit: limit || 5,
+        offset: offset || 0
       })
       .then((recipes) => {
         if (recipes.length <= 0) {
           return res.status(200).json({
             status: 'success',
-            message: 'You have not created any recipes yet'
+            message: 'You have not created any recipes yet',
+            recipes
           });
         }
+        const pageNumber = parseInt(recipes.count, 10) / parseInt(limit || 5, 10);
         return res.status(200).json({
           status: 'success',
           message: 'Your Recipes fetched successfully',
-          recipes
+          recipes,
+          pages: Math.ceil(pageNumber)
         });
       })
       .catch(error => res.status(400).json({
@@ -72,9 +78,9 @@ export default {
   },
   /**
   * @description Gets a single recipe
-  * @param {object} req - Request object 
+  * @param {object} req - Request object
   * @param {object} res - Response object
-  * @returns {object} response object contains status, message and recipe with reviews 
+  * @returns {object} response object contains status, message and recipe with reviews
   */
   fetchARecipe(req, res) {
     return Recipe
@@ -83,15 +89,15 @@ export default {
         include: [{
           model: Review,
           as: 'reviews',
-          attributes: ['userId', 'content'],
+          attributes: ['userId', 'content', 'createdAt'],
           include: [{
             model: User,
-            attributes: ['username', 'createdAt']
+            attributes: ['username', 'image_url']
           }]
         },
         {
           model: User,
-          attributes: ['username', 'createdAt']
+          attributes: ['username', 'image_url', 'createdAt']
         }]
       })
       .then((recipe) => {
@@ -120,13 +126,14 @@ export default {
    * @description Gets all the recipes
    * @param {*} req - Request object
    * @param {*} res - Response object
-   * @param {*} next 
+   * @param {*} next
    * @returns {object} containing status, message and an array of recipes
    */
   fetchAllRecipes(req, res, next) {
     if (req.query.sort) return next();
+    const { limit, offset } = req.query;
     return Recipe
-      .all({
+      .findAndCountAll({
         include: [{
           model: Review,
           as: 'reviews',
@@ -138,26 +145,30 @@ export default {
         },
         {
           model: User,
-          attributes: ['username']
+          attributes: ['username', 'image_url']
         }],
-        limit: 10
+        limit: limit || 5,
+        offset: offset || 0
       })
       .then((recipes) => {
-        if (recipes.length <= 0) {
+        if (recipes.rows.length <= 0) {
           return res.status(200).json({
             status: 'success',
-            message: 'no recipes found'
+            message: 'no recipes found',
+            pages: 1
           });
         }
+        const pageNumber = parseInt(recipes.count, 10) / parseInt(limit || 5, 10);
         res.status(200).json({
           message: 'all Recipes fetched successfully',
           status: 'success',
-          recipes
+          recipes,
+          pages: Math.ceil(pageNumber)
         });
       })
-      .catch(() => res.status(400).json({
+      .catch(error => res.status(400).json({
         status: 'fail',
-        message: 'An error occured while processing your request'
+        message: error.message
       }));
   },
   /**
@@ -226,9 +237,9 @@ export default {
             status: 'success',
             message: 'Recipe deleted successfully'
           }))
-          .catch(() => res.status(400).json({
+          .catch(error => res.status(400).json({
             status: 'fail',
-            message: 'An error occured while processing your request'
+            message: error.message
           }));
       })
       .catch(() => res.status(400).json({
@@ -240,7 +251,7 @@ export default {
    * @description search the database for a recipe matching query string
    * @param {*} req - request object
    * @param {*} res - response object
-   * @param {*} next 
+   * @param {*} next
    * @returns {object}  containing status, message and an array of recipes
    */
   searchRecipes(req, res, next) {

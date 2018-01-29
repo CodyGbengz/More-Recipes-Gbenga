@@ -24,6 +24,26 @@ export default (sequelize, DataTypes) => {
       validate: {
         isEmail: true
       }
+    },
+
+    firstname: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
+
+    surname: {
+      allowNull: true,
+      type: DataTypes.STRING
+    },
+
+    birthdate: {
+      allowNull: true,
+      type: DataTypes.DATE
+    },
+
+    image_url: {
+      allowNull: true,
+      type: DataTypes.STRING
     }
   });
 

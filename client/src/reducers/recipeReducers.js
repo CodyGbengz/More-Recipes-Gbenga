@@ -8,21 +8,19 @@ import {
 
 } from '../actions/recipeActions';
 /**
- * 
- * @param {*} state 
+ *
+ * @param {*} state
  * @param {*} action
- * @returns {object} -r 
+ * @returns {object} -r
  */
 export function recipes(state = [], action) {
   let error;
-  const { type, payload } = action;
+  const { type, payload, recipes } = action;
   switch (type) {
     case FETCH_RECIPES:
       return [...state];
     case FETCH_RECIPES_SUCCESS:
-      return [
-        ...payload
-      ];
+      return recipes;
     case FETCH_RECIPES_FAILURE:
       // error = payload || { message: payload.message };
       return state;
@@ -46,13 +44,14 @@ export function recipes(state = [], action) {
     case DELETE_SINGLE_RECIPE_FAILURE:
       return [
         ...state,
-        error ];
+        error];
     case UPVOTE_RECIPE:
       return [...state];
     case UPVOTE_RECIPE_SUCCESS:
       return [
         ...state.slice(0, action.payload.index), // before the one we are updating
-        { ...state[action.payload.index],
+        {
+          ...state[action.payload.index],
           upvotes: action.payload.votes.upvotes,
           downvotes: action.payload.votes.downvotes
         },
@@ -66,9 +65,11 @@ export function recipes(state = [], action) {
     case DOWNVOTE_RECIPE_SUCCESS:
       return [
         ...state.slice(0, action.payload.recipeIndex), // before the one we are updating
-        { ...state[action.payload.recipeIndex],
+        {
+          ...state[action.payload.recipeIndex],
           upvotes: action.payload.votesCount.upvotes,
-          downvotes: action.payload.votesCount.downvotes },
+          downvotes: action.payload.votesCount.downvotes
+        },
         ...state.slice(action.payload.recipeIndex + 1), // after the one we are updating
       ];
     case DOWNVOTE_RECIPE_FAILURE:
@@ -83,12 +84,12 @@ export function recipes(state = [], action) {
 }
 
 /**
- * 
- * @param {*} state 
- * @param {*} action 
+ *
+ * @param {*} state
+ * @param {*} action
  * @returns {object} response object
  */
-export function recipe(state = { }, action) {
+export function recipe(state = {}, action) {
   let error;
   const { type, payload } = action;
   switch (type) {
@@ -102,8 +103,29 @@ export function recipe(state = { }, action) {
     case FETCH_SINGLE_RECIPE_FAILURE:
       error = payload || { message: payload.message };
       return {
-        state, recipe: null, error: error.message, loading: false
+        state,
+        error
       };
+    case UPVOTE_RECIPE:
+      return state;
+    case UPVOTE_RECIPE_SUCCESS:
+      return {
+        ...state,
+        upvotes: payload.votes.upvotes,
+        downvotes: payload.votes.downvotes
+      };
+    case UPVOTE_RECIPE_FAILURE:
+      return state;
+    case DOWNVOTE_RECIPE:
+      return state;
+    case DOWNVOTE_RECIPE_SUCCESS:
+      return {
+        ...state,
+        upvotes: payload.votesCount.upvotes,
+        downvotes: payload.votesCount.downvotes
+      };
+    case DOWNVOTE_RECIPE_FAILURE:
+      return state;
     case 'POST_REVIEW':
       return {
         ...state,
@@ -115,3 +137,4 @@ export function recipe(state = { }, action) {
       return state;
   }
 }
+

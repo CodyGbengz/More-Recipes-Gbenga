@@ -9,7 +9,6 @@ import 'materialize-css/dist/js/materialize.min';
 import store from './store';
 import setAuthToken from './utils/setAuthToken';
 import { signInUserSuccess } from './actions/authAction';
-// import './js/custom';
 import '../src/scss/materialize.scss';
 
 

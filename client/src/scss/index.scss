@@ -4,7 +4,12 @@ $background_color_2: #E25141;
 .modal {
 	max-height: 90%;
 }
-
+a{
+	color: black
+}
+paginate{
+	margin-bottom: 30%;
+}
 h1,h2,h3,h4,h5,h6,.brand-logo{
 	font-family: 'Acme', sans-serif;
 }
@@ -27,9 +32,7 @@ body {
 .body-index{
 	background-image: url('/images/bg3.jpg');
 }
-.main {
-	
-	}
+
 #main {
 	flex: 1 0 auto;
 }
@@ -62,4 +65,48 @@ footer{
 .btn { 
 	margin-right: 5px !important; 
 
+}
+
+.homepage{
+	background-image: url('http://res.cloudinary.com/myresources/image/upload/v1516782949/Wallpapers_1440x900_as4kxb.jpg') !important;
+	background-size: 100%;
+	min-height: 900px;
+	padding-top: 20%;
+}
+
+.home-text-wrapper{
+	text-align: center;
+	background-color: rgba(0, 0, 0, 0.4);
+	padding-top: 20px;
+	padding-bottom: 30px;
+	border-radius: 20px;
+}
+
+i.left {
+	float: left;
+	margin-right: 3px;
+}
+.wrapper {
+	word-wrap: break-word;
+}
+.reviews {
+	margin-bottom: 3% !important;
+}
+.bordered-wrapper-right{
+	margin-right: 20px !important;
+}
+.bordered-wrapper-left{
+	margin-left: 20px !important;
+}
+@media (min-width: 768px) {
+	.modal{
+		width: 40% !important
+	}
+}
+.reviews-box{
+	height: 100px;
+	overflow: scroll;
+}
+.edit{
+	padding-top: 5px;
 }

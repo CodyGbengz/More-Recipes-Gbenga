@@ -33,9 +33,9 @@ const validateUser = {
         message: 'Please enter a valid email'
       });
     }
-    if (!/\w{8,12}$/.test(password) || !password) {
+    if (!/\w{6,12}$/.test(password) || !password) {
       return res.status(400).send({
-        message: 'Please Enter a password with atleast 8 characters'
+        message: 'Please Enter a password with atleast 6 characters'
       });
     }
     next();

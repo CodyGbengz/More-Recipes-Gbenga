@@ -8,7 +8,7 @@ import validateOwnership from '../helpers/checkOwner';
 const router = express.Router();
 
 // route for creating a new recipe
-router.post('/api/v1/recipes',
+router.post('/api/v1/recipe',
   auth,
   validateRecipe.validateFields,
   controllers.Recipe.addRecipe);

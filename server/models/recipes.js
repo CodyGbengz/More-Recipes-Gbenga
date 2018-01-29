@@ -46,7 +46,7 @@ export default (sequelize, DataTypes) => {
     },
     image_url: {
       type: DataTypes.STRING,
-      defaultValue: 'img-source'
+      allowNull: true
     }
   });
 
@@ -56,7 +56,8 @@ export default (sequelize, DataTypes) => {
       foreignKey: 'userId'
     });
     Recipe.hasMany(models.Favourite, {
-      foreignKey: 'recipeId'
+      foreignKey: 'recipeId',
+      onDelete: 'CASCADE'
     });
     Recipe.hasMany(models.Review, {
       foreignKey: 'recipeId',

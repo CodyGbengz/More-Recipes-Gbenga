@@ -2,28 +2,30 @@ import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 import models from '../models';
 
-const { User, Recipe, Favorite } = models;
+
+const { User } = models;
 
 export default {
   /**
    * @description Creates a new user in the database
    * @param {object} req - request object
    * @param {object} res - response object
-   * @returns {object} - Response object containing token, status and message 
+   * @returns {object} - Response object containing token, status and message
    */
   createUser(req, res) {
     return User
       .create({
         username: req.body.username,
         email: req.body.email,
-        password: md5(req.body.password)
+        password: md5(req.body.password),
+        image_url: req.body.image_url || 'http://res.cloudinary.com/myresources/image/upload/v1516794077/user_hm9yov.png'
       })
       .then((user) => {
-        const { id, username } = user;
-        const token = jwt.sign({ id, username }, process.env.secret, {
+        const { id, username, image_url } = user;
+        const token = jwt.sign({ id, username, image_url }, process.env.secret, {
           expiresIn: 86400
         });
-        res.status(201).json({
+        return res.status(201).json({
           status: 'success',
           message: 'sign up successful',
           token
@@ -38,7 +40,7 @@ export default {
  * @description User authentication function
  * @param {object} req - request object
  * @param {object} res - response object
- * @returns {object} Response object containing token, status and message 
+ * @returns {object} Response object containing token, status and message
  */
   loginUser(req, res) {
     return User
@@ -47,8 +49,8 @@ export default {
       })
       .then((user) => {
         if (user.password === md5(req.body.password)) {
-          const { id, username } = user;
-          const token = jwt.sign({ id, username }, process.env.secret, {
+          const { id, username, image_url } = user;
+          const token = jwt.sign({ id, username, image_url }, process.env.secret, {
             expiresIn: 86400
           });
           res.status(200).json({
@@ -83,5 +85,39 @@ export default {
         status: 'fail',
         message: error.message
       }));
+  },
+  editUserDetails(req, res) {
+    return User
+    .findOne({
+      where: { id: req.decoded.id }
+    })
+    .then((user) => {
+      if (!user) {
+        return res.status(200).json({
+          status: 'success',
+          message: 'User not Found'
+        });
+      }
+      return user
+      .update({
+        firstname: req.body.firstname || user.firstname,
+        surname: req.body.surname || user.surname,
+        birthdate: req.body.birthdate || user.birthdate,
+        image_url: req.body.image_url || user.image_url
+      })
+      .then(() => res.status(200).json({
+        message: 'Profile updated successfully',
+        status: 'success',
+        user
+      }))
+      .catch(error => res.status(500).json({
+        status: 'fail',
+        message: error.message
+      }));
+    })
+    .catch(error => res.status(500).json({
+      status: 'fail',
+      message: error.message
+    }));
   }
 };
