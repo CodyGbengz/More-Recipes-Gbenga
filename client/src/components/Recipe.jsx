@@ -60,6 +60,7 @@ class Recipe extends Component {
               </div>
               <div className="col m2 s2 l2">
                 <FavoriteButtonContainer
+                  isFavoritePage={this.props.isFavoritePage}
                   index={this.props.index}
                   recipe={this.props.recipe}
                 />

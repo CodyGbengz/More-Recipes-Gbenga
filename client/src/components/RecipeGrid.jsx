@@ -21,6 +21,7 @@ class RecipeGrid extends Component {
       key={index}
       className="col xs12 s12 m6 l4">
         <Recipe
+          isFavoritePage={this.props.isFavoritePage}
           recipe={recipe}
           index={index}
           downvoteRecipe={this.props.downvoteRecipe}

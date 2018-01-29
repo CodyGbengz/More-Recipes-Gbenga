@@ -68,7 +68,8 @@ export const editRecipeSuccess = (newRecipe, index) => {
   const User = currentState.auth.user;
   newRecipe.reviews = [];
   newRecipe.User = {
-    username: User.username
+    username: User.username,
+    image_url: User.image_url
   };
   return {
     type: EDIT_RECIPE_SUCCESS,
