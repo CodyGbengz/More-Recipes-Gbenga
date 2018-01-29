@@ -61,12 +61,12 @@ export const upvoteRecipe = (recipeId, index) => {
     method: 'put',
     url: `${BASE_URL}recipes/${recipeId}/upvote`
   });
-  return dispatch => request.then(res => dispatch(upvoteRecipeSuccess(res.data.recipe, index)));
+  return dispatch => request.then(res => dispatch(upvoteRecipeSuccess(res.data.recipe, index, recipeId)));
 };
 
-export const upvoteRecipeSuccess = (votes, index) => ({
+export const upvoteRecipeSuccess = (votes, index, recipeId) => ({
   type: UPVOTE_RECIPE_SUCCESS,
-  payload: { index, votes }
+  payload: { index, votes, recipeId }
 });
 
 export const upvoteRecipeFailure = error => ({
@@ -122,7 +122,8 @@ export const createRecipeSuccess = (newRecipe) => {
   const User = currentState.auth.user;
   newRecipe.reviews = [];
   newRecipe.User = {
-    username: User.username
+    username: User.username,
+    image_url: User.image_url
   };
   return {
     type: CREATE_RECIPE_SUCCESS,
@@ -172,6 +173,7 @@ export function postReviewAction(id, review) {
         const User = currentState.auth.user;
         res.data.data.User = {
           id: User.id,
+          image_url: User.image_url,
           username: User.username,
           createdAt: new Date()
         };

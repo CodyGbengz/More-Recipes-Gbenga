@@ -32,40 +32,41 @@ export default {
             status: 'Success',
             message: 'Recipe added to favourites successfully',
             recipe
-          })).catch(() => res.status(400).json({
+          })).catch(error => res.status(400).json({
             status: 'Fail',
-            message: 'An error occured while processing your request'
+            message: error.message
           }));
-      }).catch(() => res.status(400).json({
+      }).catch(error => res.status(400).json({
         status: 'Fail',
-        message: 'An error occured while processing your request'
+        message: error.message
       }));
   },
   /**
    * @description gets a user's favourite recipes
    * @param {*} req - request object
    * @param {*} res - response object
-   * @returns {object} - response object containing status, message and an array of recipes 
+   * @returns {object} - response object containing status, message and an array of recipes
    */
   fetchUserFavorites(req, res) {
     return Favourite
       .findAll({
         where: { userId: req.decoded.id },
         include: [{
-          model: Recipe
-        },
-        {
-          model: User,
-          attributes: ['username']
+          model: Recipe,
+          include: [{
+            model: User,
+            attributes: ['username', 'image_url']
+          }]
         }]
       })
       .then((favourites) => {
         if (favourites.length <= 0) {
-          res.status(200).json({
-            message: 'Your list of favorite recipes is empty'
+          return res.status(200).json({
+            message: 'Your list of favorite recipes is empty',
+            favourites
           });
         }
-        res.status(200).json({
+        return res.status(200).json({
           status: 'Success',
           favourites
         });
@@ -77,7 +78,7 @@ export default {
   },
   /**
    * @description  Permanently removes a recipe from a user's list of favourites
-   * @param {*} req - request object 
+   * @param {*} req - request object
    * @param {*} res - response object
    * @returns {object} - response object with status and message
    */

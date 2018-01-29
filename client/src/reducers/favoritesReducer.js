@@ -17,9 +17,7 @@ export default function favorites(state = [], action) {
     case FETCH_FAVORITE_RECIPES:
       return [...state];
     case FETCH_FAV_RECIPES_SUCCESS:
-      return [
-        ...favorites
-      ];
+      return favorites;
     case FETCH_FAV_RECIPES_FAILURE:
       // error = favorites;
       return [...state];

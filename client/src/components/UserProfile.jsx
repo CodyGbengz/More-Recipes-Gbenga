@@ -8,7 +8,7 @@ const UserProfile = props => (
         <div className="card-image">
           <img id="profileBanner" />
           <a className="btn-floating halfway-fab waves-effect waves-light left red">
-            <img 
+            <img
             src={props.userDetails.image_url}
             className="circle responsive-img" />
           </a>
@@ -19,7 +19,8 @@ const UserProfile = props => (
             <i className="material-icons left">favorite</i>
             { props.userDetails.favourites.length || 0}
           </a>
-          <a className="waves-effect waves-light btn-flat">
+          <a
+          className="waves-effect waves-light btn-flat">
             <i className="material-icons left">book</i>
             { props.userDetails.recipes.length || 0}
           </a>

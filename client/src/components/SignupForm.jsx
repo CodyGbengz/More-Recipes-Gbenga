@@ -28,7 +28,7 @@ class Signup extends Component {
 
   onBlur = (event) =>  {
     if(isEmpty(event.target.value)) {
-        Materialize.toast(`${event.target.name} Field cannot be empty`, 2000);
+        Materialize.toast(`${event.target.name} Field cannot be empty`, 2000, 'red');
         this.setState({
           disable: true
         });
@@ -88,6 +88,7 @@ class Signup extends Component {
           </div>
           <div className="input-field col s12">
             <button
+              type="button"
               className="modal-action modal-close waves-effect waves-green btn white-text red right">Cancel
             </button>
             <button

@@ -36,8 +36,9 @@ export default {
    * @returns {object} response object contain status, message and recipes
    */
   fetchUserRecipes(req, res) {
+    const { limit, offset } = req.query;
     return Recipe
-      .all({ where: { userId: req.decoded.id },
+      .findAndCountAll({ where: { userId: req.decoded.id },
         include: [{
           model: Review,
           as: 'reviews',
@@ -51,19 +52,23 @@ export default {
           model: User,
           attributes: ['username', 'image_url']
         }],
-        limit: 10
+        limit: limit || 5,
+        offset: offset || 0
       })
       .then((recipes) => {
         if (recipes.length <= 0) {
           return res.status(200).json({
             status: 'success',
-            message: 'You have not created any recipes yet'
+            message: 'You have not created any recipes yet',
+            recipes
           });
         }
+        const pageNumber = parseInt(recipes.count, 10) / parseInt(limit || 5, 10);
         return res.status(200).json({
           status: 'success',
           message: 'Your Recipes fetched successfully',
-          recipes
+          recipes,
+          pages: Math.ceil(pageNumber)
         });
       })
       .catch(error => res.status(400).json({
@@ -84,15 +89,15 @@ export default {
         include: [{
           model: Review,
           as: 'reviews',
-          attributes: ['userId', 'content'],
+          attributes: ['userId', 'content', 'createdAt'],
           include: [{
             model: User,
-            attributes: ['username', 'createdAt']
+            attributes: ['username', 'image_url']
           }]
         },
         {
           model: User,
-          attributes: ['username', 'createdAt']
+          attributes: ['username', 'image_url', 'createdAt']
         }]
       })
       .then((recipe) => {
@@ -149,7 +154,8 @@ export default {
         if (recipes.rows.length <= 0) {
           return res.status(200).json({
             status: 'success',
-            message: 'no recipes found'
+            message: 'no recipes found',
+            pages: 1
           });
         }
         const pageNumber = parseInt(recipes.count, 10) / parseInt(limit || 5, 10);
@@ -231,9 +237,9 @@ export default {
             status: 'success',
             message: 'Recipe deleted successfully'
           }))
-          .catch(() => res.status(400).json({
+          .catch(error => res.status(400).json({
             status: 'fail',
-            message: 'An error occured while processing your request'
+            message: error.message
           }));
       })
       .catch(() => res.status(400).json({

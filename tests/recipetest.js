@@ -55,7 +55,7 @@ describe('Creates recipes ', () => {
       directions: 'take a deep breadth, take one to the head',
     };
     chai.request(app)
-      .post('/api/v1/recipes')
+      .post('/api/v1/recipe')
       .type('form')
       .send(testRecipe)
       .end((err, res) => {
@@ -74,7 +74,7 @@ describe('Creates recipes ', () => {
       directions: 'take a deep breadth, take one to the head',
     };
     chai.request(app)
-      .post('/api/v1/recipes')
+      .post('/api/v1/recipe')
       .set('x-access-token', token)
       .type('form')
       .send(testRecipe)
@@ -93,7 +93,7 @@ describe('Creates recipes ', () => {
       directions: 'take a deep breadth, take one to the head',
     };
     chai.request(app)
-      .post('/api/v1/recipes')
+      .post('/api/v1/recipe')
       .set('x-access-token', token)
       .type('form')
       .send(testRecipe)
@@ -112,7 +112,7 @@ describe('Creates recipes ', () => {
       directions: 'take a deep breadth, take one to the head',
     };
     chai.request(app)
-      .post('/api/v1/recipes')
+      .post('/api/v1/recipe')
       .set('x-access-token', token)
       .type('form')
       .send(testRecipe)
@@ -131,7 +131,7 @@ describe('Creates recipes ', () => {
       directions: 'take a deep breadth, take one to the head',
     };
     chai.request(app)
-      .post('/api/v1/recipes')
+      .post('/api/v1/recipe')
       .set('x-access-token', token)
       .type('form')
       .send(testRecipe)
@@ -150,7 +150,7 @@ describe('Creates recipes ', () => {
       ingredients: 'take a deep breadth, take one to the head',
     };
     chai.request(app)
-      .post('/api/v1/recipes')
+      .post('/api/v1/recipe')
       .set('x-access-token', token)
       .type('form')
       .send(testRecipe)
@@ -182,7 +182,7 @@ describe('Update recipe ', () => {
         done();
       });
   });
-  it('check non existing recipe', (done) => {
+  it('checks non existing recipe', (done) => {
     const testRecipe = {
       title: 'An updated recipe',
       description: 'A short description about this recipe',
@@ -244,8 +244,8 @@ describe('Fetch a user"s recipes', () => {
   });
   it('returns an empty list for a user without recipes', (done) => {
     chai.request(app)
-      .get('/api/v1/recipes/users')
       .set('x-access-token', token)
+      .get('/api/v1/recipes/users')
       .end((err, res) => {
         res.body.recipes.length.should.be.eql(1);
         done();

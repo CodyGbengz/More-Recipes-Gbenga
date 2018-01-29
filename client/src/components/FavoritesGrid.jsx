@@ -2,10 +2,6 @@ import React, { Component } from 'react';
 import Header from './Header';
 
 class FavoritesGrid extends Component {
-  componentWillMount() {
-    this.props.fetchFavoriteRecipes();
-  }
-
   renderRecipes(recipes) {
     if (recipes.length <= 0) {
       return (
@@ -34,7 +30,7 @@ class FavoritesGrid extends Component {
           <div className="card-action">
             <div className="row">
               <div className="col s12 m12">
-                <div className="chip"><img src="http://res.cloudinary.com/myresources/image/upload/v1515852440/avi_so66tc.jpg" alt="Contact Person" />{recipe.User.username}</div>
+                <div className="chip"><img src="http://res.cloudinary.com/myresources/image/upload/v1515852440/avi_so66tc.jpg" alt="Contact Person" />{recipe.Recipe.User.username}</div>
               </div>
               <div className="col s12 m12">
                 <a className="waves-effect waves-light tooltipped" data-position="bottom" data-delay="100" data-tooltip="upvote"><i className="material-icons left">thumb_up</i>{recipe.Recipe.upvotes}</a>
@@ -50,7 +46,8 @@ class FavoritesGrid extends Component {
   }
 
   render() {
-    const { favorites } = this.props;
+    const { recipes } = this.props;
+    console.log(this.props);
     /* if (loading) {
       return (
       <div>
@@ -65,8 +62,7 @@ class FavoritesGrid extends Component {
     return (
       <div className='container'>
         <div className='row'>
-          <h5>My Favorite Recipes</h5>
-          {this.renderRecipes(favorites)}
+          {this.renderRecipes(recipes)}
         </div>
       </div>
     );

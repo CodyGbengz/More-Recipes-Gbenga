@@ -5,30 +5,12 @@ import Recipe from '../containers/RecipeContainer';
 import PostReviewForm from './PostReviewForm';
 
 class RecipeDetails extends Component {
-  constructor() {
-    super();
-    this.state = {
-      recipe: {}
-    };
-  }
-  componentDidMount() {
-    this.props.fetchSingleRecipe(this.props.id);
-  }
-
-  componentWillReceiveProps(nextProps) {
-    if (nextProps.recipe) {
-      this.setState({
-        recipe: nextProps.recipe,
-      });
-    }
-  }
-
   renderReviews(reviews) {
     if (reviews.length === 0) {
       return (
         <div className="container">
           <div className="row">
-            <h4 className="center-align"> 
+            <h4 className="center-align">
             No reviews posted yet!</h4>
           </div>
         </div>
@@ -37,17 +19,17 @@ class RecipeDetails extends Component {
     return reviews.map((review, index) => (
       <div key={index} className="col s12 m4">
         <div className="card darken-1">
-          <div className="card-content">
+          <div className="card-content reviews-box wrapper">
             <p>{review.content}</p>
           </div>
           <div className="card-action">
             <div className="chip">
-              <img 
-              src="https://api.adorable.io/avatars/285/abott@adorable.png" 
+              <img
+              src={ review.User.image_url }
               alt="Contact Person" />{review.User.username}
             </div>
             <div className="col s6 m6 l6 right">
-              <p>{moment(review.createdAt).fromNow()}</p>
+              <p style={{ fontSize: '14px' }}>{moment(review.createdAt).fromNow()}</p>
             </div>
           </div>
         </div>
@@ -56,9 +38,9 @@ class RecipeDetails extends Component {
   }
 
   render() {
-    const { recipe } = this.state;
+    const { recipe } = this.props;
     /*
-    	if (loading) { 
+    	if (loading) {
 			return <div>LOADING!!</div>;
 		} else if(error) {
 			return <div>{error}</div>
@@ -76,46 +58,19 @@ class RecipeDetails extends Component {
             <div className="col s12 m12">
               <h4 className="header">Recipe Details</h4>
               <div className="col s12 hide-on-large-only">
-                <Recipe recipe={recipe} />
+                <Recipe
+                recipe={recipe}
+                upvoteRecipe={this.props.upvoteRecipe}
+                downvoteRecipe={this.props.downvoteRecipe}/>
               </div>
-              <div className="card horizontal hide-on-med-and-down">
-                <div className="card-image">
-                  <img src={recipe.image_url} alt="recipe owner" />
-                </div>
-                <div className="card-stacked">
-                  <div className="card-content">
-                    <div className="row">
-                      <div className="col s6 m6">
-                        <h4>{recipe.title}</h4>
-                      </div>
-                      <div className="col s3 m3 offset-m3 offset-s3">
-                        <a className="btn-floating top-fab waves-effect waves-light white tooltipped" 
-                        data-position="bottom" data-delay="100" data-tooltip="Add to Favorites">
-                        <i className="material-icons red-text">favorite_border</i>
-                        </a>
-                      </div>
-                    </div>
-                    <p>{recipe.description}</p>
-                  </div>
-                  <div className="card-action">
-                    <a className="waves-effect grey-text btn-flat">
-                      <i className="material-icons left">thumb_up</i>{recipe.upvotes}
-                    </a>
-                    <a className="waves-effect grey-text btn-flat">
-                    <i className="material-icons left">thumb_down</i>{recipe.downvotes}</a>
-                    <a className="waves-effect grey-text waves-light btn-flat">
-                    <i className="material-icons left">visibility</i>{recipe.views}</a>
-                    <a className="waves-effect grey-text waves-light btn-flat">
-                    <i className="material-icons left">chat</i>{recipe.reviews.length}</a>
-                    <div>
-                      <div className="chip">
-                        <img 
-                        src="https://api.adorable.io/avatars/285/abott@adorable.png" 
-                        alt="Contact Person" />{recipe.User.username}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="col m12 l12">
+                <Recipe
+                horizontal="horizontal"
+                hide="hide-on-med-and-down"
+                recipe={recipe}
+                upvoteRecipe={this.props.upvoteRecipe}
+                downvoteRecipe={this.props.downvoteRecipe}
+                />
               </div>
             </div>
             <div className="row">
@@ -164,15 +119,15 @@ class RecipeDetails extends Component {
                 </div>
               </div>
             </div>
-            <div className="row">
+            <div className="reviews row">
               {this.renderReviews(recipe.reviews)}
             </div>
-            <a 
-            href="#navvy" 
-            id="backToTop" 
-            className="btn-floating waves-effect waves-light yellow tooltipped" 
-            data-position="top" 
-            data-delay="50" 
+            <a
+            href="#navvy"
+            id="backToTop"
+            className="btn-floating waves-effect waves-light yellow tooltipped"
+            data-position="top"
+            data-delay="50"
             data-tooltip="back to top">
             <i className="material-icons">arrow_upward</i></a>
           </div>

@@ -45,7 +45,7 @@ class RecipesGridContainer extends Component {
     return (
       <div className='container'>
         <div className='row'>
-          <h5>Most Voted Recipes</h5>
+          <h5>All Recipes</h5>
           <RecipeGrid
             recipes={ recipes }
             pages={ pages }
@@ -71,6 +71,7 @@ const mapDispatchToProps = dispatch => ({
   fetchRecipes(offset) {
     dispatch(fetchRecipes(offset)).then((response) => {
       dispatch(beginAjaxCall())
+      console.log(response.payload.data)
       !response.error ?
         dispatch(fetchRecipesSuccess(response.payload.data.recipes.rows,response.payload.data.pages)) :
         dispatch(fetchRecipesFailure(response.payload.error));

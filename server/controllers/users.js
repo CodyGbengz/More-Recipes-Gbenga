@@ -1,8 +1,9 @@
+import md5 from 'md5';
 import jwt from 'jsonwebtoken';
 import models from '../models';
-import md5 from 'md5';
 
-const { User, Recipe, Favorite } = models;
+
+const { User } = models;
 
 export default {
   /**
@@ -20,11 +21,11 @@ export default {
         image_url: req.body.image_url || 'http://res.cloudinary.com/myresources/image/upload/v1516794077/user_hm9yov.png'
       })
       .then((user) => {
-        const { id, username } = user;
-        const token = jwt.sign({ id, username }, process.env.secret, {
+        const { id, username, image_url } = user;
+        const token = jwt.sign({ id, username, image_url }, process.env.secret, {
           expiresIn: 86400
         });
-        res.status(201).json({
+        return res.status(201).json({
           status: 'success',
           message: 'sign up successful',
           token
@@ -48,8 +49,8 @@ export default {
       })
       .then((user) => {
         if (user.password === md5(req.body.password)) {
-          const { id, username } = user;
-          const token = jwt.sign({ id, username }, process.env.secret, {
+          const { id, username, image_url } = user;
+          const token = jwt.sign({ id, username, image_url }, process.env.secret, {
             expiresIn: 86400
           });
           res.status(200).json({

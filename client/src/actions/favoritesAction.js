@@ -71,7 +71,7 @@ export const removeFavoriteRecipe = (recipeId, index) => {
     url: `/api/v1/users/${recipeId}/favorites`
   });
   return (dispatch) => {
-    request.then((res) => {
+    request.then(() => {
       dispatch(removeFavoriteRecipeSuccess(index, recipeId));
     });
   };

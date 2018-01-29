@@ -17,14 +17,17 @@ class RecipeGrid extends Component {
       );
     }
     return recipes.map((recipe, index) => (
-      <Recipe
-        recipe={ recipe }
-        key={ index }
-        index={ index }
-        downvoteRecipe={ this.props.downvoteRecipe }
-        upvoteRecipe={ this.props.upvoteRecipe }
-        deleteSingleRecipe={ this.props.deleteSingleRecipe }
-        editRecipe={ this.props.editRecipe }/>
+      <div
+      key={index}
+      className="col xs12 s12 m6 l4">
+        <Recipe
+          recipe={recipe}
+          index={index}
+          downvoteRecipe={this.props.downvoteRecipe}
+          upvoteRecipe={this.props.upvoteRecipe}
+          deleteSingleRecipe={this.props.deleteSingleRecipe}
+          editRecipe={this.props.editRecipe} />
+      </div>
     ));
   }
 
@@ -66,9 +69,11 @@ class RecipeGrid extends Component {
         <div className='row'>
           {this.renderRecipes(recipes)}
         </div>
-        <div className='row'>
-          {this.renderPaginationGrid(pages)}
-        </div>
+        {this.props.pages > 1 &&
+          <div className='row'>
+            {this.renderPaginationGrid(pages)}
+          </div>
+        }
       </div>
     );
   }
