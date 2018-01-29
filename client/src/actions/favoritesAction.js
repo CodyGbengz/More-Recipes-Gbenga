@@ -1,4 +1,5 @@
 import axios from 'axios';
+import store from '../store';
 
 // Recipes list
 export const FETCH_FAVORITE_RECIPES = 'FETCH_FAVORITE_RECIPES';
@@ -37,6 +38,21 @@ export const fetchFavRecipesFailure = payload => ({
   payload
 });
 
+export const addFavoriteSuccess = (favorite) => {
+  const currentState = store.getState();
+  const recipe = currentState.recipes.find(item => item.id === favorite.recipeId);
+  favorite.Recipe = recipe;
+  return {
+    type: ADD_FAVORITE_SUCCESS,
+    favorite
+  };
+};
+
+export const addFavoriteFailure = error => ({
+  type: ADD_FAVORITE_FAILURE,
+  payload: error
+});
+
 export const addFavoriteRecipe = (recipeId) => {
   const request = axios({
     method: 'post',
@@ -48,16 +64,6 @@ export const addFavoriteRecipe = (recipeId) => {
     });
   };
 };
-
-export const addFavoriteSuccess = favorite => ({
-  type: ADD_FAVORITE_SUCCESS,
-  favorite
-});
-
-export const addFavoriteFailure = error => ({
-  type: ADD_FAVORITE_FAILURE,
-  payload: error
-});
 
 export const removeFavoriteRecipeSuccess = (index, recipeId) => ({
   type: REMOVE_FAVORITE_RECIPE_SUCCESS,

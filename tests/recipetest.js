@@ -244,12 +244,12 @@ describe('Fetch a user"s recipes', () => {
   });
   it('returns an empty list for a user without recipes', (done) => {
     chai.request(app)
-      .set('x-access-token', token)
-      .get('/api/v1/recipes/users')
-      .end((err, res) => {
-        res.body.recipes.length.should.be.eql(1);
-        done();
-      });
+    .get('/api/v1/recipes/users')
+    .set('x-access-token', token)
+    .end((err, res) => {
+      res.body.recipes.rows.length.should.be.eql(1);
+      done();
+    });
   });
 });
 

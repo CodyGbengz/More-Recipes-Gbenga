@@ -100,7 +100,7 @@ describe('test API routes', () => {
         })
         .end((err, res) => {
           res.status.should.be.eql(400);
-          res.body.message.should.eql('Please Enter a password with atleast 8 characters');
+          res.body.message.should.eql('Please Enter a password with atleast 6 characters');
           done();
         });
     });

@@ -60,12 +60,6 @@ class RecipeGrid extends Component {
     // }
     return (
       <div className=''>
-      {/* { loading &&
-      <div className='sweet-loading'>
-           <BarLoader
-             color={'#ff0000'}
-      />
-       </div>} */}
         <div className='row'>
           {this.renderRecipes(recipes)}
         </div>
