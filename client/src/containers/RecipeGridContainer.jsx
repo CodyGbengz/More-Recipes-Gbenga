@@ -71,7 +71,6 @@ const mapDispatchToProps = dispatch => ({
   fetchRecipes(offset) {
     dispatch(fetchRecipes(offset)).then((response) => {
       dispatch(beginAjaxCall())
-      console.log(response.payload.data)
       !response.error ?
         dispatch(fetchRecipesSuccess(response.payload.data.recipes.rows,response.payload.data.pages)) :
         dispatch(fetchRecipesFailure(response.payload.error));

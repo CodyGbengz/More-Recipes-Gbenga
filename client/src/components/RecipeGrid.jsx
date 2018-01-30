@@ -21,6 +21,7 @@ class RecipeGrid extends Component {
       key={index}
       className="col xs12 s12 m6 l4">
         <Recipe
+          isFavoritePage={this.props.isFavoritePage}
           recipe={recipe}
           index={index}
           downvoteRecipe={this.props.downvoteRecipe}
@@ -60,12 +61,6 @@ class RecipeGrid extends Component {
     // }
     return (
       <div className=''>
-      {/* { loading &&
-      <div className='sweet-loading'>
-           <BarLoader
-             color={'#ff0000'}
-      />
-       </div>} */}
         <div className='row'>
           {this.renderRecipes(recipes)}
         </div>

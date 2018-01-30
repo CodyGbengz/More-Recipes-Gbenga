@@ -11,7 +11,6 @@ import {
 } from '../actions/favoritesAction';
 
 export default function favorites(state = [], action) {
-  let error;
   const { type, favorites, recipeId } = action;
   switch (type) {
     case FETCH_FAVORITE_RECIPES:
@@ -25,6 +24,7 @@ export default function favorites(state = [], action) {
       return [...state];
 
     case ADD_FAVORITE_SUCCESS:
+
       return [
         action.favorite,
         ...state

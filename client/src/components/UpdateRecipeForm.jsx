@@ -4,7 +4,7 @@ import Dropzone from 'react-dropzone';
 import request from 'superagent';
 import { connect } from 'react-redux';
 import { editRecipe } from '../actions/usersRecipesActions';
-import EditButtonContainer from '../containers/EditButtonContainer'
+import EditButtonContainer from '../containers/EditButtonContainer';
 
 const CLOUDINARY_UPLOAD_PRESET = 'lexglsms';
 const CLOUDINARY_UPLOAD_URL = ' https://api.cloudinary.com/v1_1/myresources/image/upload';
@@ -26,15 +26,15 @@ class RecipeForm extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentWillReceiveProps(nextProps){
-    if (nextProps.recipe.title !== this.props.recipe.title){   
-      const {title, description, directions, ingredients} = nextProps.recipe
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.recipe.title !== this.props.recipe.title) {
+      const { title, description, directions, ingredients } = nextProps.recipe;
       this.setState({
         title,
         description,
         ingredients,
         directions,
-      })
+      });
     }
   }
 
@@ -47,28 +47,28 @@ class RecipeForm extends Component {
     e.preventDefault();
     this.state.image_url === '' ?
     this.setState({
-        image_url: 'http://res.cloudinary.com/myresources/image/upload/v1515852046/bg2_pj1yit.jpg'
+      image_url: 'http://res.cloudinary.com/myresources/image/upload/v1515852046/bg2_pj1yit.jpg'
     }) :
     this.state.image_url;
     this.props.editRecipe(this.state, this.props.recipe.id, this.props.index);
     this.setState({
-        title: '',
-        description: '',
-        ingredients:'',
-        directions: '',
-        image_url: '',
-        uploadedFile: []
-  })
-};
+      title: '',
+      description: '',
+      ingredients: '',
+      directions: '',
+      image_url: '',
+      uploadedFile: []
+    });
+  }
 onImageDrop(files) {
   this.setState({
     uploadedFile: files[0]
   });
   this.handleImageUpload(files[0]);
-};
+}
 
 handleImageUpload(file) {
-  let upload = request.post(CLOUDINARY_UPLOAD_URL)
+  const upload = request.post(CLOUDINARY_UPLOAD_URL)
                       .field('upload_preset', CLOUDINARY_UPLOAD_PRESET)
                       .field('file', file);
   upload.end((err, response) => {
@@ -84,26 +84,26 @@ handleImageUpload(file) {
 }
 
   render() {
-     const { title, description, ingredients, directions } = this.state;
+    const { title, description, ingredients, directions } = this.state;
     return (
       <form className="col s12" onSubmit={this.onSubmit}>
         <div className="row modal-form-row">
           <div className="input-field col s12 ">
-            <input id="recipeTitle" 
-            value={title} 
-            onChange={this.onChange} 
-            name="title" 
+            <input id="recipeTitle"
+            value={title}
+            onChange={this.onChange}
+            name="title"
             placeholder="Title"
             type="text" />
             <label htmlFor="recipeTitle">Recipe Title</label>
           </div>
           <div className="input-field col s12 ">
-            <input 
-            id="recipeDescription" 
-            value={description} 
-            onChange={this.onChange} 
-            className="materialize-textarea" 
-            name="description" 
+            <input
+            id="recipeDescription"
+            value={description}
+            onChange={this.onChange}
+            className="materialize-textarea"
+            name="description"
             type="text"/>
             <label htmlFor="recipeDescription">Recipe Description</label>
           </div>
@@ -120,39 +120,39 @@ handleImageUpload(file) {
             {this.state.image_url === '' ? null :
               <div>
                 <p>{this.state.uploadedFile.name}</p>
-                <img 
-                className="responsive-img" 
+                <img
+                className="responsive-img"
                 src={this.state.image_url} />
               </div>}
           </div>
           <div className="file-field input-field col s12 m12">
             <h6><em><b>Ingredients</b></em></h6>
             <small><em>Enter your Ingredients one at a time and hit enter</em></small>
-            <textarea 
-            id="ingredients" 
-            name="ingredients" 
-            value={ingredients} 
-            onChange={this.onChange} 
-            className="materialize-textarea" 
+            <textarea
+            id="ingredients"
+            name="ingredients"
+            value={ingredients}
+            onChange={this.onChange}
+            className="materialize-textarea"
             placeholder="e.g 1 tsp dry pepper" type="text"></textarea>
           </div>
           <div className="input-field col s12 m12">
             <h6><em><b>Directions</b></em></h6>
             <small><em>Enter your directions one step at a time and hit enter</em></small>
-            <textarea 
-            className="materialize-textarea" 
-            name="directions" 
-            value={directions} 
-            onChange={this.onChange} 
-            id="directions" 
+            <textarea
+            className="materialize-textarea"
+            name="directions"
+            value={directions}
+            onChange={this.onChange}
+            id="directions"
             placeholder="e.g Place all ingredients in a blender" type="text"></textarea>
           </div>
           <div className="input-field col s12">
-            <button 
-            className="btn waves-effect modal-close waves-light right white red-text" 
+            <button
+            className="btn waves-effect modal-close waves-light right white red-text"
             type="submit">
             Edit</button>
-            <button 
+            <button
             type="button"
             className=
             "modal-action modal-close waves-effect waves-red red white-text btn-flat right">

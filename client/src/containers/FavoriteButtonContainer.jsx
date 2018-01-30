@@ -10,6 +10,7 @@ class FavoriteButtonContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isFavoritePage: this.props.isFavoritePage,
       favorites: this.props.favorites,
     };
   }
@@ -29,13 +30,18 @@ class FavoriteButtonContainer extends Component {
     if (!this.isUserFavorite()) {
       this.props.addFavoriteRecipe(this.props.recipe.id, this.props.index);
     } else {
-      this.props.removeFavoriteRecipe(this.props.recipe.id, this.props.index);
+      if(this.state.isFavoritePage) {
+        this.props.removeFavoriteRecipe(this.props.recipe.recipeId, this.props.index);
+      }
+      else{
+        this.props.removeFavoriteRecipe(this.props.recipe.id, this.props.index);
+      }
     }
   }
 
   isUserFavorite = () => { 
     const isFavorite = this.state.favorites.filter(favorite => (favorite.recipeId === this.props.recipe.id));
-    if (isFavorite.length > 0) {
+    if (isFavorite.length > 0 || this.state.isFavoritePage) {
       return true;
     }
     return false;
@@ -45,6 +51,7 @@ class FavoriteButtonContainer extends Component {
     const { recipe } = this.props;
     return (
       <FavoritesButton
+      isFavoritePage={this.props.isFavoritePage }
       isUserFavorite={ this.isUserFavorite }
       handleFavBtnClick={ this.handleFavBtnClick }
       />

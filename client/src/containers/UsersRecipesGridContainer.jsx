@@ -70,7 +70,6 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   fetchRecipes(offset) {
     dispatch(fetchUsersRecipes(offset)).then((response) => {
-      console.log(response.payload)
       response.payload.data.recipes ?
         dispatch(fetchUsersRecipesSuccess(response.payload.data.recipes.rows, response.payload.data.pages)) :
         dispatch(fetchUsersRecipesFailure(response.payload.error));

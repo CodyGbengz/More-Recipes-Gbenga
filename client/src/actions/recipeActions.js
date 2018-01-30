@@ -38,14 +38,6 @@ export const DELETE_SINGLE_RECIPE_FAILURE = 'DELETE_SINGLE_RECIPE_FAILURE';
 
 const BASE_URL = '/api/v1/';
 
-export const downvoteRecipe = (recipeId, index) => {
-  const request = axios({
-    method: 'put',
-    url: `${BASE_URL}recipes/${recipeId}/downvote`
-  });
-  return dispatch => request.then(res => dispatch(downvoteRecipeSuccess(res.data.recipe, index)));
-};
-
 export const downvoteRecipeSuccess = (votesCount, recipeIndex) => ({
   type: DOWNVOTE_RECIPE_SUCCESS,
   payload: { recipeIndex, votesCount }
@@ -56,12 +48,18 @@ export const downvoteRecipeFailure = error => ({
   error
 });
 
-export const upvoteRecipe = (recipeId, index) => {
+export const downvoteRecipe = (recipeId, index) => {
   const request = axios({
     method: 'put',
-    url: `${BASE_URL}recipes/${recipeId}/upvote`
+    url: `${BASE_URL}recipes/${recipeId}/downvote`
   });
-  return dispatch => request.then(res => dispatch(upvoteRecipeSuccess(res.data.recipe, index, recipeId)));
+  const currentState = store.getState();
+  const getRecipe = currentState.recipes.filter(recipe => recipe.id === recipeId);
+  const getIndex = currentState.recipes.indexOf(getRecipe[0]);
+  if (!index || index === undefined) {
+    index = getIndex;
+  }
+  return dispatch => request.then(res => dispatch(downvoteRecipeSuccess(res.data.recipe, index)));
 };
 
 export const upvoteRecipeSuccess = (votes, index, recipeId) => ({
@@ -73,6 +71,21 @@ export const upvoteRecipeFailure = error => ({
   type: UPVOTE_RECIPE_FAILURE,
   error
 });
+
+export const upvoteRecipe = (recipeId, index) => {
+  const request = axios({
+    method: 'put',
+    url: `${BASE_URL}recipes/${recipeId}/upvote`
+  });
+  const currentState = store.getState();
+  const getRecipe = currentState.recipes.filter(recipe => recipe.id === recipeId);
+  const getIndex = currentState.recipes.indexOf(getRecipe[0]);
+  if (!index || index === undefined) {
+    index = getIndex;
+  }
+  return dispatch => request
+  .then(res => dispatch(upvoteRecipeSuccess(res.data.recipe, index, recipeId)));
+};
 
 export const fetchRecipes = (offset) => {
   const request = axios({

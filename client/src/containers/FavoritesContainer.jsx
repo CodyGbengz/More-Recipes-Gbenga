@@ -17,6 +17,7 @@ class FavoritesContainer extends Component {
           <h5>My Favorites</h5>
           <RecipeGrid
           recipes={ favorites }
+          isFavoritePage='true'
           />
         </div>
       </div>

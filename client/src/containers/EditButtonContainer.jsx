@@ -10,7 +10,6 @@ class EditButtonContainer extends Component {
   }
 
   handleEditBtnClick() {
-    console.log(this.props.recipe.id);
     this.props.editRecipe(this.props.recipe.id, this.props.index);
   }
 
@@ -29,6 +28,6 @@ const mapStateToProps = state => ({
   recipes: state.usersrecipes
 });
 
-export default connect(mapStateToProps,{
+export default connect(mapStateToProps, {
   editRecipe
 })(EditButtonContainer);
