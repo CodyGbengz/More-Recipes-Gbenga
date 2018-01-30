@@ -13,9 +13,9 @@ import {
   EDIT_RECIPE_SUCCESS
 } from '../actions/usersRecipesActions';
 /**
- * 
- * @param {*} state 
- * @param {*} action 
+ *
+ * @param {*} state
+ * @param {*} action
  * @returns {object} response
  */
 export default function usersRecipes(state = [], action) {
@@ -36,8 +36,8 @@ export default function usersRecipes(state = [], action) {
       return [...state];
     case DELETE_SINGLE_RECIPE_SUCCESS:
       return [
-        ...state.slice(0, action.index),
-        ...state.slice(action.index + 1)
+        ...state.slice(0, index),
+        ...state.slice(index + 1)
       ];
     case DELETE_SINGLE_RECIPE_FAILURE:
       return {
@@ -56,13 +56,13 @@ export default function usersRecipes(state = [], action) {
     case EDIT_RECIPE:
       return [...state];
     case EDIT_RECIPE_SUCCESS:
-    const updatedItems = state.map(item => {
-      if(item.id === newRecipe.id) {
-        return { ...item, ...newRecipe }
-      }
-      return item
-    })
-      return updatedItems
+      const updatedItems = state.map((item) => {
+        if (item.id === newRecipe.id) {
+          return { ...item, ...newRecipe };
+        }
+        return item;
+      });
+      return updatedItems;
     case EDIT_RECIPE_FAILURE:
       // error = payload || { message: payload.message };
       return [...state];

@@ -26,15 +26,28 @@ class Recipe extends Component {
 
     });
   }
-
+  
   handleEdit = (props) => {
-    const { index, recipe, recipes }= this.props
+    const { index, recipe, recipes }= this.props;
     this.setState({
       recipeIndex: index,
       recipe,
       recipes,
     })
     $('#'+this.props.index).modal('open');
+  }
+  handleDeleteBtnClick = (props) => {
+    const { index, recipe, recipes } = this.props;
+    this.setState({
+      recipeIndex: index,
+      recipe,
+      recipes,
+    })
+    this.props.deleteSingleRecipe(recipe.id, index);
+  }
+
+  handleDelete = (props) => {
+    $('#'+ this.props.recipe.id).modal('open')
   }
   render() {
     const { hide, horizontal, recipe, index,} = this.props;
@@ -89,10 +102,14 @@ class Recipe extends Component {
                 }
                 {
                   this.props.deleteSingleRecipe &&
-                  <DeleteButtonContainer
-                    recipe={this.props.recipe}
-                    index={this.props.index}
-                  />
+                  <a
+                    onClick={this.handleDelete}
+                    data-position="bottom"
+                    data-delay="100"
+                    data-tooltip="edit"
+                    data-target="edit">
+                    <i className="material-icons edit">create</i>
+                  </a>
                 }
                 {
                   this.props.editRecipe &&
@@ -178,10 +195,16 @@ class Recipe extends Component {
                 }
                 {
                   this.props.deleteSingleRecipe &&
-                  <DeleteButtonContainer
-                    recipe={this.props.recipe}
-                    index={this.props.index}
-                  />
+                  <span>
+                    <a
+                      onClick={this.handleDelete}
+                      data-position="bottom"
+                      data-delay="100"
+                      data-tooltip="delete"
+                      data-target="delete">
+                      <i className="material-icons">delete_forever</i>
+                    </a>
+                  </span>
                 }
                 {
                   this.props.editRecipe &&
@@ -229,6 +252,20 @@ class Recipe extends Component {
                 index={this.state.recipeIndex}
               />
             </div>
+          </div>
+        </div>
+        <div id={this.props.recipe.id} className="modal">
+          <div className="modal-content">
+            <h4>Delete recipe</h4>
+            <p>Are you sure you want to permanently delete recipe <em>{this.props.recipe.title}</em>?</p>
+          </div>
+          <div className="modal-footer">
+          <DeleteButtonContainer
+                    handleDeleteBtnClick={this.handleDeleteBtnClick}
+                    recipe={this.props.recipe}
+                    index={this.props.index}
+                  />
+            <a  className="modal-action modal-close waves-effect waves-green btn-flat red-text">no</a>
           </div>
         </div>
       </div>
