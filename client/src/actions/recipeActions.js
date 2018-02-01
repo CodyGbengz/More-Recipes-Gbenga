@@ -144,6 +144,12 @@ export const createRecipeSuccess = (newRecipe) => {
   };
 };
 
+export const createRecipeFailure = error => (
+  {
+    type: CREATE_RECIPE_FAILURE,
+    payload: error
+  });
+
 export const createRecipe = (recipe) => {
   const request = axios({
     method: 'post',
@@ -155,15 +161,10 @@ export const createRecipe = (recipe) => {
     Materialize.toast(res.data.message, 3000);
     dispatch(createRecipeSuccess(res.data.recipe));
   }).catch((error) => {
-    throw (error);
+    Materialize.toast(error.response.data.message, 3000, 'red');
+    dispatch(createRecipeFailure(error.response.data.message));
   });
 };
-
-export const createRecipeFailure = error => (
-  {
-    type: CREATE_RECIPE_FAILURE,
-    payload: error
-  });
 
 
 export const postReview = review => (

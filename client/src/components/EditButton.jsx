@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const EditButton = props =>
   (
-    <span>
+    <span className="recipe-icon">
       <a
         onClick={props.handleEdit}
         data-position="bottom"

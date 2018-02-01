@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 const UpvoteButton = props =>
   (
-    <span>
+    <span className="recipe-icon">
       <a
         onClick={props.handleUpvoteBtnClick}
         className="waves-effect waves-light tooltipped"

@@ -13,7 +13,7 @@ import {
  * @param {*} action
  * @returns {object} -r
  */
-export function recipes(state = [], action) {
+const recipes = (state = [], action) => {
   let error;
   const { type, payload, recipes } = action;
   switch (type) {
@@ -81,7 +81,7 @@ export function recipes(state = [], action) {
     default:
       return state;
   }
-}
+};
 
 /**
  *
@@ -89,7 +89,7 @@ export function recipes(state = [], action) {
  * @param {*} action
  * @returns {object} response object
  */
-export function recipe(state = {}, action) {
+const recipe = (state = {}, action) => {
   let error;
   const { type, payload } = action;
   switch (type) {
@@ -136,5 +136,7 @@ export function recipe(state = {}, action) {
     default:
       return state;
   }
-}
+};
+
+export { recipe, recipes };
 
