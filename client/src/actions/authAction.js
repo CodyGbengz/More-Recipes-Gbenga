@@ -1,6 +1,7 @@
 import axios from 'axios';
 import jwtDecode from 'jwt-decode';
 import setAuthToken from '../utils/setAuthToken';
+import Alert from '../utils/Alert';
 
 export const SET_CURRENT_USER = 'SET_CURRENT_USER';
 export const SIGNIN_USER = 'SIGNIN_USER';
@@ -20,16 +21,40 @@ export function signInUserFailure(error) {
     payload: error
   };
 }
-export function signInUser(userData) {
-  return dispatch => axios.post('/api/v1/users/signin', userData)
+
+export function setCurrentUser(user) {
+  return {
+    type: SET_CURRENT_USER,
+    user
+  };
+}
+export const signInUser = (userData) => {
+  return (dispatch) => {
+    return axios.post('/api/v1/user/signin', userData)
     .then((res) => {
       window.location = '/recipes';
-      const token = res.data.token;
+      const { token } = res.data;
       localStorage.setItem('jwtToken', token);
       setAuthToken(token);
       dispatch(signInUserSuccess(jwtDecode(token)));
     })
     .catch((error) => {
-      Materialize.toast(error.response.data.message, 3000, 'red');
+      Alert(error.response.data.message, 3000, 'red');
     });
-}
+  };
+};
+
+export const userSignupRequest = (userData) => {
+  return (dispatch) => {
+    return axios.post('/api/v1/user/signup', userData)
+    .then((res) => {
+      window.location = '/recipes';
+      const { token } = res.data;
+      localStorage.setItem('jwtToken', token);
+      setAuthToken(jwtDecode(token));
+      dispatch(setCurrentUser(token));
+    }).catch((error) => {
+      Alert(error.response.data.message, 3000, 'red');
+    });
+  };
+};

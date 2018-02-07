@@ -22,7 +22,6 @@ export default function favorites(state = [], action) {
       return [...state];
     case ADD_FAVORITE_RECIPE:
       return [...state];
-
     case ADD_FAVORITE_SUCCESS:
 
       return [

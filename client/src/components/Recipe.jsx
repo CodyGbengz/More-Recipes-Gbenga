@@ -195,7 +195,7 @@ class Recipe extends Component {
                 }
                 {
                   this.props.deleteSingleRecipe &&
-                  <span>
+                  <span className="recipe-Icon">
                     <a
                       onClick={this.handleDelete}
                       data-position="bottom"
@@ -216,7 +216,7 @@ class Recipe extends Component {
                 }
                 <span>
                   <a
-                    className="waves-effect waves-light tooltipped"
+                    className="recipe-icon waves-effect waves-light tooltipped"
                     data-position="bottom"
                     data-delay="100 "
                     data-tooltip="views">
@@ -226,7 +226,7 @@ class Recipe extends Component {
                 </span>
 
                 {this.props.recipe.reviews &&
-                  <span>
+                  <span className="recipe-icon">
                     <a
                       className="waves-effect waves-light tooltipped"
                       data-position="bottom"
