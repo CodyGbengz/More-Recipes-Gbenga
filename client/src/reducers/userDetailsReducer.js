@@ -19,15 +19,15 @@ const userDetailsReducer = (state = { }, action) => {
         ...error
       };
     case EDIT_USER_DETAILS_SUCCESS:
-    return {
-      ...state,
-      ...userDetails
-    };
+      return {
+        ...state,
+        ...userDetails
+      };
     case EDIT_USER_DETAILS_FAILURE:
-    return {
-      ...state,
-      message
-    }
+      return {
+        ...state,
+        message
+      };
     default:
       return state;
   }

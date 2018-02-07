@@ -37,18 +37,18 @@ export const editUserDetailsFailure = message => ({
   message
 });
 
-export const editUserDetailsRequest = userDetails => {
+export const editUserDetailsRequest = (userDetails) => {
   const request = axios({
     method: 'put',
     data: userDetails,
     url: `${BASE_URL}user`
   });
-  return dispatch => {
-    return request.then(res => {
-      dispatch(editUserDetailsSuccess(res.data.user))
+  return (dispatch) => {
+    return request.then((res) => {
+      dispatch(editUserDetailsSuccess(res.data.user));
     })
-    .catch( res => {
-      dispatch(editUserDetailsFailure(res.data.message))
-    })
+    .catch((res) => {
+      dispatch(editUserDetailsFailure(res.data.message));
+    });
   };
 };
