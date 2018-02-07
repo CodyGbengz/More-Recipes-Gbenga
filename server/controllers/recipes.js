@@ -195,7 +195,8 @@ export default {
             title: req.body.title || recipe.title,
             description: req.body.description || recipe.description,
             ingredients: req.body.ingredients || recipe.ingredients,
-            directions: req.body.directions || recipe.directions
+            directions: req.body.directions || recipe.directions,
+            image_url: req.body.image_url || recipe.image_url
           })
           .then(() => res.status(200).json({
             message: 'Recipe modified successfully',
