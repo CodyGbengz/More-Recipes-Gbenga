@@ -44,8 +44,8 @@ class RecipesGridContainer extends Component {
     const { recipes, pages, loading } = this.props;
     return (
       <div className='container'>
-        <div className='row'>
-          <h5>All Recipes</h5>
+        <div className='row '>
+          <h5 className='center-align'>All Recipes</h5>
           <RecipeGrid
             recipes={ recipes }
             pages={ pages }
