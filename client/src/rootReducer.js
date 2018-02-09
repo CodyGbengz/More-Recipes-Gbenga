@@ -6,6 +6,7 @@ import usersrecipes from './reducers/usersRecipesReducer';
 import userDetailsReducer from './reducers/userDetailsReducer';
 import { getPages } from './reducers/paginationReducer';
 import ajaxStatusReducer from './reducers/ajaxStatusReducer';
+import searchResult from './reducers/searchRecipeReducer';
 
 export default combineReducers({
   auth,
@@ -15,5 +16,6 @@ export default combineReducers({
   usersrecipes,
   userDetailsReducer,
   getPages,
-  ajaxStatusReducer
+  ajaxStatusReducer,
+  searchResult
 });

@@ -273,7 +273,7 @@ export default {
           }]
         },
         limit: 10,
-        attributes: ['title', 'ingredients', 'description', 'directions', 'upvotes', 'downvotes', 'views']
+        attributes: ['id', 'title', 'ingredients', 'description', 'directions', 'upvotes', 'downvotes', 'views', 'image_url']
       })
       .then((recipes) => {
         if (recipes.length <= 0) {
