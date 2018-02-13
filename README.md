@@ -56,7 +56,24 @@ To setup this project locally you need to have **NodeJs** and **Postgresql** ins
 ### API Documentation
 * View full document at [https://more-recipes-gbenga.herokuapp.com/api/docs]
 
+### TESTING
+This app uses the following for testing
+* ```mocha/chai``` and ```chai-http``` for server-side testing
+* ```Enzyme``` and ```Jest``` for client-side testing
+```npm run test``` to run server-side test
+```npm run test:client``` to run client-side test
 
+### CONTRIBUTING
+Follow the listed steps to contribute to this project:
+* Fork this repository
+* Clone your copy of the repository
+* Create your feature branch on your local machine with git checkout -b your-feature-branch
+* Push your changes to your remote branch with git push origin your-feature-branch
+* Raise a pull request
+* Visit Repo wiki for style guide and conventions
+
+### LICENSE
+This project is authored by Ode Gbenga and it is licensed for your use, modification and distribution under the MIT license.
 
   
 
