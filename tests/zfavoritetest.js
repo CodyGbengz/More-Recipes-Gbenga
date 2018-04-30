@@ -6,10 +6,10 @@ const should = chai.should();
 let token;
 chai.use(chaiHttp);
 
-describe('POST /api/v1/users/signup', () => {
+describe('POST /api/v1/user/signup', () => {
   it('creates a new user', (done) => {
     chai.request(app)
-      .post('/api/v1/users/signup')
+      .post('/api/v1/user/signup')
       .type('form')
       .send({
         username: 'anotherusers',
@@ -25,14 +25,14 @@ describe('POST /api/v1/users/signup', () => {
   });
 });
 
-describe('POST /api/v1/users/signin', () => {
+describe('POST /api/v1/user/signin', () => {
   it('signs in a registered user', (done) => {
     const testUser = {
       email: 'newtests@user.com',
       password: 'testpassword'
     };
     chai.request(app)
-      .post('/api/v1/users/signin')
+      .post('/api/v1/user/signin')
       .type('form')
       .send(testUser)
       .end((err, res) => {
@@ -45,7 +45,7 @@ describe('POST /api/v1/users/signin', () => {
   });
 });
 
-describe('GET /api/v1/users/favorites', () => {
+describe('GET /api/v1/user/favorites', () => {
   it('returns 403 when no token is passed', (done) => {
     chai.request(app)
       .get('/api/v1/users/favorites')
@@ -67,7 +67,7 @@ describe('GET /api/v1/users/favorites', () => {
   });
 });
 
-describe('POST /api/v1/users/:recipeId/favorites', () => {
+describe('POST /api/v1/user/:recipeId/favorites', () => {
   it('returns status 404 for non-existing recipe', (done) => {
     chai.request(app)
       .post('/api/v1/users/1000/favorites')
@@ -106,7 +106,7 @@ describe('POST /api/v1/users/:recipeId/favorites', () => {
   });
 });
 
-describe('GET /api/v1/users/favorites', () => {
+describe('GET /api/v1/user/favorites', () => {
   it('returns 200 when user has favorites', (done) => {
     chai.request(app)
       .get('/api/v1/users/favorites')

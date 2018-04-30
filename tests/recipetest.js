@@ -6,10 +6,10 @@ const should = chai.should();
 let token;
 chai.use(chaiHttp);
 
-describe('POST /api/v1/users/signup', () => {
+describe('POST /api/v1/user/signup', () => {
   it('creates a new user', (done) => {
     chai.request(app)
-      .post('/api/v1/users/signup')
+      .post('/api/v1/user/signup')
       .type('form')
       .send({
         username: 'anotheruser',
@@ -25,14 +25,14 @@ describe('POST /api/v1/users/signup', () => {
   });
 });
 
-describe('POST /api/v1/users/signin', () => {
+describe('POST /api/v1/user/signin', () => {
   it('signs in a registered user', (done) => {
     const testUser = {
       email: 'newtest@user.com',
       password: 'testpassword'
     };
     chai.request(app)
-      .post('/api/v1/users/signin')
+      .post('/api/v1/user/signin')
       .type('form')
       .send(testUser)
       .end((err, res) => {

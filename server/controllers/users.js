@@ -31,9 +31,9 @@ export default {
           token
         });
       })
-      .catch(() => res.status(400).json({
-        status: 'fail',
-        message: 'An error occured while processing your request'
+      .catch(error => res.status(400).json({
+        status: 'Fail',
+        message: error.message
       }));
   },
   /**
