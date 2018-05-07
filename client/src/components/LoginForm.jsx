@@ -55,8 +55,10 @@ class Login extends Component {
             />
             <label htmlFor="logpassword">Password</label>
           </div>
+          <div className="col s12">
+          <a href="" className="red-text">Forgot Password?</a>
+          </div>
           <div className="input-field col s12">
-            <a href="" className="black-text">Forgot Password?</a>
             <button
             type="button"
             className="modal-action modal-close waves-effect waves-red btn red white-text right">
