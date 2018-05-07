@@ -6,14 +6,14 @@ const should = chai.should();
 let token;
 chai.use(chaiHttp);
 
-describe('POST /api/v1/users/signup', () => {
+describe('POST /api/v1/users/signin', () => {
   it('signs in a registered user', (done) => {
     const testUser = {
       email: 'newtest@user.com',
       password: 'testpassword'
     };
     chai.request(app)
-      .post('/api/v1/users/signin')
+      .post('/api/v1/user/signin')
       .type('form')
       .send(testUser)
       .end((err, res) => {

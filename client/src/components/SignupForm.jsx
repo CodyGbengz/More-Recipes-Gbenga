@@ -86,10 +86,27 @@ class Signup extends Component {
             />
             <label htmlFor="repassword">Confirm Password</label>
           </div>
-          <div className="input-field col s12">
+          <div className="col s12">
+            <span>Already got an account? 
+              <a
+                className="modal-trigger  modal-close red-text"
+                href="#login">
+                 Login
+              </a>
+            </span>
+          </div>
+          <div className="input-field col s12 center-align">
             <button
               type="button"
-              className="modal-action modal-close waves-effect waves-green btn white-text red right">Cancel
+              className="
+              modal-action
+              modal-close
+              waves-effect
+              waves-green 
+              btn 
+              white-text 
+              red 
+              right">Cancel
             </button>
             <button
               className="btn waves-effect waves-light white red-text right" 
