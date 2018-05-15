@@ -40,6 +40,8 @@ class Signup extends Component {
     }
   }
 
+
+
   render() {
     return (
       <form onSubmit= { this.onSubmit } className="col s12 former">
@@ -75,23 +77,12 @@ class Signup extends Component {
             />
             <label htmlFor="password">Password</label>
           </div>
-          <div className="input-field col s12 ">
-            <input
-              id="repassword"
-              name="repassword"
-              value= { this.state.repassword }
-              onChange= { this.onChange }
-              onBlur={ this.onBlur }
-              type="password"
-            />
-            <label htmlFor="repassword">Confirm Password</label>
-          </div>
           <div className="col s12">
-            <span>Already got an account? 
+            <span>
               <a
                 className="modal-trigger  modal-close red-text"
                 href="#login">
-                 Login
+                 I have an account
               </a>
             </span>
           </div>
