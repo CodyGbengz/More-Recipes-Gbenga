@@ -7,8 +7,8 @@ class FavoritesGrid extends Component {
       return (
         <div className="container">
           <div className="row">
-            <div className="col s12 m6 l4 ">
-              <h5 className="center-align"><em>No recipes found</em></h5>
+            <div className="col s12 m12 l12 ">
+              <h5 className="center-align"><em>Your list of favorites is empty</em></h5>
             </div>
           </div>
         </div>
@@ -47,17 +47,7 @@ class FavoritesGrid extends Component {
 
   render() {
     const { recipes } = this.props;
-    console.log(this.props);
-    /* if (loading) {
-      return (
-      <div>
-        <h3>loading...</h3>
-      </div>
-      )
-    } else if (error) {
-      return <div> Error : {error}</div>
-    }
-    */
+
 
     return (
       <div className='container'>
